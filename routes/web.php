@@ -14,3 +14,21 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Route::group(['prefix' => '/user'], function() {
+  Route::get('/', 'UserController@index');
+  Route::get('/home', 'UserController@index');
+});
+
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+  $this->get('login', 'Auth\LoginController@showLoginForm');
+  $this->post('login', 'Auth\LoginController@login');
+  $this->post('logout', 'Auth\LoginController@logout');
+
+  Route::get('/', 'HomeController@index');
+  Route::get('/home', 'HomeController@index');
+});

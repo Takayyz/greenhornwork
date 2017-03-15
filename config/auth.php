@@ -40,10 +40,19 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
+        ],
+        //追加
+        // 'user' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users',
+        // ],
+        //追加 for admin
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ],
     ],
 
@@ -70,10 +79,10 @@ return [
             'model' => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Entities\AdminUsers::class,
+        ],
     ],
 
     /*
@@ -97,6 +106,10 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+        'admins' => [
+          'provider' => 'users',
+          'table' => 'password_resets',
+          'expire' => 60,
+        ],
     ],
-
 ];
