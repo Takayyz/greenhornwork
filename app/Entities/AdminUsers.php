@@ -21,6 +21,10 @@ class AdminUsers extends Authenticatable
         'privileges',
     ];
 
+    protected $hidden = [
+        'password',
+    ];
+
     protected $dates = ['deleted_at'];
 
 }

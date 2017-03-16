@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDairyReportsTable extends Migration
+class CreateDailyReportsTable extends Migration
 {
 
 	/**
@@ -13,7 +13,6 @@ class CreateDairyReportsTable extends Migration
 	 */
 	public function up()
 	{
-		
 		Schema::create('daily_reports', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
@@ -32,7 +31,7 @@ class CreateDairyReportsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('dairy_reports');
+		Schema::drop('daily_reports');
 	}
 
 }

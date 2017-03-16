@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Entities\AdminUsers;
 
-class AdminsTableSeeder extends Seeder
+class AdminUsersTableSeeder extends Seeder
 {
   public function run()
   {

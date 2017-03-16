@@ -4,15 +4,15 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\DairyReportsRepository;
-use App\Entities\DairyReports;
-use App\Validators\DairyReportsValidator;
+use App\Repositories\DailyReportsRepository;
+use App\Entities\DailyReports;
+use App\Validators\DailyReportsValidator;
 
 /**
  * Class DairyReportsRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class DairyReportsRepositoryEloquent extends BaseRepository implements DairyReportsRepository
+class DailyReportsRepositoryEloquent extends BaseRepository implements DailyReportsRepository
 {
     /**
      * Specify Model class name
@@ -21,7 +21,7 @@ class DairyReportsRepositoryEloquent extends BaseRepository implements DairyRepo
      */
     public function model()
     {
-        return DairyReports::class;
+        return DailyReports::class;
     }
 
     
