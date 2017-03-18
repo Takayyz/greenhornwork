@@ -9,6 +9,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 class WorkSchedules extends Model implements Transformable
 {
     use TransformableTrait;
+    use SoftDeletes;
 
     protected $fillable = [
         'user_id',
