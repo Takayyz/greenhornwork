@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index');
 Route::group(['prefix' => '/user'], function() {
   Route::get('/', 'UserController@index');
   Route::get('/home', 'UserController@index');
+  Route::resource('/report', 'DailyReportController');
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
@@ -31,4 +32,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
   Route::get('/', 'HomeController@index');
   Route::get('/home', 'HomeController@index');
+  Route::resource('/user-report', 'DailyReportController');
 });
