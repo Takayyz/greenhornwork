@@ -11,7 +11,7 @@ class AdminUsersTableSeeder extends Seeder
     AdminUsers::create([
       'name' => 'admin',
       'password' => bcrypt('1234'),
-      'info_id' => 1,
+      'user_info_id' => 1,
       'privileges' => 1,
     ]);
   }

@@ -9,7 +9,7 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/admin/home';
+    protected $redirectTo = '/admin';
 
     public function __construct()
     {
@@ -29,5 +29,11 @@ class LoginController extends Controller
     public function username()
     {
         return 'name';
+    }
+
+    public function logout()
+    {
+        $this->guard()->logout();
+        return redirect('admin/login');
     }
 }

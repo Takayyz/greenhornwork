@@ -12,22 +12,25 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+// Route::get('/home', 'HomeController@index');
 
-Route::group(['prefix' => '/user'], function() {
+Route::group(['prefix' => '/'], function() {
+  Route::get('/', function () {
+      return view('auth.login');
+  });
   Route::get('/', 'UserController@index');
-  Route::get('/home', 'UserController@index');
+  // Route::get('/', 'UserController@index');
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
-  $this->get('login', 'Auth\LoginController@showLoginForm');
-  $this->post('login', 'Auth\LoginController@login');
-  $this->post('logout', 'Auth\LoginController@logout');
+  Route::get('login', 'Auth\LoginController@showLoginForm');
+  Route::post('login', 'Auth\LoginController@login');
+  Route::post('logout', 'Auth\LoginController@logout');
 
   Route::get('/', 'HomeController@index');
   Route::get('/home', 'HomeController@index');

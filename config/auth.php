@@ -44,12 +44,6 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
-        //追加
-        // 'user' => [
-        //     'driver' => 'session',
-        //     'provider' => 'users',
-        // ],
-        //追加 for admin
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
