@@ -17,7 +17,7 @@ class CreateAdminUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('password');
-            $table->integer('info_id');
+            $table->integer('user_info_id');
             $table->integer('privileges');
             $table->rememberToken();
             $table->timestamps();

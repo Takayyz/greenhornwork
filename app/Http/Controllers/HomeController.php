@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Entities\DailyReports;
+use App\Repositories\DailyReportsRepository;
 
 class HomeController extends Controller
 {
@@ -11,9 +13,12 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    protected $reports;
+
+    public function __construct(DailyReportsRepository $reports)
     {
-        $this->middleware('auth');
+      $this->middleware('auth');
+      $this->reports = $reports; 
     }
 
     /**
