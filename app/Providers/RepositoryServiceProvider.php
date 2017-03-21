@@ -26,12 +26,12 @@ class RepositoryServiceProvider extends ServiceProvider
         $repositories = [
             // \App\Repositories\UserRepository::class,
             \App\Repositories\UserInfosRepository::class,
-            \App\Repositories\DairyReportsRepository::class,
+            \App\Repositories\DailyReportsRepository::class,
             \App\Repositories\AdminUsersRepository::class,
             \App\Repositories\WorkSchedulesRepository::class,
-            \App\Repositories\StoresRepository::class,  
+            \App\Repositories\StoresRepository::class,
         ];
- 
+
         foreach ($repositories as $repository) {
             $this->app->bind($repository, $repository.'Eloquent');
         }
