@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Entities\DailyReports;
 use App\Repositories\DailyReportsRepository;
+use App\Repositories\UserInfosRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\DailyReportRequest;
 use Illuminate\Support\Facades\Auth;
@@ -13,11 +14,16 @@ class DailyReportController extends Controller
 {
 
   protected $report;
+  protected $user_info;
 
-  public function __construct(DailyReportsRepository $report)
+  public function __construct(
+    DailyReportsRepository $report,
+    UserInfosRepository $user_info
+    )
   {
     $this->middleware('auth:admin');
     $this->report = $report;
+    $this->user_info = $user_info;
 
   }
   /**
