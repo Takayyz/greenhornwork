@@ -24,7 +24,7 @@ class DailyReportsRepositoryEloquent extends BaseRepository implements DailyRepo
         return DailyReports::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -33,4 +33,20 @@ class DailyReportsRepositoryEloquent extends BaseRepository implements DailyRepo
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function getAllReports()
+    {
+      $reports = $this->model->orderBy('reporting_time', 'desc')
+                             ->get();
+      return $reports;
+    }
+
+    public function getOwnReports($userId)
+    {
+      $reports = $this->model->where('user_id', $userId)
+                             ->orderBy('reporting_time', 'desc')
+                             ->get();
+      return $reports;
+    }
+
 }

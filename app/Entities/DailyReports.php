@@ -20,4 +20,9 @@ class DailyReports extends Model implements Transformable
     ];
 
     protected $dates = ['deleted_at'];
+
+    public function user()
+    {
+      return $this->belongsTo('App\Entities\User');
+    }
 }
