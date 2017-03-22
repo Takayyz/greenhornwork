@@ -61,7 +61,8 @@ class DailyReportController extends Controller
    */
   public function show($id)
   {
-      //
+    $report = $this->report->find($id);
+    return view('daily_report.show')->with(compact('report'));
   }
 
   /**
@@ -108,5 +109,10 @@ class DailyReportController extends Controller
     $data->delete();
 
     return redirect()->to('user/report');
+  }
+
+  public function create()
+  {
+    return view('daily_report.create');
   }
 }
