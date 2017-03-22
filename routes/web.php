@@ -32,5 +32,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
 
   Route::get('/', 'HomeController@index');
   Route::get('/home', 'HomeController@index');
-  Route::resource('/user-report', 'DailyReportController');
+  Route::resource('/report', 'DailyReportController');
 });
