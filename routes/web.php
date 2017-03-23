@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
@@ -30,5 +26,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
   $this->post('logout', 'Auth\LoginController@logout');
 
   Route::get('/', 'HomeController@index');
-  Route::get('/home', 'HomeController@index');
+  // Route::get('/home', 'HomeController@index');
+
+  Route::resource('adminuser', 'AdminUserController');
+  //Route::resourceを使う事により、AdminUserControllerの中のCRUDへのルートを定義する事が出来る。
+  Route::resource('user', 'UserController');
 });
+
