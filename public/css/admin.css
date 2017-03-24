@@ -1,8 +1,4 @@
-a
-{
-  text-decoration: none;
-  color: #fff;
-}
+
 .container {
   padding-top: 10px;
 }
@@ -11,6 +7,7 @@ a
   padding: 20px 20px;
   font-size: 24px;
   text-align: center;
+  color: #fff;
 }
 
 .admin__btn:visited {

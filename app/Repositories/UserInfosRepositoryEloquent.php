@@ -24,7 +24,7 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
         return UserInfos::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -32,5 +32,10 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function getUserList($id)
+    {
+      return UserInfos::where('store_id', $id)->get();
     }
 }
