@@ -5,23 +5,34 @@ use App\Entities\UserInfos;
 
 class UserInfosTableSeeder extends Seeder
 {
-
-    public function run()
+  public function run()
+  {
+    UserInfos::truncate();
     {
-        UserInfos::truncate();
-        UserInfos::create([
-          'first_name' => "Atsushi",
-          'last_name' => "Ikeda",
-          'email' => "sample@sample.com",
-          'tel' => 1234567890,
-          'store_id' => 1,
-        ]);
-          // DB::table('user_infos')->insert([
-          //   'first_name' => 'test',
-          //   'last_name' => 'test',
-          //   'email' => 'sample@sample.com',
-          //   'tel' => 09012345678,
-          //   'store_id' => 1,
-          // ]);
+    UserInfos::create(
+      [
+      'first_name' => '小松',
+      'last_name' => '信之',
+      'email' => 'hoge@gmail.com',
+      'tel' => 11111111,
+      'store_id' => 1,
+    ]);
+    UserInfos::create(
+    [
+      'first_name' => '池田',
+      'last_name' => '篤史',
+      'email' => 'fuga@gmail.com',
+      'tel' => 222222222,
+      'store_id' => 2,
+    ]);
+    UserInfos::create(
+    [
+      'first_name' => '河原',
+      'last_name' => '佑哉',
+      'email' => 'hogefuga@gmail.com',
+      'tel' => 333333333,
+      'store_id' => 3,
+    ]);
     }
+  }
 }
