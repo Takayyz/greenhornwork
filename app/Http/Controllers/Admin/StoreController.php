@@ -51,7 +51,7 @@ class StoreController extends Controller
 
     public function edit($id) {
       $store = $this->stores->find($id);
-      return view('admin.store.edit')->with(compact('store'));
+      return view('admin.store.edit',compact('store'));
     }
 
     public function update(StoreRequest $request, $id) {
