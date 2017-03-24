@@ -12,10 +12,10 @@
   </tr>
 </thead>
   <tbody>
-    @foreach($userList as $userlist)
+    @foreach($userList as $user)
     <tr>
-      <td>{{ $userlist->first_name }}{{ $userlist->last_name }}</td>
-      <td><a class="btn btn-primary" href="">詳細</a></td>
+      <td>{{ $user->first_name }}{{ $user->last_name }}</td>
+      <td><a class="btn btn-primary" href="{{ route('user.edit', $user->id) }}">詳細</a></td>
     </tr>
     @endforeach()
   </tbody>

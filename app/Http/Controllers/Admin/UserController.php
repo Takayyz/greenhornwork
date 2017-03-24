@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\users;
+use App\Http\Requests\UserRequest;
 use App\Repositories\UserInfosRepository;
 use App\Entities\User;
 use App\Mail\MailSent;
@@ -63,14 +63,14 @@ class UserController extends Controller
             $input = $request->all();
             $this->user->create([
 
-            'first_name'=>$input['first_name'],
-            'last_name'=>$input["last_name"],
-            'sex'=>$input['sex'],
+            'first_name' => $input['first_name'],
+            'last_name' =>$input["last_name"],
+            'sex' => $input['sex'],
             // 'birthday'=>$input["birthday"],
-            'email'=>$input["email"],
-            'tel'=>$input['tel'],
-            'start_date'=>$input['start_date'],
-            'store_id'=>$input['store_name']
+            'email' => $input["email"],
+            'tel' => $input['tel'],
+            'hire_date' => $input['hire_date'],
+            // 'store_id' => $input['store_name']
 
         ]);
 
@@ -92,7 +92,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->user->find($id);
-        return view('admin.user.show')->with(compact('user'));
+        return view('admin.user.show', compact('user'));
         // $user = Users::find($id);
         // return view ('user.show')->withUser($user);
     }
@@ -126,8 +126,8 @@ class UserController extends Controller
                 'last_name' => $input['last_name'],
                 'email'=>$input["email"],
                 'tel'=>$input['tel'],
-                'start_date'=>$input['start_date'],
-                'store_id'=>$input['store_name']
+                'hire_date'=>$input['hire_date'],
+                // 'store_id'=>$input['store_name']
          ],$id);
 
         return redirect()->route('user.index');

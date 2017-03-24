@@ -25,7 +25,7 @@ class StoreFormRequest extends FormRequest
     {
       return [
           'name' => 'required',
-          'kananame' => 'required',
+          'kana_name' => 'required',
       ];
     }
 
@@ -33,7 +33,7 @@ class StoreFormRequest extends FormRequest
     {
       return [
       'name.required' => '店舗名を入力してください。',
-      'kananame.required' => '店舗名を入力してください。'
+      'kana_name.required' => '店舗名を入力してください。'
       ];
     }
 }

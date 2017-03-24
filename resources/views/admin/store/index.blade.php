@@ -15,7 +15,7 @@
     @foreach($stores as $store)
     <tr>
       <td>{{ $store->name }}</td>
-      <td><a class="btn btn-primary pull-right" href="{{ url('admin/store', $store->id)}}">研修生一覧</a></td>
+      <td><a class="btn btn-primary pull-right" href="{{ route('store.show', $store->id)}}">研修生一覧</a></td>
       <td>
         {!! Form::open(['route' => ['store.destroy', $store->id], 'method' => 'DELETE']) !!}
           <button type ="submit" class="btn btn-danger pull-right">削除</button>

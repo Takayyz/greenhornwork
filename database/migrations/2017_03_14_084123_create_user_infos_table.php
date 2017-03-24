@@ -18,7 +18,7 @@ class CreateUserInfosTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->integer('tel');
+            $table->string('tel');
             $table->integer('store_id');
             $table->timestamps();
             $table->softDeletes();

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Entities\Stores;
 use App\Repositories\StoresRepository;
 use App\Repositories\UserinfosRepository;
-use App\Http\Requests\StoreFormRequest;
+use App\Http\Requests\StoreRequest;
 
 class StoreController extends Controller
 {
@@ -25,7 +25,7 @@ class StoreController extends Controller
     }
 
     public function index() {
-      $stores = $this->stores->orderBy('kananame', 'asc')->all();
+      $stores = $this->stores->orderBy('kana_name', 'asc')->all();
       return view('admin.store.index', compact('stores'));
     }
 
@@ -33,10 +33,11 @@ class StoreController extends Controller
       return view('admin.store.create');
     }
 
-    public function store(Request $request, StoreFormRequest $storeformrequest) {
+    public function store(StoreRequest $request) {
       $input = $request->all();
       $this->stores->create([
         'name' => $input['name'],
+        'kana_name' => $input['kana_name'],
       ]);
 
       return redirect()->to('admin/store');

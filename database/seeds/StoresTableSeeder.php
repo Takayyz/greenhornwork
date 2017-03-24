@@ -10,15 +10,15 @@ class StoresTableSeeder extends Seeder
     Stores::truncate();
     Stores::create([
       'name' => '新宿店',
-      'kananame' => 'シンジュクテン',
+      'kana_name' => 'シンジュクテン',
     ]);
     Stores::create([
       'name' => '渋谷店',
-      'kananame' => 'シブヤテン',
+      'kana_name' => 'シブヤテン',
     ]);
     Stores::create([
       'name' => '池袋店',
-      'kananame' => 'イケブクロテン',
+      'kana_name' => 'イケブクロテン',
     ]);
   }
 }

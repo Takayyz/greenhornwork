@@ -31,9 +31,8 @@
     <thead>
     <tr>
         <th>性</th>
-        <th>名</th>
+        <th>名</th>
         <th>性別</th>
-        <th>生年月日</th>
         <th>メールアドレス</th>
         <th>電話番号</th>
         <th>開始日</th>
@@ -43,8 +42,8 @@
     <tbody>
     @foreach($users as $user)
     <tr>
-        <td>{{ $user->last_name }}</td>
         <td>{{ $user->first_name }}</td>
+        <td>{{ $user->last_name }}</td>
         <td>{{ $user->sex }}</td>
         <!-- <td>{{ $user->birthday }}</td> -->
         <td>{{ $user->email }}</td>
@@ -53,7 +52,11 @@
         <td>{{ $user->store_name }}</td>
         <td></td>
         <td></td>
-        <td><a class="btn btn-primary" href="user/{{$user->id}}/edit">編集</a></td>
+        <!--<td><a class="btn btn-primary" href="user/{{$user->id}}/edit">編集</a></td>-->
+
+        <td>
+            <a class="btn btn-primary" href="{{ route('user.edit', $user->id) }}">編集</a>
+        </td>
 
         {!! Form::open(['route'=>['user.destroy',$user->id],'method'=>'DELETE']) !!}
 

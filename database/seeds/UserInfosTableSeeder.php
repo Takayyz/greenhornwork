@@ -15,6 +15,7 @@ class UserInfosTableSeeder extends Seeder
       'last_name' => '信之',
       'email' => 'hoge@gmail.com',
       'tel' => 11111111,
+      'sex' => '男',
       'store_id' => 1,
     ]);
     UserInfos::create(
@@ -23,6 +24,7 @@ class UserInfosTableSeeder extends Seeder
       'last_name' => '篤史',
       'email' => 'fuga@gmail.com',
       'tel' => 222222222,
+      'sex' => '男',
       'store_id' => 2,
     ]);
     UserInfos::create(
@@ -31,6 +33,7 @@ class UserInfosTableSeeder extends Seeder
       'last_name' => '佑哉',
       'email' => 'hogefuga@gmail.com',
       'tel' => 333333333,
+      'sex' => '男',
       'store_id' => 3,
     ]);
     }

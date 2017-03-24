@@ -68,25 +68,18 @@
 
              <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
 
-                {!! Form::label('start_date', '開始日'); !!}
-                {!! Form::input('text', 'start_date', old("start_date"), array('class' => 'form-control')) !!}
+                {!! Form::label('hire_date', '入社日'); !!}
+                {!! Form::input('text', 'hire_date', old("hire_date"), array('class' => 'form-control')) !!}
 
             <span class="help-block">{{$errors->first('email')}}</span>
 
             </div>
 
-            <div class="form-group @if(!empty($errors->first('tel'))) has-error @endif">
-
-                {!! Form::label('store_name', '店舗名'); !!}
-                {!! Form::input('text', 'store_name', old("store_name"), array('class' => 'form-control')) !!}
-
-            <span class="help-block">{{$errors->first('store_name')}}</span>
-
-            </div>
-
         
         <button type="submit" class="btn btn-success pull-right">新規作成</button>
-        <p class="pull-right"><a href="./">一覧に戻る</a></p>
+        <p class="pull-right">
+            <a href="./">一覧に戻る</a>
+        </p>
 
     {!! Form::close() !!}
 @endsection
