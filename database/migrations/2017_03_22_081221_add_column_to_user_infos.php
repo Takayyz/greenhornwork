@@ -30,7 +30,9 @@ class AddColumnSexToUserInfos extends Migration
     public function down()
     {
         Schema::table('user_infos', function($table){
-          $table->dropColumns('sex');
+          $table->dropColumn('sex');
+          $table->dropColumn('birthday');
+          $table->dropColumn('hire_date');
       });
     }
 }

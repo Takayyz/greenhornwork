@@ -29,7 +29,8 @@ class AddColumnYearMonthToWorkScheduleTable extends Migration
     {
       Schema::table('work_schedules', function($table)
       {
-        $table->dropColumn('year_month');
+        $table->dropColumn('year');
+        $table->dropColumn('month');
       });
     }
 }

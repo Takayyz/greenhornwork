@@ -26,6 +26,9 @@ class AddColumnKananameToStoresTable extends Migration
      */
     public function down()
     {
-        Schema::drop('stores');
+        Schema::table('stores', function (Blueprint $table)
+        {
+          $table->dropColumn('kana_name');
+        });
     }
 }
