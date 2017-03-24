@@ -7,6 +7,7 @@ use App\Repositories\WorkSchedulesRepository;
 use App\Entities\WorkSchedules;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\WorkScheduleRequest;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class WorkScheduleController extends Controller
 {
@@ -24,8 +25,8 @@ class WorkScheduleController extends Controller
    */
   public function index()
   {
-      $schedules = $this->schedule->all();
-      return view('work_schedule.index');
+    $schedules = $this->schedule->all();
+    return view('work_schedule.index', compact('schedules'));
   }
 
   /**
@@ -44,9 +45,31 @@ class WorkScheduleController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
+  public function store(WorkScheduleRequest $request)
   {
-      //
+    $userId = Auth::id();
+    //ファイルを保存する
+    $input = $request->all();
+
+    $img = Image::make($request->file('schedule'));
+
+    //ファイル名を重複しないように変更する処理を書く
+    $img->save('schedules/test.jpg');
+
+    //ファイルパスを取得する
+    $filePath = "public/schedules/test.jpg";
+    //ファイルの種類を取得する
+
+
+    //データベースへの保存処理
+    $this->schedule->create([
+      'user_id' => $userId,
+      'file_path' => $filePath,
+      'file_type' => 'jpg',
+      'year_month' => $input['time'],
+    ]);
+
+    return redirect()->to('user/schedule');
   }
 
   /**
@@ -91,34 +114,9 @@ class WorkScheduleController extends Controller
    */
   public function destroy($id)
   {
-      //
-  }
+      $data = $this->schedule->find($id);
+      $data->delete();
 
-  public function upload(WorkScheduleRequest $request)
-  {
-    $userId = Auth::id();
-    //ファイルを保存する
-
-    //HTTPリクエストからアップロードされたフォルダを取得
-    $fileTmp = $request->file('schedule');
-    //ファイル名を取得
-    $fileName = $fileTmp->getClientOriginalName();
-    //ファイルの格納先取得
-    $fileDir = public_path() . '/schedules/';
-    //ファイルを保存する
-    $save = $fileTmp->move($fileDir, $fileName);
-
-    //保存したパスをデータベースに保存する
-
-    //データベースに保存するファイルパスを作成
-    $filePath = $fileDir . $fileName;
-    //データベースへの保存処理
-    $this->schedule->create([
-      'user_id' => $userId,
-      'file_path' => $filePath,
-      'file_type' => 'jpg',
-    ]);
-
-    return redirect()->to('user/schedule');
+      return redirect()->to('user/schedule');
   }
 }
