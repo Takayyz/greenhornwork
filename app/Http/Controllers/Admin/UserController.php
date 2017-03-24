@@ -8,6 +8,7 @@ use App\Http\Requests\UserRequest;
 use App\Repositories\UserInfosRepository;
 use App\Entities\User;
 use App\Mail\MailSent;
+use Carbon\Carbon;
 
 //use App\Requests\usersはusers.phpの中のバリデーションへアクセスしている。
 
@@ -57,24 +58,25 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(users $request)
+    public function store(UserRequest $request)
     {
         //usersを第一引数に入れる事によって、バリデーションを実行する事が出来るようになる。
             $input = $request->all();
             $this->user->create([
 
             'first_name' => $input['first_name'],
-            'last_name' =>$input["last_name"],
+            'last_name' =>$input['last_name'],
             'sex' => $input['sex'],
-            // 'birthday'=>$input["birthday"],
-            'email' => $input["email"],
+            'birthday'=>$input['birthday'],
+            'email' => $input['email'],
             'tel' => $input['tel'],
             'hire_date' => $input['hire_date'],
-            // 'store_id' => $input['store_name']
+            'store_id' => $input['store_id']
+
 
         ]);
 
-        // return redirect()->route('user.index');
+        return redirect()->route('user.index');
 
         // $user = Users::create(
         //     request(['name', 'email', 'password'])
@@ -117,17 +119,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Users $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $input =  $request->all();
         // $user = $this->user->find($id);
         $this->user->update([
                 'first_name' => $input['first_name'],
                 'last_name' => $input['last_name'],
+                'sex' => $input['sex'],
                 'email'=>$input["email"],
                 'tel'=>$input['tel'],
                 'hire_date'=>$input['hire_date'],
-                // 'store_id'=>$input['store_name']
+                'store_id'=>$input['store_name']
          ],$id);
 
         return redirect()->route('user.index');

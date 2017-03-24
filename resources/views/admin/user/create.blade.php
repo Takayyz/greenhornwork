@@ -27,26 +27,26 @@
 
             </div>
 
-            <!--  <div class="form-group @if(!empty($errors->first('sex'))) has-error @endif">
+             <div class="form-group @if(!empty($errors->first('sex'))) has-error @endif">
 
                 {!! Form::label('sex', '男性'); !!}
-                {!! Form::radio('sex', 'male', old("sex")) !!}
+                {!! Form::radio('sex', '男', old("sex")) !!}
 
                 {!! Form::label('sex', '女性'); !!}
-                {!! Form::radio('sex', 'female', old("sex")) !!}
+                {!! Form::radio('sex', '女', old("sex")) !!}
 
             <span class="help-block">{{$errors->first('sex')}}</span>
- -->
+
             </div>
 
-             <!-- <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
+             <div class="form-group @if(!empty($errors->first('birthday'))) has-error @endif">
 
                 {!! Form::label('birthday', '生年月日'); !!}
                 {!! Form::input('text', 'birthday', old("birthday"), array('class' => 'form-control','placeholder' => '1992年7月30日')) !!}
 
             <span class="help-block">{{$errors->first('birthday')}}</span>
 
-            </div> -->
+            </div>
 
             <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
 
@@ -66,12 +66,22 @@
 
             </div>
 
-             <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
+             <div class="form-group @if(!empty($errors->first('hire_date'))) has-error @endif">
 
                 {!! Form::label('hire_date', '入社日'); !!}
-                {!! Form::input('text', 'hire_date', old("hire_date"), array('class' => 'form-control')) !!}
+                {!! Form::input('date', 'hire_date', old("hire_date"), array('class' => 'form-control')) !!}
 
-            <span class="help-block">{{$errors->first('email')}}</span>
+            <span class="help-block">{{$errors->first('hire_date')}}</span>
+
+            </div>
+
+
+             <div class="form-group @if(!empty($errors->first('store_id'))) has-error @endif">
+
+                {!! Form::label('store_id', '店舗名'); !!}
+                {!! Form::input('text', 'store_id', old("store_id"), array('class' => 'form-control')) !!}
+
+            <span class="help-block">{{$errors->first('store_id')}}</span>
 
             </div>
 
