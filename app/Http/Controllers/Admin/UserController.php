@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\users;
 use App\Repositories\UserInfosRepository;
 use App\Entities\User;
+use App\Mail\MailSent;
 
 //use App\Requests\usersはusers.phpの中のバリデーションへアクセスしている。
 
@@ -41,6 +42,13 @@ class UserController extends Controller
     {
         return view('admin/user/create'); 
 
+        // \Mail::to($user)->send(new Email);
+
+    //     Mail::send('emails.welcome', ['key' => 'value'], function($message)
+    // {
+    //     $message->to('foo@example.com', 'John Smith')->subject('Welcome!');
+
+
     }
 
     /**
@@ -52,19 +60,26 @@ class UserController extends Controller
     public function store(users $request)
     {
         //usersを第一引数に入れる事によって、バリデーションを実行する事が出来るようになる。
-        $input = $request->all();
-        $this->user->create([
+            $input = $request->all();
+            $this->user->create([
 
-        'first_name'=>$input['first_name'],
-        'last_name'=>$input["last_name"],
-        'sex'=>$input['sex'],
-        'birthday'=>$input["birthday"],
-        'email'=>$input["email"],
-        'tel'=>$input['tel'],
-        'store_id'=>$input['store_name']
-    ]);
+            'first_name'=>$input['first_name'],
+            'last_name'=>$input["last_name"],
+            'sex'=>$input['sex'],
+            // 'birthday'=>$input["birthday"],
+            'email'=>$input["email"],
+            'tel'=>$input['tel'],
+            'start_date'=>$input['start_date'],
+            'store_id'=>$input['store_name']
 
-        return redirect()->route('user.index');
+        ]);
+
+        // return redirect()->route('user.index');
+
+        // $user = Users::create(
+        //     request(['name', 'email', 'password'])
+        // );
+
     
     }
 
@@ -111,6 +126,7 @@ class UserController extends Controller
                 'last_name' => $input['last_name'],
                 'email'=>$input["email"],
                 'tel'=>$input['tel'],
+                'start_date'=>$input['start_date'],
                 'store_id'=>$input['store_name']
          ],$id);
 

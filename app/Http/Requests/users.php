@@ -24,12 +24,12 @@ class users extends FormRequest
     public function rules()
     {
         return [
-            'last_name'=>'required|max:11',
-            'first_name'=>'required',
-            'sex'=>'required',
-            'birthday'=>'required',
-            'email'=>'required',
-            'tel'=>'required|int|max:11'
+            // 'last_name'=>'required|max:11',
+            // 'first_name'=>'required',
+            // 'sex'=>'required',
+            // 'birthday'=>'required',
+            // 'email'=>'required',
+            // 'tel'=>'required|int|max:11'
                   
         ];
     }

@@ -36,6 +36,7 @@
         <th>生年月日</th>
         <th>メールアドレス</th>
         <th>電話番号</th>
+        <th>開始日</th>
         <th>店舗名</th>
     </tr>
     </thead>
@@ -45,10 +46,11 @@
         <td>{{ $user->last_name }}</td>
         <td>{{ $user->first_name }}</td>
         <td>{{ $user->sex }}</td>
-        <td>{{ $user->birthday }}</td>
+        <!-- <td>{{ $user->birthday }}</td> -->
         <td>{{ $user->email }}</td>
         <td>{{ $user->tel }}</td>
-        <td>{{ $user->store->name }}</td>
+        <td>{{ $user->start_date }}</td>
+        <td>{{ $user->store_name }}</td>
         <td></td>
         <td></td>
         <td><a class="btn btn-primary" href="user/{{$user->id}}/edit">編集</a></td>

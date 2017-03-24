@@ -27,26 +27,26 @@
 
             </div>
 
-             <div class="form-group @if(!empty($errors->first('sex'))) has-error @endif">
+            <!--  <div class="form-group @if(!empty($errors->first('sex'))) has-error @endif">
 
                 {!! Form::label('sex', '男性'); !!}
-                {!! Form::radio('text', 'sex', old("sex")) !!}
+                {!! Form::radio('sex', 'male', old("sex")) !!}
 
                 {!! Form::label('sex', '女性'); !!}
-                {!! Form::radio('text', 'sex', old("sex")) !!}
+                {!! Form::radio('sex', 'female', old("sex")) !!}
 
             <span class="help-block">{{$errors->first('sex')}}</span>
-
+ -->
             </div>
 
-             <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
+             <!-- <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
 
                 {!! Form::label('birthday', '生年月日'); !!}
                 {!! Form::input('text', 'birthday', old("birthday"), array('class' => 'form-control','placeholder' => '1992年7月30日')) !!}
 
             <span class="help-block">{{$errors->first('birthday')}}</span>
 
-            </div>
+            </div> -->
 
             <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
 
@@ -63,6 +63,15 @@
                 {!! Form::input('int', 'tel', old("tel"), array('class' => 'form-control','placeholder' => '03-3353-2720')) !!}
 
             <span class="help-block">{{$errors->first('tel')}}</span>
+
+            </div>
+
+             <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
+
+                {!! Form::label('start_date', '開始日'); !!}
+                {!! Form::input('text', 'start_date', old("start_date"), array('class' => 'form-control')) !!}
+
+            <span class="help-block">{{$errors->first('email')}}</span>
 
             </div>
 

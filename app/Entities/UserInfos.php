@@ -19,7 +19,8 @@ class UserInfos extends Model implements Transformable
         'birthday',
         'email',
         'tel',
-        'store_id',
+        'start_date',
+        'store_id'
     ];
 
     protected $dates = ['deleted_at'];
