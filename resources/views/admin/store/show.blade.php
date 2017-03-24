@@ -14,7 +14,7 @@
   <tbody>
     @foreach($userList as $user)
     <tr>
-      <td>{{ $user->first_name }}{{ $user->last_name }}</td>
+      <td>{{ $user->last_name }}{{ $user->first_name }}</td>
       <td><a class="btn btn-primary" href="{{ route('user.edit', $user->id) }}">詳細</a></td>
     </tr>
     @endforeach()
