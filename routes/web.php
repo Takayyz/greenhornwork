@@ -26,6 +26,8 @@ Route::group(['prefix' => '/'], function() {
   Route::get('/', 'UserController@index');
   Route::get('/home', 'UserController@index');
   Route::resource('/report', 'DailyReportController');
+  Route::resource('/schedule', 'WorkScheduleController');
+  Route::post('/upload', 'WorkScheduleController@upload');
 });
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
