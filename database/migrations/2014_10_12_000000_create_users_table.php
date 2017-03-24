@@ -17,9 +17,10 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('password');
-            $table->intger('user_info_id');
+            $table->integer('user_info_id');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

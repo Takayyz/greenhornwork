@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnSexToUserInfos extends Migration
+class AddColumnToUserInfos extends Migration
 {
     /**
      * Run the migrations.
@@ -16,8 +16,8 @@ class AddColumnSexToUserInfos extends Migration
         Schema::table('user_infos', function($table)
         {
           $table->string('sex')->after('tel');
-          $table->timestamp('birthday')->after('sex');
-          $table->timestamp('hire_date')->after('birthday');
+          $table->timestamp('birthday')->after('tel')->nullable();
+          $table->timestamp('hire_date')->after('tel')->nullable();
         });
     }
 
