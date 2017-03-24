@@ -15,10 +15,18 @@ class UserInfos extends Model implements Transformable
     protected $fillable = [
         'first_name',
         'last_name',
+        'sex',
+        'birthday',
         'email',
         'tel',
-        'store_id',
+        'start_date',
+        'store_id'
     ];
 
     protected $dates = ['deleted_at'];
+
+    public function store () 
+    {
+        return $this->belongsTo('App\Entities\Stores');
+    }
 }

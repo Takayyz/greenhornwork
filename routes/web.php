@@ -11,13 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => '/'], function() {
   Route::get('/', function () {
@@ -36,7 +30,11 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
   Route::post('logout', 'Auth\LoginController@logout');
 
   Route::get('/', 'HomeController@index');
-  Route::get('/home', 'HomeController@index');
   Route::resource('/report', 'DailyReportController');
   Route::resource('/store', 'StoreController'); 
+
+  Route::resource('adminuser', 'AdminUserController');
+  //Route::resourceを使う事により、AdminUserControllerの中のCRUDへのルートを定義する事が出来る。
+  Route::resource('user', 'UserController');
 });
+

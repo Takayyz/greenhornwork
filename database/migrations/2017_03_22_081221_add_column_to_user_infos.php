@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnKananameToStoresTable extends Migration
+class AddColumnSexToUserInfos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,24 @@ class AddColumnKananameToStoresTable extends Migration
      */
     public function up()
     {
-        Schema::table('stores', function (Blueprint $table)
+        Schema::table('user_infos', function($table)
         {
-          $table->string('kana_name')->after('name');
+          $table->string('sex')->after('tel');
+          $table->timestamp('birthday')->after('sex');
+          $table->timestamp('hire_date')->after('birthday');
         });
     }
 
-    /**
+   /**
      * Reverse the migrations.
      *
      * @return void
      */
+
     public function down()
     {
-        Schema::drop('stores');
+        Schema::table('user_infos', function($table){
+          $table->dropColumns('sex');
+      });
     }
 }

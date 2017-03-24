@@ -15,7 +15,8 @@ class AddColumnYearMonthToWorkScheduleTable extends Migration
     {
       Schema::table('work_schedules', function($table)
       {
-        $table->timestamp('year_month')->after('file_type');
+        $table->string('year')->after('file_type');
+        $table->string('month')->after('year');
       });
     }
 
