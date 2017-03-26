@@ -7,7 +7,6 @@ use App\Repositories\WorkSchedulesRepository;
 use App\Entities\WorkSchedules;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\WorkScheduleRequest;
-use Intervention\Image\ImageManagerStatic as Image;
 
 class WorkScheduleController extends Controller
 {
@@ -48,28 +47,38 @@ class WorkScheduleController extends Controller
   public function store(WorkScheduleRequest $request)
   {
     $userId = Auth::id();
-    //ファイルを保存する
     $input = $request->all();
 
-    $img = Image::make($request->file('schedule'));
+    $uploadFile = $input['schedule'];
 
-    //ファイル名を重複しないように変更する処理を書く
-    $img->save('schedules/test.jpg');
+    //ファイルの拡張子確認
+    $fileType = $uploadFile->getClientOriginalExtension();
+    //ファイルパスを取得
+    $filePath = "public/schedules/";
+    //ファイル名が重複しないように変更
+    $fileName = $this->schedule->changeFileName($fileType);
 
-    //ファイルパスを取得する
-    $filePath = "public/schedules/test.jpg";
-    //ファイルの種類を取得する
-
+    if ($fileType === 'pdf')
+    {
+      //PDFの処理
+      $fileName = $this->schedule->pdfSave($uploadFile, $fileType, $fileName);
+    } else
+    {
+      //画像の処理 関数を書く場所を確認
+      $fileName = $this->schedule->imgSave($uploadFile, $fileType, $fileName);
+    }
 
     //データベースへの保存処理
     $this->schedule->create([
       'user_id' => $userId,
       'file_path' => $filePath,
-      'file_type' => 'jpg',
-      'year_month' => $input['time'],
+      'file_name' => $fileName,
+      'file_type' => $fileType,
+      'year' => $input['year'],
+      'month' => $input['month'],
     ]);
 
-    return redirect()->to('user/schedule');
+    return redirect()->to('schedule');
   }
 
   /**
@@ -117,6 +126,6 @@ class WorkScheduleController extends Controller
       $data = $this->schedule->find($id);
       $data->delete();
 
-      return redirect()->to('user/schedule');
+      return redirect()->to('schedule');
   }
 }
