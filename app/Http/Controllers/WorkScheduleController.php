@@ -50,22 +50,28 @@ class WorkScheduleController extends Controller
     $input = $request->all();
 
     $uploadFile = $input['schedule'];
-
-    //ファイルの拡張子確認
+    //ファイルの拡張子取得
     $fileType = $uploadFile->getClientOriginalExtension();
     //ファイルパスを取得
-    $filePath = "public/schedules/";
+    $filePath = 'schedules/' .$userId . '/' ;
+    $fileFullPath = public_path() . '/schedules/' .$userId . '/';
+    //ユーザーのフォルダが存在しなければ作成
+    if(!file_exists($fileFullPath))
+    {
+      mkdir($fileFullPath);
+    }
     //ファイル名が重複しないように変更
     $fileName = $this->schedule->changeFileName($fileType);
 
     if ($fileType === 'pdf')
     {
       //PDFの処理
-      $fileName = $this->schedule->pdfSave($uploadFile, $fileType, $fileName);
+      $uploadFile->move($fileFullPath, $fileName);
     } else
     {
-      //画像の処理 関数を書く場所を確認
-      $fileName = $this->schedule->imgSave($uploadFile, $fileType, $fileName);
+      //画像の処理
+      $img = Image::make($uploadFile);
+      $img->save($filePath. $fileName);
     }
 
     //データベースへの保存処理

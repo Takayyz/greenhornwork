@@ -41,23 +41,21 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
        return $fileName;
      }
 
-     public function imgSave($uploadFile, $fileType, $fileName)
-     {
-       //保存するファイルを取得
-       $img = Image::make($uploadFile);
-       //ファイル保存
-       $img->save('schedules/'. $fileName);
-
-       return $fileName;
-     }
-
-     public function pdfSave($uploadFile, $fileType, $fileName)
-     {
-       //保存先ファイルパス取得
-       $filePath = public_path() . '/schedules/';
-       //ファイル保存
-       move_uploaded_file($uploadFile, $filePath . $fileName);
-
-       return $fileName;
-     }
+    //  public function pdfSave($uploadFile, $fileType, $fileName, $fileFullPath)
+    //  {
+    //    //ファイル保存
+    //    $uploadFile->move($fileFullPath, $fileName);
+     //
+    //    return $fileName;
+    //  }
+     //
+    //   public function imgSave($uploadFile, $fileType, $fileName, $filePath)
+    //   {
+    //     //保存するファイルを取得
+    //     $img = Image::make($uploadFile);
+    //     //ファイル保存
+    //     $img->save($filePath. $fileName);
+     //
+    //     return $fileName;
+    //   }
 }

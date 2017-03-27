@@ -17,7 +17,7 @@
         @foreach($schedules as $schedule)
         <tr>
           <td>
-            <a href="{{ $schedule->file_path . $schedule->file_name }}">
+            <a href="{{ $schedule->file_path . $schedule->file_name }}" target="_blank" >
               {{ $schedule->year }}年
               {{ $schedule->month }}月
               勤務表
