@@ -24,14 +24,15 @@ class WorkScheduleRequest extends FormRequest
     public function rules()
     {
         return [
-            'schedule' => 'image',
+            'schedule' => 'required|mimes:jpeg,png,jpg,pdf',
         ];
     }
 
     public function messages()
     {
       return[
-        'schedule.image' => 'ファイルの形式が正しくありません',
+        'schedule.required' => 'ファイルが選択されていません。',
+        'schedule.mimes' => 'ファイルの形式が正しくありません。pdf/jpeg/pngのいずれかの形式のみアップロードできます。',
       ];
     }
 }
