@@ -14,6 +14,7 @@ class Stores extends Model implements Transformable
 
     protected $fillable = [
         'name',
+        'kana_name',
     ];
 
     protected $dates = ['deleted_at'];

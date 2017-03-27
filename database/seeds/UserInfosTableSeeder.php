@@ -11,8 +11,8 @@ class UserInfosTableSeeder extends Seeder
     {
     UserInfos::create(
       [
-      'first_name' => '小松',
-      'last_name' => '信之',
+      'first_name' => '信之',
+      'last_name' => '小松',
       'email' => 'hoge@gmail.com',
       'tel' => 11111111,
       'sex' => '男',
@@ -20,8 +20,8 @@ class UserInfosTableSeeder extends Seeder
     ]);
     UserInfos::create(
     [
-      'first_name' => '池田',
-      'last_name' => '篤史',
+      'first_name' => '篤史',
+      'last_name' => '池田',
       'email' => 'fuga@gmail.com',
       'tel' => 222222222,
       'sex' => '男',
@@ -29,8 +29,8 @@ class UserInfosTableSeeder extends Seeder
     ]);
     UserInfos::create(
     [
-      'first_name' => '河原',
-      'last_name' => '佑哉',
+      'first_name' => '佑哉',
+      'last_name' => '河原',
       'email' => 'hogefuga@gmail.com',
       'tel' => 333333333,
       'sex' => '男',

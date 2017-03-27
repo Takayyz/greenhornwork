@@ -37,7 +37,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/admin/home') }}">
+                    <a class="navbar-brand" href="{{ url('admin') }}">
                         {{ config('app.name', 'greenhorn_works') }}
                     </a>
                 </div>

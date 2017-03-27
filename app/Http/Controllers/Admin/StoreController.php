@@ -49,6 +49,21 @@ class StoreController extends Controller
       return view('admin.store.show', compact('store', 'userList'));
     }
 
+    public function edit($id) {
+      $store = $this->stores->find($id);
+      return view('admin.store.edit',compact('store'));
+    }
+
+    public function update(StoreRequest $request, $id) {
+      $input = $request->all();
+      $this->stores->update([
+        'name' => $input['name'],
+        'kana_name' => $input['kana_name']
+      ], $id);
+
+      return redirect()->to('admin/store');
+    }
+
     public function destroy($id) {
       $data = $this->stores->find($id);
       $data->delete();
