@@ -24,7 +24,9 @@ class WorkScheduleController extends Controller
    */
   public function index()
   {
-    $schedules = $this->schedule->all();
+    $schedules = $this->schedule->orderBy('year', 'desc')
+                                ->orderBy('month', 'desc')
+                                ->all();
     return view('work_schedule.index', compact('schedules'));
   }
 
