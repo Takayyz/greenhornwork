@@ -98,11 +98,6 @@ class WorkScheduleController extends Controller
   public function destroy($id)
   {
       $data = $this->schedule->find($id);
-      //アップロードされたファイル削除
-      $fileName = $data['file_path'] . $data['file_name'];
-      if (file_exists($fileName)) unlink($fileName);
-
-      //レコード論理削除
       $data->delete();
 
       return redirect()->to('schedule');
