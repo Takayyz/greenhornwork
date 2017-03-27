@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreFormRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class StoreFormRequest extends FormRequest
     {
       return [
           'name' => 'required',
-          'kana_name' => 'required',
+          'kana_name' => 'required|katakana',
       ];
     }
 
@@ -33,7 +33,8 @@ class StoreFormRequest extends FormRequest
     {
       return [
       'name.required' => '店舗名を入力してください。',
-      'kana_name.required' => '店舗名を入力してください。'
+      'kana_name.required' => '店舗名を入力してください。(カタカナ)',
+      'kana_name.katakana' => '店舗名を入力してください。(カタカナ)',
       ];
     }
 }
