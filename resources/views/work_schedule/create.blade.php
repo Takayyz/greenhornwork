@@ -9,8 +9,6 @@
   <div class="panel-body">
     {!! Form::open(['url' => 'schedule', 'method' => 'post', 'files' => 'true']) !!}
       <div class="form-group {{ !empty($errors->first('year')) ? 'has-error' :'' }}">
-        <!-- 条件式 ? true : false -->
-        <!-- !empty($errors->first('year')) ? has-error : "" -->
         {!! Form::label('year', '年'); !!}
         {!! Form::selectRange('year', date('Y'), date('Y')+20, old('year', date('Y'))) !!}
         <span class="help-block">{{ $errors->first('year') }}</span>
