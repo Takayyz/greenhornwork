@@ -6,7 +6,7 @@
     <h2>勤務表一覧</h2>
   </div>
   <div class="panel-body">
-    <p class="pull-right"><a class="btn btn-success" href="schedule/create">作成</a></p>
+    <p class="pull-right"><a class="btn btn-success" href="{{ url('schedule/create') }}">作成</a></p>
     <table class="table table-hover todo-table">
       <thead>
       <tr>

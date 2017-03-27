@@ -7,6 +7,7 @@ use App\Repositories\WorkSchedulesRepository;
 use App\Entities\WorkSchedules;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\WorkScheduleRequest;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class WorkScheduleController extends Controller
 {
@@ -88,41 +89,6 @@ class WorkScheduleController extends Controller
 
     return redirect()->to('schedule');
   }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-      //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-      //
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-      //
-  }
-
   /**
    * Remove the specified resource from storage.
    *
@@ -132,6 +98,11 @@ class WorkScheduleController extends Controller
   public function destroy($id)
   {
       $data = $this->schedule->find($id);
+      //アップロードされたファイル削除
+      $fileName = $data['file_path'] . $data['file_name'];
+      if (file_exists($fileName)) unlink($fileName);
+
+      //レコード論理削除
       $data->delete();
 
       return redirect()->to('schedule');

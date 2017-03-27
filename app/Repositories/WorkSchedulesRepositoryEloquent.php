@@ -7,7 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\WorkSchedulesRepository;
 use App\Entities\WorkSchedules;
 use App\Validators\WorkSchedulesValidator;
-use Intervention\Image\ImageManagerStatic as Image;
+// use Intervention\Image\ImageManagerStatic as Image;
 
 /**
  * Class WorkSchedulesRepositoryEloquent
