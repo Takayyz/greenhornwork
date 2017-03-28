@@ -28,7 +28,7 @@ class DailyReportController extends Controller
   {
     $userId = Auth::id();
     $reports = $this->report->getOwnReports($userId);
-    return view('daily_report.index',compact('reports'));
+    return view('daily_report.index', compact('reports'));
   }
 
   /**
@@ -62,7 +62,7 @@ class DailyReportController extends Controller
   public function show($id)
   {
     $report = $this->report->find($id);
-    return view('daily_report.show')->with(compact('report'));
+    return view('daily_report.show', compact('report'));
   }
 
   /**
@@ -74,7 +74,7 @@ class DailyReportController extends Controller
   public function edit($id)
   {
     $report = $this->report->find($id);
-    return view('daily_report.edit')->with(compact('report'));
+    return view('daily_report.edit', compact('report'));
   }
 
   /**

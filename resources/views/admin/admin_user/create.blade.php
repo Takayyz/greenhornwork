@@ -1,5 +1,5 @@
     {{ Form::open(array('route' => 'adminuser.store')) }}
-      
+
             <h2 class="page-header">アドミンユーザーの新規作成</h2>
 
             {!! Form::label('name', '名前'); !!}
@@ -30,7 +30,7 @@
 
             <p>
 
-        
+
         <button type="submit" class="btn btn-success pull-right">新規作成</button>
 
     {!! Form::close() !!}
