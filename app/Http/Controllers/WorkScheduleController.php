@@ -25,7 +25,9 @@ class WorkScheduleController extends Controller
    */
   public function index()
   {
-    $schedules = $this->schedule->all();
+    $schedules = $this->schedule->orderBy('year', 'desc')
+                                ->orderBy('month', 'desc')
+                                ->all();
     return view('work_schedule.index', compact('schedules'));
   }
 
@@ -48,64 +50,45 @@ class WorkScheduleController extends Controller
   public function store(WorkScheduleRequest $request)
   {
     $userId = Auth::id();
-    //ファイルを保存する
     $input = $request->all();
 
-    $img = Image::make($request->file('schedule'));
+    $uploadFile = $input['schedule'];
+    //ファイルの拡張子取得
+    $fileType = $uploadFile->getClientOriginalExtension();
+    //ファイルパスを取得
+    $filePath = 'schedules/' .$userId . '/' ;
+    $fileFullPath = public_path() . '/schedules/' .$userId . '/';
+    //ユーザーのフォルダが存在しなければ作成
+    if(!file_exists($fileFullPath))
+    {
+      mkdir($fileFullPath);
+    }
+    //ファイル名が重複しないように変更
+    $fileName = $this->schedule->changeFileName($fileType);
 
-    //ファイル名を重複しないように変更する処理を書く
-    $img->save('schedules/test.jpg');
-
-    //ファイルパスを取得する
-    $filePath = "public/schedules/test.jpg";
-    //ファイルの種類を取得する
-
+    if ($fileType === 'pdf')
+    {
+      //PDFの処理
+      $uploadFile->move($fileFullPath, $fileName);
+    } else
+    {
+      //画像の処理
+      $img = Image::make($uploadFile);
+      $img->save($filePath. $fileName);
+    }
 
     //データベースへの保存処理
     $this->schedule->create([
       'user_id' => $userId,
       'file_path' => $filePath,
-      'file_type' => 'jpg',
-      'year_month' => $input['time'],
+      'file_name' => $fileName,
+      'file_type' => $fileType,
+      'year' => $input['year'],
+      'month' => $input['month'],
     ]);
 
     return redirect()->to('schedule');
   }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-      //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function edit($id)
-  {
-      //
-  }
-
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-      //
-  }
-
   /**
    * Remove the specified resource from storage.
    *
