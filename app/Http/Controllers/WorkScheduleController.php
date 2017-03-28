@@ -69,7 +69,7 @@ class WorkScheduleController extends Controller
       'year_month' => $input['time'],
     ]);
 
-    return redirect()->to('user/schedule');
+    return redirect()->to('schedule');
   }
 
   /**
@@ -117,6 +117,6 @@ class WorkScheduleController extends Controller
       $data = $this->schedule->find($id);
       $data->delete();
 
-      return redirect()->to('user/schedule');
+      return redirect()->to('schedule');
   }
 }

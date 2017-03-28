@@ -26,7 +26,7 @@
 <body>
 <div class="container">
 <h2 class="page-header">ユーザーの一覧</h2>
-    <p class="pull-right"><a class="btn btn-success" href="{{url('admin/user/create')}}">新規ユーザー作成</a></p>
+    <p class="pull-right"><a class="btn btn-success" href="{{ route('admin.user.create')}}">新規ユーザー作成</a></p>
 <table class="table table-hover todo-table">
     <thead>
     <tr>
@@ -55,14 +55,14 @@
         <!--<td><a class="btn btn-primary" href="user/{{$user->id}}/edit">編集</a></td>-->
 
         <td>
-            <a class="btn btn-primary" href="{{ route('user.edit', $user->id) }}">編集</a>
+            <a class="btn btn-primary" href="{{ route('admin.user.edit', $user->id) }}">編集</a>
         </td>
 
-        {!! Form::open(['route'=>['user.destroy',$user->id],'method'=>'DELETE']) !!}
+        {!! Form::open(['route'=>['admin.user.destroy',$user->id],'method'=>'DELETE']) !!}
 
 
         <td><button class="btn btn-danger" type="submit">削除</button></td>
-        
+
         {!! Form::close() !!}
     </tr>
     @endforeach

@@ -37,7 +37,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('user') }}">
+                    <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'greenhorn_works') }}
                     </a>
                 </div>
@@ -46,8 +46,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                        <li><a href="{{ route('schedule.index') }}">勤退表一覧</a></li>
-                        <li><a href="{{ route('report.index') }}">日報一覧</a></li>
+                        <li><a href="{{ url('schedule') }}">勤退表一覧</a></li>
+                        <li><a href="{{ url('report') }}">日報一覧</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

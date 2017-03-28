@@ -18,7 +18,7 @@
         <td><a href="{{ $schedule->file_path }}">ファイル名</a></td>
         <td></td>
         <td>
-          {!! Form::open(['url' => ['user/schedule', $schedule->id], 'method' => 'DELETE']) !!}
+          {!! Form::open(['route' => ['schedule.destroy', $schedule->id], 'method' => 'DELETE']) !!}
             <button class="btn btn-danger" type="submit">削除</button>
           {!! Form::close() !!}
         </td>

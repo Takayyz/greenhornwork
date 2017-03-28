@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  <p class="pull-right"><a href="{{ url('user/report') }}">一覧に戻る</a></p>
+  <p class="pull-right"><a href="{{ route('report.index') }}">一覧に戻る</a></p>
   <div class="panel-heading">
     <h2>日報詳細</h2>
   </div>
@@ -20,6 +20,6 @@
         {{ $report->contents }}
       </div>
   </div>
-  <p class="pull-right"><a class="btn btn-primary" href="{{ $report->id }}/edit">編集</a></p>
+  <p class="pull-right"><a class="btn btn-primary" href="{{ route('report.edit', $report->id) }}">編集</a></p>
 </div>
 @endsection

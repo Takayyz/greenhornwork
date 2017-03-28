@@ -50,7 +50,7 @@ class DailyReportController extends Controller
       'contents' =>$input['contents'],
     ]);
 
-    return redirect()->to('user/report');
+    return redirect()->to('report');
   }
 
   /**
@@ -94,7 +94,7 @@ class DailyReportController extends Controller
                 'title' => $input['title'],
                 'contents' =>$input['contents'],
               ],$id);
-    return redirect()->to('user/report');
+    return redirect()->to('report');
   }
 
   /**
@@ -108,7 +108,7 @@ class DailyReportController extends Controller
     $data = $this->report->find($id);
     $data->delete();
 
-    return redirect()->to('user/report');
+    return redirect()->to('report');
   }
 
   public function create()

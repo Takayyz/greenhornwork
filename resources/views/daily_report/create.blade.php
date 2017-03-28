@@ -5,9 +5,9 @@
   <div class="panel-heading">
     <h2>日報</h2>
   </div>
-  <p class="pull-right"><a href="{{ url('user/report') }}">一覧に戻る</a></p>
+  <p class="pull-right"><a href="{{ route('report.index') }}">一覧に戻る</a></p>
   <div class="panel-body">
-    {!! Form::open(['action' => ['DailyReportController@store']]) !!}
+    {!! Form::open(['route' => 'report.store']) !!}
       <div class="form-group @if(!empty($errors->first('date'))) has-error @endif">
         {!! Form::input('date', 'date', null, ['class' => 'form-control']) !!}
         <span class="help-block">{{$errors->first('date')}}</span>
