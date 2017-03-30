@@ -6,10 +6,12 @@
     <h2>勤務表一覧</h2>
   </div>
   <div class="panel-body">
-    <p class="pull-right"><a class="btn btn-success" href="{{ url('schedule/create') }}">作成</a></p>
+    <p class="pull-right"><a class="btn btn-success" href="{{ route('schedule.create') }}">作成</a></p>
     <table class="table table-hover todo-table">
       <thead>
       <tr>
+        <th></th>
+        <th></th>
         <th></th>
       </tr>
       </thead>
@@ -23,7 +25,7 @@
               勤務表
             </a>
           </td>
-          <td></td>
+          <td><a class="btn btn-primary" href="{{ route('schedule.edit', $schedule->id) }}">変更</a></td>
           <td>
             {!! Form::open(['route' => ['schedule.destroy', $schedule->id], 'method' => 'DELETE']) !!}
               <button class="btn btn-danger" type="submit">削除</button>
