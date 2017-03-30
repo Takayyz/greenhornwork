@@ -64,7 +64,7 @@ class WorkScheduleController extends Controller
     //ファイル保存
     $fileInfo = $this->schedule->saveUploadFile($input['schedule'], $userId);
     //データベースへ保存
-    $this->schedule->insertSchedule($userId, $fileInfo['filePath'],
+    $this->schedule->createSchedule($userId, $fileInfo['filePath'],
                                     $fileInfo['fileName'], $fileInfo['fileType'],
                                     $input['year'], $input['month']);
 

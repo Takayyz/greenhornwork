@@ -9,12 +9,12 @@
   <p class="pull-right"><a href="{{ route('schedule.index') }}">一覧に戻る</a></p>
   <div class="panel-body">
     {!! Form::open(['url' => 'schedule', 'method' => 'post', 'files' => 'true']) !!}
-      <div class="form-group {{ Session::has($errors->first('year')) ? 'has-error' :'' }}">
+      <div class="form-group {{ Session::has('flash_message') ? 'has-error' :'' }}">
         {!! Form::label('year', '年'); !!}
         {!! Form::selectRange('year', date('Y'), date('Y')+20, old('year', date('Y'))) !!}
         <span class="help-block">{{ $errors->first('year') }}</span>
       </div>
-      <div class="form-group {{ Session::has($errors->first('month')) ? 'has-error' :'' }}">
+      <div class="form-group {{ Session::has('flash_message') ? 'has-error' :'' }}">
         {!! Form::label('month', '月'); !!}
         {!! Form::selectRange('month', 1, 12, date('m')) !!}
         <span class="help-block">{{ $errors->first('month') }}</span>
@@ -24,7 +24,7 @@
           <span class="help-block">{{ Session('flash_message') }}</span>
         </div>
       @endif
-      <div class="form-group {{ Session::has($errors->first('schedule')) ? 'has-error' :'' }}">
+      <div class="form-group {{ $errors->has('schedule') ? 'has-error' :'' }}">
         {!! Form::file('schedule', ['required' => 'required']) !!}
         <span class="help-block">{{ $errors->first('schedule') }}</span>
       </div>
