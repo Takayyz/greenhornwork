@@ -45,13 +45,34 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
       return $schedules;
     }
 
+    public function saveUploadFile($uploadFile, $userId)
+    {
+      //ファイルの拡張子取得
+      $fileType = $uploadFile->getClientOriginalExtension();
+      //ファイルパスを取得
+      $filePath = 'schedules/' .$userId . '/' ;
+      $fileFullPath = public_path() . '/' . $filePath;
+      //ファイル格納先のフォルダが存在しなければ作成
+      if (!file_exists($fileFullPath))  mkdir($fileFullPath);
+      //ファイル名が重複しないように変更
+      $fileName = $this->changeFileName($fileType);
+      //ファイル保存
+      $this->saveFile($fileType, $uploadFile, $fileName, $filePath);
+
+      return [
+        'filePath' => $filePath,
+        'fileName' => $fileName,
+        'fileType' => $fileType,
+      ];
+    }
+
     public function changeFileName($fileType)
      {
        $fileName = md5(uniqid(rand(), true)) . '.' .$fileType;
        return $fileName;
      }
 
-     public function saveUploadFile($fileType, $uploadFile, $fileName, $filePath)
+     public function saveFile($fileType, $uploadFile, $fileName, $filePath)
      {
        if ($fileType === 'pdf')
        {

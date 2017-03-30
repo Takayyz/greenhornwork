@@ -55,30 +55,16 @@ class WorkScheduleController extends Controller
 
     //同年月の勤務表が存在しないか確認
     $errMsg = $this->schedule->checkDate($input['year'], $input['month'], $userId);
+    //同年月の勤務表が存在する場合は元の画面にリダイレクト
+    if(!empty($errMsg)) return redirect()->to(route('schedule.create'))->with('message', $errMsg);
+    //ファイル保存
+    $fileInfo = $this->schedule->saveUploadFile($input['schedule'], $userId);
+    //データベースへ保存
+    $this->schedule->insertSchedule($userId, $fileInfo['filePath'],
+                                    $fileInfo['fileName'], $fileInfo['fileType'],
+                                    $input['year'], $input['month']);
 
-    if ($errMsg === NULL)
-    {
-      $uploadFile = $input['schedule'];
-      //ファイルの拡張子取得
-      $fileType = $uploadFile->getClientOriginalExtension();
-      //ファイルパスを取得
-      $filePath = 'schedules/' .$userId . '/' ;
-      $fileFullPath = public_path() . '/' . $filePath;
-      //ファイル格納先のフォルダが存在しなければ作成
-      if (!file_exists($fileFullPath))  mkdir($fileFullPath);
-      //ファイル名が重複しないように変更
-      $fileName = $this->schedule->changeFileName($fileType);
-      //ファイル保存
-      $this->schedule->saveUploadFile($fileType, $uploadFile, $fileName, $filePath);
-
-      //データベースへ保存
-      $this->schedule->insertSchedule($userId, $filePath, $fileName, $fileType, $input['year'], $input['month']);
-
-      return redirect()->to(route('schedule.index'));
-
-    } else {
-      return redirect()->to(route('schedule.create'))->with('message', $errMsg);
-    }
+    return redirect()->to(route('schedule.index'));
   }
 
   public function edit($id)
@@ -94,30 +80,20 @@ class WorkScheduleController extends Controller
 
     //同年月の勤務表が存在しないか確認
     $errMsg = $this->schedule->checkDate($input['year'], $input['month'], $userId, $id);
+    //同年月の勤務表が存在する場合は元の画面にリダイレクト
+    if(!empty($errMsg)) return redirect()->to(route('schedule.create'))->with('message', $errMsg);
 
-    if ($errMsg === NULL)
-    {
+      //ファイルがアップロードされたか確認
       if (array_key_exists('schedule', $input))
       {
-        $uploadFile = $input['schedule'];
-        //ファイルの拡張子取得
-        $fileType = $uploadFile->getClientOriginalExtension();
-        //ファイルパスを取得
-        $filePath = 'schedules/' .$userId . '/' ;
-        //ファイル名が重複しないように変更
-        $fileName = $this->schedule->changeFileName($fileType);
         //ファイル保存
-        $this->schedule->saveUploadFile($fileType, $uploadFile, $fileName, $filePath);
+        $fileInfo = $this->schedule->saveUploadFile($input['schedule'], $userId);
         //データベース更新
-        $this->schedule->updateSchedule($fileName, $fileType, $input['year'], $input['month'], $id);
+        $this->schedule->updateSchedule($fileInfo['fileName'], $fileInfo['fileType'], $input['year'], $input['month'], $id);
       } else {
         $this->schedule->updateOnlyDate($input['year'], $input['month'], $id);
       }
       return redirect()->to(route('schedule.index'));
-
-    } else {
-      return redirect()->to(route('schedule.edit', $id))->with('message', $errMsg);
-    }
   }
 
   /**
