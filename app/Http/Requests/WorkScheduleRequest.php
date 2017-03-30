@@ -32,7 +32,7 @@ class WorkScheduleRequest extends FormRequest
   public function messages()
   {
     return[
-      'schedule.mimes' => 'ファイルの形式が正しくありません。pdf/jpeg/pngのいずれかの形式のみアップロードできます。',
+      'schedule.mimes' => 'ファイルの形式が正しくありません。pdf/jpeg/jpg/pngのいずれかの形式のみアップロードできます。',
     ];
   }
 }
