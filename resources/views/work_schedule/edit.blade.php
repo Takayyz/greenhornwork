@@ -21,9 +21,11 @@
       <div class="has-error">
         <span class="help-block">@if(Session::has('message')) {{ Session('message') }} @endif</span>
       </div>
+      <div class="form-group">
+        <span class="help-block">※勤務表の変更が不要な場合はファイルを選択する必要はありません</span>
+      </div>
       <div class="form-group {{ !empty($errors->first('schedule')) ? 'has-error' :'' }}">
         {!! Form::file('schedule', null) !!}
-        <span class="help-block">※勤務表の変更が不要な場合はファイルを選択する必要はありません</span>
         <span class="help-block">{{ $errors->first('schedule') }}</span>
       </div>
       <button type="submit" class="btn btn-success pull-right">更新</button>
