@@ -56,7 +56,11 @@ class WorkScheduleController extends Controller
     //同年月の勤務表が存在しないか確認
     $errMsg = $this->schedule->checkDate($input['year'], $input['month'], $userId);
     //同年月の勤務表が存在する場合は元の画面にリダイレクト
-    if(!empty($errMsg)) return redirect()->to(route('schedule.create'))->with('message', $errMsg);
+    if(!empty($errMsg))
+    {
+      $request->session()->flash('flash_message', $errMsg);
+      return redirect()->route('schedule.create');
+    }
     //ファイル保存
     $fileInfo = $this->schedule->saveUploadFile($input['schedule'], $userId);
     //データベースへ保存
@@ -64,7 +68,7 @@ class WorkScheduleController extends Controller
                                     $fileInfo['fileName'], $fileInfo['fileType'],
                                     $input['year'], $input['month']);
 
-    return redirect()->to(route('schedule.index'));
+    return redirect()->route('schedule.index');
   }
 
   public function edit($id)
@@ -81,7 +85,11 @@ class WorkScheduleController extends Controller
     //同年月の勤務表が存在しないか確認
     $errMsg = $this->schedule->checkDate($input['year'], $input['month'], $userId, $id);
     //同年月の勤務表が存在する場合は元の画面にリダイレクト
-    if(!empty($errMsg)) return redirect()->to(route('schedule.create'))->with('message', $errMsg);
+    if(!empty($errMsg))
+    {
+      $request->session()->flash('flash_message', $errMsg);
+      return redirect()->route('schedule.edit', $id);
+    }
 
       //ファイルがアップロードされたか確認
       if (array_key_exists('schedule', $input))
@@ -93,7 +101,7 @@ class WorkScheduleController extends Controller
       } else {
         $this->schedule->updateOnlyDate($input['year'], $input['month'], $id);
       }
-      return redirect()->to(route('schedule.index'));
+      return redirect()->route('schedule.index');
   }
 
   /**
@@ -107,6 +115,6 @@ class WorkScheduleController extends Controller
       $data = $this->schedule->find($id);
       $data->delete();
 
-      return redirect()->to(route('schedule.index'));
+      return redirect()->route('schedule.index');
   }
 }
