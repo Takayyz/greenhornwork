@@ -18,9 +18,11 @@
         {!! Form::selectRange('month', 1, 12, $schedule->month ) !!}
         <span class="help-block">{{ $errors->first('month') }}</span>
       </div>
-      <div class="has-error">
-        <span class="help-block">@if(Session::has('message')) {{ Session('message') }} @endif</span>
-      </div>
+      @if (Session::has('flash_message'))
+        <div class="has-error">
+          <span class="help-block">{{ Session('flash_message') }}</span>
+        </div>
+      @endif
       <div class="form-group">
         <span class="help-block">※勤務表の変更が不要な場合はファイルを選択する必要はありません</span>
       </div>
