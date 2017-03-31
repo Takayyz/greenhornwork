@@ -36,4 +36,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::resource('adminuser', AdminUserController::class);
   //Route::resourceを使う事により、AdminUserControllerの中のCRUDへのルートを定義する事が出来る。
   Route::resource('user', UserController::class);
+  Route::resource('schedule', WorkScheduleController::class);
 });

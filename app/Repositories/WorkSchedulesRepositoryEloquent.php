@@ -36,6 +36,14 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
+    public function getAllSchedules()
+    {
+      $schedules = $this->model->orderBy('year', 'desc')
+                               ->orderBy('month', 'desc')
+                               ->get();
+      return $schedules;
+    }
+
     public function getOwnSchedules($userId)
     {
       $schedules = $this->model->where('user_id', $userId)
@@ -85,7 +93,7 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
        }
      }
 
-     public function insertSchedule($userId, $filePath, $fileName, $fileType, $year, $month)
+     public function createSchedule($userId, $filePath, $fileName, $fileType, $year, $month)
      {
        $this->model->create([
          'user_id' => $userId,
