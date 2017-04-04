@@ -20,19 +20,19 @@
     <tbody>
     @foreach($users as $user)
     <tr>
-
-        <td>{{ $user->last_name }}</td>
-        <td>{{ $user->first_name }}</td>
-        <td>{{ $user->sex }}</td>
-        <td>{{ date("Y/m/d", strtotime($user->birthday)) }}</td>
-        <td>{{ $user->email }}</td>
-        <td>{{ $user->tel }}</td>
-        <td>{{ date("Y/m/d", strtotime($user->hire_date)) }}</td>
-        <td>{{ $user->store->name }}</td>
+        
+        <td>{{ $user->info->last_name }}</td>
+        <td>{{ $user->info->first_name }}</td>
+        <td>{{ $user->info->sex }}</td>
+        <td>{{ date("Y/m/d", strtotime($user->info->birthday)) }}</td>
+        <td>{{ $user->info->email }}</td>
+        <td>{{ $user->info->tel }}</td>
+        <td>{{ date("Y/m/d", strtotime($user->info->hire_date)) }}</td>
+        <td>{{ $user->info->store->name }}</td>
 
         <td></td>
         <td></td>
-        <!--<td><a class="btn btn-primary" href="user/{{$user->id}}/edit">編集</a></td>-->
+       
 
         <td>
 
@@ -52,7 +52,7 @@
         {!! Form::close() !!}
 
         </td>
-        
+
     </tr>
     @endforeach
 </tbody>

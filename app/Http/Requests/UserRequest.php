@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'birthday'=>'required',
             'email'=>'required',
             'hire_date'=>'required',
-            'tel'=>'required',
+            'tel'=>'required|numeric',
             'store_id'=>'required'
                   
         ];
@@ -46,6 +46,7 @@ class UserRequest extends FormRequest
         'email.required'=>'必須の項目です！',
         'hire_date.required'=> '必須の項目です！',
         'tel.required'=>'必須の項目です！',
+        'tel.numeric'=>'数字でお願いします！',
         'store_id.required'=>'必須の項目です！'
         
         ];

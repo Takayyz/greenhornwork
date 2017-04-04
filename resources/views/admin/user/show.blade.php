@@ -11,40 +11,50 @@
   <div class="panel-body">
 
       <div>
+        <h3>ユーザー名</h3>
+        {{ $user->name }}
+      </div>
+
+      <div>
         <h3>性</h3>
-        {{ $user->last_name }}
+        {{ $user->info->last_name }}
       </div>
 
       <div>
         <h3>名</h3>
-        {{ $user->first_name}}
+        {{ $user->info->first_name}}
       </div>
 
       <div>
 
       <h3>性別</h3>
-        {{ $user->sex }}
+        {{ $user->info->sex }}
+      </div>
+
+      <div>
+        <h3>誕生日</h3>
+        {{ date("Y/m/d", strtotime($user->info->birthday)) }}
       </div>
 
       <div>
 
         <h3>メールアドレス</h3>
-        {{ $user->email}}
+        {{ $user->info->email}}
       </div>
 
       <div>
         <h3>電話番号</h3>
-        {{ $user->tel}}
+        {{ $user->info->tel}}
       </div>
 
       <div>
         <h3>入社日</h3>
-        {{ $user->birthday}}
+        {{ date("Y/m/d", strtotime($user->info->hire_date))}}
       </div>
 
       <div>
         <h3>店舗名</h3>
-        {{ $user->store->name}}
+        {{ $user->info->store->name}}
       </div>
 
       
