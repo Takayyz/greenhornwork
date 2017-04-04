@@ -38,4 +38,14 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
     {
       return UserInfos::where('store_id', $id)->get();
     }
+
+    public function getAdminUserEmail($email)
+    {
+      return UserInfos::where('email', $email)->first();
+    }
+
+    public function getAdminUserId($id)
+    {
+      return UserInfos::where('id', $id)->first();
+    }
 }

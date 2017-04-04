@@ -1,7 +1,4 @@
 
-.container {
-  padding-top: 10px;
-}
 .admin__btn {
   display: block;
   padding: 20px 20px;
@@ -81,6 +78,24 @@
 .container__inner {
   padding: 10px 0;
 }
+
+/* 管理ユーザーCRUDに使用するクラス */
+
+.container__box {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 11px;
+}
+
+.container__box__txt {
+  margin: 0;
+}
+.container__box__link {
+  float: right;
+}
+
+/*-----------------------------------*/
 
 @media screen and (max-width: 1199px) and (min-width: 767px)
 {

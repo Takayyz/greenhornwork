@@ -20,7 +20,7 @@
   </div>
   <div class="row container__inner">
     <div class="col-md-3 col-md-offset-2 col-xs-8 col-xs-offset-2">
-      <a href="" class="btn btn-admin admin__btn"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;管理者</a>
+      <a href="{{ route('admin.adminuser.index') }}" class="btn btn-admin admin__btn"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;管理者</a>
     </div>
   </div>
 </div>

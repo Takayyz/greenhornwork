@@ -4,13 +4,28 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Requests\AdminUsers;
+use App\Entities\AdminUsers;
+use App\Repositories\AdminUsersRepository;
+use App\Repositories\UserinfosRepository;
+use App\Http\Requests\AdminUserRequest;
+use App\Http\Requests\AdminUserEditRequest;
+use Mail;
+use App\Mail\AdminAccountRegister;
+use App\Mail\AdminAccountMailEdit;
 
 class AdminUserController extends Controller
 {
-    public function __construct()
+    protected $adminuser;
+    protected $userinfos;
+
+    public function __construct(
+      AdminUsersRepository $adminuser,
+      UserinfosRepository $userinfo
+      )
     {
       $this->middleware('auth:admin');
+      $this->adminuser = $adminuser;
+      $this->userinfo = $userinfo;
     }
     /**
      * Display a listing of the resource.
@@ -19,7 +34,9 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        //
+        $adminusers = $this->adminuser->all();
+
+        return view('admin.admin_user.index', compact('adminusers'));
     }
 
     /**
@@ -29,7 +46,6 @@ class AdminUserController extends Controller
      */public function create()
     {
         return view('admin.admin_user.create');
-        //createはアドミンユーザーの新規作成画面（AdminUserCreate.php）に遷移させるだけ。
     }
 
 
@@ -41,9 +57,23 @@ class AdminUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AdminUsers $request)
+    public function store(AdminUserRequest $request)
     {
-        $request->all();
+        $input = $request->all();
+        $this->userinfo->create([
+          'first_name' => $input['first_name'],
+          'last_name' => $input['last_name'],
+          'sex' => $input['sex'],
+          'birthday' => $input['birthday'],
+          'email' => $input['email'],
+          'tel' => $input['tel'],
+          'hire_date' => $input['hire_date'],
+          'store_id' => 0,
+        ]);
+
+        Mail::to($input['email'])->send(new AdminAccountRegister($input));
+
+        return redirect()->route('admin.adminuser.index');
     }
 
     /**
@@ -54,10 +84,8 @@ class AdminUserController extends Controller
      */
     public function show($id)
     {
-        $adminuser = AdminUser::find($id);
-        return view ('adminuser.show')->withAdminuser($adminuser);
-        //$idはユーザー個人のIDが引数でこの関数に飛ばされている。
-        //$adminuser = AdminUsers::find()は該当するユーザーのIDをDBから引っ張り出し、そのユーザーの詳細ページに飛ばすために使う
+        $adminuser = $this->adminuser->find($id);
+        return view ('admin.admin_user.show', compact('adminuser'));
     }
 
     /**
@@ -68,7 +96,8 @@ class AdminUserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $adminuser = $this->adminuser->find($id);
+        return view('admin.admin_user.edit', compact('adminuser'));
     }
 
     /**
@@ -78,9 +107,36 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AdminUserEditRequest $request, $id)
     {
-        //
+        $input = $request->all();
+        $this->adminuser->update([
+          'name' => $input['name'],
+        ], $id);
+
+        $this->userinfo->update([
+          'first_name' => $input['first_name'],
+          'last_name' => $input['last_name'],
+          'sex' => $input['sex'],
+          'tel' => $input['tel'],
+        ], $id);
+
+        return redirect()->route('admin.adminuser.index');
+    }
+
+    public function mailedit($id)
+    {
+      $adminuser = $this->adminuser->find($id);
+      return view('admin.admin_user.mailedit', compact('adminuser'));
+    }
+
+    public function sendmail(Request $request)
+    {
+      $input = $request->all();
+      $email = $input['email'];
+      Mail::to($email)->send(new AdminAccountMailEdit($email));
+
+      return redirect()->route('admin.adminuser.index');
     }
 
     /**
@@ -91,6 +147,13 @@ class AdminUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $data = $this->adminuser->find($id);
+        $userinfoid = $data['user_info_id'];
+        $userinfo = $this->userinfo->getAdminUserId($userinfoid);
+        $data->info()->delete();
+        $data->delete();
+
+        return redirect()->route('admin.adminuser.index');
     }
 }

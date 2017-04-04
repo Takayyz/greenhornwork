@@ -9,9 +9,9 @@ use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 // class AdminUsers extends Model implements Transformable
-class AdminUsers extends Authenticatable
+class AdminUsers extends Authenticatable implements Transformable
 {
-    // use TransformableTrait;
+    use TransformableTrait;
     use SoftDeletes;
 
     protected $fillable = [
@@ -26,5 +26,10 @@ class AdminUsers extends Authenticatable
     ];
 
     protected $dates = ['deleted_at'];
+
+    public function info()
+    {
+      return $this->belongsTo('App\Entities\UserInfos', 'user_info_id');
+    }
 
 }

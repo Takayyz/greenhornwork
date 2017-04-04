@@ -22,6 +22,10 @@ Route::group(['prefix' => '/'], function() {
   Route::resource('/report', 'DailyReportController');
   Route::resource('/schedule', 'WorkScheduleController');
   Route::post('/upload', 'WorkScheduleController@upload');
+  Route::get('showadminregister', 'Admin\Auth\AdminRegisterController@showAdminRegistrationForm')->name('showadminregister');
+  Route::post('adminregister', 'Admin\Auth\AdminRegisterController@adminRegister')->name('adminregister');
+  Route::get('adminmaileditform', 'Admin\Auth\AdminRegisterController@showAdminMailEditForm')->name('adminmaileditform');
+  Route::post('adminmailupdate', 'Admin\Auth\AdminRegisterController@adminEmailUpdate')->name('adminmailupdate');
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], function() {
@@ -34,6 +38,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::resource('store', StoreController::class);
 
   Route::resource('adminuser', AdminUserController::class);
+  Route::get('adminuser/{adminuser}/mailedit', 'AdminUserController@mailedit')->name('adminuser.mailedit');
+  Route::post('adminuser/sendmail', 'AdminUserController@sendmail')->name('adminuser.sendmail');
   //Route::resourceを使う事により、AdminUserControllerの中のCRUDへのルートを定義する事が出来る。
   Route::resource('user', UserController::class);
   Route::resource('schedule', WorkScheduleController::class);

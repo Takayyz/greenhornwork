@@ -1,36 +1,64 @@
-    {{ Form::open(array('route' => 'adminuser.store')) }}
+@extends('partials.admin_nav')
 
-            <h2 class="page-header">アドミンユーザーの新規作成</h2>
+@section('content')
+<div class="container">
+  <p class="pull-right"><a href="{{ route('admin.adminuser.index') }}">一覧に戻る</a></p>
+  <h2 class="page-header">ユーザーの新規作成</h2>
+  {{ Form::open(['route' => 'admin.adminuser.store']) }}
+    {!! Form::label('last_name', '性'); !!}
+    <div class="form-group @if(!empty($errors->first('last_name'))) has-error @endif">
+      {!! Form::input('text', 'last_name', old("name"), array('class' => 'form-control','placeholder' => '小松')) !!}
+      <span class="help-block">{{ $errors->first('last_name') }}</span>
+    </div>
 
-            {!! Form::label('name', '名前'); !!}
-            {!! Form::input('text', 'name', old("name"), array('required', 'class' => 'form-control','placeholder' => 'Gizumo')) !!}
+    {!! Form::label('first_name', '名'); !!}
+    <div class="form-group @if(!empty($errors->first('first_name'))) has-error @endif">
+      {!! Form::input('text', 'first_name', old("name"), array('class' => 'form-control','placeholder' => '信之')) !!}
+      <span class="help-block">{{ $errors->first('first_name') }}</span>
+    </div>
 
-            <p>
+    <div class="form-group @if(!empty($errors->first('sex'))) has-error @endif">
+      {!! Form::label('sex', '男性'); !!}
+      {!! Form::radio('sex', '男', old("sex")) !!}
+      {!! Form::label('sex', '女性'); !!}
+      {!! Form::radio('sex', '女', old("sex")) !!}
+      <span class="help-block">{{$errors->first('sex')}}</span>
+    </div>
 
-            <!-- {!! Form::label('sex', '性別'); !!}
-            {!! Form::radio('sex', 'male', null, ['required', 'class' => 'form-control']) !!}
-            男
-            {!! Form::radio('sex', 'female', null, ['required', 'class' => 'form-control']) !!}
-            女 -->
+    <div class="form-group @if(!empty($errors->first('birthday'))) has-error @endif">
+      {!! Form::label('birthday', '生年月日'); !!}
+      {!! Form::input('date', 'birthday', old("birthday"), array('class' => 'form-control')) !!}
+      <span class="help-block">{{ $errors->first('birthday') }}</span>
+    </div>
 
-            <p>
+    <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
+      {!! Form::label('email', 'メールアドレス'); !!}
+      {!! Form::input('text', 'email', old("email"), array('class' => 'form-control','placeholder' => 'greenhorn@gizumo.com')) !!}
+      <span class="help-block">{{$errors->first('email')}}</span>
+    </div>
 
-            <!-- {!! Form::label('birth', '生年月日'); !!}
-            {!! Form::input('birth',date('Y-M-D'), old("birth"), ['required', 'class' => 'form-control']) !!} -->
+    <div class="form-group @if(!empty($errors->first('tel'))) has-error @endif">
+      {!! Form::label('tel', '電話番号'); !!}
+      {!! Form::input('int', 'tel', old("tel"), array('class' => 'form-control','placeholder' => '03-3353-2720')) !!}
+      <span class="help-block">{{$errors->first('tel')}}</span>
+    </div>
 
-            <p>
+    <div class="form-group @if(!empty($errors->first('hire_date'))) has-error @endif">
+      {!! Form::label('hire_date', '入社日'); !!}
+      {!! Form::input('date', 'hire_date', old("hire_date"), array('class' => 'form-control')) !!}
+      <span class="help-block">{{ $errors->first('hire_date') }}</span>
+    </div>
 
-            {!! Form::label('email', 'メールアドレス'); !!}
-            {!! Form::input('text', 'email', old("email"), array('required', 'class' => 'form-control','placeholder' => 'greenhorn@gizumo.com')) !!}
+    <div class="form-group @if(!empty($errors->first('store_id'))) has-error @endif">
+      {!! Form::label('privileges', '管理者権限'); !!}
+      <select name="privileges">
+        <option value="1">スーパーアドミン</option>
+        <option value="2">アドミン</option>
+      </select>
+      <span class="help-block">{{ $errors->first('store_id') }}</span>
+    </div>
 
-            <p>
-
-            {!! Form::label('tel', '電話番号'); !!}
-            {!! Form::input('int', 'tel', old("tel"), array('required', 'class' => 'form-control','placeholder' => '03-3353-2720')) !!}
-
-            <p>
-
-
-        <button type="submit" class="btn btn-success pull-right">新規作成</button>
-
-    {!! Form::close() !!}
+    <button type="submit" class="btn btn-success pull-right">新規作成</button>
+  {!! Form::close() !!}
+ </div>
+@endsection
