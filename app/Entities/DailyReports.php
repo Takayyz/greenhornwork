@@ -25,4 +25,8 @@ class DailyReports extends Model implements Transformable
     {
       return $this->belongsTo('App\Entities\User');
     }
+
+    public function scopeDateRange($query, $start_date, $end_date){
+      return $query->whereBetween('reporting_time', [$start_date, $end_date]);
+    }
 }

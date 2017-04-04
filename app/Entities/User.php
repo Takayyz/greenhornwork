@@ -27,4 +27,9 @@ class User extends Authenticatable implements Transformable
     return $this->belongsTo('App\Entities\UserInfos', 'user_info_id');
     // return $this->belongsToMany('App\Entities\UserInfos', 'user_info_id', 'id');
   }
+
+  public function dailyReports()
+  {
+    return $this->hasMany('App\Entities\DailyReports', 'user_id');
+  }
 }
