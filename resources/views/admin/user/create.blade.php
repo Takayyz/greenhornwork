@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    {{ Form::open(array('route' => 'user.store')) }}
-      
+    {{ Form::open(array('route' => 'admin.user.store')) }}
+
             <h2 class="page-header">ユーザーの新規作成</h2>
 
                 {!! Form::label('last_name', '性'); !!}
@@ -16,7 +16,7 @@
 
             </div>
 
-            
+
                 {!! Form::label('first_name', '名'); !!}
 
             <div class="form-group @if(!empty($errors->first('first_name'))) has-error @endif">
@@ -85,10 +85,10 @@
 
             </div>
 
-        
+
         <button type="submit" class="btn btn-success pull-right">新規作成</button>
         <p class="pull-right">
-            <a href="./">一覧に戻る</a>
+            <a href="{{ route('admin.user.index') }}">一覧に戻る</a>
         </p>
 
     {!! Form::close() !!}

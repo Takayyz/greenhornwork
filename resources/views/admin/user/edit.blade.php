@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
 
-{{ Form::open(array('route'=> ['user.update', $user->id], 'method'=>'put')) }}
-      
+{{ Form::open(array('route'=> ['admin.user.update', $user->id], 'method'=>'put')) }}
+
             <h2 class="page-header">ユーザーの編集</h2>
 
                 {!! Form::label('last_name', '性'); !!}
@@ -81,10 +81,9 @@
                 {!! Form::label('store_name', '店舗名'); !!}
                 {!! Form::input('text', 'store_name', old("store_name", $user->store_id), array('class' => 'form-control')) !!}
 
-        
+
         <button type="submit" class="btn btn-success pull-right">更新</button>
-        <p class="pull-right"><a href="{{ url('admin/user') }}">一覧に戻る</a></p>
+        <p class="pull-right"><a href="{{ route('admin.user.index') }}">一覧に戻る</a></p>
 
     {!! Form::close() !!}
     @endsection
-

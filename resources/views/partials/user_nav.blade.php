@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="{{ asset('css/user.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -35,7 +37,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('user') }}">
+                    <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'greenhorn_works') }}
                     </a>
                 </div>
@@ -44,8 +46,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                        <li><a href="">勤退表一覧</a></li>
-                        <li><a href="">日報一覧</a></li>
+                        <li><a href="{{ url('schedule') }}">勤退表一覧</a></li>
+                        <li><a href="{{ url('report') }}">日報一覧</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

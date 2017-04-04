@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-  <p class="pull-right"><a href="{{ url('admin/report') }}">一覧に戻る</a></p>
+  <p class="pull-right"><a href="{{ route('admin.report.index') }}">一覧に戻る</a></p>
   <div class="panel-heading">
     <h2>日報詳細</h2>
   </div>

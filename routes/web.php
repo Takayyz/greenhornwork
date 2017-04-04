@@ -24,17 +24,17 @@ Route::group(['prefix' => '/'], function() {
   Route::post('/upload', 'WorkScheduleController@upload');
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], function() {
   Route::get('login', 'Auth\LoginController@showLoginForm');
   Route::post('login', 'Auth\LoginController@login');
   Route::post('logout', 'Auth\LoginController@logout');
 
   Route::get('/', 'HomeController@index');
-  Route::resource('/report', 'DailyReportController');
-  Route::resource('/store', 'StoreController'); 
+  Route::resource('report', DailyReportController::class);
+  Route::resource('store', StoreController::class);
 
-  Route::resource('adminuser', 'AdminUserController');
+  Route::resource('adminuser', AdminUserController::class);
   //Route::resourceを使う事により、AdminUserControllerの中のCRUDへのルートを定義する事が出来る。
-  Route::resource('user', 'UserController');
+  Route::resource('user', UserController::class);
+  Route::resource('schedule', WorkScheduleController::class);
 });
-

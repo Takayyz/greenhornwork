@@ -15,8 +15,16 @@ class WorkSchedules extends Model implements Transformable
     protected $fillable = [
         'user_id',
         'file_path',
+        'file_name',
         'file_type',
+        'year',
+        'month',
     ];
 
     protected $dates = ['deleted_at'];
+
+    public function user()
+    {
+      return $this->belongsTo('App\Entities\User');
+    }
 }

@@ -18,7 +18,7 @@
       <td>{{ date("Y/m/d", strtotime($report->reporting_time)) }}</td>
       <td>{{ $report->user->info->last_name }} {{ $report->user->info->first_name }}</td>
       <td>{{ $report->title }}</td>
-      <td><a class="btn btn-primary" href="report/{{ $report->id }}">詳細</a></td>
+      <td><a class="btn btn-primary" href="{{ route('admin.report.show', $report->id) }}">詳細</a></td>
     </tr>
     @endforeach
   </tbody>

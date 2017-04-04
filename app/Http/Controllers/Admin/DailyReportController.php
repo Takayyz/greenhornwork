@@ -34,7 +34,7 @@ class DailyReportController extends Controller
   public function index()
   {
       $reports = $this->report->getAllReports();
-      return view('admin.daily_report.index',compact('reports'));
+      return view('admin.daily_report.index', compact('reports'));
   }
 
 
@@ -47,7 +47,7 @@ class DailyReportController extends Controller
   public function show($id)
   {
       $report = $this->report->find($id);
-      return view('admin.daily_report.show')->with(compact('report'));
+      return view('admin.daily_report.show', compact('report'));
   }
 
 

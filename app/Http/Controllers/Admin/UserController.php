@@ -14,7 +14,7 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
-    protected $user; 
+    protected $user;
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function index()
     {
-    
+
         $users = $this->user->all();
         return view('admin.user.index', compact('users'));
     }
@@ -41,7 +41,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin/user/create'); 
+        return view('admin/user/create');
 
         // \Mail::to($user)->send(new Email);
 
@@ -82,7 +82,7 @@ class UserController extends Controller
         //     request(['name', 'email', 'password'])
         // );
 
-    
+
     }
 
     /**
@@ -133,7 +133,7 @@ class UserController extends Controller
                 'store_id'=>$input['store_name']
          ],$id);
 
-        return redirect()->route('user.index');
+        return redirect()->route('admin.user.index');
     }
 
     /**
@@ -147,6 +147,6 @@ class UserController extends Controller
         $user = $this->user->find($id);
         $user->delete();
 
-        return redirect()->route('user.index');
+        return redirect()->route('admin.user.index');
     }
 }
