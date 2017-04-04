@@ -27,17 +27,17 @@
 
             </div>
 
-         <!--    <div class="form-group @if(!empty($errors->first('sex'))) has-error @endif">
+            <div class="form-group @if(!empty($errors->first('sex'))) has-error @endif">
 
                 {!! Form::label('sex', '男性'); !!}
-                {!! Form::radio('sex', 'male', old("male", $user->male)) !!}
+                {!! Form::radio('sex', '男', old("male", $user->male)) !!}
 
                 {!! Form::label('sex', '女性'); !!}
-                {!! Form::radio('sex', 'female', old("female", $user->female)) !!}
+                {!! Form::radio('sex', '女', old("female", $user->female)) !!}
 
             <span class="help-block">{{$errors->first('sex')}}</span>
 
-            </div> -->
+            </div>
 
              <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
 
@@ -67,9 +67,27 @@
 
             </div>
 
+            <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
+
+                {!! Form::label('hire_date', '入社日'); !!}
+                {!! Form::input('date', 'hire_date', old("hire_date"), array('class' => 'form-control')) !!}
+
+            <span class="help-block">{{$errors->first('email')}}</span>
+
+            </div>
+
+
 
                 {!! Form::label('store_name', '店舗名'); !!}
-                {!! Form::input('text', 'store_name', old("store_name", $user->store_id), array('class' => 'form-control')) !!}
+               <select name="store_id">
+
+    @foreach($stores as $store)
+    
+     <option value="{{ $store->id }}">{{ $store->name }}</option> 
+    
+    @endforeach
+
+    </select>
 
         
         <button type="submit" class="btn btn-success pull-right">更新</button>
@@ -77,4 +95,3 @@
 
     {!! Form::close() !!}
     @endsection
-

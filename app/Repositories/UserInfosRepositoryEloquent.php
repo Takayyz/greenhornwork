@@ -8,6 +8,7 @@ use App\Repositories\UserInfosRepository;
 use App\Entities\UserInfos;
 use App\Validators\UserInfosValidator;
 
+
 /**
  * Class UserInfosRepositoryEloquent
  * @package namespace App\Repositories;
@@ -34,8 +35,9 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function getUserList($id)
+    public function getUserRecord($email)
     {
-      return UserInfos::where('store_id', $id)->get();
+      $user = $this->model->where('email', $email)->first();
+      return $user;
     }
 }

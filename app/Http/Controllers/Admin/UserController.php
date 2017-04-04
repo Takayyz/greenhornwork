@@ -2,35 +2,45 @@
 
 namespace App\Http\Controllers\Admin;
 
+//
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Repositories\UserInfosRepository;
 use App\Entities\User;
-use App\Mail\MailSent;
+use App\Mail\AccountRegister;
+use App\Repositories\StoresRepository;
+use Mail;
 
 //use App\Requests\usersはusers.phpの中のバリデーションへアクセスしている。
 
 class UserController extends Controller
 {
+    protected $stores;
     protected $user; 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(UserInfosRepository $user)
+    public function __construct(
+     StoresRepository $stores,
+     UserInfosRepository $user)
     {
-
       $this->middleware('auth:admin');
+      $this->stores = $stores;
       $this->user = $user;
     }
 
     public function index()
     {
-    
+        $user = $this->user->getUserEmail('lifechops4@gmail.com12121');
+        dd($user);
+        // $user = $this->user->find(20);
+
         $users = $this->user->all();
-        return view('admin.user.index', compact('users'));
+        return view('admin.user.index', compact('users', 'stores'));
     }
 
     /**
@@ -40,7 +50,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin/user/create'); 
+        $stores = $this->stores->orderBy('kana_name', 'asc')->all();
+        return view('admin/user/create', compact('stores'));
+
 
         // \Mail::to($user)->send(new Email);
 
@@ -57,29 +69,29 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(users $request)
+    public function store(UserRequest $request)
     {
         //usersを第一引数に入れる事によって、バリデーションを実行する事が出来るようになる。
             $input = $request->all();
             $this->user->create([
 
             'first_name' => $input['first_name'],
-            'last_name' =>$input["last_name"],
+            'last_name' =>$input['last_name'],
             'sex' => $input['sex'],
-            // 'birthday'=>$input["birthday"],
-            'email' => $input["email"],
+            'birthday'=>$input['birthday'],
+            'email' => $input['email'],
             'tel' => $input['tel'],
             'hire_date' => $input['hire_date'],
-            // 'store_id' => $input['store_name']
+            'store_id' => $input['store_id']
+
 
         ]);
-
-        // return redirect()->route('user.index');
 
         // $user = Users::create(
         //     request(['name', 'email', 'password'])
         // );
 
+        Mail::to($input['email'])->send(new AccountRegister($input));
     
     }
 
@@ -106,8 +118,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->user->find($id);
-        // dd($users);
-        return view('admin.user.edit',compact('user'));
+        $stores = $this->stores->orderBy('kana_name', 'asc')->all();
+        return view('admin.user.edit',compact('user', 'stores'));
     }
 
     /**
@@ -117,17 +129,18 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Users $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $input =  $request->all();
         // $user = $this->user->find($id);
         $this->user->update([
                 'first_name' => $input['first_name'],
                 'last_name' => $input['last_name'],
+                'sex' => $input['sex'],
                 'email'=>$input["email"],
                 'tel'=>$input['tel'],
                 'hire_date'=>$input['hire_date'],
-                // 'store_id'=>$input['store_name']
+                'store_id'=>$input['store_id']
          ],$id);
 
         return redirect()->route('user.index');
@@ -146,4 +159,5 @@ class UserController extends Controller
 
         return redirect()->route('user.index');
     }
+
 }

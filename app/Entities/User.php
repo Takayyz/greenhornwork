@@ -15,7 +15,7 @@ class User extends Authenticatable implements Transformable
   protected $fillable = [
     'name',
     'password',
-    'usre_info_id',
+    'user_info_id',
   ];
 
   protected $hidden = [
