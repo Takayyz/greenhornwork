@@ -19,7 +19,7 @@ Route::group(['prefix' => '/'], function() {
   });
   Route::get('/', 'UserController@index');
   Route::get('/home', 'UserController@index');
-  Route::post('/report/search', 'DailyReportController@search')->name('report.search');
+  Route::get('/report/search', ['as' => 'report.search', 'uses' => 'DailyReportController@search']);
   Route::resource('report', 'DailyReportController');
   Route::resource('/schedule', 'WorkScheduleController');
   Route::post('/upload', 'WorkScheduleController@upload');
