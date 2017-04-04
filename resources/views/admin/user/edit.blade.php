@@ -1,10 +1,14 @@
-@extends('layouts.app')
+@extends('partials.admin_nav')
 
 @section('content')
 <div class="container">
 
-{{ Form::open(array('route'=> ['user.update', $user->id], 'method'=>'put')) }}
-      
+<p class="pull-right"><a href="{{ route('admin.user.index') }}">一覧に戻る</a></p>
+
+
+{{ Form::open(array('route'=> ['admin.user.update', $user->id], 'method'=>'put')) }}
+
+
             <h2 class="page-header">ユーザーの編集</h2>
 
                 {!! Form::label('last_name', '性'); !!}
@@ -89,9 +93,8 @@
 
     </select>
 
-        
-        <button type="submit" class="btn btn-success pull-right">更新</button>
-        <p class="pull-right"><a href="{{ url('admin/user') }}">一覧に戻る</a></p>
 
+        <button type="submit" class="btn btn-success pull-right">更新</button>
+        
     {!! Form::close() !!}
     @endsection

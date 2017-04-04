@@ -9,16 +9,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Repositories\UserInfosRepository;
 use App\Entities\User;
+
 use App\Mail\AccountRegister;
 use App\Repositories\StoresRepository;
 use Mail;
+
 
 //use App\Requests\usersはusers.phpの中のバリデーションへアクセスしている。
 
 class UserController extends Controller
 {
+
     protected $stores;
     protected $user; 
+
     /**
      * Display a listing of the resource.
      *
@@ -35,9 +39,6 @@ class UserController extends Controller
 
     public function index()
     {
-        $user = $this->user->getUserEmail('lifechops4@gmail.com12121');
-        dd($user);
-        // $user = $this->user->find(20);
 
         $users = $this->user->all();
         return view('admin.user.index', compact('users', 'stores'));
@@ -50,6 +51,7 @@ class UserController extends Controller
      */
     public function create()
     {
+
         $stores = $this->stores->orderBy('kana_name', 'asc')->all();
         return view('admin/user/create', compact('stores'));
 
@@ -87,12 +89,17 @@ class UserController extends Controller
 
         ]);
 
+        
+
         // $user = Users::create(
         //     request(['name', 'email', 'password'])
         // );
 
         Mail::to($input['email'])->send(new AccountRegister($input));
+
+        return redirect()->route('admin.user.index');
     
+
     }
 
     /**
@@ -140,10 +147,12 @@ class UserController extends Controller
                 'email'=>$input["email"],
                 'tel'=>$input['tel'],
                 'hire_date'=>$input['hire_date'],
+
                 'store_id'=>$input['store_id']
+
          ],$id);
 
-        return redirect()->route('user.index');
+        return redirect()->route('admin.user.index');
     }
 
     /**
@@ -157,7 +166,7 @@ class UserController extends Controller
         $user = $this->user->find($id);
         $user->delete();
 
-        return redirect()->route('user.index');
+        return redirect()->route('admin.user.index');
     }
 
 }

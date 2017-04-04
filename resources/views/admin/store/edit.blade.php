@@ -7,7 +7,9 @@
   </div>
   <p class="pull-right"><a href="./">一覧に戻る</a></p>
   <div class="panel-body">
-    {!! Form::open(['route' => ['store.update', $store->id], 'method'=> 'PUT']) !!}
+
+    {!! Form::open(['route' => ['admin.store.update', $store->id], 'method'=> 'PUT']) !!}
+
       {!! Form::hidden('id', $store->id, ['class' => 'form-control']) !!}
       <div class="form-group {{ $errors->has('name')? 'has-error' : '' }}">
         <p>店舗名</p>

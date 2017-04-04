@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Repositories\WorkSchedulesRepository;
 use App\Entities\WorkSchedules;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\WorkScheduleRequest;
 use Intervention\Image\ImageManagerStatic as Image;
+use Validator;
 
 class WorkScheduleController extends Controller
 {
@@ -25,7 +27,8 @@ class WorkScheduleController extends Controller
    */
   public function index()
   {
-    $schedules = $this->schedule->all();
+    $userId = Auth::id();
+    $schedules = $this->schedule->getOwnSchedules($userId);
     return view('work_schedule.index', compact('schedules'));
   }
 
@@ -48,62 +51,57 @@ class WorkScheduleController extends Controller
   public function store(WorkScheduleRequest $request)
   {
     $userId = Auth::id();
-    //ファイルを保存する
     $input = $request->all();
 
-    $img = Image::make($request->file('schedule'));
+    //同年月の勤務表が存在しないか確認
+    $errMsg = $this->schedule->checkDate($input['year'], $input['month'], $userId);
+    //同年月の勤務表が存在する場合は元の画面にリダイレクト
+    if(!empty($errMsg))
+    {
+      $request->session()->flash('flash_message', $errMsg);
+      return redirect()->route('schedule.create');
+    }
+    //ファイル保存
+    $fileInfo = $this->schedule->saveUploadFile($input['schedule'], $userId);
+    //データベースへ保存
+    $this->schedule->createSchedule($userId, $fileInfo['filePath'],
+                                    $fileInfo['fileName'], $fileInfo['fileType'],
+                                    $input['year'], $input['month']);
 
-    //ファイル名を重複しないように変更する処理を書く
-    $img->save('schedules/test.jpg');
-
-    //ファイルパスを取得する
-    $filePath = "public/schedules/test.jpg";
-    //ファイルの種類を取得する
-
-
-    //データベースへの保存処理
-    $this->schedule->create([
-      'user_id' => $userId,
-      'file_path' => $filePath,
-      'file_type' => 'jpg',
-      'year_month' => $input['time'],
-    ]);
-
-    return redirect()->to('user/schedule');
+    return redirect()->route('schedule.index');
   }
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-      //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   *
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
   public function edit($id)
   {
-      //
+    $schedule = $this->schedule->find($id);
+    return view('work_schedule.edit')->with(compact('schedule'));
   }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
+  public function update(WorkScheduleRequest $request, $id)
   {
-      //
+    $userId = Auth::id();
+    $input = $request->all();
+
+    //同年月の勤務表が存在しないか確認
+    $errMsg = $this->schedule->checkDate($input['year'], $input['month'], $userId, $id);
+    //同年月の勤務表が存在する場合は元の画面にリダイレクト
+    if(!empty($errMsg))
+    {
+      $request->session()->flash('flash_message', $errMsg);
+      return redirect()->route('schedule.edit', $id);
+    }
+
+      //ファイルがアップロードされたか確認
+      if (array_key_exists('schedule', $input))
+      {
+        //ファイル保存
+        $fileInfo = $this->schedule->saveUploadFile($input['schedule'], $userId);
+        //データベース更新
+        $this->schedule->updateSchedule($fileInfo['fileName'], $fileInfo['fileType'], $input['year'], $input['month'], $id);
+      } else {
+        $this->schedule->updateOnlyDate($input['year'], $input['month'], $id);
+      }
+      return redirect()->route('schedule.index');
   }
 
   /**
@@ -117,6 +115,6 @@ class WorkScheduleController extends Controller
       $data = $this->schedule->find($id);
       $data->delete();
 
-      return redirect()->to('user/schedule');
+      return redirect()->route('schedule.index');
   }
 }

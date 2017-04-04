@@ -80,13 +80,15 @@ class RegisterController extends Controller
         // idwotoru
         // usertable infoid ni ireru hensuu ni ireru
 
-        return $this->register->create([
+        $this->register->create([
             'name' => $data['name'],
             // 'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'user_info_id' => $user['id']
 
         ]);
+
+
 
 
     }
@@ -102,6 +104,8 @@ class RegisterController extends Controller
        $this->validator($request->all());
 
        $this->create($request->all());
+
+       return redirect()->route('login');
 
     }
 

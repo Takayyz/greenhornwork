@@ -28,7 +28,7 @@ class DailyReportController extends Controller
   {
     $userId = Auth::id();
     $reports = $this->report->getOwnReports($userId);
-    return view('daily_report.index',compact('reports'));
+    return view('daily_report.index', compact('reports'));
   }
 
   /**
@@ -50,7 +50,7 @@ class DailyReportController extends Controller
       'contents' =>$input['contents'],
     ]);
 
-    return redirect()->to('user/report');
+    return redirect()->to('report');
   }
 
   /**
@@ -62,7 +62,7 @@ class DailyReportController extends Controller
   public function show($id)
   {
     $report = $this->report->find($id);
-    return view('daily_report.show')->with(compact('report'));
+    return view('daily_report.show', compact('report'));
   }
 
   /**
@@ -74,7 +74,7 @@ class DailyReportController extends Controller
   public function edit($id)
   {
     $report = $this->report->find($id);
-    return view('daily_report.edit')->with(compact('report'));
+    return view('daily_report.edit', compact('report'));
   }
 
   /**
@@ -94,7 +94,7 @@ class DailyReportController extends Controller
                 'title' => $input['title'],
                 'contents' =>$input['contents'],
               ],$id);
-    return redirect()->to('user/report');
+    return redirect()->to('report');
   }
 
   /**
@@ -108,7 +108,7 @@ class DailyReportController extends Controller
     $data = $this->report->find($id);
     $data->delete();
 
-    return redirect()->to('user/report');
+    return redirect()->to('report');
   }
 
   public function create()

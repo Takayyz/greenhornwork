@@ -37,7 +37,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/admin/home') }}">
+                    <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'greenhorn_works') }}
                     </a>
                 </div>
@@ -64,7 +64,7 @@
                         </a>
                         <ul class="dropdown-menu">
                           <li>
-                            <a href="">
+                            <a href="{{ route('admin.report.index') }}">
                               日報一覧
                             </a>
                           </li>
@@ -76,7 +76,7 @@
                         </a>
                         <ul class="dropdown-menu">
                           <li>
-                            <a href="">
+                            <a href="{{ route('admin.store.index') }}">
                               店舗一覧
                             </a>
                           </li>
@@ -88,7 +88,7 @@
                         </a>
                         <ul class="dropdown-menu">
                           <li>
-                            <a href="">
+                            <a href="{{ route('admin.user.index') }}">
                               ユーザー一覧
                             </a>
                           </li>

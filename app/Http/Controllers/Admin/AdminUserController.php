@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,10 +28,10 @@ class AdminUserController extends Controller
      * @return \Illuminate\Http\Response
      */public function create()
     {
-        return view('admin/admin_user/create');
+        return view('admin.admin_user.create');
         //createはアドミンユーザーの新規作成画面（AdminUserCreate.php）に遷移させるだけ。
     }
-    
+
 
 
 

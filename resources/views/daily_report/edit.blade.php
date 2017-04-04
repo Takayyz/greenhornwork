@@ -13,7 +13,7 @@
     <h2>日報詳細・編集</h2>
   </div>
   <div class="panel-body">
-    {!! Form::open(['url' => ['user/report', $report->id], 'method' => 'PUT']) !!}
+    {!! Form::open(['route' => ['report.update', $report->id], 'method' => 'PUT']) !!}
       <div class="form-group @if(!empty($errors->first('date'))) has-error @endif">
         {{ Form::input('date', 'date', $reporting_time, ['class' => 'form-control']) }}
         <span class="help-block">{{$errors->first('date')}}</span>

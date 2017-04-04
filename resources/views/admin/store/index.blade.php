@@ -15,9 +15,14 @@
     @foreach($stores as $store)
     <tr>
       <td>{{ $store->name }}</td>
-      <td><a class="btn btn-primary pull-right" href="{{ route('store.show', $store->id)}}">研修生一覧</a></td>
+      <td><a class="btn btn-primary pull-right" href="{{ route('admin.store.show', $store->id)}}">研修生一覧</a></td>
       <td>
-        {!! Form::open(['route' => ['store.destroy', $store->id], 'method' => 'DELETE']) !!}
+          <a href="{{ route('admin.store.edit', $store->id) }}" type ="submit" class="btn btn-success pull-right">
+              編集
+          </a>
+      </td>
+      <td>
+        {!! Form::open(['route' => ['admin.store.destroy', $store->id], 'method' => 'DELETE']) !!}
           <button type ="submit" class="btn btn-danger pull-right">削除</button>
         {!! Form::close() !!}
       </td>

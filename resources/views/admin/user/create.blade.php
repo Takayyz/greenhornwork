@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('partials.admin_nav')
 
 @section('content')
 <div class="container">
+
  <p class="pull-right"><a href="./">一覧に戻る</a></p>
-    {{ Form::open(array('route' => 'user.store')) }}
+    {{ Form::open(array('route' => 'admin.user.store')) }}
       
             <h2 class="page-header">ユーザーの新規作成</h2>
 
@@ -17,7 +18,7 @@
 
             </div>
 
-            
+
                 {!! Form::label('first_name', '名'); !!}
 
             <div class="form-group @if(!empty($errors->first('first_name'))) has-error @endif">
@@ -43,7 +44,7 @@
              <div class="form-group @if(!empty($errors->first('birthday'))) has-error @endif">
 
                 {!! Form::label('birthday', '生年月日'); !!}
-                {!! Form::input('text', 'birthday', old("birthday"), array('class' => 'form-control','placeholder' => '1992年7月30日')) !!}
+                {!! Form::input('date', 'birthday', old("birthday"), array('class' => 'form-control','placeholder' => '1992年7月30日')) !!}
 
             <span class="help-block">{{$errors->first('birthday')}}</span>
 
@@ -92,11 +93,12 @@
 
     </select>
 
+
             <span class="help-block">{{$errors->first('store_id')}}</span>
 
             </div>
 
-        
+
         <button type="submit" class="btn btn-success pull-right">新規作成</button>
         <p class="pull-right">
             

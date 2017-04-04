@@ -25,19 +25,22 @@ Route::group(['prefix' => '/'], function() {
   Route::post('/register', 'Auth\RegisterController@register');
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
+Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], function() {
   Route::get('login', 'Auth\LoginController@showLoginForm');
   Route::post('login', 'Auth\LoginController@login');
   Route::post('logout', 'Auth\LoginController@logout');
 
   Route::get('/', 'HomeController@index');
-  Route::resource('/report', 'DailyReportController');
-  Route::resource('/store', 'StoreController'); 
+  Route::resource('report', DailyReportController::class);
+  Route::resource('store', StoreController::class);
 
-  Route::resource('adminuser', 'AdminUserController');
+  Route::resource('adminuser', AdminUserController::class);
   //Route::resourceを使う事により、AdminUserControllerの中のCRUDへのルートを定義する事が出来る。
 
   Route::resource('user', 'UserController');
   //userに関係するページに誰かがアクセスしようとした時（第一引数）、UserControllerの中の関数が発火される。発火される関数は、userのページに続くcreateなりのページによって発火される関数が決まる。このアプリケーションが街だとしたら、RouteはControllerと言う場所へ続く道であると考える。
-});
 
+  Route::resource('user', UserController::class);
+  Route::resource('schedule', WorkScheduleController::class);
+
+});
