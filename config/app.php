@@ -179,6 +179,7 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        App\Providers\LocalServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
 
