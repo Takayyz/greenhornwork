@@ -115,4 +115,19 @@ class DailyReportController extends Controller
   {
     return view('daily_report.create');
   }
+
+  public function search(Request $request)
+  {
+    $input = $request->all();
+    $userId = Auth::id();
+    
+    //　日付のデータを取得
+    $start_date = $input['start-date'];
+    $end_date = $input['end-date'];
+
+    //　あるユーザーのレポート情報を日付の範囲を指定し、contentsを取得。
+    $reports = $this->report->getReportByDateRange($userId, $start_date, $end_date);
+
+    return view('daily_report.index', compact('reports'));
+  }
 }

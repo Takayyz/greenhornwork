@@ -19,7 +19,8 @@ Route::group(['prefix' => '/'], function() {
   });
   Route::get('/', 'UserController@index');
   Route::get('/home', 'UserController@index');
-  Route::resource('/report', 'DailyReportController');
+  Route::post('/report/search', 'DailyReportController@search')->name('report.search');
+  Route::resource('report', 'DailyReportController');
   Route::resource('/schedule', 'WorkScheduleController');
   Route::post('/upload', 'WorkScheduleController@upload');
 });
