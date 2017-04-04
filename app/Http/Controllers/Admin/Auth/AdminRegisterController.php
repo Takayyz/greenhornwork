@@ -41,12 +41,9 @@ class AdminRegisterController extends Controller
      *
      * @return void
      */
-    public function __construct(AdminUsersRepository $adminuser,
-                                UserinfosRepository $userinfo)
+    public function __construct()
     {
         $this->middleware('guest');
-        $this->adminuser = $adminuser;
-        $this->userinfo = $userinfo;
     }
 
     /**
@@ -72,11 +69,11 @@ class AdminRegisterController extends Controller
      */
     protected function admincreate(array $data)
     {
-        $mailpassword = 'hogehoge';
+        $mailpassword = env('MAIL_ADDRESSPASS');
         $mgethex = hex2bin($data['mquery']);
         $mdec = openssl_decrypt($mgethex, 'aes-256-ecb', $mailpassword);
 
-        $privilegespassword = 'fugafuga';
+        $privilegespassword = env('MAIL_PRIVILEGES');
         $pgethex = hex2bin($data['pquery']);
         $pdec = openssl_decrypt($pgethex, 'aes-256-ecb', $privilegespassword);
         $userinfo = $this->userinfo->getAdminUserEmail($mdec);
@@ -119,7 +116,7 @@ class AdminRegisterController extends Controller
       $input = $request->all();
       $email = $input['email'];
 
-      $mailpassword = 'hogehoge';
+      $mailpassword = env('MAIL_ADDRESSPASS');
       $mgethex = hex2bin($input['mquery']);
       $mdec = openssl_decrypt($mgethex, 'aes-256-ecb', $mailpassword);
       $this->userinfo->getAdminUserEmail($mdec)->update([

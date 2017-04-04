@@ -1,3 +1,8 @@
+<?php
+//日報の日付をstringからdatetimeに変換
+ $reporting_time = date("Y-m-d", strtotime($adminuser->info->birthday));
+ ?>
+
 @extends('partials.admin_nav')
 
 @section('content')
@@ -29,9 +34,10 @@
         {!! Form::input('text', 'sex', $adminuser->info->sex, ['class' => 'form-control']) !!}
         <span class="help-block">{{$errors->first('sex')}}</span>
       </div>
-      <p>生年月日</p>
-      <div class="container__box">
-        <p class="container__box__txt">{{ date("Y/m/d", strtotime($adminuser->info->birthday)) }}</p>
+      <div class="form-group {{ $errors->has('birthday')? 'has-error' : '' }}">
+        <p>生年月日</p>
+        {!! Form::input('date', 'birthday', $reporting_time, ['class' => 'form-control']) !!}
+        <span class="help-block">{{$errors->first('sex')}}</span>
       </div>
       <p>メールアドレス</p>
       <div class="container__box">
