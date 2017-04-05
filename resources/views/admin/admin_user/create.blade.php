@@ -2,8 +2,7 @@
 
 @section('content')
 <div class="container">
-  <p class="pull-right"><a href="{{ route('admin.adminuser.index') }}">一覧に戻る</a></p>
-  <h2 class="page-header">ユーザーの新規作成</h2>
+  <h2 class="page-header">管理者の作成</h2>
   {{ Form::open(['route' => 'admin.adminuser.store']) }}
     {!! Form::label('last_name', '性'); !!}
     <div class="form-group {{ $errors->has('last_name')? 'has-error' : '' }}">
@@ -52,12 +51,14 @@
     <div class="form-group">
       {!! Form::label('privileges', '管理者権限'); !!}
       <select name="privileges">
-        <option value="1">スーパーアドミン</option>
-        <option value="2">アドミン</option>
+        <option value="1">SuperAdmin</option>
+        <option value="2">Admin</option>
       </select>
     </div>
-
-    <button type="submit" class="btn btn-success pull-right">新規作成</button>
+    <div class="col-xs-12 col-md-offset-5">
+      <a href="{{ route('admin.adminuser.index') }}" class="btn btn-primary">戻る</a>
+      <button type="submit" class="btn btn-success pull-right">作成</button>
+    </div>
   {!! Form::close() !!}
  </div>
 @endsection

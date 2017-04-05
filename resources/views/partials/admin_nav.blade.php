@@ -37,7 +37,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ route('admin.') }}">
                         {{ config('app.name', 'greenhorn_works') }}
                     </a>
                 </div>
@@ -52,7 +52,7 @@
                         </a>
                         <ul class="dropdown-menu">
                           <li>
-                            <a href="">
+                            <a href="{{ route('admin.schedule.index') }}">
                               勤退表一覧
                             </a>
                           </li>
@@ -93,7 +93,7 @@
                             </a>
                           </li>
                           <li>
-                            <a href="">
+                            <a href="{{ route('admin.user.create') }}">
                               ユーザー作成
                             </a>
                           </li>
@@ -105,12 +105,12 @@
                         </a>
                         <ul class="dropdown-menu">
                           <li>
-                            <a href="">
+                            <a href="{{ route('admin.adminuser.index') }}">
                               管理者一覧
                             </a>
                           </li>
                           <li>
-                            <a href="">
+                            <a href="{{ route('admin.adminuser.create') }}">
                               管理者の作成
                             </a>
                         </ul>
