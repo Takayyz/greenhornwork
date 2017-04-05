@@ -19,7 +19,8 @@ Route::group(['prefix' => '/'], function() {
   });
   Route::get('/', 'UserController@index');
   Route::get('/home', 'UserController@index');
-  Route::resource('/report', 'DailyReportController');
+  Route::get('/report/search', ['as' => 'report.search', 'uses' => 'DailyReportController@search']);
+  Route::resource('report', 'DailyReportController');
   Route::resource('/schedule', 'WorkScheduleController');
   Route::post('/upload', 'WorkScheduleController@upload');
   Route::get('showadminregister', 'Admin\Auth\AdminRegisterController@showAdminRegistrationForm')->name('showadminregister');

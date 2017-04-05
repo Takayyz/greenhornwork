@@ -3,6 +3,19 @@
 @section('content')
 <div class="container">
 <h2 class="page-header">日報一覧</h2>
+
+<div class="search-box">
+  <div class="inner-box">
+    {!! Form::open(['route' => 'report.search', 'method' => 'GET']) !!}
+      {!! Form::input('date', 'start-date', null, ['class' => 'search-box__input-date']) !!}
+      から　
+      {!! Form::input('date', 'end-date', null, ['class' => 'search-box__input-date']) !!}
+      まで　
+      {!! Form::input('submit', '', '日報検索', ['class' => 'btn btn-primary btn-sm']) !!}
+    {!! Form::close() !!}
+  </div>
+</div>
+
 <p class="pull-right"><a class="btn btn-success" href="{{ route('report.create') }}">作成</a></p>
 <table class="table table-hover todo-table">
   <thead>
