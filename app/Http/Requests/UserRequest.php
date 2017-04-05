@@ -28,9 +28,9 @@ class UserRequest extends FormRequest
             'first_name'=>'required',
             'sex'=>'required',
             'birthday'=>'required',
-            'email'=>'required',
+            'email'=>'required|email',
             'hire_date'=>'required',
-            'tel'=>'required|numeric',
+            'tel'=>'required|min:11|numeric',
             'store_id'=>'required'
                   
         ];

@@ -43,7 +43,7 @@ class UserController extends Controller
         $users = User::all();
         // $users = $this->user->all();
         // dd($users->);
-        return view('admin.user.index', compact('users', 'stores'));
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -87,12 +87,9 @@ class UserController extends Controller
             'tel' => $input['tel'],
             'hire_date' => $input['hire_date'],
             'store_id' => $input['store_id']
-
-
         ]);
 
         
-
         // $user = Users::create(
         //     request(['name', 'email', 'password'])
         // );
@@ -100,8 +97,6 @@ class UserController extends Controller
         Mail::to($input['email'])->send(new AccountRegister($input));
 
         return redirect()->route('admin.user.index');
-    
-
     }
 
     /**
@@ -129,7 +124,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $stores = $this->stores->orderBy('kana_name', 'asc')->all();
-        return view('admin.user.edit',compact('user', 'stores'));
+        return view('admin.user.edit', compact('user', 'stores'));
     }
 
     /**
