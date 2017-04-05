@@ -32,7 +32,7 @@ class AdminAccountMailEdit extends Mailable
      */
     public function build()
     {
-      $mailpassword = 'hogehoge';
+      $mailpassword = env('MAIL_ADDRESSPASS');
       $email = $this->adminusers;
       $mailenc = openssl_encrypt($email, 'aes-256-ecb', $mailpassword);
       $mailhex = bin2hex($mailenc);
