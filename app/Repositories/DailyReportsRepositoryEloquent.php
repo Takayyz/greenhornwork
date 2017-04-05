@@ -49,12 +49,22 @@ class DailyReportsRepositoryEloquent extends BaseRepository implements DailyRepo
       return $reports;
     }
 
-    public function getReportByDateRange($userId, $start_date, $end_date) {
-      $searchedReport = $this->model
-                                ->find($userId)
-                                ->dateRange($start_date, $end_date)
-                                ->get();
-
+    public function getReportByDateRange($start_date, $end_date, $userId = null) {
+      if(empty($userId)){
+        $searchedReport = $this->model
+                                  ->dateRange($start_date, $end_date)
+                                  ->get();
+      } else {
+        //　値が両方空ならそのユーザーに関するレポートデータ全てを取得
+        if(empty($start_date) && empty($end_date)) {
+          $searchedReport = $this->model->find($userId)->get();
+        } else {
+          $searchedReport = $this->model
+                                    ->find($userId)
+                                    ->dateRange($start_date, $end_date)
+                                    ->get();
+        }
+      }
       return $searchedReport;
     }
 }
