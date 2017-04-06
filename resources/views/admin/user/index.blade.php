@@ -6,6 +6,7 @@
   <table class="table table-hover todo-table">
     <thead>
       <tr>
+        <th>ユーザー名</th>
         <th>性</th>
         <th>名</th>
         <th>性別</th>
@@ -19,6 +20,7 @@
     <tbody>
     @foreach($users as $user)
       <tr>   
+      　　<td>{{ $user->name }}</td>
         <td>{{ $user->info->last_name }}</td>
         <td>{{ $user->info->first_name }}</td>
         <td>{{ $user->info->sex }}</td>
