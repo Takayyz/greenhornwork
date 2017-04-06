@@ -70,10 +70,10 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $hex = $data['hash'];
-        $password = "hogehoge";
-        $gethex = hex2bin($hex);
-        $decrypt = openssl_decrypt($gethex, 'aes-256-ecb', $password);
-        $user = $this->userinfo->getUserRecord($decrypt);
+        $mailpassword = env('MAIL_ADDRESSPASS');
+        $mailhex = hex2bin($hex);
+        $maildecrypt = openssl_decrypt($mailhex, 'aes-256-ecb', $mailpassword);
+        $user = $this->userinfo->getUserRecord($maildecrypt);
         //Whereを使って、復号化したメアドを元にUSERINFOSテーブルのレコード取得している。
         // idwotoru
         // usertable infoid ni ireru hensuu ni ireru
@@ -84,13 +84,15 @@ class RegisterController extends Controller
             'user_info_id' => $user['id']
         ]);
     }
+
+
     //hex2bin関数とopenssl_decryptで16進数に変換されたメアドを元の文字列に戻す。
 
     //順番としては、１．アカウント登録ボタンが押された時に、URLも末尾に暗号化されているメアドを復号化して、２．それを元にUSERINFOSテーブルのそのメアドと同じメアドを持つユーザーのレコードを探す。３．そのレコードからIDを引っ張り、ユーザーテーブルに入れる。４．そして、ユーザーがアカウント登録画面で入力したユーザー名とパスワードと共にUSERINFOIDが保存される。
 
     public function register(RegisterRequest $request)
     {
-       $this->validator($request->all());
+       // $this->validator($request->all());
        $this->create($request->all());
        return redirect()->route('login');
     }

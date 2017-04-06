@@ -30,9 +30,8 @@ class UserRequest extends FormRequest
             'birthday'=>'required',
             'email'=>'required|email',
             'hire_date'=>'required',
-            'tel'=>'required|min:11|numeric',
-            'store_id'=>'required'
-                  
+            'tel'=>'required|numeric',
+            'store_id'=>'required'           
         ];
     }
 
@@ -48,7 +47,6 @@ class UserRequest extends FormRequest
         'tel.required'=>'必須の項目です！',
         'tel.numeric'=>'数字でお願いします！',
         'store_id.required'=>'必須の項目です！'
-        
         ];
     }
 }
