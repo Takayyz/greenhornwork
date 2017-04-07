@@ -8,6 +8,7 @@ use App\Repositories\UserInfosRepository;
 use App\Entities\UserInfos;
 use App\Validators\UserInfosValidator;
 
+
 /**
  * Class UserInfosRepositoryEloquent
  * @package namespace App\Repositories;
@@ -34,9 +35,38 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function getUserList($id)
+    public function saveUserInfo($input)
     {
-      return UserInfos::where('store_id', $id)->get();
+        $this->model->create([
+            'first_name' => $input['first_name'],
+            'last_name' =>$input['last_name'],
+            'sex' => $input['sex'],
+            'birthday'=>$input['birthday'],
+            'email' => $input['email'],
+            'tel' => $input['tel'],
+            'hire_date' => $input['hire_date'],
+            'store_id' => $input['store_id']
+        ]);
+    }
+
+    public function updateUserInfo($input, $user)
+    {
+        $this->model->where('id',$user['user_info_id'])->update([
+            'first_name' => $input['first_name'],
+            'last_name' => $input['last_name'],
+            'sex' => $input['sex'],
+            'birthday' => $input['birthday'],
+            'email'=>$input["email"],
+            'tel'=>$input['tel'],
+            'hire_date'=>$input['hire_date'],
+            'store_id'=>$input['store_id']
+         ]);
+    }
+
+    public function getUserRecord($email)
+    {
+      $user = $this->model->where('email', $email)->first();
+      return $user;
     }
 
     public function getAdminUserEmail($email)
