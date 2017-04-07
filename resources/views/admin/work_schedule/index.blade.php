@@ -32,4 +32,7 @@
     </table>
   </div>
 </div>
+<div class="col-xs-12 col-md-offset-5">
+    <a href="{{ route('admin.') }}" class="btn btn-primary">戻る</a>
+</div>
 @endsection

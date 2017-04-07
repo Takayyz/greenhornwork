@@ -3,7 +3,6 @@
 @section('content')
 <div class="container">
 <h2 class="page-header">{{ $store->name }}</h2>
-<p class="pull-right"><a href="{{ route('admin.store.index') }}">一覧に戻る</a></p>
 <table class="table table-hover todo-table">
   <thead>
   <tr>
@@ -20,5 +19,8 @@
     @endforeach()
   </tbody>
 </table>
+</div>
+<div class="col-xs-12 col-md-offset-5">
+    <a href="{{ route('admin.store.index') }}" class="btn btn-primary">戻る</a>
 </div>
 @endsection
