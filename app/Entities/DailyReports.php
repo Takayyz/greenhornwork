@@ -29,4 +29,18 @@ class DailyReports extends Model implements Transformable
     public function scopeDateRange($query, $start_date, $end_date){
       return $query->whereBetween('reporting_time', [$start_date, $end_date]);
     }
+
+    public function scopeWhereName($query, $field, $name) {
+      if($name || $field) {
+        return $query;
+      }
+      switch($field) {
+        case 'first_name':
+        case 'last_name':
+          return $query->where($field, 'like', '%' . $name . '%');
+          break;
+        default:
+          return $query;
+      }
+    }
 }
