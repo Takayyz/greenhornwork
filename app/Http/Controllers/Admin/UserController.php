@@ -77,7 +77,7 @@ class UserController extends Controller
     {
         //usersを第一引数に入れる事によって、バリデーションを実行する事が出来るようになる。
             $input = $request->all();
-            $this->user->UserInfoSave($input);
+            $this->user->saveUserInfo($input);
         // $user = Users::create(
         //     request(['name', 'email', 'password'])
         // );
@@ -126,17 +126,18 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $input =  $request->all();
+        $this->user->updateUserinfo($input, $user);
         // $user = $this->user->find($id);
-        $this->user->update([
-                'first_name' => $input['first_name'],
-                'last_name' => $input['last_name'],
-                'sex' => $input['sex'],
-                'birthday' => $input['birthday'],
-                'email'=>$input["email"],
-                'tel'=>$input['tel'],
-                'hire_date'=>$input['hire_date'],
-                'store_id'=>$input['store_id']
-         ],$user['user_info_id']);
+        // $this->user->update([
+        //         'first_name' => $input['first_name'],
+        //         'last_name' => $input['last_name'],
+        //         'sex' => $input['sex'],
+        //         'birthday' => $input['birthday'],
+        //         'email'=>$input["email"],
+        //         'tel'=>$input['tel'],
+        //         'hire_date'=>$input['hire_date'],
+        //         'store_id'=>$input['store_id']
+        //  ],$user['user_info_id']);
 
         User::where('id', $id)->update([
                 'name'=>$input['name']

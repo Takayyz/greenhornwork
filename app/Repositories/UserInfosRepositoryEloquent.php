@@ -35,10 +35,9 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function UserInfoSave($input)
+    public function saveUserInfo($input)
     {
-        $this->model()->create([
-
+        $this->model->create([
             'first_name' => $input['first_name'],
             'last_name' =>$input['last_name'],
             'sex' => $input['sex'],
@@ -48,6 +47,20 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
             'hire_date' => $input['hire_date'],
             'store_id' => $input['store_id']
         ]);
+    }
+
+    public function updateUserInfo($input, $user)
+    {
+        $this->model->where('id',$user['user_info_id'])->update([
+            'first_name' => $input['first_name'],
+            'last_name' => $input['last_name'],
+            'sex' => $input['sex'],
+            'birthday' => $input['birthday'],
+            'email'=>$input["email"],
+            'tel'=>$input['tel'],
+            'hire_date'=>$input['hire_date'],
+            'store_id'=>$input['store_id']
+         ]);
     }
 
     public function getUserRecord($email)
