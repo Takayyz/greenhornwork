@@ -34,7 +34,17 @@ class UserInfos extends Model implements Transformable
       return $this->belongsTo('App\Entities\User');
     }
 
-    public function scopeName($query, $field, $value){
-        return $query->where($field, 'like', '%'.$value.'%');
+    public function scopeWhereName($query, $field, $name) {
+      if(!$field || !$name){
+        return $query;
+      }
+      switch($field) {
+        case 'first_name':
+        case 'last_name':
+          return $query->where($field, 'like', $name);
+          break;
+        default:
+          return $query;
+      }
     }
 }

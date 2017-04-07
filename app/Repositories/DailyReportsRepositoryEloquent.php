@@ -83,7 +83,7 @@ class DailyReportsRepositoryEloquent extends BaseRepository implements DailyRepo
             return $query->whereHas('info', function ($query) use ($inputs) {
               $fields = ['first_name', 'last_name'];
               foreach($fields as $field) {
-                return $query->name($field, $inputs[$field]);
+                $query->whereName($field, $inputs[$field]);
               }
             });
           })->get();
@@ -93,7 +93,7 @@ class DailyReportsRepositoryEloquent extends BaseRepository implements DailyRepo
             return $query->whereHas('info', function ($query) use ($inputs) {
               $fields = ['first_name', 'last_name'];
               foreach($fields as $field) {
-                return $query->name($field, $inputs[$field]);
+                $query->whereName($field, $inputs[$field]);
               }
             });
           })->get();
