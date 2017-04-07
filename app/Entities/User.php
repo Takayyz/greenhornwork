@@ -24,7 +24,7 @@ class User extends Authenticatable implements Transformable
 
   public function info()
   {
-    return $this->belongsTo('App\Entities\UserInfos', 'user_info_id');
+    return $this->hasOne('App\Entities\UserInfos', 'id' ,'user_info_id');
     // return $this->belongsTo('App\Entities\UserInfos', 'user_info_id', 'id');
   }
 

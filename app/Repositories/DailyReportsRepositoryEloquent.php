@@ -76,23 +76,24 @@ class DailyReportsRepositoryEloquent extends BaseRepository implements DailyRepo
       if(!is_array($inputs)) {
         $result = $this->model->get();
       }
+
       if($inputs['start-date'] && $inputs['end-date']) {
         $result = $this->model->dateRange($inputs['start-date'], $inputs['end-date'])
-          ->whereHas('users', function($query) use ($inputs) {
-            return $query->whereHas('user_infos', function ($query) use ($inputs) {
+          ->whereHas('user', function($query) use ($inputs) {
+            return $query->whereHas('info', function ($query) use ($inputs) {
               $fields = ['first_name', 'last_name'];
               foreach($fields as $field) {
-                return $query->whereName($field, $inputs[$field]);
+                return $query->name($field, $inputs[$field]);
               }
             });
           })->get();
       } else {
         $result = $this->model
-          ->whereHas('users', function($query) use ($inputs) {
-            return $query->whereHas('user_infos', function ($query) use ($inputs) {
+          ->whereHas('user', function($query) use ($inputs) {
+            return $query->whereHas('info', function ($query) use ($inputs) {
               $fields = ['first_name', 'last_name'];
               foreach($fields as $field) {
-                return $query->whereName($field, $inputs[$field]);
+                return $query->name($field, $inputs[$field]);
               }
             });
           })->get();

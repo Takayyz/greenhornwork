@@ -56,7 +56,6 @@ class DailyReportController extends Controller
 
     //　あるユーザーのレポート情報を日付の範囲を指定し、contentsを取得。
     $reports = $this->report->getSearchingResultReport($inputs);
-
     return view('admin.daily_report.index', compact('reports'));
   }
 }

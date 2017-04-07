@@ -31,6 +31,10 @@ class UserInfos extends Model implements Transformable
     }
 
     public function user() {
-      return $this->hasOne('App\Entities\User', 'user_info_id');
+      return $this->belongsTo('App\Entities\User');
+    }
+
+    public function scopeName($query, $field, $value){
+        return $query->where($field, 'like', '%'.$value.'%');
     }
 }
