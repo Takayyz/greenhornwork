@@ -19,7 +19,7 @@ class UserInfos extends Model implements Transformable
         'birthday',
         'email',
         'tel',
-        'start_date',
+        'hire_date',
         'store_id'
     ];
 
