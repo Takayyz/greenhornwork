@@ -25,8 +25,12 @@ class UserInfos extends Model implements Transformable
 
     protected $dates = ['deleted_at'];
 
-    public function store () 
+    public function store ()
     {
         return $this->belongsTo('App\Entities\Stores');
+    }
+
+    public function user() {
+      return $this->hasOne('App\Entities\User', 'user_info_id');
     }
 }

@@ -3,6 +3,23 @@
 @section('content')
 <div class="container">
 <h2 class="page-header">日報一覧</h2>
+<div class="search-box">
+  <div class="inner-box">
+    {!! Form::open(['route' => 'admin.report.search', 'method' => 'GET']) !!}
+      {!! Form::input('date', 'start-date', null, ['class' => 'search-box__input-date']) !!}
+      から　
+      {!! Form::input('date', 'end-date', null, ['class' => 'search-box__input-date']) !!}
+      まで　
+      <div class="search-box__name-box">
+        性：{!! Form::input('text', 'last_name', null, ['class' => 'search-box__firstname-input', 'placeholder' => '熱田']) !!}
+        名：{!! Form::input('text', 'first_name', null, ['class' => 'search-box__firstname-input', 'placeholder' => '亮']) !!}
+      </div>
+      <div class="search-box__btn-box">
+        {!! Form::input('submit', '', '日報検索', ['class' => 'btn btn-primary btn-sm']) !!}
+      </div>
+    {!! Form::close() !!}
+  </div>
+</div>
 <table class="table table-hover todo-table">
   <thead>
   <tr>
