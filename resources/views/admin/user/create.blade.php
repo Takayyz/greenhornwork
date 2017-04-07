@@ -1,10 +1,10 @@
-@extends('layouts.app')
-
+@extends('partials.admin_nav')
+ 
 @section('content')
 <div class="container">
     {{ Form::open(array('route' => 'admin.user.store')) }}
 
-            <h2 class="page-header">ユーザーの新規作成</h2>
+            <h2 class="page-header">ユーザー作成</h2>
 
                 {!! Form::label('last_name', '性'); !!}
 
@@ -23,37 +23,18 @@
 
                 {!! Form::input('text', 'first_name', old("name"), array('class' => 'form-control','placeholder' => '信之')) !!}
 
-            <span class="help-block">{{$errors->first('first_name')}}</span>
+                 <span class="help-block">{{$errors->first('first_name')}}</span>
 
             </div>
 
-            <!--  <div class="form-group @if(!empty($errors->first('sex'))) has-error @endif">
-
-                {!! Form::label('sex', '男性'); !!}
-                {!! Form::radio('sex', 'male', old("sex")) !!}
-
-                {!! Form::label('sex', '女性'); !!}
-                {!! Form::radio('sex', 'female', old("sex")) !!}
-
-            <span class="help-block">{{$errors->first('sex')}}</span>
- -->
             </div>
-
-             <!-- <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
-
-                {!! Form::label('birthday', '生年月日'); !!}
-                {!! Form::input('text', 'birthday', old("birthday"), array('class' => 'form-control','placeholder' => '1992年7月30日')) !!}
-
-            <span class="help-block">{{$errors->first('birthday')}}</span>
-
-            </div> -->
 
             <div class="form-group @if(!empty($errors->first('email'))) has-error @endif">
 
                 {!! Form::label('email', 'メールアドレス'); !!}
                 {!! Form::input('text', 'email', old("email"), array('class' => 'form-control','placeholder' => 'greenhorn@gizumo.com')) !!}
 
-            <span class="help-block">{{$errors->first('email')}}</span>
+                <span class="help-block">{{$errors->first('email')}}</span>
 
             </div>
 
@@ -62,7 +43,7 @@
                 {!! Form::label('tel', '電話番号'); !!}
                 {!! Form::input('int', 'tel', old("tel"), array('class' => 'form-control','placeholder' => '03-3353-2720')) !!}
 
-            <span class="help-block">{{$errors->first('tel')}}</span>
+                <span class="help-block">{{$errors->first('tel')}}</span>
 
             </div>
 
@@ -71,15 +52,16 @@
                 {!! Form::label('hire_date', '入社日'); !!}
                 {!! Form::input('text', 'hire_date', old("hire_date"), array('class' => 'form-control')) !!}
 
-            <span class="help-block">{{$errors->first('email')}}</span>
+                <span class="help-block">{{$errors->first('email')}}</span>
 
             </div>
 
-
-        <button type="submit" class="btn btn-success pull-right">新規作成</button>
-        <p class="pull-right">
-            <a href="{{ route('admin.user.index') }}">一覧に戻る</a>
-        </p>
+        
+        <div class="col-xs-12 col-md-offset-5">
+            <a href="{{ route('admin.user.index') }}" class="btn btn-primary">戻る</a> 
+            <button type="submit" class="btn btn-success pull-right">作成</button>
+        </div>
 
     {!! Form::close() !!}
+</div>
 @endsection

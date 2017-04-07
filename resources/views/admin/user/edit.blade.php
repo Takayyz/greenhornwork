@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('partials.admin_nav')
 
 @section('content')
 <div class="container">
@@ -71,9 +71,9 @@
                 {!! Form::label('store_name', '店舗名'); !!}
                 {!! Form::input('text', 'store_name', old("store_name", $user->store_id), array('class' => 'form-control')) !!}
 
-
-        <button type="submit" class="btn btn-success pull-right">更新</button>
-        <p class="pull-right"><a href="{{ route('admin.user.index') }}">一覧に戻る</a></p>
-
+        <div class="col-xs-12 col-md-offset-5">
+            <a href="{{ route('admin.user.index') }}" class="btn btn-primary">戻る</a>
+            <button type="submit" class="btn btn-success pull-right">更新</button>
+        </div>
     {!! Form::close() !!}
-    @endsection
+@endsection

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('partials.admin_nav')
 
 @section('content')
 <div class="container">
@@ -40,5 +40,8 @@
     @endforeach
   </tbody>
 </table>
+</div>
+<div class="col-xs-12 col-md-offset-5">
+    <a href="{{ route('admin.') }}" class="btn btn-primary ">戻る</a>
 </div>
 @endsection

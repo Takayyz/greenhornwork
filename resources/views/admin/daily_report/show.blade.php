@@ -1,8 +1,7 @@
-@extends('layouts.app')
+@extends('partials.admin_nav')
 
 @section('content')
 <div class="container">
-  <p class="pull-right"><a href="{{ route('admin.report.index') }}">一覧に戻る</a></p>
   <div class="panel-heading">
     <h2>日報詳細</h2>
   </div>
@@ -24,5 +23,8 @@
         {{ $report->contents }}
       </div>
   </div>
+</div>
+<div class="col-xs-12 col-md-offset-5">
+    <a href="{{ route('admin.report.index') }}" class="btn btn-primary">戻る</a>
 </div>
 @endsection
