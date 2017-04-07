@@ -35,6 +35,21 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
+    public function UserInfoSave($input)
+    {
+        $this->model()->create([
+
+            'first_name' => $input['first_name'],
+            'last_name' =>$input['last_name'],
+            'sex' => $input['sex'],
+            'birthday'=>$input['birthday'],
+            'email' => $input['email'],
+            'tel' => $input['tel'],
+            'hire_date' => $input['hire_date'],
+            'store_id' => $input['store_id']
+        ]);
+    }
+
     public function getUserRecord($email)
     {
       $user = $this->model->where('email', $email)->first();

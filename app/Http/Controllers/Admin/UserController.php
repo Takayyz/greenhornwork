@@ -77,19 +77,7 @@ class UserController extends Controller
     {
         //usersを第一引数に入れる事によって、バリデーションを実行する事が出来るようになる。
             $input = $request->all();
-            $this->user->create([
-
-            'first_name' => $input['first_name'],
-            'last_name' =>$input['last_name'],
-            'sex' => $input['sex'],
-            'birthday'=>$input['birthday'],
-            'email' => $input['email'],
-            'tel' => $input['tel'],
-            'hire_date' => $input['hire_date'],
-            'store_id' => $input['store_id']
-        ]);
-
-        
+            $this->user->UserInfoSave($input);
         // $user = Users::create(
         //     request(['name', 'email', 'password'])
         // );
