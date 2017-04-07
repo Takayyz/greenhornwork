@@ -3,19 +3,48 @@
 @section('content')
 <div class="container">
 <h2 class="page-header">日報一覧</h2>
+<div class="col-xs-10">
+</div>
+<div class="col-xs-2">
+    <a href="{{ route('admin.') }}" class="btn btn-primary ">戻る</a>
+</div>
+
 <div class="search-box">
   <div class="inner-box">
     {!! Form::open(['route' => 'admin.report.search', 'method' => 'GET']) !!}
-      {!! Form::input('date', 'start-date', null, ['class' => 'search-box__input-date']) !!}
-      から　
-      {!! Form::input('date', 'end-date', null, ['class' => 'search-box__input-date']) !!}
-      まで　
-      <div class="search-box__name-box">
-        性：{!! Form::input('text', 'last_name', null, ['class' => 'search-box__firstname-input', 'placeholder' => '熱田']) !!}
-        名：{!! Form::input('text', 'first_name', null, ['class' => 'search-box__firstname-input', 'placeholder' => '亮']) !!}
+      <h3>日報検索</h3>
+      <div class="col-xs-12">
+        <div class="col-xs-1">
+          始め
+        </div>
+        <div class="col-xs-3">
+          {!! Form::input('date', 'start-date', null, ['class' => 'form-control']) !!}　
+        </div>　
+        <div class="col-xs-1">
+          終わり
+        </div>
+        <div class="col-xs-3">
+          {!! Form::input('date', 'end-date', null, ['class' => 'form-control']) !!}　
+        </div>
       </div>
-      <div class="search-box__btn-box">
-        {!! Form::input('submit', '', '日報検索', ['class' => 'btn btn-primary btn-sm']) !!}
+
+      <div class="col-xs-12">
+        <div class="col-xs-1">
+          苗字
+        </div>
+        <div class="col-xs-3">
+          {!! Form::input('text', 'last_name', null, ['class' => 'form-control', 'placeholder' => '苗字']) !!}
+        </div>
+        <div class="col-xs-1">
+          名前
+        </div>
+        <div class="col-xs-3">
+          {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => '名前']) !!}
+        </div>
+      </div>
+      <div class="col-xs-9"></div>
+      <div class="col-xs-3">
+        {!! Form::input('submit', '', '日報検索', ['class' => 'btn btn-primary']) !!}
       </div>
     {!! Form::close() !!}
   </div>
@@ -40,8 +69,5 @@
     @endforeach
   </tbody>
 </table>
-</div>
-<div class="col-xs-12 col-md-offset-5">
-    <a href="{{ route('admin.') }}" class="btn btn-primary ">戻る</a>
 </div>
 @endsection
