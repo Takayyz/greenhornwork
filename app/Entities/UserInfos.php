@@ -25,8 +25,26 @@ class UserInfos extends Model implements Transformable
 
     protected $dates = ['deleted_at'];
 
-    public function store () 
+    public function store ()
     {
         return $this->belongsTo('App\Entities\Stores');
+    }
+
+    public function user() {
+      return $this->belongsTo('App\Entities\User');
+    }
+
+    public function scopeWhereName($query, $field, $name) {
+      if(!$field || !$name){
+        return $query;
+      }
+      switch($field) {
+        case 'first_name':
+        case 'last_name':
+          return $query->where($field, 'like', $name);
+          break;
+        default:
+          return $query;
+      }
     }
 }
