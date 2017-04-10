@@ -41,7 +41,6 @@ class User extends Authenticatable implements Transformable
    */
   public function scopeWhereName($query, $field, $name)
   {
-
     //　fieldまたはnameに情報が入っていなければ、処理を終了。
     if(!$field || !$name) {
       return $query;
