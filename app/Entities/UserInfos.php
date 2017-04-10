@@ -79,7 +79,7 @@ class UserInfos extends Model implements Transformable
      * データが空であれば処理なし。
      */
     public function scopeDateRange($query, $field, $start_date, $end_date) {
-      if (!$field || ($start_date && $end_date)) {
+      if (!$field || (!$start_date && !$end_date)) {
         return $query;
       }
 
