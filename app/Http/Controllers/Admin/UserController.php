@@ -21,7 +21,7 @@ class UserController extends Controller
 {
 
     protected $stores;
-    protected $user; 
+    protected $user;
 
     /**
      * Display a listing of the resource.
@@ -163,4 +163,13 @@ class UserController extends Controller
         return redirect()->route('admin.user.index');
     }
 
+    public function search(Request $request) {
+      $inputs = $request->all();
+
+      //　管理者が指定した検索条件によりユーザー情報を取得
+      $users = $this->getUsersFromSearchingResult($inputs);
+
+      //$users = $this->users->orderBy('created_at', 'desc')->get();
+      return view('admin.user.index', compact('users'));
+    }
 }
