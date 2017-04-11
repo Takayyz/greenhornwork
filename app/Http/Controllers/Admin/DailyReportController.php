@@ -50,5 +50,12 @@ class DailyReportController extends Controller
       return view('admin.daily_report.show', compact('report'));
   }
 
+  public function search(Request $request)
+  {
+    $inputs = $request->all();
 
+    //　あるユーザーのレポート情報を日付の範囲を指定し、contentsを取得。
+    $reports = $this->report->getSearchingResultReport($inputs);
+    return view('admin.daily_report.index', compact('reports'));
+  }
 }

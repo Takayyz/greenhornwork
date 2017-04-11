@@ -23,10 +23,7 @@ Route::group(['prefix' => '/'], function() {
   Route::resource('report', 'DailyReportController');
   Route::resource('/schedule', 'WorkScheduleController');
   Route::post('/upload', 'WorkScheduleController@upload');
-  Route::get('showadminregister', 'Admin\Auth\AdminRegisterController@showAdminRegistrationForm')->name('showadminregister');
-  Route::post('adminregister', 'Admin\Auth\AdminRegisterController@adminRegister')->name('adminregister');
-  Route::get('adminmaileditform', 'Admin\Auth\AdminRegisterController@showAdminMailEditForm')->name('adminmaileditform');
-  Route::post('adminmailupdate', 'Admin\Auth\AdminRegisterController@adminEmailUpdate')->name('adminmailupdate');
+  Route::post('/register', 'Auth\RegisterController@register');
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], function() {
@@ -35,6 +32,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::post('logout', 'Auth\LoginController@logout');
 
   Route::get('/', 'HomeController@index');
+  Route::get('/report/search', ['as' => 'report.search', 'uses' => 'DailyReportController@search']);
   Route::resource('report', DailyReportController::class);
   Route::resource('store', StoreController::class);
 
@@ -42,6 +40,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::get('adminuser/{adminuser}/mailedit', 'AdminUserController@mailedit')->name('adminuser.mailedit');
   Route::post('adminuser/sendmail', 'AdminUserController@sendmail')->name('adminuser.sendmail');
   //Route::resourceを使う事により、AdminUserControllerの中のCRUDへのルートを定義する事が出来る。
+
+  Route::resource('user', 'UserController');
+  //userに関係するページに誰かがアクセスしようとした時（第一引数）、UserControllerの中の関数が発火される。発火される関数は、userのページに続くcreateなりのページによって発火される関数が決まる。このアプリケーションが街だとしたら、RouteはControllerと言う場所へ続く道であると考える。
+
   Route::resource('user', UserController::class);
   Route::resource('schedule', WorkScheduleController::class);
+
 });
