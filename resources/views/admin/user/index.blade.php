@@ -99,7 +99,13 @@
             店舗名
           </div>
           <div class="col-xs-3">
-            {!! Form::input('text', 'store_name', null, ['class' => '', 'placeholder' => '店舗名']) !!}
+            <select name="store_name">
+              @foreach($stores as $store)
+                <option>
+                  {{ $store->name }}
+                </option>
+              @endforeach
+            </select>
           </div>
         </div>
 
@@ -151,7 +157,7 @@
         </td>
         <td>
           {!! Form::open(['route'=>['admin.user.destroy',$user->id],'method'=>'DELETE']) !!}
-          <button class="btn btn-danger" type="submit">削除</button>
+            <button class="btn btn-danger" type="submit">削除</button>
           {!! Form::close() !!}
         </td>
       </tr>

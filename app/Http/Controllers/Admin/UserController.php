@@ -169,8 +169,15 @@ class UserController extends Controller
      */
     public function search(Request $request) {
       $inputs = $request->all();
+
+      // 管理者からのインプットを正常化
       $inputs = $this->users->normalizeInputs($inputs);
+
+      //　管理者が指定した条件によりユーザー情報を取得
       $users = $this->users->getUsersFromSearchingResult($inputs);
-      return view('admin.user.index', compact('users'));
+
+      $stores = $this->stores->all();
+
+      return view('admin.user.index', compact('users', 'stores'));
     }
 }
