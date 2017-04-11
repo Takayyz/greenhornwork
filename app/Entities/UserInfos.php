@@ -87,11 +87,10 @@ class UserInfos extends Model implements Transformable
         case 'birthday':
         case 'hire_date':
           if ($start_date) {
-            dd($start_date);
-            $query->where($field, '>=', $start_date);
+            $query->where($field, '>=', date($start_date));
           }
           if ($end_date) {
-            $query->where($field, '<=', $end_date);
+            $query->where($field, '<=', date($end_date));
           }
           return $query;
           break;

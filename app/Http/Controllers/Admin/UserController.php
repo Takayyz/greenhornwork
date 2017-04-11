@@ -77,8 +77,8 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         //usersを第一引数に入れる事によって、バリデーションを実行する事が出来るようになる。
-            $input = $request->all();
-            $this->user->saveUserInfo($input);
+        $input = $request->all();
+        $this->userinfos->saveUserInfo($input);
         // $user = Users::create(
         //     request(['name', 'email', 'password'])
         // );
@@ -164,12 +164,12 @@ class UserController extends Controller
         return redirect()->route('admin.user.index');
     }
 
+    /**
+     *　管理者が指定した検索条件によりユーザー情報を取得
+     */
     public function search(Request $request) {
       $inputs = $request->all();
-
-      //　管理者が指定した検索条件によりユーザー情報を取得
       $users = $this->users->getUsersFromSearchingResult($inputs);
-
       return view('admin.user.index', compact('users'));
     }
 }
