@@ -117,4 +117,15 @@ class WorkScheduleController extends Controller
 
       return redirect()->route('schedule.index');
   }
+
+  public function search(Request $request)
+  {
+    $input = $request->all();
+    $userId = Auth::id();
+
+    $schedules = $this->schedule->getSchedulesByDate($input['year'], $input['month'], $userId);
+
+    // dd($schedules);
+    return view('work_schedule.index', compact('schedules'));
+  }
 }

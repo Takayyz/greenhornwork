@@ -3,8 +3,21 @@
 @section('content')
 <div class="container">
   <div class="panel-heading">
-    <h2>勤務表一覧</h2>
+    <h2 class="page-header">勤務表一覧</h2>
   </div>
+
+  <div>
+    <div>
+      {!! Form::open(['route' => 'schedule.search', 'method' => 'GET']) !!}
+        {!! Form::selectRange('year', date('Y')-10, date('Y')+10, old('year', date('Y'))) !!}
+        {!! Form::label('year', '年'); !!}
+        {!! Form::selectRange('month', 1, 12,  old('month', date('m'))) !!}
+        {!! Form::label('month', '月'); !!}
+        {!! Form::input('submit', '', '検索', ['class' => 'btn btn-primary btn-sm']) !!}
+      {!! Form::close() !!}
+    </div>
+  </div>
+
   <div class="panel-body">
     <p class="pull-right"><a class="btn btn-success" href="{{ route('schedule.create') }}">作成</a></p>
     <table class="table table-hover todo-table">
