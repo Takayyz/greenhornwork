@@ -27,4 +27,10 @@ class WorkSchedules extends Model implements Transformable
     {
       return $this->belongsTo('App\Entities\User');
     }
+
+    public function scopeDateRange($query, $year, $month)
+    {
+      return $query->where('year', $year)
+                   ->where('month', $month);
+    }
 }
