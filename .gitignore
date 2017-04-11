@@ -9,3 +9,4 @@ Homestead.yaml
 .env
 /public/schedules
 /storage/*
+npm-debug.log
