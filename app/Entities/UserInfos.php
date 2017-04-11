@@ -32,7 +32,7 @@ class UserInfos extends Model implements Transformable
 
     public function user()
     {
-      return $this->belongsTo('App\Entities\User');
+      return $this->hasOne('App\Entities\User','user_info_id');
     }
 
     public function scopeWhereName($query, $field, $name)
@@ -87,6 +87,7 @@ class UserInfos extends Model implements Transformable
         case 'birthday':
         case 'hire_date':
           if ($start_date) {
+            dd($start_date);
             $query->where($field, '>=', $start_date);
           }
           if ($end_date) {

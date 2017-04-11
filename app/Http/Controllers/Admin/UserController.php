@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Repositories\UserRepository;
 use App\Repositories\UserInfosRepository;
 use App\Entities\User;
 
@@ -19,9 +20,9 @@ use Mail;
 
 class UserController extends Controller
 {
-
+    protected $users;
     protected $stores;
-    protected $user;
+    protected $userinfos;
 
     /**
      * Display a listing of the resource.
@@ -29,20 +30,20 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __construct(
-     StoresRepository $stores,
-     UserInfosRepository $user)
+      UserRepository $users,
+      StoresRepository $stores,
+      UserInfosRepository $userinfos)
     {
       $this->middleware('auth:admin');
+      $this->users = $users;
       $this->stores = $stores;
-      $this->user = $user;
+      $this->userinfos = $userinfos;
     }
 
     public function index()
     {
 
         $users = User::orderBy('created_at', 'desc')->get();
-        // $users = $this->user->all();
-        // dd($users->);
         return view('admin.user.index', compact('users'));
     }
 
@@ -167,9 +168,8 @@ class UserController extends Controller
       $inputs = $request->all();
 
       //　管理者が指定した検索条件によりユーザー情報を取得
-      $users = $this->getUsersFromSearchingResult($inputs);
+      $users = $this->users->getUsersFromSearchingResult($inputs);
 
-      //$users = $this->users->orderBy('created_at', 'desc')->get();
       return view('admin.user.index', compact('users'));
     }
 }

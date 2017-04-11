@@ -41,8 +41,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::post('adminuser/sendmail', 'AdminUserController@sendmail')->name('adminuser.sendmail');
   //Route::resourceを使う事により、AdminUserControllerの中のCRUDへのルートを定義する事が出来る。
 
-  Route::resource('user', 'UserController');
   Route::get('/user/search', ['as' => 'user.search', 'uses' => 'UserController@search']);
+  Route::resource('user', 'UserController');
   //userに関係するページに誰かがアクセスしようとした時（第一引数）、UserControllerの中の関数が発火される。発火される関数は、userのページに続くcreateなりのページによって発火される関数が決まる。このアプリケーションが街だとしたら、RouteはControllerと言う場所へ続く道であると考える。
 
   Route::resource('user', UserController::class);
