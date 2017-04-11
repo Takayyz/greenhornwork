@@ -169,6 +169,7 @@ class UserController extends Controller
      */
     public function search(Request $request) {
       $inputs = $request->all();
+      $inputs = $this->users->normalizeInputs($inputs);
       $users = $this->users->getUsersFromSearchingResult($inputs);
       return view('admin.user.index', compact('users'));
     }

@@ -55,9 +55,8 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
       })
 
       //　性別、Email、電話番号で条件を絞る
-      //  $equal_fields = ['sex', 'email', 'tel'];
       ->whereHas('info', function($query) use ($inputs) {
-        $equal_fields = ['email', 'tel'];
+        $equal_fields = ['sex', 'email', 'tel'];
         foreach ($equal_fields as $equal_field) {
           $query->equal($equal_field, $inputs[$equal_field]);
         }
@@ -82,5 +81,41 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
       // 情報を整理する
       ->orderBy('created_at', 'desc')->get();
+    }
+
+    /**
+     *　管理者が入力したデータを正常化
+     */
+    public function normalizeInputs($inputs) {
+      if(is_array($inputs)) {
+        $inputs = [
+          "user_name" => isset($inputs['user_name']) ? $inputs['user_name'] : "",
+          "sex" => isset($inputs['sex']) ? $inputs['sex'] : "",
+          "last_name" => isset($inputs['last_name']) ? $inputs['last_name'] : "",
+          "first_name" => isset($inputs['first_name']) ? $inputs['first_name'] : "",
+          "birthday-start-date" => isset($inputs['birthday-start-date']) ? $inputs['birthday-start-date'] : "",
+          "birthday-end-date" => isset($inputs['birthday-end-date']) ? $inputs['birthday-end-date'] : "",
+          "email" => isset($inputs['email']) ? $inputs['email'] : "",
+          "tel" => isset($inputs['tel']) ? $inputs['tel'] : "",
+          "hire_date-start-date" => isset($inputs['hire_date-start-date']) ? $inputs['hire_date-start-date'] : "",
+          "hire_date-end-date" => isset($inputs['hire_date-end-date']) ? $inputs['hire_date-end-date'] : "",
+          "store_name" => isset($inputs['store_name']) ? $inputs['store_name'] : ""
+        ];
+      } else {
+        $inputs = [
+          "user_name" => "",
+          "sex" => "",
+          "last_name" => "",
+          "first_name" => "",
+          "birthday-start-date" => "",
+          "birthday-end-date" => "",
+          "email" => "",
+          "tel" => "",
+          "hire_date-start-date" => "",
+          "hire_date-end-date" => "",
+          "store_name" => ""
+        ];
+      }
+      return $inputs;
     }
 }
