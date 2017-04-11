@@ -25,12 +25,12 @@
           <div class="col-xs-3">
             <div class="col-xs-6">
               <label>
-                男性　{!! Form::input('radio', 'sex', null) !!}　
+                男性　{!! Form::input('radio', 'sex', '男') !!}　
               </label>
             </div>
             <div class="col-xs-6">
               <label>
-                　女性　{!! Form::input('radio', 'sex', null) !!}　
+                　女性　{!! Form::input('radio', 'sex', '女') !!}　
               </label>
             </div>
           </div>
@@ -133,10 +133,18 @@
         <td>{{ $user->info->last_name }}</td>
         <td>{{ $user->info->first_name }}</td>
         <td>{{ $user->info->sex }}</td>
-        <td>{{ date("Y/m/d", strtotime($user->info->birthday)) }}</td>
+        @if($user->info->birthday)
+          <td>{{ date("Y/m/d", strtotime($user->info->birthday)) }}</td>
+        @else
+          <td></td>
+        @endif
         <td>{{ $user->info->email }}</td>
         <td>{{ $user->info->tel }}</td>
-        <td>{{ date("Y/m/d", strtotime($user->info->hire_date)) }}</td>
+        @if($user->info->hire_date)
+          <td>{{ date("Y/m/d", strtotime($user->info->hire_date)) }}</td>
+        @else
+          <td></td>
+        @endif
         <td>{{ $user->info->store->name }}</td>
         <td>
           <a class="btn btn-primary" href="{{ route('admin.user.show', $user->id) }}">詳細</a>
