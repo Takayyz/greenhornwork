@@ -141,15 +141,8 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
         return $errMsg;
      }
 
-     public function getSchedulesByDate($year = NULL, $month = NULL, $userId = NULL)
+     public function getSchedulesByDate($year, $month, $userId = NULL)
      {
-       //Administrator用の処理
-      //  if($userId === NULL) {
-      //    $schedules = $this->model->where('year', $year)
-      //                             ->where('month', $month)
-      //                             ->get();
-      //  }
-
        $schedules = $this->model->where('year', $year)
                                 ->where('month', $month)
                                 ->where('user_id', $userId)

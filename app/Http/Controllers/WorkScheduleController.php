@@ -124,8 +124,7 @@ class WorkScheduleController extends Controller
     $userId = Auth::id();
 
     $schedules = $this->schedule->getSchedulesByDate($input['year'], $input['month'], $userId);
-
-    // dd($schedules);
+    
     return view('work_schedule.index', compact('schedules'));
   }
 }
