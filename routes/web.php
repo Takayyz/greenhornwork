@@ -19,8 +19,8 @@ Route::group(['prefix' => '/'], function() {
   });
   Route::get('/', 'UserController@index');
   Route::get('/home', 'UserController@index');
+  Route::get('/report/search', ['as' => 'report.search', 'uses' => 'DailyReportController@search']);
   Route::resource('report', 'DailyReportController');
-  Route::get('/schedule/search', ['as' => 'schedule.search', 'uses' => 'WorkScheduleController@search']);
   Route::resource('/schedule', 'WorkScheduleController');
   Route::post('/register', 'Auth\RegisterController@register');
 });
