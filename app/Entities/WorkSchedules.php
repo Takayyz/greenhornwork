@@ -28,9 +28,48 @@ class WorkSchedules extends Model implements Transformable
       return $this->belongsTo('App\Entities\User');
     }
 
-    public function scopeDateRange($query, $year, $month)
+    public function scopeWhereDate($query, $field, $date)
     {
-      return $query->where('year', $year)
-                   ->where('month', $month);
+      if(!$field || !$date){
+        return $query;
+      }
+      switch($field) {
+        case 'year':
+        case 'month':
+          return $query->where($field, $date);
+          break;
+        default:
+          return $query;
+      }
+    }
+
+    //年月が一致するデータで絞る
+    public function scopeDateRange($query, $input)
+    {
+      //年月の両方が未入力の場合は何もしない
+      if(!isset($input['year']) && !isset($input['month'])) {
+        return $query;
+      }
+      $fields = ['year', 'month'];
+      foreach($fields as $field) {
+        $query->WhereDate($field, $input[$field]);
+      }
+    }
+
+    //苗字、名前が一致するデータで絞る
+    public function scopeUserInfo($query, $input)
+    {
+      //苗字、名前の両方が未入力の場合は何もしない
+      if(!isset($input['first_name']) && !isset($input['last_name'])){
+        return $query;
+      }
+      return $query->whereHas('user', function($query) use ($input) {
+        return $query->whereHas('info', function ($query) use ($input) {
+          $fields = ['first_name', 'last_name'];
+          foreach($fields as $field) {
+            $query->whereName($field, $input[$field]);
+          }
+        });
+      });
     }
 }
