@@ -25,11 +25,23 @@ class WorkScheduleController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Request $request)
   {
     $userId = Auth::id();
-    $schedules = $this->schedule->getOwnSchedules($userId);
-    return view('work_schedule.index', compact('schedules'));
+
+    if(!isset($request)) {
+      //一覧表示
+      $schedules = $this->schedule->getOwnSchedules($userId);
+    } else {
+      //検索結果表示
+      $input = $request->all();
+      $schedules = $this->schedule->getSchedulesBySearch($input, $userId);
+    }
+
+    //ルートディレクトリ取得
+    $path = env('APP_URL');
+    
+    return view('work_schedule.index', compact('schedules', 'path'));
   }
 
   /**
@@ -118,13 +130,4 @@ class WorkScheduleController extends Controller
       return redirect()->route('schedule.index');
   }
 
-  public function search(Request $request)
-  {
-    $input = $request->all();
-    $userId = Auth::id();
-
-    $schedules = $this->schedule->getSchedulesBySearch($input, $userId);
-
-    return view('work_schedule.index', compact('schedules'));
-  }
 }

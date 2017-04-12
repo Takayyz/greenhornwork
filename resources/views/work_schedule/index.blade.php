@@ -8,7 +8,7 @@
 
   <!-- 検索メニュー -->
   <div class="panel-body">
-    {!! Form::open(['route' => 'schedule.search', 'method' => 'GET']) !!}
+    {!! Form::open(['route' => 'schedule.index', 'method' => 'GET']) !!}
       <div class="form-group">
         <div class="col-xs-2">
           {!! Form::selectRange('year', date('Y')-10, date('Y')+10, old('year'), ['class' => 'form-control', 'placeholder'=>'年']) !!}
@@ -35,7 +35,7 @@
         @foreach($schedules as $schedule)
         <tr>
           <td>
-            <a href="{{ $schedule->file_path . $schedule->file_name }}" target="_blank" >
+            <a href="{{$path . $schedule->file_path . $schedule->file_name }}" target="_blank" >
               {{ $schedule->year }}年
               {{ $schedule->month }}月
               勤務表
