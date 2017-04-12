@@ -7,16 +7,18 @@
   </div>
 
   <!-- 検索メニュー -->
-  <div>
-    <div>
-      {!! Form::open(['route' => 'schedule.search', 'method' => 'GET']) !!}
-        {!! Form::selectRange('year', date('Y')-10, date('Y')+10, old('year', date('Y'))) !!}
-        {!! Form::label('year', '年'); !!}
-        {!! Form::selectRange('month', 1, 12,  old('month', date('m'))) !!}
-        {!! Form::label('month', '月'); !!}
+  <div class="panel-body">
+    {!! Form::open(['route' => 'schedule.search', 'method' => 'GET']) !!}
+      <div class="form-group">
+        <div class="col-xs-2">
+          {!! Form::selectRange('year', date('Y')-10, date('Y')+10, old('year'), ['class' => 'form-control', 'placeholder'=>'年']) !!}
+        </div>
+        <div class="col-xs-2">
+          {!! Form::selectRange('month', 1, 12, old('month'), ['class' => 'form-control', 'placeholder'=>'月']) !!}
+        </div>
         {!! Form::input('submit', '', '検索', ['class' => 'btn btn-primary btn-sm']) !!}
-      {!! Form::close() !!}
-    </div>
+      </div>
+    {!! Form::close() !!}
   </div>
 
   <div class="panel-body">

@@ -2,7 +2,7 @@
 
 $month = [];
 for ($i = 1; $i <=12; $i++) {
-  array_push( $month, $i);
+  array_push($month, $i);
 }
 $month = [];
 
@@ -17,26 +17,24 @@ $month = [];
   </div>
 
   <!-- 検索メニュー -->
-  <div class="col-xs-12">
-    <div>
-      {!! Form::open(['route' => 'admin.schedule.search', 'method' => 'GET']) !!}
-        <div class="col-xs-2">
-          {!! Form::selectRange('year', date('Y')-10, date('Y')+10, old('year', date('Y'))) !!}
-          {!! Form::label('year', '年'); !!}
-        </div>
-        <div class="col-xs-2">
-          {!! Form::selectRange('month', 1, 12,  old('month', date('m'))) !!}
-          {!! Form::label('month', '月'); !!}
-        </div>
-        <div class="col-xs-3">
-          {!! Form::input('text', 'last_name', null, ['class' => 'form-control', 'placeholder' => '苗字']) !!}
-        </div>
-        <div class="col-xs-3">
-          {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => '名前']) !!}
-        </div>
-        {!! Form::input('submit', '', '検索', ['class' => 'btn btn-primary btn-sm']) !!}
-      {!! Form::close() !!}
+  <div class="panel-body">
+    {!! Form::open(['route' => 'admin.schedule.search', 'method' => 'GET']) !!}
+    <div class="form-group">
+      <div class="col-xs-2">
+        {!! Form::selectRange('year', date('Y')-10, date('Y')+10, old('year'), ['class' => 'form-control', 'placeholder'=>'年']) !!}
+      </div>
+      <div class="col-xs-2">
+        {!! Form::selectRange('month', 1, 12, old('month'), ['class' => 'form-control', 'placeholder'=>'月']) !!}
+      </div>
+      <div class="col-xs-2">
+        {!! Form::input('text', 'last_name', null, ['class' => 'form-control', 'placeholder' => '苗字']) !!}
+      </div>
+      <div class="col-xs-2">
+        {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => '名前']) !!}
+      </div>
+      {!! Form::input('submit', '', '検索', ['class' => 'btn btn-primary btn-sm']) !!}
     </div>
+    {!! Form::close() !!}
   </div>
 
   <div class="panel-body">
