@@ -23,19 +23,19 @@ class WorkScheduleController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Request $request)
   {
-    $schedules = $this->schedule->getAllSchedules();
-    return view('admin.work_schedule.index', compact('schedules'));
-  }
+    if(!isset($request)) {
+      //一覧表示
+      $schedules = $this->schedule->getAllSchedules();
+    } else {
+      //検索結果表示
+      $input = $request->all();
+      $schedules = $this->schedule->getSchedulesBySearch($input);
+    }
 
-  public function search(Request $request)
-  {
-    $input = $request->all();
-
-    $schedules = $this->schedule->getSchedulesBySearch($input);
-
-    return view('admin.work_schedule.index', compact('schedules'));
+    $path = env('APP_URL');
+    return view('admin.work_schedule.index', compact('schedules', 'path'));
   }
 
 }

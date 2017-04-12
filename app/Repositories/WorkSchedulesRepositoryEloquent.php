@@ -58,8 +58,8 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
       //ファイルの拡張子取得
       $fileType = $uploadFile->getClientOriginalExtension();
       //ファイルパスを取得
-      $filePath = 'schedules/' .$userId . '/' ;
-      $fileFullPath = public_path() . '/' . $filePath;
+      $filePath = '/schedules/' .$userId . '/' ;
+      $fileFullPath = public_path() . $filePath;
       //ファイル格納先のフォルダが存在しなければ作成
       if (!file_exists($fileFullPath))  mkdir($fileFullPath);
       //ファイル名が重複しないように変更

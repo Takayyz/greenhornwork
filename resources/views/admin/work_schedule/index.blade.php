@@ -1,13 +1,3 @@
-<?php
-
-$month = [];
-for ($i = 1; $i <=12; $i++) {
-  array_push($month, $i);
-}
-$month = [];
-
- ?>
-
 @extends('partials.admin_nav')
 
 @section('content')
@@ -18,7 +8,7 @@ $month = [];
 
   <!-- 検索メニュー -->
   <div class="panel-body">
-    {!! Form::open(['route' => 'admin.schedule.search', 'method' => 'GET']) !!}
+    {!! Form::open(['route' => 'admin.schedule.index', 'method' => 'GET']) !!}
     <div class="form-group">
       <div class="col-xs-2">
         {!! Form::selectRange('year', date('Y')-10, date('Y')+10, old('year'), ['class' => 'form-control', 'placeholder'=>'年']) !!}
@@ -36,7 +26,6 @@ $month = [];
     </div>
     {!! Form::close() !!}
   </div>
-
   <div class="panel-body">
     <table class="table table-hover todo-table">
       <thead>
@@ -50,7 +39,7 @@ $month = [];
         @foreach($schedules as $schedule)
         <tr>
           <td>
-            <a href="../{{ $schedule->file_path . $schedule->file_name }}" target="_blank" >
+            <a href="{{$path . $schedule->file_path . $schedule->file_name }}" target="_blank" >
               {{ $schedule->year }}年
               {{ $schedule->month }}月
               勤務表
