@@ -239,6 +239,69 @@
   border-right: 1px solid #7d7409;
 }
 
+.user-search-btn-box {
+  text-align: right;
+}
+
+/********** Reset <li> ***********/
+
+.back-btn-box {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 30px;
+}
+
+form.user-search {
+  background: #eee;
+  border-radius: 5px;
+  border: solid #ccc 1px;
+  padding: 30px;
+}
+
+table.search-table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.search-header {
+  margin: 0;
+}
+
+tbody.search-tbody {
+  padding: 10px;
+}
+
+tbody.search-body > tr {
+  width: 200px;
+  margin: 10px;
+}
+
+tbody.search-body > tr > td {
+  text-align: right;
+}
+
+.search-btn-box {
+  text-align: right;
+}
+
+.search-tr {
+  width: 100%;
+}
+
+.search-td {
+  text-align: right;
+  padding: 5px;
+  margin: 10px;
+}
+
+.search-td.left {
+  text-align: left;
+}
+
+.create-user-btn-box {
+  margin-top: 100px;
+}
+
 /*-----------------------------------*/
 
 @media screen and (max-width: 1199px) and (min-width: 767px)

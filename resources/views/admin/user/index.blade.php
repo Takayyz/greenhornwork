@@ -3,115 +3,169 @@
 @section('content')
 <div class="container">
   <h2 class="page-header">ユーザーの一覧</h2>
-  <div class="col-xs-10"></div>
-  <div class="col-xs-2">
+  <div class="back-btn-box">
     <a href="{{ route('admin.') }}" class="btn btn-primary">戻る</a>
   </div>
 
-  <div class="search-box">
-    <div class="inner-box">
-      {!! Form::open(['route' => 'admin.user.search', 'method' => 'GET']) !!}
-        <h3>ユーザー検索</h3>
-        <div class="col-xs-12">
-          <div class="col-xs-2">
-            ユーザー名
-          </div>
-          <div class="col-xs-3">
-            {!! Form::input('text', 'user_name', null, ['class' => 'form-control']) !!}　
-          </div>
-          <div class="col-xs-2">
-            性別
-          </div>
-          <div class="col-xs-3">
-            <div class="col-xs-6">
-              <label>
-                男性　{!! Form::input('radio', 'sex', '男') !!}　
-              </label>
-            </div>
-            <div class="col-xs-6">
-              <label>
-                　女性　{!! Form::input('radio', 'sex', '女') !!}　
-              </label>
-            </div>
-          </div>
-        </div>
+  {!! Form::open(['route' => 'admin.user.search', 'method' => 'GET', 'class' => 'user-search clearfix']) !!}
+    <table class="search-table">
+      <thead class="search-thead">
+        <tr>
+          <h3 class="search-header">ユーザー検索</h3>
+        </tr>
+      </thead>
+      <tbody class="search-tbody">
+        <tr>
+          <td class="search-td">
+            <label for="user_name">
+              ユーザー名
+            </label>
+          </td>
+          <td></td>
+          <td class="search-td">
+            {!! Form::input('text', 'user_name', null, ['class' => 'form-control', 'placeholder' => 'ユーザー名', 'id' => 'user_name']) !!}　
+          </td>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td class="search-td">
+            <label>
+              性別
+            </label>
+          </td>
+          <td></td>
+          <td class="search-td left">
+            <label>
+              男性　{!! Form::input('radio', 'sex', '男') !!}
+            </label>
+            <label>
+              　女性　{!! Form::input('radio', 'sex', '女') !!}　
+            </label>
+          </td>
+          <td class="search-td">
+          </td>
+          <td></td>
+        </tr>
 
-        <div class="col-xs-12">
-          <div class="col-xs-2">
-            姓
-          </div>
-          <div class="col-xs-3">
-            {!! Form::input('text', 'last_name', null, ['class' => 'form-control', 'placeholder' => '姓']) !!}
-          </div>
-          <div class="col-xs-2">
-            名
-          </div>
-          <div class="col-xs-3">
-            {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => '名']) !!}
-          </div>
-        </div>
+        <tr>
+          <td class="search-td">
+            <label>
+              姓名
+            </label>
+          </td>
+          <td class="search-td">
+            <label for="last_name">
+              姓
+            </label>
+          </td>
+          <td class="search-td">
+            {!! Form::input('text', 'last_name', null, ['class' => 'form-control', 'placeholder' => '姓', 'id' => 'last_name']) !!}
+          </td>
+          <td class="search-td">
+            <label for="first_name">
+              名
+            </label>
+          </td>
+          <td class="search-td">
+            {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => '名', 'id' => 'first_name']) !!}
+          </td>
+        </tr>
 
-        <div class="col-xs-12">
-          <div class="col-xs-2">
-            生年月日
-          </div>
-          <div class="col-xs-3">
-            始め　{!! Form::input('date', 'birthday-start-date', null, ['class' => 'form-control']) !!}　
-          </div>　
-          <div class="col-xs-2">
-          </div>
-          <div class="col-xs-3">
-            終わり　{!! Form::input('date', 'birthday-end-date', null, ['class' => 'form-control']) !!}　
-          </div>
-        </div>
+        <tr>
+          <td class="search-td">
+            <label for="birthday-start-date">
+              生年月日
+            </label>
+          </td>
+          <td class="search-td">
+            <label for="birthday-start-date">
+              始め
+            </label>
+          </td>
+          <td class="search-td">
+            {!! Form::input('date', 'birthday-start-date', null, ['class' => 'form-control', 'id' => 'birthday-start-date']) !!}
+          </td>
+          <td class="search-td">
+            <label for="birthday-end-date">
+              終わり
+            </label>
+          </td>
+          <td class="search-td">
+            {!! Form::input('date', 'birthday-end-date', null, ['class' => 'form-control', 'id' => 'birthday-end-date']) !!}
+          </td>
+        </tr>
 
-        <div class="col-xs-12">
-          <div class="col-xs-2">
-            メールアドレス
-          </div>
-          <div class="col-xs-3">
-            {!! Form::input('text', 'email', null, ['class' => 'form-control', 'placeholder' => 'gizutech@gmail.com']) !!}
-          </div>
-          <div class="col-xs-2">
-            電話番号
-          </div>
-          <div class="col-xs-3">
-            {!! Form::input('text', 'tel', null, ['class' => 'form-control', 'placeholder' => '0312345678']) !!}
-          </div>
-        </div>
+        <tr>
+          <td class="search-td">
+            <label for="email">
+              メールアドレス
+            </label>
+          </td>
+          <td></td>
+          <td class="search-td">
+            {!! Form::input('text', 'email', null, ['class' => 'form-control', 'placeholder' => 'gizutech@gmail.com', 'id' => 'email']) !!}
+          </td>
+        </tr>
+        <tr>
+          <td class="search-td">
+            <label for="tel">
+              電話番号
+            </label>
+          </td>
+          <td></td>
+          <td class="search-td">
+            {!! Form::input('text', 'tel', null, ['class' => 'form-control', 'placeholder' => '0312345678', 'id' => 'tel']) !!}
+          </td>
+        </tr>
 
-        <div class="col-xs-12">
-          <div class="col-xs-2">
-            開始日
-          </div>
-          <div class="col-xs-3">
-            始め　{!! Form::input('date', 'hire_date-start-date', null, ['class' => 'form-control']) !!}　
-          </div>　
-          <div class="col-xs-2">
-          </div>
-          <div class="col-xs-3">
-            終わり　{!! Form::input('date', 'hire_date-end-date', null, ['class' => 'form-control']) !!}　
-          </div>
-        </div>
+        <tr>
+          <td class="search-td">
+            <label for="hire_date-start-date">
+              開始日
+            </label>
+          </td>
+          <td class="search-td">
+            <label for="hire_date-start-date">
+              始め
+            </label>
+          </td>
+          <td class="search-td">
+            {!! Form::input('date', 'hire_date-start-date', null, ['class' => 'form-control', 'id' => 'hire_date-start-date']) !!}　
+          </td>
+          <td class="search-td">
+            <label for="hire_date-end-date">
+              終わり
+            </label>
+          </td>
+          <td class="search-td">
+            {!! Form::input('date', 'hire_date-end-date', null, ['class' => 'form-control', 'id' => 'hire_date-end-date']) !!}　
+          </td>
+        </tr>
 
-        <div class="col-xs-12">
-          <div class="col-xs-2">
-            店舗名
-          </div>
-          <div class="col-xs-3">
-            {!! Form::select('store_id', [null => 'Please Select'] + array_pluck($stores, 'name', 'id')) !!}
-          </div>
-        </div>
+        <tr>
+          <td class="search-td">
+            <label for="store_id">
+              店舗名
+            </label>
+          </td>
+          <td></td>
+          <td class="search-td">
+            {!! Form::select('store_id', [null => '店舗選択'] + array_pluck($stores, 'name', 'id'), null, ['class' => 'form-control', 'id' => 'store_id']) !!}
+          </td>
+        </tr>
+      </tbody>
 
-        <div class="col-xs-9"></div>
-        <div class="col-xs-3">
-          {!! Form::input('submit', '', 'ユーザー検索', ['class' => 'btn btn-primary']) !!}
-        </div>
-      {!! Form::close() !!}
-    </div>
-  </div>
+      <tfoot class="search-tfoot">
+        <tr class="search-tr">
+          <td colspan="5" class="search-td">
+            {!! Form::input('submit', '', '検索', ['class' => 'btn btn-primary']) !!}
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  {!! Form::close() !!}
 
-  <p class="pull-right"><a class="btn btn-success" href="{{ route('admin.user.create')}}">新規ユーザー作成</a></p>
+  <p class="pull-right create-user-btn-box"><a class="btn btn-success" href="{{ route('admin.user.create')}}">新規ユーザー作成</a></p>
   <table class="table table-hover todo-table">
     <thead>
       <tr>
