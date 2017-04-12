@@ -29,4 +29,13 @@ class WorkScheduleController extends Controller
     return view('admin.work_schedule.index', compact('schedules'));
   }
 
+  public function search(Request $request)
+  {
+    $input = $request->all();
+
+    $schedules = $this->schedule->getSchedulesBySearch($input);
+
+    return view('admin.work_schedule.index', compact('schedules'));
+  }
+
 }

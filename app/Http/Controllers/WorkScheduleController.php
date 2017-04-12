@@ -123,8 +123,8 @@ class WorkScheduleController extends Controller
     $input = $request->all();
     $userId = Auth::id();
 
-    $schedules = $this->schedule->getSchedulesByDate($input['year'], $input['month'], $userId);
-    
+    $schedules = $this->schedule->getSchedulesBySearch($input, $userId);
+
     return view('work_schedule.index', compact('schedules'));
   }
 }
