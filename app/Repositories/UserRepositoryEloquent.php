@@ -39,9 +39,6 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function getUsersFromSearchingResult($inputs)
     {
       $users = $this->model;
-      if(!is_array($inputs)) {
-        return $users->get();
-      }
 
       //　ユーザー名で条件を絞る
       return $users->whereName('name', $inputs['user_name'])
@@ -71,8 +68,8 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
       //　店舗名で条件を絞る
       ->whereHas('info', function($query) use ($inputs) {
         return  $query->whereHas('store', function($query) use ($inputs) {
-          if($inputs['store_name']) {
-            return $query->where('name', $inputs['store_name']);
+          if($inputs['store_id']) {
+            return $query->where('id', $inputs['store_id']);
           } else {
             return $query;
           }
@@ -99,7 +96,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
           "tel" => isset($inputs['tel']) ? $inputs['tel'] : "",
           "hire_date-start-date" => isset($inputs['hire_date-start-date']) ? $inputs['hire_date-start-date'] : "",
           "hire_date-end-date" => isset($inputs['hire_date-end-date']) ? $inputs['hire_date-end-date'] : "",
-          "store_name" => isset($inputs['store_name']) ? $inputs['store_name'] : ""
+          "store_id" => isset($inputs['store_id']) ? $inputs['store_id'] : ""
         ];
       } else {
         $inputs = [
@@ -113,7 +110,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
           "tel" => "",
           "hire_date-start-date" => "",
           "hire_date-end-date" => "",
-          "store_name" => ""
+          "store_id" => ""
         ];
       }
       return $inputs;

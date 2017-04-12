@@ -44,7 +44,8 @@ class UserController extends Controller
     {
 
         $users = User::orderBy('created_at', 'desc')->get();
-        return view('admin.user.index', compact('users'));
+        $stores = $this->stores->all();
+        return view('admin.user.index', compact('users', 'stores'));
     }
 
     /**
