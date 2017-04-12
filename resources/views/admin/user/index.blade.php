@@ -99,13 +99,7 @@
             店舗名
           </div>
           <div class="col-xs-3">
-            <select name="store_name">
-              @foreach($stores as $store)
-                <option>
-                  {{ $store->name }}
-                </option>
-              @endforeach
-            </select>
+            {!! Form::select('store_id', [null => 'Please Select'] + array_pluck($stores, 'name', 'id')) !!}
           </div>
         </div>
 
