@@ -6,6 +6,7 @@
     <h2 class="page-header">勤務表一覧</h2>
   </div>
 
+  <!-- 検索メニュー -->
   <div>
     <div>
       {!! Form::open(['route' => 'schedule.search', 'method' => 'GET']) !!}
