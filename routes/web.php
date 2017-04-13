@@ -22,7 +22,6 @@ Route::group(['prefix' => '/'], function() {
   Route::get('/report/search', ['as' => 'report.search', 'uses' => 'DailyReportController@search']);
   Route::resource('report', 'DailyReportController');
   Route::resource('/schedule', 'WorkScheduleController');
-  Route::post('/upload', 'WorkScheduleController@upload');
   Route::post('/register', 'Auth\RegisterController@register');
 });
 
