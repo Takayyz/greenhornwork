@@ -28,19 +28,19 @@ class WorkScheduleController extends Controller
   public function index(Request $request)
   {
     $userId = Auth::id();
+    $input = $request->all();
 
-    if(!isset($request)) {
+    if(empty($input)) {
       //一覧表示
       $schedules = $this->schedule->getOwnSchedules($userId);
     } else {
       //検索結果表示
-      $input = $request->all();
       $schedules = $this->schedule->getSchedulesBySearch($input, $userId);
     }
 
     //ルートディレクトリ取得
-    $path = env('APP_URL');
-    
+    $path = $request->root();
+
     return view('work_schedule.index', compact('schedules', 'path'));
   }
 
