@@ -58,8 +58,8 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
       //ファイルの拡張子取得
       $fileType = $uploadFile->getClientOriginalExtension();
       //ファイルパスを取得
-      $filePath = 'schedules/' .$userId . '/' ;
-      $fileFullPath = public_path() . '/' . $filePath;
+      $filePath = '/schedules/' .$userId . '/' ;
+      $fileFullPath = public_path() . $filePath;
       //ファイル格納先のフォルダが存在しなければ作成
       if (!file_exists($fileFullPath))  mkdir($fileFullPath);
       //ファイル名が重複しないように変更
@@ -85,7 +85,7 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
        if ($fileType === 'pdf')
        {
          //PDFの処理
-         $uploadFile->move(public_path() . '/' . $filePath, $fileName);
+         $uploadFile->move(public_path() . $filePath, $fileName);
        } else {
          //画像の処理
          $img = Image::make($uploadFile);
@@ -139,5 +139,21 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
           $errMsg = $year .'年' . $month .'月'. 'の勤務表は既に保存されています。';
         }
         return $errMsg;
+     }
+
+     public function getSchedulesBySearch($input, $userId = NULL)
+     {
+       if($userId !== NULL) {
+         $schedules = $this->model->DateRange($input)
+                                  ->where('user_id', $userId)
+                                  ->UserInfo($input)
+                                  ->get();
+       } else {
+         $schedules = $this->model->DateRange($input)
+                                  ->UserInfo($input)
+                                  ->get();
+       }
+
+       return $schedules;
      }
 }
