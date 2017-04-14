@@ -40,10 +40,17 @@ class UserController extends Controller
       $this->userinfos = $userinfos;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $inputs = $request->all();
 
-        $users = User::orderBy('created_at', 'desc')->get();
+        // 管理者からのインプットを正常化
+        $inputs = $this->users->normalizeInputs($inputs);
+
+        // デフォルト：　ユーザー情報全権取得
+        //　管理者が指定した条件によりユーザー情報を取得
+        $users = $this->users->getUsersFromSearchingResult($inputs);
+
         $stores = $this->stores->all();
         return view('admin.user.index', compact('users', 'stores'));
     }
@@ -163,22 +170,5 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('admin.user.index');
-    }
-
-    /**
-     *　管理者が指定した検索条件によりユーザー情報を取得
-     */
-    public function search(Request $request) {
-      $inputs = $request->all();
-
-      // 管理者からのインプットを正常化
-      $inputs = $this->users->normalizeInputs($inputs);
-
-      //　管理者が指定した条件によりユーザー情報を取得
-      $users = $this->users->getUsersFromSearchingResult($inputs);
-
-      $stores = $this->stores->all();
-
-      return view('admin.user.index', compact('users', 'stores'));
     }
 }

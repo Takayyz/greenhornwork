@@ -7,7 +7,7 @@
     <a href="{{ route('admin.') }}" class="btn btn-primary">戻る</a>
   </div>
 
-  {!! Form::open(['route' => 'admin.user.search', 'method' => 'GET', 'class' => 'user-search clearfix']) !!}
+  {!! Form::open(['route' => 'admin.user.index', 'method' => 'GET', 'class' => 'user-search clearfix']) !!}
     <table class="search-table">
       <thead class="search-thead">
         <tr>
