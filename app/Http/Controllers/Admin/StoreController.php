@@ -28,15 +28,15 @@ class StoreController extends Controller
     {
       $input = $request->all();
 
-       if(empty($input)) {
-      //一覧表示
-      $stores = $this->stores->orderBy('kana_name', 'asc')->all();
-    } else {
-      //検索結果表示
-      $stores = $this->stores->getSearchedStoreName($input);
-    }
+      if(empty($input)) {
+        //一覧表示
+        $stores = $this->stores->orderBy('kana_name', 'asc')->all();
+      } else {
+        //検索結果表示
+        $stores = $this->stores->getSearchedStoreName($input);
+      }
 
-     return view('admin.store.index', compact('stores'));
+      return view('admin.store.index', compact('stores'));
     }
       
     public function create() 

@@ -21,7 +21,7 @@ class StoresRepositoryEloquent extends BaseRepository implements StoresRepositor
      */
     public function model()
     {
-        return Stores::class;
+      return Stores::class;
     }
 
     /**
@@ -29,12 +29,12 @@ class StoresRepositoryEloquent extends BaseRepository implements StoresRepositor
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+      $this->pushCriteria(app(RequestCriteria::class));
     }
 
     public function getSearchedStoreName($input)
     {
-        $result = $this->model->where('name', 'LIKE',"%" . $input['storeName'] . "%")->get();
-        return $result;
+      $result = $this->model->where('name', 'LIKE',"%" . $input['storeName'] . "%")->get();
+      return $result;
     }
 }
