@@ -6,7 +6,7 @@
 
 <div class="search-box">
   <div class="inner-box">
-    {!! Form::open(['route' => 'report.search', 'method' => 'GET']) !!}
+    {!! Form::open(['route' => 'report.index', 'method' => 'GET']) !!}
       {!! Form::input('date', 'start-date', null, ['class' => 'search-box__input-date']) !!}
       から　
       {!! Form::input('date', 'end-date', null, ['class' => 'search-box__input-date']) !!}
