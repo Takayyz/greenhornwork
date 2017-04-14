@@ -17,8 +17,10 @@ class WorkScheduleController extends Controller
 
   public function __construct(WorkSchedulesRepository $schedule)
   {
+   
     $this->middleware('auth');
     $this->schedule = $schedule;
+  
   }
   /**
    * Display a listing of the resource.
@@ -27,6 +29,7 @@ class WorkScheduleController extends Controller
    */
   public function index(Request $request)
   {
+  
     $userId = Auth::id();
     $input = $request->all();
 
@@ -35,13 +38,11 @@ class WorkScheduleController extends Controller
       $schedules = $this->schedule->getOwnSchedules($userId);
     } else {
       //検索結果表示
-      $schedules = $this->schedule->getSchedulesBySearch($input, $userId);
+      $schedules = $this->schedule->getSchedulesSearch($input, $userId);
     }
 
-    //ルートディレクトリ取得
-    $path = $request->root();
-
-    return view('work_schedule.index', compact('schedules', 'path'));
+    return view('work_schedule.index', compact('schedules'));
+  
   }
 
   /**
@@ -51,7 +52,9 @@ class WorkScheduleController extends Controller
    */
   public function create()
   {
-      return view('work_schedule.create');
+
+    return view('work_schedule.create');
+  
   }
 
   /**
@@ -62,6 +65,7 @@ class WorkScheduleController extends Controller
    */
   public function store(WorkScheduleRequest $request)
   {
+  
     $userId = Auth::id();
     $input = $request->all();
 
@@ -81,16 +85,20 @@ class WorkScheduleController extends Controller
                                     $input['year'], $input['month']);
 
     return redirect()->route('schedule.index');
+  
   }
 
   public function edit($id)
   {
+  
     $schedule = $this->schedule->find($id);
     return view('work_schedule.edit')->with(compact('schedule'));
+  
   }
 
   public function update(WorkScheduleRequest $request, $id)
   {
+  
     $userId = Auth::id();
     $input = $request->all();
 
@@ -103,17 +111,18 @@ class WorkScheduleController extends Controller
       return redirect()->route('schedule.edit', $id);
     }
 
-      //ファイルがアップロードされたか確認
-      if (array_key_exists('schedule', $input))
-      {
-        //ファイル保存
-        $fileInfo = $this->schedule->saveUploadFile($input['schedule'], $userId);
-        //データベース更新
-        $this->schedule->updateSchedule($fileInfo['fileName'], $fileInfo['fileType'], $input['year'], $input['month'], $id);
-      } else {
-        $this->schedule->updateOnlyDate($input['year'], $input['month'], $id);
-      }
-      return redirect()->route('schedule.index');
+    //ファイルがアップロードされたか確認
+    if (array_key_exists('schedule', $input))
+    {
+      //ファイル保存
+      $fileInfo = $this->schedule->saveUploadFile($input['schedule'], $userId);
+      //データベース更新
+      $this->schedule->updateSchedule($fileInfo, $id);
+    } else {
+      $this->schedule->updateOnlyDate($input['year'], $input['month'], $id);
+    }
+    return redirect()->route('schedule.index');
+  
   }
 
   /**
@@ -124,10 +133,10 @@ class WorkScheduleController extends Controller
    */
   public function destroy($id)
   {
-      $data = $this->schedule->find($id);
-      $data->delete();
+    $data = $this->schedule->find($id);
+    $data->delete();
 
-      return redirect()->route('schedule.index');
+    return redirect()->route('schedule.index');
   }
 
 }

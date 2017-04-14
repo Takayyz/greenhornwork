@@ -7,12 +7,9 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-// class User extends Model implements Transformable
 class User extends Authenticatable implements Transformable
 {
-  use TransformableTrait,
-      SoftDeletes;
-  // use Authenticatable;
+  use TransformableTrait, SoftDeletes;
 
   protected $fillable = [
     'name',
@@ -27,7 +24,6 @@ class User extends Authenticatable implements Transformable
   public function info()
   {
     return $this->belongsTo('App\Entities\UserInfos', 'user_info_id');
-    // return $this->belongsTo('App\Entities\UserInfos', 'user_info_id', 'id');
   }
 
   public function dailyReport()

@@ -10,13 +10,9 @@ use App\Http\Requests\UserRequest;
 use App\Repositories\UserRepository;
 use App\Repositories\UserInfosRepository;
 use App\Entities\User;
-
 use App\Mail\AccountRegister;
 use App\Repositories\StoresRepository;
 use Mail;
-
-
-//use App\Requests\usersはusers.phpの中のバリデーションへアクセスしている。
 
 class UserController extends Controller
 {
@@ -47,6 +43,7 @@ class UserController extends Controller
         // 管理者からのインプットを正常化
         $inputs = $this->users->normalizeInputs($inputs);
 
+
         // デフォルト：　ユーザー情報全権取得
         //　管理者が指定した条件によりユーザー情報を取得
         $users = $this->users->getUsersFromSearchingResult($inputs);
@@ -64,15 +61,7 @@ class UserController extends Controller
     {
 
         $stores = $this->stores->orderBy('kana_name', 'asc')->all();
-        return view('admin/user/create', compact('stores'));
-
-
-        // \Mail::to($user)->send(new Email);
-
-    //     Mail::send('emails.welcome', ['key' => 'value'], function($message)
-    // {
-    //     $message->to('foo@example.com', 'John Smith')->subject('Welcome!');
-
+        return view('admin.user.create', compact('stores'));
 
     }
 
@@ -87,9 +76,6 @@ class UserController extends Controller
         //usersを第一引数に入れる事によって、バリデーションを実行する事が出来るようになる。
         $input = $request->all();
         $this->userinfos->saveUserInfo($input);
-        // $user = Users::create(
-        //     request(['name', 'email', 'password'])
-        // );
 
         Mail::to($input['email'])->send(new AccountRegister($input));
 
@@ -104,11 +90,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
-        // $user = $this->user->find($id);
+
+        $user =  $this->users->find($id);
         return view('admin.user.show', compact('user'));
-        // $user = Users::find($id);
-        // return view ('user.show')->withUser($user);
+    
     }
 
     /**
@@ -119,7 +104,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::find($id);
+        $user =  $this->users->find($id);
         $stores = $this->stores->orderBy('kana_name', 'asc')->all();
         return view('admin.user.edit', compact('user', 'stores'));
     }
@@ -133,26 +118,17 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-        $user = User::find($id);
+
+        $user =  $this->users->find($id);
         $input =  $request->all();
         $this->user->updateUserinfo($input, $user);
-        // $user = $this->user->find($id);
-        // $this->user->update([
-        //         'first_name' => $input['first_name'],
-        //         'last_name' => $input['last_name'],
-        //         'sex' => $input['sex'],
-        //         'birthday' => $input['birthday'],
-        //         'email'=>$input["email"],
-        //         'tel'=>$input['tel'],
-        //         'hire_date'=>$input['hire_date'],
-        //         'store_id'=>$input['store_id']
-        //  ],$user['user_info_id']);
 
         User::where('id', $id)->update([
                 'name'=>$input['name']
          ]);
 
         return redirect()->route('admin.user.index');
+        
     }
 
     /**
@@ -163,8 +139,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        $userinfo = $this->user->find($user['user_info_id']);
+        $user =  $this->users->find($id);
+        $userinfo = $this->userinfos->find($user['user_info_id']);
 
         $userinfo->delete();
         $user->delete();

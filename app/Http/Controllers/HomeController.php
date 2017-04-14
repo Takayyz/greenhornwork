@@ -17,8 +17,10 @@ class HomeController extends Controller
 
     public function __construct(DailyReportsRepository $reports)
     {
+    
       $this->middleware('auth');
       $this->reports = $reports; 
+    
     }
 
     /**
@@ -28,6 +30,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+    
         return view('home');
+    
     }
 }

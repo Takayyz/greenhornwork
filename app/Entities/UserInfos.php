@@ -9,8 +9,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 
 class UserInfos extends Model implements Transformable
 {
-    use TransformableTrait;
-    use SoftDeletes;
+    use TransformableTrait, SoftDeletes;
 
     protected $fillable = [
         'first_name',

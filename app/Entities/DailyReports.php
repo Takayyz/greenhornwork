@@ -9,8 +9,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 
 class DailyReports extends Model implements Transformable
 {
-    use TransformableTrait;
-    use SoftDeletes;
+    use TransformableTrait, SoftDeletes;
 
     protected $fillable = [
         'user_id',
