@@ -34,9 +34,7 @@ class WorkScheduleController extends Controller
       $schedules = $this->schedule->getSchedulesSearch($input);
     }
 
-    // $path = $request->root();
-    // return view('admin.work_schedule.index', compact('schedules', 'path'));
     return view('admin.work_schedule.index', compact('schedules'));
-  }
 
+  }
 }

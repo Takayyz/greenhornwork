@@ -24,8 +24,6 @@ class DailyReportsRepositoryEloquent extends BaseRepository implements DailyRepo
         return DailyReports::class;
     }
 
-
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -49,55 +47,65 @@ class DailyReportsRepositoryEloquent extends BaseRepository implements DailyRepo
       return $reports;
     }
 
-    public function getReportByDateRange($start_date, $end_date, $userId = null)
+    /**
+     *　あるユーザーの複数ある日報を日付の範囲で指定し
+     *　該当の日報を全て出力。
+     *
+     *  @param Array
+     */
+    public function getReportsByDateRange($inputs)
     {
-      // Administrator用の処理
-      if(empty($userId)) {
-        $searchedReport = $this->model
-                                  ->dateRange($start_date, $end_date)
-                                  ->get();
-      } else {
-        //　値が両方空ならそのユーザーに関するレポートデータ全てを取得
-        if(empty($start_date) && empty($end_date)) {
-          $searchedReport = $this->model->find($userId)->get();
-        } else {
-          $searchedReport = $this->model
-                                    ->find($userId)
-                                    ->dateRange($start_date, $end_date)
-                                    ->get();
-        }
-      }
-      return $searchedReport;
+      //　ユーザーを検索
+      $dataOfTheUser = $this->model->whereUserId($inputs['id']);
+
+      //　そのユーザーの日報の中から日付の範囲で検索
+      $dataOfTheUser = $dataOfTheUser->dateRange("reporting_time", $inputs['start-date'], $inputs['end-date']);
+
+      //　表示の順番を報告日付順に指定する。
+      return $dataOfTheUser->orderBy('reporting_time')->get();
     }
 
-    public function getSearchingResultReport($inputs)
+    /**
+     *　ユーザーから送られた情報を正常化。
+     *  @param Array
+     */
+    public function normalizeInputs($inputs)
     {
-      $result = null;
-      if(!is_array($inputs)) {
-        $result = $this->model->get();
-      }
-
-      if($inputs['start-date'] && $inputs['end-date']) {
-        $result = $this->model->dateRange($inputs['start-date'], $inputs['end-date'])
-          ->whereHas('user', function($query) use ($inputs) {
-            return $query->whereHas('info', function ($query) use ($inputs) {
-              $fields = ['first_name', 'last_name'];
-              foreach($fields as $field) {
-                $query->whereName($field, $inputs[$field]);
-              }
-            });
-          })->get();
+      if(is_array($inputs)) {
+        $inputs = [
+          'id' => isset($inputs['id']) ? $inputs['id'] : '',
+          'start-date' => isset($inputs['start-date']) ? $inputs['start-date'] : '',
+          'end-date' => isset($inputs['end-date']) ? $inputs['end-date'] : '',
+          'first_name' => isset($inputs['first_name']) ? $inputs['first_name'] : '',
+          'last_name' => isset($inputs['last_name']) ? $inputs['last_name'] : ''
+        ];
       } else {
-        $result = $this->model
-          ->whereHas('user', function($query) use ($inputs) {
-            return $query->whereHas('info', function ($query) use ($inputs) {
-              $fields = ['first_name', 'last_name'];
-              foreach($fields as $field) {
-                $query->whereName($field, $inputs[$field]);
-              }
-            });
-          })->get();
+        $inputs = [
+          'id' => '',
+          'start-date' => '',
+          'end-date' => '',
+          'first_name' => '',
+          'last_name' => ''
+        ];
       }
-      return $result;
+      return $inputs;
+    }
+
+    /**
+     *　あるユーザーの日報を日付の範囲で指定し、取得。
+     */
+    public function getReportsBySearching($inputs)
+    {
+      return $this->model->dateRange("reporting_time", $inputs['start-date'], $inputs['end-date'])
+        ->whereHas('user', function($query) use ($inputs) {
+          return $query->whereHas('info', function ($query) use ($inputs) {
+            $fields = ['first_name', 'last_name'];
+            foreach($fields as $field) {
+              $query->whereName($field, $inputs[$field]);
+            }
+          });
+        })
+        //　日報を作成した順に表示
+        ->orderBy('reporting_time')->get();
     }
 }

@@ -15,6 +15,7 @@ class DailyReportController extends Controller
 
   public function __construct(DailyReportsRepository $report)
   {
+  
     $this->middleware('auth');
     $this->report = $report;
 
@@ -24,11 +25,20 @@ class DailyReportController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Request $request)
   {
-    $userId = Auth::id();
-    $reports = $this->report->getOwnReports($userId);
+  
+    $inputs = $request->all();
+    $inputs['id'] = Auth::id();
+
+    //ユーザーからのインプットを正常化
+    $inputs = $this->report->normalizeInputs($inputs);
+
+    //　あるユーザーのレポート情報を日付の範囲を指定し、contentsを取得。
+    $reports = $this->report->getReportsByDateRange($inputs);
+
     return view('daily_report.index', compact('reports'));
+  
   }
 
   /**
@@ -51,6 +61,7 @@ class DailyReportController extends Controller
     ]);
 
     return redirect()->to('report');
+  
   }
 
   /**
@@ -61,8 +72,10 @@ class DailyReportController extends Controller
    */
   public function show($id)
   {
+  
     $report = $this->report->find($id);
     return view('daily_report.show', compact('report'));
+  
   }
 
   /**
@@ -73,8 +86,10 @@ class DailyReportController extends Controller
    */
   public function edit($id)
   {
+  
     $report = $this->report->find($id);
     return view('daily_report.edit', compact('report'));
+  
   }
 
   /**
@@ -86,6 +101,7 @@ class DailyReportController extends Controller
    */
   public function update(DailyReportRequest $request, $id)
   {
+
     $userId = Auth::id();
     $input = $request->all();
     $this->report->update([
@@ -95,6 +111,7 @@ class DailyReportController extends Controller
                 'contents' =>$input['contents'],
               ],$id);
     return redirect()->to('report');
+  
   }
 
   /**
@@ -105,29 +122,18 @@ class DailyReportController extends Controller
    */
   public function destroy($id)
   {
+  
     $data = $this->report->find($id);
     $data->delete();
 
     return redirect()->to('report');
+  
   }
 
   public function create()
   {
+  
     return view('daily_report.create');
-  }
-
-  public function search(Request $request)
-  {
-    $input = $request->all();
-    $userId = Auth::id();
-
-    //　日付のデータを取得
-    $start_date = $input['start-date'];
-    $end_date = $input['end-date'];
-
-    //　あるユーザーのレポート情報を日付の範囲を指定し、contentsを取得。
-    $reports = $this->report->getReportByDateRange($start_date, $end_date, $userId);
-
-    return view('daily_report.index', compact('reports'));
+  
   }
 }
