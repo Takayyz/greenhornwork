@@ -24,13 +24,17 @@ class StoresRepositoryEloquent extends BaseRepository implements StoresRepositor
         return Stores::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function getSearchedStoreName($input)
+    {
+        $result = $this->model->where('name', 'LIKE',"%" . $input['storeName'] . "%")->get();
+        return $result;
     }
 }

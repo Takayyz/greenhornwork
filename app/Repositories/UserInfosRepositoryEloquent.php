@@ -78,4 +78,9 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
     {
       return UserInfos::where('id', $id)->first();
     }
+
+    public function getUserList($id)
+    {
+      return UserInfos::where('store_id', $id)->get();
+    }
 }

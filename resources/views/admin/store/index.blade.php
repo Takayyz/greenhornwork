@@ -2,8 +2,12 @@
 
 @section('content')
 <div class="container">
-<h2 class="page-header">店舗一覧</h2>
-<p class="pull-right"><a class="btn btn-success" href="{{ url('admin/store/create') }}">作成</a></p>
+  <h2 class="page-header">店舗一覧</h2>
+  {!! Form::open(['route' => 'admin.store.index', 'method' => 'GET']) !!}
+  {!! Form::input('text', 'storeName', '', ['class' => 'form searchform']) !!}
+  {!! Form::submit('店舗検索',['class'=>'btn btn-primary']) !!}
+  {!! Form::close() !!}
+  <p class="pull-right"><a class="btn btn-success" href="{{ url('admin/store/create') }}">作成</a></p>
 <table class="table table-hover todo-table">
   <thead>
   <tr>
