@@ -35,7 +35,7 @@ class StoreController extends Controller
       //検索結果表示
       $stores = $this->stores->getSearchedStoreName($input);
     }
-      return view('admin.store.index', compact('stores'));
+    return view('admin.store.index', compact('stores'));
   }
       
   public function create() 
@@ -50,6 +50,8 @@ class StoreController extends Controller
       'name' => $input['name'],
       'kana_name' => $input['kana_name'],
     ]);
+
+    return redirect()->to('admin/store');
   }
 
   public function show($id) 
