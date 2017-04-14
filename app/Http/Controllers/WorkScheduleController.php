@@ -35,13 +35,10 @@ class WorkScheduleController extends Controller
       $schedules = $this->schedule->getOwnSchedules($userId);
     } else {
       //検索結果表示
-      $schedules = $this->schedule->getSchedulesBySearch($input, $userId);
+      $schedules = $this->schedule->getSchedulesSearch($input, $userId);
     }
 
-    //ルートディレクトリ取得
-    $path = $request->root();
-
-    return view('work_schedule.index', compact('schedules', 'path'));
+    return view('work_schedule.index', compact('schedules'));
   }
 
   /**
@@ -109,7 +106,7 @@ class WorkScheduleController extends Controller
         //ファイル保存
         $fileInfo = $this->schedule->saveUploadFile($input['schedule'], $userId);
         //データベース更新
-        $this->schedule->updateSchedule($fileInfo['fileName'], $fileInfo['fileType'], $input['year'], $input['month'], $id);
+        $this->schedule->updateSchedule($fileInfo, $id);
       } else {
         $this->schedule->updateOnlyDate($input['year'], $input['month'], $id);
       }

@@ -7,6 +7,6 @@
 Homestead.json
 Homestead.yaml
 .env
-/public/schedules
+/public/schedules/*
 /storage/*
 npm-debug.log
