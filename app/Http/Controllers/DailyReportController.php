@@ -24,10 +24,17 @@ class DailyReportController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Request $request)
   {
-    $userId = Auth::id();
-    $reports = $this->report->getOwnReports($userId);
+    $inputs = $request->all();
+    $inputs['id'] = Auth::id();
+
+    //ユーザーからのインプットを正常化
+    $inputs = $this->report->normalizeInputs($inputs);
+
+    //　あるユーザーのレポート情報を日付の範囲を指定し、contentsを取得。
+    $reports = $this->report->getReportsByDateRange($inputs);
+
     return view('daily_report.index', compact('reports'));
   }
 
@@ -114,20 +121,5 @@ class DailyReportController extends Controller
   public function create()
   {
     return view('daily_report.create');
-  }
-
-  public function search(Request $request)
-  {
-    $input = $request->all();
-    $userId = Auth::id();
-
-    //　日付のデータを取得
-    $start_date = $input['start-date'];
-    $end_date = $input['end-date'];
-
-    //　あるユーザーのレポート情報を日付の範囲を指定し、contentsを取得。
-    $reports = $this->report->getReportByDateRange($start_date, $end_date, $userId);
-
-    return view('daily_report.index', compact('reports'));
   }
 }

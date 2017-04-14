@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Repositories\UserRepository;
 use App\Repositories\UserInfosRepository;
 use App\Entities\User;
 
@@ -19,9 +20,9 @@ use Mail;
 
 class UserController extends Controller
 {
-
+    protected $users;
     protected $stores;
-    protected $user; 
+    protected $userinfos;
 
     /**
      * Display a listing of the resource.
@@ -29,21 +30,29 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __construct(
-     StoresRepository $stores,
-     UserInfosRepository $user)
+      UserRepository $users,
+      StoresRepository $stores,
+      UserInfosRepository $userinfos)
     {
       $this->middleware('auth:admin');
+      $this->users = $users;
       $this->stores = $stores;
-      $this->user = $user;
+      $this->userinfos = $userinfos;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $inputs = $request->all();
 
-        $users = User::orderBy('created_at', 'desc')->get();
-        // $users = $this->user->all();
-        // dd($users->);
-        return view('admin.user.index', compact('users'));
+        // 管理者からのインプットを正常化
+        $inputs = $this->users->normalizeInputs($inputs);
+
+        // デフォルト：　ユーザー情報全権取得
+        //　管理者が指定した条件によりユーザー情報を取得
+        $users = $this->users->getUsersFromSearchingResult($inputs);
+
+        $stores = $this->stores->all();
+        return view('admin.user.index', compact('users', 'stores'));
     }
 
     /**
@@ -76,8 +85,8 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         //usersを第一引数に入れる事によって、バリデーションを実行する事が出来るようになる。
-            $input = $request->all();
-            $this->user->saveUserInfo($input);
+        $input = $request->all();
+        $this->userinfos->saveUserInfo($input);
         // $user = Users::create(
         //     request(['name', 'email', 'password'])
         // );
@@ -162,5 +171,4 @@ class UserController extends Controller
 
         return redirect()->route('admin.user.index');
     }
-
 }

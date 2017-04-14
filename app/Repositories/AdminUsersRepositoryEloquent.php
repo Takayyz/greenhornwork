@@ -24,7 +24,7 @@ class AdminUsersRepositoryEloquent extends BaseRepository implements AdminUsersR
         return AdminUsers::class;
     }
 
-    
+
 
     /**
      * Boot up the repository, pushing criteria
@@ -32,5 +32,20 @@ class AdminUsersRepositoryEloquent extends BaseRepository implements AdminUsersR
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function getUsersBasedOnTheConditions($inputs) {
+      // Table: stores, user_infos, users
+      // user_name, sex, last_name, first_name, birthday-start-date, birthday-end-date, email, tel, start-date, end-date, store_name
+
+      // user_name
+      // sex
+      // last_name, first_name
+      // birthday-start-date, birthday-end-date
+      // email
+      // tel
+      // start-date, end-date
+      // store_name
+      return $this->model->whereHas('stores');
     }
 }

@@ -31,12 +31,19 @@ class DailyReportController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index()
+  public function index(Request $request)
   {
-      $reports = $this->report->getAllReports();
+      //　ユーザーの入力した値を連想配列で取得
+      //　inputs: (first_name, last_name, start-date, end-date)
+      $inputs = $request->all();
+
+      //　ユーザーの入力した値を正常化
+      $inputs = $this->report->normalizeInputs($inputs);
+
+      //　あるユーザーの日報を日付の範囲で指定し、取得。
+      $reports = $this->report->getReportsBySearching($inputs);
       return view('admin.daily_report.index', compact('reports'));
   }
-
 
   /**
    * Display the specified resource.
@@ -48,14 +55,5 @@ class DailyReportController extends Controller
   {
       $report = $this->report->find($id);
       return view('admin.daily_report.show', compact('report'));
-  }
-
-  public function search(Request $request)
-  {
-    $inputs = $request->all();
-
-    //　あるユーザーのレポート情報を日付の範囲を指定し、contentsを取得。
-    $reports = $this->report->getSearchingResultReport($inputs);
-    return view('admin.daily_report.index', compact('reports'));
   }
 }
