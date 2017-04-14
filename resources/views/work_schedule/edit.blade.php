@@ -30,6 +30,9 @@
         {!! Form::file('schedule', null) !!}
         <span class="help-block">{{ $errors->first('schedule') }}</span>
       </div>
+      <div>
+        <img src="{{ url($schedule->file_path . $schedule->file_name) }}" alt="" width="350" height="350">
+      </div>
       <button type="submit" class="btn btn-success pull-right">更新</button>
     {!! Form::close() !!}
   </div>

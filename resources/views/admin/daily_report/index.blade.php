@@ -11,8 +11,23 @@
 
 <div class="search-box">
   <div class="inner-box">
-    {!! Form::open(['route' => 'admin.report.search', 'method' => 'GET']) !!}
+    {!! Form::open(['route' => 'admin.report.index', 'method' => 'GET']) !!}
       <h3>日報検索</h3>
+      <div class="col-xs-12">
+        <div class="col-xs-1">
+          苗字
+        </div>
+        <div class="col-xs-3">
+          {!! Form::input('text', 'last_name', null, ['class' => 'form-control', 'placeholder' => '苗字']) !!}
+        </div>
+        <div class="col-xs-1">
+          名前
+        </div>
+        <div class="col-xs-3">
+          {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => '名前']) !!}
+        </div>
+      </div>
+
       <div class="col-xs-12">
         <div class="col-xs-1">
           始め
@@ -28,23 +43,9 @@
         </div>
       </div>
 
-      <div class="col-xs-12">
-        <div class="col-xs-1">
-          苗字
-        </div>
-        <div class="col-xs-3">
-          {!! Form::input('text', 'last_name', null, ['class' => 'form-control', 'placeholder' => '苗字']) !!}
-        </div>
-        <div class="col-xs-1">
-          名前
-        </div>
-        <div class="col-xs-3">
-          {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => '名前']) !!}
-        </div>
-      </div>
       <div class="col-xs-9"></div>
       <div class="col-xs-3">
-        {!! Form::input('submit', '', '日報検索', ['class' => 'btn btn-primary']) !!}
+        {!! Form::input('submit', '', '検索', ['class' => 'btn btn-primary']) !!}
       </div>
     {!! Form::close() !!}
   </div>

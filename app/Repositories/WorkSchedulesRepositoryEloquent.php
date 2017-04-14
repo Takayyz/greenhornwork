@@ -58,10 +58,10 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
       //ファイルの拡張子取得
       $fileType = $uploadFile->getClientOriginalExtension();
       //ファイルパスを取得
-      $filePath = 'schedules/' .$userId . '/' ;
-      $fileFullPath = public_path() . '/' . $filePath;
+      $filePath = sprintf($this->model->updateDir.'%s/',$userId);
+
       //ファイル格納先のフォルダが存在しなければ作成
-      if (!file_exists($fileFullPath))  mkdir($fileFullPath);
+      if (!file_exists($filePath))  mkdir($filePath, 0777, true);
       //ファイル名が重複しないように変更
       $fileName = $this->changeFileName($fileType);
       //ファイル保存
@@ -80,20 +80,20 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
        return $fileName;
      }
 
-     public function saveFile($fileType, $uploadFile, $fileName, $filePath)
+    public function saveFile($fileType, $uploadFile, $fileName, $filePath)
      {
        if ($fileType === 'pdf')
        {
          //PDFの処理
-         $uploadFile->move(public_path() . '/' . $filePath, $fileName);
+         $uploadFile->move(public_path() . $filePath, $fileName);
        } else {
          //画像の処理
          $img = Image::make($uploadFile);
          $img->save($filePath. $fileName);
        }
-     }
+    }
 
-     public function createSchedule($userId, $filePath, $fileName, $fileType, $year, $month)
+    public function createSchedule($userId, $filePath, $fileName, $fileType, $year, $month)
      {
        $this->model->create([
          'user_id' => $userId,
@@ -103,35 +103,34 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
          'year' => $year,
          'month' => $month,
        ]);
-     }
+    }
 
-     public function updateSchedule($fileName, $fileType, $year, $month, $id)
+    public function updateSchedule(array $dataArray, $id)
+    {
+       $this->model->where('id', $id)->update([
+         'file_name' => $dataArray['file_name'],
+         'file_type' => $dataArray['file_type'],
+         'year' => $dataArray['year'],
+         'month' => $dataArray['month'],
+       ]);
+    }
+
+    public function updateOnlyDate($year, $month, $id)
      {
        $this->model->where('id', $id)->update([
-         'file_name' => $fileName,
-         'file_type' => $fileType,
          'year' => $year,
          'month' => $month,
        ]);
-     }
-
-     public function updateOnlyDate($year, $month, $id)
-     {
-       $this->model->where('id', $id)->update([
-         'year' => $year,
-         'month' => $month,
-       ]);
-     }
+    }
 
      //アップロードされた勤務表と同年月の勤務表が既にDBに存在しないか確認
-     public function checkDate($year, $month, $userId, $id = NULL)
+    public function checkDate($year, $month, $userId, $id = NULL)
      {
-        $sameDate = DB::table('work_schedules')->where('year', $year)
-                                               ->where('month', $month)
-                                               ->where('user_id', $userId)
-                                               ->where('id', '!=', $id )
-                                               ->whereNull('deleted_at')
-                                               ->count();
+        $sameDate = $this->model->where('year', $year)
+                                 ->where('month', $month)
+                                 ->where('user_id', $userId)
+                                 ->where('id', '!=', $id )
+                                 ->count();
         if($sameDate === 0)
         {
           $errMsg = NULL;
@@ -139,5 +138,25 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
           $errMsg = $year .'年' . $month .'月'. 'の勤務表は既に保存されています。';
         }
         return $errMsg;
-     }
+    }
+
+    public function getSchedulesSearch($input, $userId = NULL)
+     {
+        if($userId !== NULL) {
+          $schedules = $this->model->DateRange($input)
+                                  ->where('user_id', $userId)
+                                  ->orderBy('year', 'desc')
+                                  ->orderBy('month', 'desc')
+                                  ->UserInfo($input)
+                                  ->get();
+        } else {
+          $schedules = $this->model->DateRange($input)
+                                ->orderBy('year', 'desc')
+                                ->orderBy('month', 'desc')
+                                ->UserInfo($input)
+                                ->get();
+        }
+
+      return $schedules;
+    }
 }

@@ -7,12 +7,9 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-// class User extends Model implements Transformable
 class User extends Authenticatable implements Transformable
 {
-  use TransformableTrait,
-      SoftDeletes;
-  // use Authenticatable;
+  use TransformableTrait, SoftDeletes;
 
   protected $fillable = [
     'name',
@@ -26,11 +23,32 @@ class User extends Authenticatable implements Transformable
 
   public function info()
   {
-    return $this->hasOne('App\Entities\UserInfos', 'id' ,'user_info_id');
-    // return $this->belongsTo('App\Entities\UserInfos', 'user_info_id', 'id');
+    return $this->belongsTo('App\Entities\UserInfos', 'user_info_id');
   }
 
-  public function dailyReport(){
+  public function dailyReport()
+  {
     return $this->hasMany('App\Entities\DailyReports', 'user_id');
+  }
+
+  /**
+   * ユーザー名で検索
+   * データが空であれば処理なし。
+   */
+  public function scopeWhereName($query, $field, $name)
+  {
+    //　fieldまたはnameに情報が入っていなければ、処理を終了。
+    if(!$field || !$name) {
+      return $query;
+    }
+
+    //　fieldの値がname以外は処理しない。
+    switch($field) {
+      case 'name':
+        return $query->where($field, 'like', '%' . $name . '%');
+        break;
+      default:
+        return $query;
+    }
   }
 }

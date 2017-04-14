@@ -19,10 +19,8 @@ Route::group(['prefix' => '/'], function() {
   });
   Route::get('/', 'UserController@index');
   Route::get('/home', 'UserController@index');
-  Route::get('/report/search', ['as' => 'report.search', 'uses' => 'DailyReportController@search']);
   Route::resource('report', 'DailyReportController');
   Route::resource('/schedule', 'WorkScheduleController');
-  Route::post('/upload', 'WorkScheduleController@upload');
   Route::post('/register', 'Auth\RegisterController@register');
 });
 
@@ -32,17 +30,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::post('logout', 'Auth\LoginController@logout');
 
   Route::get('/', 'HomeController@index');
-  Route::get('/report/search', ['as' => 'report.search', 'uses' => 'DailyReportController@search']);
   Route::resource('report', DailyReportController::class);
   Route::resource('store', StoreController::class);
 
   Route::resource('adminuser', AdminUserController::class);
   Route::get('adminuser/{adminuser}/mailedit', 'AdminUserController@mailedit')->name('adminuser.mailedit');
   Route::post('adminuser/sendmail', 'AdminUserController@sendmail')->name('adminuser.sendmail');
-  
   Route::resource('user', 'UserController');
 
   Route::resource('user', UserController::class);
   Route::resource('schedule', WorkScheduleController::class);
-
 });

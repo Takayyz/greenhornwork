@@ -25,8 +25,6 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
         return UserInfos::class;
     }
 
-
-
     /**
      * Boot up the repository, pushing criteria
      */

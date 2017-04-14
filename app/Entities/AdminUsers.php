@@ -11,8 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 // class AdminUsers extends Model implements Transformable
 class AdminUsers extends Authenticatable implements Transformable
 {
-    use TransformableTrait;
-    use SoftDeletes;
+    use TransformableTrait, SoftDeletes;
 
     protected $fillable = [
         'name',
