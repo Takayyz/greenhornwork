@@ -34,7 +34,7 @@ class StoresRepositoryEloquent extends BaseRepository implements StoresRepositor
 
     public function getSearchedStoreName($input)
     {
-      $result = $this->model->where('name', 'LIKE',"%" . $input['storeName'] . "%")->get();
+      $result = $this->model->where('name', 'LIKE',"%" . $input['storeName'] . "%")->orderBy('kana_name', 'asc')->get();
       return $result;
     }
 }
