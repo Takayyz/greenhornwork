@@ -26,8 +26,6 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
         return WorkSchedules::class;
     }
 
-
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -36,20 +34,15 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function getAllSchedules()
+    //一覧表示（検索の場合は検索結果を表示）
+    public function getSchedules($input = NULL, $userId = NULL)
     {
-      $schedules = $this->model->orderBy('year', 'desc')
+      $schedules = $this->model->WhereUserId($userId)
+                               ->DateRange($input)
+                               ->UserInfo($input)
+                               ->orderBy('year', 'desc')
                                ->orderBy('month', 'desc')
                                ->get();
-      return $schedules;
-    }
-
-    public function getOwnSchedules($userId)
-    {
-      $schedules = $this->model->where('user_id', $userId)
-                                  ->orderBy('year', 'desc')
-                                  ->orderBy('month', 'desc')
-                                  ->get();
       return $schedules;
     }
 
@@ -68,65 +61,65 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
       $this->saveFile($fileType, $uploadFile, $fileName, $filePath);
 
       return [
-        'filePath' => $filePath,
-        'fileName' => $fileName,
-        'fileType' => $fileType,
+        'file_path' => $filePath,
+        'file_name' => $fileName,
+        'file_type' => $fileType,
       ];
     }
 
     public function changeFileName($fileType)
-     {
-       $fileName = md5(uniqid(rand(), true)) . '.' .$fileType;
-       return $fileName;
-     }
+    {
+      $fileName = md5(uniqid(rand(), true)) . '.' .$fileType;
+      return $fileName;
+    }
 
     public function saveFile($fileType, $uploadFile, $fileName, $filePath)
-     {
-       if ($fileType === 'pdf')
-       {
-         //PDFの処理
-         $uploadFile->move(public_path() . $filePath, $fileName);
-       } else {
-         //画像の処理
-         $img = Image::make($uploadFile);
-         $img->save($filePath. $fileName);
-       }
-    }
-
-    public function createSchedule($userId, $filePath, $fileName, $fileType, $year, $month)
-     {
-       $this->model->create([
-         'user_id' => $userId,
-         'file_path' => $filePath,
-         'file_name' => $fileName,
-         'file_type' => $fileType,
-         'year' => $year,
-         'month' => $month,
-       ]);
-    }
-
-    public function updateSchedule(array $dataArray, $id)
     {
-       $this->model->where('id', $id)->update([
-         'file_name' => $dataArray['file_name'],
-         'file_type' => $dataArray['file_type'],
-         'year' => $dataArray['year'],
-         'month' => $dataArray['month'],
-       ]);
+      if ($fileType === 'pdf')
+      {
+        //PDFの処理
+        $uploadFile->move(public_path() . $filePath, $fileName);
+      } else {
+        //画像の処理
+        $img = Image::make($uploadFile);
+        $img->save($filePath. $fileName);
+      }
     }
 
-    public function updateOnlyDate($year, $month, $id)
-     {
-       $this->model->where('id', $id)->update([
-         'year' => $year,
-         'month' => $month,
-       ]);
+    public function createSchedule($userId, $fileInfos, $year, $month)
+    {
+      $this->model->create([
+      'user_id' => $userId,
+        'file_path' => $fileInfos['file_path'],
+        'file_name' => $fileInfos['file_name'],
+        'file_type' => $fileInfos['file_type'],
+        'year' => $year,
+        'month' => $month,
+      ]);
+    }
+
+    public function updateSchedule(array $fileInfos = NULL, $year, $month,$id)
+    {
+      if($fileInfos !== NULL) {
+        $this->model->where('id', $id)->update([
+          'file_name' => $fileInfos['file_name'],
+          'file_type' => $fileInfos['file_type'],
+          'year' => $year,
+          'month' => $month,
+        ]);
+      } else {
+        //ファイルがアップロードされなかった場合は日付のみ更新
+        $this->model->where('id', $id)->update([
+          'year' => $year,
+          'month' => $month,
+        ]);
+      }
     }
 
      //アップロードされた勤務表と同年月の勤務表が既にDBに存在しないか確認
     public function checkDate($year, $month, $userId, $id = NULL)
-     {
-        $sameDate = $this->model->where('year', $year)
+    {
+      $sameDate = $this->model->where('year', $year)
                                  ->where('month', $month)
                                  ->where('user_id', $userId)
                                  ->where('id', '!=', $id )
@@ -140,23 +133,4 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
         return $errMsg;
     }
 
-    public function getSchedulesSearch($input, $userId = NULL)
-     {
-        if($userId !== NULL) {
-          $schedules = $this->model->DateRange($input)
-                                  ->where('user_id', $userId)
-                                  ->orderBy('year', 'desc')
-                                  ->orderBy('month', 'desc')
-                                  ->UserInfo($input)
-                                  ->get();
-        } else {
-          $schedules = $this->model->DateRange($input)
-                                ->orderBy('year', 'desc')
-                                ->orderBy('month', 'desc')
-                                ->UserInfo($input)
-                                ->get();
-        }
-
-      return $schedules;
-    }
 }
