@@ -78,7 +78,7 @@ class WorkSchedulesRepositoryEloquent extends BaseRepository implements WorkSche
       if ($fileType === 'pdf')
       {
         //PDFの処理
-        $uploadFile->move(public_path() . $filePath, $fileName);
+        $uploadFile->move($filePath, $fileName);
       } else {
         //画像の処理
         $img = Image::make($uploadFile);
