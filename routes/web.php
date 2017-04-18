@@ -40,5 +40,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
 
   Route::resource('user', UserController::class);
   Route::resource('schedule', WorkScheduleController::class);
-
 });
