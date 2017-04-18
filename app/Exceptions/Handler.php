@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Symfony\Component\HttpKernel\Exception as Errors;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -44,6 +45,60 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        $error_message = $exception->getMessage();
+
+        //  エラーかどうかを判断。。
+        if(!$error_message) {
+          $statusCode = $exception->getStatusCode();
+          switch ($statusCode) {
+              case 400:
+                  $error_message = 'Bad Request';
+                  break;
+              case 401:
+                  $error_message = '認証に失敗しました';
+                  break;
+              case 403:
+                  $error_message = 'アクセス権がありません';
+                  break;
+              case 404:
+                  $error_message = 'ページが見つかりません';
+                  break;
+              case 408:
+                  $error_message = 'タイムアウトです';
+                  break;
+              case 414:
+                  $error_message = 'リクエストURIが長すぎます';
+                  break;
+              case 500:
+                  $error_message = 'Internal Server Error';
+                  break;
+              case 503:
+                  $error_message = 'Service Unavailable';
+                  break;
+              default:
+                  $error_message = '予期しないエラーが起きました。管理者に連絡して下さい';
+                  break;
+          }
+        } else {
+          //  問題が無ければ普通に処理。
+          return parent::render($request, $exception);
+        }
+
+        //　viewに渡すデータをここで入力
+        $data = [
+          'exception' => $exception,
+          'error_message' => $error_message
+        ];
+
+        //　errors直下にcommonファイルがあればそちらを使用。ここでエラーが全て処理される。
+        if (view()->exists('errors.common')) {
+          return response(view('errors.common', $data), $statusCode);
+        }
+
+        //  そのステータスコードに対応しているファイルが存在しているかどうか確認。例）404.blade.php
+        if (view()->exists('errors.' . $statusCode)) {
+          return response(view('errors.' . $statusCode, $data), $statusCode);
+        }
         return parent::render($request, $exception);
     }
 
@@ -51,7 +106,7 @@ class Handler extends ExceptionHandler
      * Convert an authentication exception into an unauthenticated response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @param  \Illuminate\Auth\Authenticati\onException  $exception
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)
@@ -101,4 +156,10 @@ class Handler extends ExceptionHandler
             method_exists($e, 'getHeaders') ? $e->getHeaders() : []
         );
     }
+
+    // protected function renderHttpException(HttpException $exception)
+    // {
+    //   $status = $e->getStatusCode();
+    //   return response()->view("errors.common", compact('exception', 'status'));
+    // }
 }
