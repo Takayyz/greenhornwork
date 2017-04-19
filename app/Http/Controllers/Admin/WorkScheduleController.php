@@ -26,15 +26,9 @@ class WorkScheduleController extends Controller
   public function index(Request $request)
   {
     $input = $request->all();
-    if(empty($input)) {
-      //一覧表示
-      $schedules = $this->schedule->getAllSchedules();
-    } else {
-      //検索結果表示
-      $schedules = $this->schedule->getSchedulesSearch($input);
-    }
+    $schedules = $this->schedule->getSchedules($input);
 
     return view('admin.work_schedule.index', compact('schedules'));
-
   }
+  
 }
