@@ -67,8 +67,7 @@ class Handler extends ExceptionHandler
           $statusCode = $exception->getStatusCode();
 
           //　渡って来たステータスコードが対応しているかどうかを確認
-          $error_message = isset($MESSAGES[$statusCode]) ?
-                      $MESSAGES[$statusCode] : $MESSAGE_UNEXPECTED;
+          $error_message = $MESSAGES[$statusCode] ?? $MESSAGE_UNEXPECTED;
         } else {
           //  問題が無ければ普通に処理。
           return parent::render($request, $exception);
