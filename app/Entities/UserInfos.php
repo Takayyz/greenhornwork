@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use App\notifications\UserResetPasswordNotification;
 
-class UserInfos extends Model implements Transformable
+// class UserInfos extends Model implements Transformable
+class UserInfos extends Authenticatable implements Transformable
 {
-    use TransformableTrait, SoftDeletes;
+    use TransformableTrait, SoftDeletes, Notifiable;
 
     protected $fillable = [
         'first_name',
@@ -96,5 +100,10 @@ class UserInfos extends Model implements Transformable
         default:
           return $query;
       }
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+      $this->notify(new UserResetPasswordNotification($token));
     }
 }
