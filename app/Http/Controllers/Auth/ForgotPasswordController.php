@@ -33,7 +33,7 @@ class ForgotPasswordController extends Controller
 
     public function broker()
     {
-      return Password::broker('userInfo');
+      return Password::broker('users');
     }
 
 }

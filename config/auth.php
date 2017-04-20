@@ -101,20 +101,14 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => 'userInfo',
             'table' => 'password_resets',
             'expire' => 60,
         ],
         'admins' => [
-          'provider' => 'users',
-          'table' => 'password_resets',
-          'expire' => 60,
-        ],
-
-        'userInfo' => [
           'provider' => 'userInfo',
           'table' => 'password_resets',
           'expire' => 60,
-          ]
+        ],
         ],
 ];
