@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">アカウント登録</div>
                 <div class="panel-body">
-                     {!! Form::open(['route' => 'adminregister']) !!}
+                     {!! Form::open(['route' => 'admin.register']) !!}
                      {!! Form::hidden('mquery', $url['m']) !!}
                      {!! Form::hidden('pquery', $url['p']) !!}
 
