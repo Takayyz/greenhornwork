@@ -47,38 +47,27 @@ class Handler extends ExceptionHandler
     {
         $error_message = $exception->getMessage();
 
-        //  エラーかどうかを判断。。
+        //　ステータスコードに対応するメッセージをここで設定。
+        $MESSAGES = [
+          400 => 'Bad Request',
+          401 => '認証に失敗しました',
+          403 => 'アクセス権がありません',
+          404 => 'ページが見つかりません',
+          408 => 'タイムアウトです',
+          414 => 'リクエストURIが長過ぎます',
+          500 => 'Internal Server Error',
+          503 => 'Service Unavailable'
+        ];
+
+        //　予期しないステータスコードが渡って来た場合のメッセージを設定。
+        $MESSAGE_UNEXPECTED = "予期しないエラーが起きました。管理者に連絡して下さい";
+
+        //  エラーかどうかを判断。
         if(!$error_message) {
           $statusCode = $exception->getStatusCode();
-          switch ($statusCode) {
-              case 400:
-                  $error_message = 'Bad Request';
-                  break;
-              case 401:
-                  $error_message = '認証に失敗しました';
-                  break;
-              case 403:
-                  $error_message = 'アクセス権がありません';
-                  break;
-              case 404:
-                  $error_message = 'ページが見つかりません';
-                  break;
-              case 408:
-                  $error_message = 'タイムアウトです';
-                  break;
-              case 414:
-                  $error_message = 'リクエストURIが長すぎます';
-                  break;
-              case 500:
-                  $error_message = 'Internal Server Error';
-                  break;
-              case 503:
-                  $error_message = 'Service Unavailable';
-                  break;
-              default:
-                  $error_message = '予期しないエラーが起きました。管理者に連絡して下さい';
-                  break;
-          }
+
+          //　渡って来たステータスコードが対応しているかどうかを確認
+          $error_message = $MESSAGES[$statusCode] ?? $MESSAGE_UNEXPECTED;
         } else {
           //  問題が無ければ普通に処理。
           return parent::render($request, $exception);
