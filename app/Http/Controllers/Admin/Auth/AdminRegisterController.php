@@ -35,15 +35,18 @@ class AdminRegisterController extends Controller
      */
     protected $redirectTo = '/admin';
     protected $adminuser;
+    protected $userinfo;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(AdminUsersRepository $adminuser, UserInfosRepository $userinfo)
     {
         $this->middleware('guest');
+        $this->adminuser = $adminuser;
+        $this->userinfo = $userinfo;
     }
 
     /**
@@ -89,7 +92,8 @@ class AdminRegisterController extends Controller
     public function showAdminRegistrationForm(Request $request)
     {
       $url = $request->query();
-      return view('admin.auth.register', compact('url'));
+      $view = !empty($url) ? view('admin.auth.register', compact('url')) : redirect()->route('admin.login');
+      return $view;
     }
 
     public function adminRegister(Request $request)

@@ -29,6 +29,14 @@ class WorkSchedules extends Model implements Transformable
       return $this->belongsTo('App\Entities\User');
     }
 
+    public function scopeWhereUserId($query, $userId = NULL)
+    {
+      if(!isset($userId)) {
+        return $query;
+      }
+      return $query->where('user_id', $userId);
+    }
+
     public function scopeWhereDate($query, $field, $date)
     {
       if(!$field || !$date){
@@ -73,4 +81,5 @@ class WorkSchedules extends Model implements Transformable
         });
       });
     }
+
 }
