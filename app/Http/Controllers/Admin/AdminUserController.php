@@ -85,7 +85,7 @@ class AdminUserController extends Controller
     public function show($id)
     {
         $adminuser = $this->adminuser->find($id);
-        return view ('admin.admin_user.show', compact('adminuser'));
+        return view('admin.admin_user.show', compact('adminuser'));
     }
 
     /**
