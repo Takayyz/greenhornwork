@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class UserResetPasswordNotification extends Notification
+class ResetPasswordNotification extends Notification
 {
     use Queueable;
 
@@ -40,11 +40,18 @@ class UserResetPasswordNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-            ->subject('パスワード再発行')
-            ->line('パスワードを変更するには、以下のリンクをクリックしてください。')
-            ->action('パスワード変更', route('password.reset', $this->token));
-            // ->line('このメールに心当たりがない場合は、無視してください。');
+      if($notifiable['attributes']['store_id'] == 0) {
+        $url = 'admin.password.reset';
+      } else {
+        $url = 'password.reset';
+      }
+      dd($url);
+      return (new MailMessage)
+          ->subject('パスワード再発行')
+          ->greeting('こんにちは')
+          ->line('パスワードを変更するには、以下のリンクをクリックしてください。')
+          ->action('パスワード変更', route($url, $this->token))
+          ->salutation('よろしくお願いします。');
     }
 
     /**
