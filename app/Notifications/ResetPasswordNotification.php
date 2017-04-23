@@ -45,7 +45,6 @@ class ResetPasswordNotification extends Notification
       } else {
         $url = 'password.reset';
       }
-      dd($url);
       return (new MailMessage)
           ->subject('パスワード再発行')
           ->greeting('こんにちは')
