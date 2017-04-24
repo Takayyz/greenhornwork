@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use App\Register\AdminRegistered;
 use App\Repositories\AdminUsersRepository;
-use App\Repositories\UserinfosRepository;
+use App\Repositories\UserInfosRepository;
 
 
 class AdminRegisterController extends Controller
