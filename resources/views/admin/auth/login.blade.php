@@ -75,7 +75,7 @@
                                     ログイン
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <a class="btn btn-link" href="{{ route('admin.password.request') }}">
                                     パスワードを忘れた方はこちら
                                 </a>
                             </div>

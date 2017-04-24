@@ -77,6 +77,11 @@ return [
             'driver' => 'eloquent',
             'model' => App\Entities\AdminUsers::class,
         ],
+
+        'userInfo' => [
+            'driver' => 'eloquent',
+            'model' => App\Entities\UserInfos::class,
+        ],
     ],
 
     /*
@@ -96,14 +101,14 @@ return [
 
     'passwords' => [
         'users' => [
-            'provider' => 'users',
+            'provider' => 'userInfo',
             'table' => 'password_resets',
             'expire' => 60,
         ],
         'admins' => [
-          'provider' => 'users',
+          'provider' => 'userInfo',
           'table' => 'password_resets',
           'expire' => 60,
         ],
-    ],
+        ],
 ];
