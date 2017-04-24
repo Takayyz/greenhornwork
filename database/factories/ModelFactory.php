@@ -22,6 +22,7 @@ $factory->define(App\Entities\Stores::class, function(Faker\Generator $faker) {
 
 $factory->define(App\Entities\UserInfos::class, function(Faker\Generator $faker) {
     static $phoneNumber = 11111111;
+    $storeIndex = mt_rand(1, 3);
     return [
       'first_name' => $faker->firstName,
       'last_name' => $faker->lastName,
@@ -30,7 +31,7 @@ $factory->define(App\Entities\UserInfos::class, function(Faker\Generator $faker)
       'hire_date' => $faker->dateTime,
       'birthday' => $faker->dateTime,
       'sex' => (mt_rand(0, 1) === 0) ? '男' : '女',
-      'store_id' => factory(App\Entities\Stores::class)->create()->id
+      'store_id' => $storeIndex
     ];
 });
 
