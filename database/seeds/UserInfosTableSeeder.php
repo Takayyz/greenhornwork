@@ -37,5 +37,6 @@ class UserInfosTableSeeder extends Seeder
       'store_id' => 3,
     ]);
     }
+    factory(App\Entities\DailyReports::class, 20)->create();
   }
 }
