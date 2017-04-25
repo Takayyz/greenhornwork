@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Entities\Stores;
 use App\Repositories\StoresRepository;
-use App\Repositories\UserinfosRepository;
+use App\Repositories\UserInfosRepository;
 use App\Http\Requests\StoreRequest;
 
 class StoreController extends Controller
@@ -17,14 +17,14 @@ class StoreController extends Controller
 
   public function __construct(
     StoresRepository $stores,
-    UserinfosRepository $user_infos
+    UserInfosRepository $user_infos
   ) {
       $this->middleware('auth:admin');
       $this->stores = $stores;
       $this->user_infos = $user_infos;
     }
 
-  public function index(Request $request) 
+  public function index(Request $request)
   {
     $input = $request->all();
 
@@ -37,8 +37,8 @@ class StoreController extends Controller
     }
     return view('admin.store.index', compact('stores'));
   }
-      
-  public function create() 
+
+  public function create()
   {
     return view('admin.store.create');
   }
@@ -54,20 +54,20 @@ class StoreController extends Controller
     return redirect()->to('admin/store');
   }
 
-  public function show($id) 
+  public function show($id)
   {
     $store = $this->stores->find($id);
     $userList = $this->user_infos->getUserList($id);
     return view('admin.store.show', compact('store', 'userList'));
   }
 
-  public function edit($id) 
+  public function edit($id)
   {
     $store = $this->stores->find($id);
     return view('admin.store.edit',compact('store'));
   }
 
-  public function update(StoreRequest $request, $id) 
+  public function update(StoreRequest $request, $id)
   {
     $input = $request->all();
     $this->stores->update([
@@ -77,7 +77,7 @@ class StoreController extends Controller
     return redirect()->to('admin/store');
   }
 
-  public function destroy($id) 
+  public function destroy($id)
   {
     $data = $this->stores->find($id);
     $data->delete();
