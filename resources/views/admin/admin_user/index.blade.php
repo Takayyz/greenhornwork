@@ -1,9 +1,8 @@
 @extends('partials.admin_nav')
 
 @section('content')
+<h2 class="page-header header-gradient">管理者ユーザー一覧</h2>
 <div class="container">
-<h2 class="page-header">管理者ユーザーの一覧</h2>
-    <p class="pull-right"><a class="btn btn-success" href="{{ route('admin.adminuser.create') }}">新規ユーザー作成</a></p>
 <table class="table table-hover todo-table">
     <thead>
     <tr>
@@ -26,16 +25,17 @@
         <td>{{ $adminuser->info->email }}</td>
         <td>{{ $adminuser->info->tel }}</td>
        <td>
-            <a class="btn btn-primary" href="{{ route('admin.adminuser.show', $adminuser->id) }}">詳細</a>
+            <a class="btn btn-success" href="{{ route('admin.adminuser.show', $adminuser->id) }}">詳細</a>
         </td>
-        <td>
-          {!! Form::open(['route' => ['admin.adminuser.destroy', $adminuser->id], 'method'=>'DELETE']) !!}
-            <button class="btn btn-danger" type="submit">削除</button>
-          {!! Form::close() !!}
-        </td>
+      
     </tr>
     @endforeach
 </tbody>
 </table>
+<div class="bottom-button-wrapper">
+    <a href="{{ route('admin.') }}" class="bottom-button">ホームへ</a>
+    <a class="button" href="{{ route('admin.adminuser.create') }}">管理者ユーザーの作成</a></p>
+</div>
+</div>
 </div>
 @endsection

@@ -13,10 +13,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <!--<link href="{{ asset('css/user.css') }}" rel="stylesheet">-->
+    <!--<link href="{{ asset('css/admin.css') }}" rel="stylesheet">-->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('css/user.css') }}" rel="stylesheet">
-
 
     <!-- Scripts -->
     <script>
@@ -26,8 +25,10 @@
     </script>
 </head>
 <body>
+
+<body class="body-color">
     <div id="app">
-        <nav class="navbar navbar-static-top user-navbar">
+        <nav class="navbar navbar-default navbar-static-top home_navbar_brand_color">
             <div class="container">
                 <div class="navbar-header">
 
@@ -44,14 +45,6 @@
                         {{ config('app.name', 'greenhorn_works') }}
                     </a>
                 </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                        <li><a href="{{ url('schedule') }}">勤退表一覧</a></li>
-                        <li><a href="{{ url('report') }}">日報一覧</a></li>
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -85,10 +78,10 @@
             </div>
         </nav>
 
-        @yield('content')
+        @yield('outline')
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>     
 </body>
 </html>

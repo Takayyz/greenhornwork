@@ -1,11 +1,10 @@
-@extends('layouts.app')
+@extends('partials.user_nav')
 
 @section('content')
 <div class="container">
   <div class="panel-heading">
     <h2>日報</h2>
   </div>
-  <p class="pull-right"><a href="{{ route('report.index') }}">一覧に戻る</a></p>
   <div class="panel-body">
     {!! Form::open(['route' => 'report.store']) !!}
       <div class="form-group @if(!empty($errors->first('date'))) has-error @endif">
@@ -23,5 +22,8 @@
       <button type="submit" class="btn btn-success pull-right">追加</button>
     {!! Form::close() !!}
   </div>
+</div>
+<div class="col-xs-12 col-md-offset-5">
+    <a href="{{ route('report.index') }}" class="btn btn-primary">日報一覧画面に戻る</a>
 </div>
 @endsection

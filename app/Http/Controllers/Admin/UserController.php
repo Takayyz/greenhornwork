@@ -147,4 +147,9 @@ class UserController extends Controller
 
         return redirect()->route('admin.user.index');
     }
+
+     public function getUserList($id)
+    {
+      return UserInfos::where('store_id', $id)->get();
+    }
 }

@@ -42,25 +42,11 @@
   border-bottom: 1px solid #7d7409;
   border-right: 1px solid #7d7409;
 }
+
 .btn-user {
   background-color: #2a8eb3;
   border-bottom: 3px solid #054f6a;
   border-right: 3px solid #054f6a;
-}
-
-.btn-user:hover {
-  border-bottom: 1px solid #054f6a;
-  border-right: 1px solid #054f6a;
-}
-.btn-store {
-  background-color: #b34f2a;
-  border-bottom: 3px solid #6c2206;
-  border-right: 3px solid #6c2206;
-}
-
-.btn-store:hover {
-  border-bottom: 1px solid #6c2206;
-  border-right: 1px solid #6c2206;
 }
 
 .btn-admin {
@@ -144,19 +130,10 @@
   border-right: 3px solid #054f6a;
 }
 
-.btn-user:hover {
-  border-bottom: 1px solid #054f6a;
-  border-right: 1px solid #054f6a;
-}
 .btn-store {
   background-color: #b34f2a;
   border-bottom: 3px solid #6c2206;
   border-right: 3px solid #6c2206;
-}
-
-.btn-store:hover {
-  border-bottom: 1px solid #6c2206;
-  border-right: 1px solid #6c2206;
 }
 
 .btn-admin {
@@ -241,6 +218,10 @@
 
 .user-search-btn-box {
   text-align: right;
+}
+
+.background-color {
+  background-color: #fff !important;
 }
 
 /********** Reset <li> ***********/

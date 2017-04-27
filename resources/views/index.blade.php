@@ -1,7 +1,7 @@
-@extends('partials.user_nav')
+@extends('partials.outline')
 
-@section('content')
-
+@section('outline')
+<body>
 <div class="container">
   <div class="row container__inner">
       <div class="col-md-3 col-md-offset-2 col-xs-8 col-xs-offset-2">
@@ -12,5 +12,6 @@
       </div>
   </div>
 </div>
+</body>
 
 @endsection

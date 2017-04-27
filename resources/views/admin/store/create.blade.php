@@ -5,7 +5,6 @@
   <div class="panel-heading">
     <h2>店舗の登録</h2>
   </div>
-  <p class="pull-right"><a href="./">一覧に戻る</a></p>
   <div class="panel-body">
     {!! Form::open(['route' => ['admin.store.store']]) !!}
       <div class="form-group @if(!empty($errors->first('name'))) has-error @endif">
@@ -21,5 +20,8 @@
       <button type="submit" class="btn btn-success pull-right">追加</button>
     {!! Form::close() !!}
   </div>
+</div>
+<div class="col-xs-12 col-md-offset-5">
+    <a href="{{ route('admin.store.index') }}" class="btn btn-primary">店舗一覧に戻る</a>
 </div>
 @endsection

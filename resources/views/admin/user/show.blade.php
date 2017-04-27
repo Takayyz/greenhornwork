@@ -1,66 +1,75 @@
 @extends('partials.admin_nav')
 
 @section('content')
-<div class="container">
 
-  <p class="pull-right"><a href="{{ url('admin/user') }}">一覧に戻る</a></p>
+  <h2 class="page-header header-gradient">ユーザー詳細情報</h2>
 
-  <div class="panel-heading">
-    <h2>ユーザー詳細情報</h2>
+  <div class="button-wrapper">
+    {!! Form::open(['route'=>['admin.user.destroy',$user->id],'method'=>'DELETE']) !!}
+      <a class="button" href="{{ $user->id }}/edit">編集</a>
+      <a class="button-danger btn" type="submit">削除</a>
+    {!! Form::close() !!}
   </div>
-  <div class="panel-body">
 
-      <div>
+  <div class="container">
+    <ul class="user-info-list">
+      <li>
+        <div class="profile icon"></div>
         <h3>ユーザー名</h3>
         {{ $user->name }}
-      </div>
-
-      <div>
+      </li>
+      
+      <li>
+        <div class="profile icon"></div>
         <h3>性</h3>
         {{ $user->info->last_name }}
-      </div>
+      </li>   
 
-      <div>
+      <li>
+        <div class="profile icon"></div>
         <h3>名</h3>
         {{ $user->info->first_name}}
-      </div>
-
-      <div>
-
-      <h3>性別</h3>
-        {{ $user->info->sex }}
-      </div>
-
-      <div>
+      </li>
+    
+      <li>
+        <div class="profile icon"></div>
+        <h3>性別</h3>
+        {{$user->info->sex}}
+      </li>
+        
+      <li>
+        <div class="profile icon"></div>
         <h3>誕生日</h3>
-        {{ date("Y/m/d", strtotime($user->info->birthday)) }}
-      </div>
+        {{date("Y/m/d", strtotime($user->info->birthday))}}
+      </li>
 
-      <div>
-
+      <li>
+        <div class="profile icon"></div>
         <h3>メールアドレス</h3>
-        {{ $user->info->email}}
-      </div>
-
-      <div>
+        {{$user->info->email}}
+      </li>
+  
+      <li>
+        <div class="profile icon"></div>
         <h3>電話番号</h3>
-        {{ $user->info->tel}}
-      </div>
+        {{$user->info->tel}}
+      </li>
 
-      <div>
+      <li>
+        <div class="profile icon"></div>
         <h3>入社日</h3>
-        {{ date("Y/m/d", strtotime($user->info->hire_date))}}
-      </div>
-
-      <div>
+        {{date("Y/m/d", strtotime($user->info->hire_date))}}
+      </li>
+  
+      <li>
+        <div class="profile icon"></div>
         <h3>店舗名</h3>
-        {{ $user->info->store->name}}
-      </div>
-
-      
-      </div>
-        <p class="pull-right"><a class="btn btn-primary" href="{{ $user->id }}/edit">編集</a></p>
+        {{$user->info->store->name}}
+      </li>
+    </ul>
   </div>
-
+  <div class="bottom-button-wrapper">
+    <a href="{{ route('admin.') }}" class="bottom-button">ホームへ</a>
+  </div>
+  </div>
 @endsection
-

@@ -1,23 +1,28 @@
 @extends('partials.admin_nav')
 
 @section('content')
-<div class="container">
-  <p class="pull-right"><a href="./">一覧に戻る</a></p>
-  <h2 class="page-header">ユーザーの新規作成</h2>
+
+  <h2 class="page-header header-gradient">研修生の追加</h2>
   {{ Form::open(array('route' => 'admin.user.store')) }} 
-    
-    {!! Form::label('last_name', '性'); !!}
+  <div class="container">
+    <ul class="user-info-list">
+    <li>
+    <h4>{!! Form::label('last_name', '姓'); !!}</h4>
     <div class="form-group {{ $errors->has('last_name') ? 'has-error' :''}}">
-      {!! Form::input('text', 'last_name', old("name"), array('class' => 'form-control','placeholder' => '小松')) !!}
+      {!! Form::input('text', 'last_name', old("name"), array('class' => 'form-control-custom','placeholder' => '小松')) !!}
       <span class="help-block">{{$errors->first('last_name')}}</span>
     </div>
+    </li>
     
-    {!! Form::label('first_name', '名'); !!}
+    <li>
+    <h4>{!! Form::label('first_name', '名'); !!}</h4>
     <div class="form-group {{ $errors->has('first_name') ? 'has-error' :''}}">
-      {!! Form::input('text', 'first_name', old("name"), array('class' => 'form-control','placeholder' => '信之')) !!}
+      {!! Form::input('text', 'first_name', old("name"), array('class' => 'form-control-custom','placeholder' => '信之')) !!}
       <span class="help-block">{{$errors->first('first_name')}}</span>
     </div>
+    </li>
     
+    <li>
     <div class="form-group {{ $errors->has('sex') ? 'has-error' :''}}">
       {!! Form::label('sex', '男性'); !!}
       {!! Form::radio('sex', '男', old("sex")) !!}
@@ -25,32 +30,43 @@
       {!! Form::radio('sex', '女', old("sex")) !!}
       <span class="help-block">{{$errors->first('sex')}}</span>
     </div>
+    </li>
 
+    <li>
     <div class="form-group {{ $errors->has('birthday') ? 'has-error' :''}}">
-      {!! Form::input('date', 'birthday', old("birthday"), array('class' => 'form-control','placeholder' => '1992年7月30日')) !!}
+      <h4>{!! Form::label('birthday', '生年月日'); !!}</h4>
+      {!! Form::input('date', 'birthday', old("birthday"), array('class' => 'form-control-custom','placeholder' => '1992年7月30日')) !!}</h4>
       <span class="help-block">{{$errors->first('birthday')}}</span>
     </div>
-    
+    </li>
+
+    <li>   
     <div class="form-group {{ $errors->has('email') ? 'has-error' :''}}">
-      {!! Form::label('email', 'メールアドレス'); !!}
-      {!! Form::input('text', 'email', old("email"), array('class' => 'form-control','placeholder' => 'greenhorn@gizumo.com')) !!}
+      <h4>{!! Form::label('email', 'メールアドレス'); !!}</h4>
+      {!! Form::input('text', 'email', old("email"), array('class' => 'form-control-custom','placeholder' => 'greenhorn@gizumo.com')) !!}
       <span class="help-block">{{$errors->first('email')}}</span>
     </div>
+    </li>
 
+    <li>
     <div class="form-group {{ $errors->has('tel') ? 'has-error' :''}}">
-      {!! Form::label('tel', '電話番号'); !!}
-      {!! Form::input('int', 'tel', old("tel"), array('class' => 'form-control','placeholder' => '03-3353-2720')) !!}
+      <h4>{!! Form::label('tel', '電話番号'); !!}</h4>
+      {!! Form::input('int', 'tel', old("tel"), array('class' => 'form-control-custom','placeholder' => '0333532720')) !!}
       <span class="help-block">{{$errors->first('tel')}}</span>
     </div>
+    </li>
 
+    <li>
     <div class="form-group {{ $errors->has('hire_date') ? 'has-error' :''}}">
-      {!! Form::label('hire_date', '入社日'); !!}
-      {!! Form::input('date', 'hire_date', old("hire_date"), array('class' => 'form-control')) !!}
+      <h4>{!! Form::label('hire_date', '入社日'); !!}</h4>
+      {!! Form::input('date', 'hire_date', old("hire_date"), array('class' => 'form-control-custom')) !!}
       <span class="help-block">{{$errors->first('hire_date')}}</span>
     </div>
+    </li>
 
+    <li>
     <div class="form-group {{ $errors->has('store_id') ? 'has-error' :''}}">
-      {!! Form::label('store_id', '店舗名'); !!}
+      <h4>{!! Form::label('store_id', '店舗名'); !!}</h4>
       <select name="store_id">
         @foreach($stores as $store)
           <option value="{{ $store->id }}">{{ $store->name }}</option> 
@@ -58,11 +74,13 @@
       </select>
       <span class="help-block">{{$errors->first('store_id')}}</span>
     </div>
-    
-    <div class="col-xs-12 col-md-offset-5">
-        <a href="{{ route('admin.user.index') }}" class="btn btn-primary">戻る</a> 
-        <button type="submit" class="btn btn-success pull-right">作成</button>
-    </div>
+    </li>
+</ul>
+  <div class="bottom-button-wrapper">
+    <button type="submit" class="button">追加</button>
+    <a href="{{ route('admin.user.index') }}" class="bottom-button">研修生一覧へ</a>
+  </div> 
+
   {!! Form::close() !!}
 
 </div>

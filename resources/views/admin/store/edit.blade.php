@@ -1,11 +1,9 @@
 @extends('partials.admin_nav')
 
 @section('content')
-<div class="container">
-  <div class="panel-heading">
-    <h2>店舗の更新</h2>
+    <h2 class="page-header header-gradient">店舗の更新</h2>
   </div>
-  <p class="pull-right"><a href="./">一覧に戻る</a></p>
+  <div class="container">
   <div class="panel-body">
 
     {!! Form::open(['route' => ['admin.store.update', $store->id], 'method'=> 'PUT']) !!}
@@ -21,8 +19,16 @@
         {!! Form::input('text', 'kana_name', $store->kana_name, ['class' => 'form-control']) !!}
         <span class="help-block">{{$errors->first('kana_name')}}</span>
       </div>
-      <button type="submit" class="btn btn-success pull-right">追加</button>
+      <button type="submit" class="btn btn-success pull-right">更新</button>
     {!! Form::close() !!}
+  </div>
+</div>
+<div class="col-md-offset-5">
+<div class="bottom-button-wrapper">
+{!! Form::open(['route'=>['admin.store.destroy',$store->id],'method'=>'DELETE']) !!}
+    <a href="{{ route('admin.store.index') }}" class="button">店舗一覧へ</a> 
+    <a class="button-danger btn" type="submit">このユーザーを削除する</a>
+{!! Form::close() !!}
   </div>
 </div>
 @endsection

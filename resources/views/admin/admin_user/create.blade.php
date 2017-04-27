@@ -1,8 +1,8 @@
 @extends('partials.admin_nav')
 
 @section('content')
+  <h2 class="page-header header-gradient">管理者ユーザーの作成</h2>
 <div class="container">
-  <h2 class="page-header">管理者の作成</h2>
   {{ Form::open(['route' => 'admin.adminuser.store']) }}
     {!! Form::label('last_name', '性'); !!}
     <div class="form-group {{ $errors->has('last_name')? 'has-error' : '' }}">
@@ -55,10 +55,11 @@
         <option value="2">Admin</option>
       </select>
     </div>
-    <div class="col-xs-12 col-md-offset-5">
-      <a href="{{ route('admin.adminuser.index') }}" class="btn btn-primary">戻る</a>
-      <button type="submit" class="btn btn-success pull-right">作成</button>
-    </div>
+        <div class="bottom-button-wrapper">
+          <button type="submit" class="button">管理者ユーザー作成</button>
+          <a href="{{ route('admin.user.index') }}" class="button">管理者ユーザー一覧画面へ</a>
+        </div>
+      </div>
   {!! Form::close() !!}
  </div>
 @endsection

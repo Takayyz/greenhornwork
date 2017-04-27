@@ -1,10 +1,9 @@
 @extends('partials.user_nav')
 
 @section('content')
+
+    <h2 class="page-header header-gradient">勤務表一覧</h2>
 <div class="container">
-  <div class="panel-heading">
-    <h2 class="page-header">勤務表一覧</h2>
-  </div>
 
   <!-- 検索メニュー -->
   <div class="panel-body">
@@ -51,6 +50,11 @@
         @endforeach
       </tbody>
     </table>
+  </div>
+</div>
+<div class="col-md-offset-5">
+ <div class="bottom-button-wrapper">
+    <a href="{{ route('admin.') }}" class="bottom-button">ホームへ</a>
   </div>
 </div>
 @endsection

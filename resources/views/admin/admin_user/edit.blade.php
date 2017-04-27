@@ -10,7 +10,6 @@
   <div class="panel-heading">
     <h2>管理者ユーザーの更新</h2>
   </div>
-  <p class="pull-right"><a href="{{ route('admin.adminuser.index') }}">一覧に戻る</a></p>
   <div class="panel-body">
     {!! Form::open(['route' => ['admin.adminuser.update', $adminuser->id], 'method'=> 'PUT']) !!}
       {!! Form::hidden('id', $adminuser->id, ['class' => 'form-control']) !!}
@@ -48,7 +47,8 @@
         {!! Form::input('text', 'tel', $adminuser->info->tel, ['class' => 'form-control']) !!}
         <span class="help-block">{{$errors->first('tel')}}</span>
       </div>
-      <button type="submit" class="btn btn-success pull-right">更新</button>
+      <button type="submit" class="btn btn-success pull-left">更新</button>
+      <a href="{{ route('admin.adminuser.index') }}" class="btn btn-primary pull-right">管理者ユーザー一覧画面に戻る</a>  
     {!! Form::close() !!}
   </div>
 </div>

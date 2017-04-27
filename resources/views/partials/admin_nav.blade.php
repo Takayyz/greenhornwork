@@ -15,6 +15,7 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <!--<link href="{{ asset('css/admin.css') }}" rel="stylesheet">-->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/user.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -85,17 +86,17 @@
                       </li>
                       <li class="dropmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                          ユーザー&nbsp;<span class="caret"></span>
+                          研修生&nbsp;<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                           <li>
                             <a href="{{ route('admin.user.index') }}">
-                              ユーザー一覧
+                              研修生一覧
                             </a>
                           </li>
                           <li>
                             <a href="{{ route('admin.user.create') }}">
-                              ユーザー作成
+                              研修生を追加
                             </a>
                           </li>
                         </ul>

@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('partials.user_nav')
 
 @section('content')
+<h2 class="page-header header-gradient">日報一覧</h2>
 <div class="container">
-<h2 class="page-header">日報一覧</h2>
-
+  <div class="panel-body">
 <div class="search-box">
   <div class="inner-box">
     {!! Form::open(['route' => 'report.index', 'method' => 'GET']) !!}
@@ -31,15 +31,13 @@
     <tr>
       <td>{{ date("Y/m/d", strtotime($report->reporting_time)) }}</td>
       <td>{{ $report->title }}</td>
-      <td><a class="btn btn-primary" href="report/{{ $report->id }}">詳細</a></td>
-      <td>
-        {!! Form::open(['route' => ['report.destroy', $report->id], 'method' => 'DELETE']) !!}
-          <button class="btn btn-danger" type="submit">削除</button>
-        {!! Form::close() !!}
-      </td>
+      <td><a class="btn btn-success" href="report/{{ $report->id }}">詳細</a></td>
     </tr>
     @endforeach
   </tbody>
 </table>
+</div>
+<div class="col-md-offset-5">
+    <a href="{{ route('admin.') }}" class="button">ホーム画面に戻る</a>
 </div>
 @endsection
