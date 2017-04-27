@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Entities\AdminUsers;
 use App\Repositories\AdminUsersRepository;
-use App\Repositories\UserinfosRepository;
+use App\Repositories\UserInfosRepository;
 use App\Http\Requests\AdminUserRequest;
 use App\Http\Requests\AdminUserEditRequest;
 use Mail;
@@ -20,7 +20,7 @@ class AdminUserController extends Controller
 
     public function __construct(
       AdminUsersRepository $adminuser,
-      UserinfosRepository $userinfo
+      UserInfosRepository $userinfo
       )
     {
       $this->middleware('auth:admin');
@@ -85,7 +85,7 @@ class AdminUserController extends Controller
     public function show($id)
     {
         $adminuser = $this->adminuser->find($id);
-        return view ('admin.admin_user.show', compact('adminuser'));
+        return view('admin.admin_user.show', compact('adminuser'));
     }
 
     /**

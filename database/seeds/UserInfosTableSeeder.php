@@ -37,5 +37,9 @@ class UserInfosTableSeeder extends Seeder
       'store_id' => 3,
     ]);
     }
+    //  UsersにDailyReportsのFactoryをおいている理由は、
+    //  各Seederでtrancate関数を用いているため、正常な動作がしない。
+    //  UserInfosTableは一番最後に実行するので差し当たりここに記述。
+    factory(App\Entities\DailyReports::class, 20)->create();
   }
 }
