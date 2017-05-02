@@ -23,11 +23,11 @@
         {!! Form::textarea('contents', $report->contents, ['class' => 'form-control', 'placeholder' => '本文']) !!}
         <span class="help-block">{{$errors->first('contents')}}</span>
       </div>
-      <button type="submit" class="btn btn-success pull-right">更新</button>
+      <button type="submit" class="btn btn-success">更新</button>
     {!! Form::close() !!}
   </div>
 </div>
 <div class="col-md-offset-5">
-    <a href="{{ route('report.index') }}" class="button">日報一覧画面に戻る</a>
+    <a href="{{ route('report.index') }}" class="button">日報一覧画面へ</a>
 </div>
 @endsection

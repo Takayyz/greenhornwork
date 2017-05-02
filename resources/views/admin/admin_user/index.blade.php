@@ -2,12 +2,12 @@
 
 @section('content')
 <h2 class="page-header header-gradient">管理者ユーザー一覧</h2>
-<div class="container">
+<div class="content-wrapper">
 <table class="table table-hover todo-table">
     <thead>
     <tr>
-        <th>性</th>
-        <th>名</th>
+        <th>苗字</th>
+        <th>名前</th>
         <th>性別</th>
         <th>生年月日</th>
         <th>メールアドレス</th>
@@ -32,8 +32,9 @@
     @endforeach
 </tbody>
 </table>
+</div>
 <div class="bottom-button-wrapper">
-    <a href="{{ route('admin.') }}" class="bottom-button">ホームへ</a>
+    <a href="{{ route('admin.home') }}" class="button">ホームへ</a>
     <a class="button" href="{{ route('admin.adminuser.create') }}">管理者ユーザーの作成</a></p>
 </div>
 </div>

@@ -1,7 +1,7 @@
 @extends('partials.admin_nav')
 
 @section('content')
-    <h2 class="page-header header-gradient">店舗の更新</h2>
+    <h2 class="page-header header-gradient">店舗情報の更新</h2>
   </div>
   <div class="container">
   <div class="panel-body">
@@ -23,12 +23,10 @@
     {!! Form::close() !!}
   </div>
 </div>
-<div class="col-md-offset-5">
 <div class="bottom-button-wrapper">
 {!! Form::open(['route'=>['admin.store.destroy',$store->id],'method'=>'DELETE']) !!}
     <a href="{{ route('admin.store.index') }}" class="button">店舗一覧へ</a> 
-    <a class="button-danger btn" type="submit">このユーザーを削除する</a>
+    <button class="button-danger btn" type="submit">削除</button>
 {!! Form::close() !!}
-  </div>
 </div>
 @endsection

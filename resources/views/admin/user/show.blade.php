@@ -2,12 +2,12 @@
 
 @section('content')
 
-  <h2 class="page-header header-gradient">ユーザー詳細情報</h2>
+  <h2 class="page-header header-gradient">研修生の詳細情報</h2>
 
   <div class="button-wrapper">
     {!! Form::open(['route'=>['admin.user.destroy',$user->id],'method'=>'DELETE']) !!}
       <a class="button" href="{{ $user->id }}/edit">編集</a>
-      <a class="button-danger btn" type="submit">削除</a>
+      <button class="button-danger btn" type="submit">削除</button>      
     {!! Form::close() !!}
   </div>
 
@@ -21,13 +21,13 @@
       
       <li>
         <div class="profile icon"></div>
-        <h3>性</h3>
+        <h3>苗字</h3>
         {{ $user->info->last_name }}
       </li>   
 
       <li>
         <div class="profile icon"></div>
-        <h3>名</h3>
+        <h3>名前</h3>
         {{ $user->info->first_name}}
       </li>
     
@@ -69,7 +69,6 @@
     </ul>
   </div>
   <div class="bottom-button-wrapper">
-    <a href="{{ route('admin.') }}" class="bottom-button">ホームへ</a>
-  </div>
+    <a href="{{ route('admin.home') }}" class="bottom-button">ホームへ</a>
   </div>
 @endsection

@@ -1,11 +1,8 @@
 @extends('partials.user_nav')
 
 @section('content')
-<div class="container">
-  <div class="panel-heading">
-    <h2>日報</h2>
-  </div>
-  <div class="panel-body">
+    <h2 class="page-header header-gradient">日報</h2>
+  <div class="container">
     {!! Form::open(['route' => 'report.store']) !!}
       <div class="form-group @if(!empty($errors->first('date'))) has-error @endif">
         {!! Form::input('date', 'date', null, ['class' => 'form-control']) !!}
@@ -24,6 +21,6 @@
   </div>
 </div>
 <div class="col-xs-12 col-md-offset-5">
-    <a href="{{ route('report.index') }}" class="btn btn-primary">日報一覧画面に戻る</a>
+    <a href="{{ route('report.index') }}" class="button">日報一覧画面へ</a>
 </div>
 @endsection

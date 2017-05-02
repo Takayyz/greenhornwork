@@ -16,21 +16,24 @@
         </div>
         <span class="help-block">{{ $errors->first('month') }}</span>
       </div>
+      <span class="help-block">※ファイルを選択ボタンを押して勤務表をアップロードして下さい！</span>
       @if (Session::has('flash_message'))
         <div class="has-error">
           <span class="help-block">{{ Session('flash_message') }}</span>
         </div>
       @endif
       <div class="form-group {{ $errors->has('schedule') ? 'has-error' :'' }}">
-      <h5><span class="label label-info">勤務表をアップロードするには「ファイルを選択ボタン」を押してください！</span><h5>
         {!! Form::file('schedule', ['required' => 'required']) !!}
         <span class="help-block">{{ $errors->first('schedule') }}</span>
       </div>
-      <button type="submit" class="btn btn-success pull-right">アップロード</button>
+      <div class="button-wrapper">
+      <button type="submit" class="btn btn-success">アップロード</button>
+      </div>
     {!! Form::close() !!}
   </div>
+  </div>
 </div>
-<div class="col-md-offset-5">
-    <a href="{{ route('schedule.index') }}" class="button">勤務表一覧画面へ</a>
+<div class="button-wrapper">
+    <a href="{{ route('schedule.index') }}" class="bottom-button">勤務表一覧画面へ</a>
 </div>
 @endsection

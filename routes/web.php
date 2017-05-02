@@ -28,9 +28,9 @@ Route::group(['prefix' => '/'], function() {
 Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], function() {
   Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
   Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
-  Route::post('logout', 'Auth\LoginController@logout');
+  Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
-  Route::get('/', 'HomeController@index');
+  Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
   Route::resource('report', DailyReportController::class);
   Route::resource('store', StoreController::class);
 

@@ -56,8 +56,8 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
             'birthday' => $input['birthday'],
             'email'=>$input["email"],
             'tel'=>$input['tel'],
-            'hire_date'=>$input['hire_date'],
-            'store_id'=>$input['store_id']
+            'hire_date'=>$input['hire_date'] ?? null,
+            'store_id'=>$input['store_id'] ?? 0
          ]);
     }
 

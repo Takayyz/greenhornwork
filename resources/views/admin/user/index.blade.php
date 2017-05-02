@@ -3,7 +3,7 @@
 @section('content')
 
   <h2 class="page-header header-gradient">研修生一覧</h2>
-  {!! Form::open(['route' => 'admin.user.index', 'method' => 'GET', 'class' => 'user-search clearfix']) !!}
+  {!! Form::open(['route' => 'admin.user.index', 'method' => 'GET']) !!}
 <div class="button-wrapper">
   <a class="button" href="{{ route('admin.user.create')}}">研修生を追加</a>
   <a　class="button" href="#openModal">研修生を検索</a>
@@ -20,16 +20,16 @@
         <tr>
           <td class="search-td">
             <label>
-              名前
+              氏名
             </label>
           </td>
           <td class="search-td">
-            {!! Form::input('text', 'last_name', null, ['class' => 'form-control', 'placeholder' => '名字', 'id' => 'last_name']) !!}
+            {!! Form::input('text', 'last_name', null, ['class' => 'form-control', 'placeholder' => '苗字', 'id' => 'last_name']) !!}
           </td>
           <td class="search-td">
           </td>
           <td class="search-td">
-            {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => '名', 'id' => 'first_name']) !!}
+            {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => '名前', 'id' => 'first_name']) !!}
           </td>
         </tr>
 
@@ -97,8 +97,8 @@
   <table class="table table-hover todo-table">
     <thead>
       <tr>
-        <th>姓</th>
-        <th>名</th>
+        <th>苗字</th>
+        <th>名前</th>
         <th>性別</th>
         <th>開始日</th>
         <th>店舗名</th>
@@ -125,6 +125,6 @@
   </table>
 </div>
 <div class="bottom-button-wrapper">
-    <a href="{{ route('admin.') }}" class="bottom-button">ホームへ</a>
+    <a href="{{ route('admin.home') }}" class="bottom-button">ホームへ</a>
 </div>
 @endsection

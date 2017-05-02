@@ -27,7 +27,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
+            <div class="container z-index">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -39,7 +39,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ route('admin.') }}">
+                    <a class="navbar-brand" href="{{ route('admin.home') }}">
                         {{ config('app.name', 'greenhorn_works') }}
                     </a>
                 </div>

@@ -2,7 +2,12 @@
 
 @section('content')
 <h2 class="page-header header-gradient">店舗一覧</h2>
-<div class="container">
+
+<div class="button-wrapper">
+<a class="button delete-margin" href="{{ url('admin/store/create') }}">店舗の登録</a>
+</div>
+
+<div class="content-wrapper">
 
 <table class="table table-hover todo-table">
   <thead>
@@ -25,9 +30,9 @@
     @endforeach
   </tbody>
 </table>
+</div>
   <div class="bottom-button-wrapper">
-    <a class="button" href="{{ url('admin/store/create') }}">新しい店舗の登録</a>
-    <a href="{{ route('admin.') }}" class="bottom-button">ホームへ</a>
+    <a href="{{ route('admin.home') }}" class="bottom-button">ホームへ</a>
   </div>
 </div>
 @endsection

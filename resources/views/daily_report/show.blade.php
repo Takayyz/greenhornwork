@@ -25,12 +25,13 @@
       {{ $report->contents }}
     </li>
   </ul>
-  <p class="pull-right"><a class="btn btn-success" href="{{ route('report.edit', $report->id) }}">編集</a></p>
+  <div class="bottom-button-wrapper">
+ <a class="btn btn-success" href="{{ route('report.edit', $report->id) }}">編集</a>
 </div>
 <div class="button-wrapper">
     {!! Form::open(['route' => ['report.destroy', $report->id], 'method' => 'DELETE']) !!}
-        <a href="{{ route('report.index') }}" class="button">日報一覧画面に戻る</a>
-        <button class="btn btn-danger" type="submit">日報を削除する</button>
+        <a href="{{ route('report.index') }}" class="button">日報一覧画面へ</a>
+        <button class="btn btn-danger" type="submit">削除</button>
     {!! Form::close() !!}
 </div>
 @endsection

@@ -1,11 +1,8 @@
 @extends('partials.admin_nav')
 
 @section('content')
+    <h2 class="page-header header-gradient">店舗登録</h2>
 <div class="container">
-  <div class="panel-heading">
-    <h2>店舗の登録</h2>
-  </div>
-  <div class="panel-body">
     {!! Form::open(['route' => ['admin.store.store']]) !!}
       <div class="form-group @if(!empty($errors->first('name'))) has-error @endif">
         <p>店舗名</p>
@@ -21,7 +18,7 @@
     {!! Form::close() !!}
   </div>
 </div>
-<div class="col-xs-12 col-md-offset-5">
-    <a href="{{ route('admin.store.index') }}" class="btn btn-primary">店舗一覧に戻る</a>
+<div class="bottom-button-wrapper">
+    <a href="{{ route('admin.store.index') }}" class="bottom-button">店舗一覧に戻る</a>
 </div>
 @endsection
