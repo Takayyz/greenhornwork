@@ -58,7 +58,7 @@
       <tfoot class="search-tfoot">
         <tr class="search-tr">
           <td colspan="5" class="search-td">
-          <div class="bottom-button-wrapper">
+          <div class="button-wrapper">
           {!! Form::input('submit', '', '検索', ['class' => 'btn btn-success']) !!}
           </div>
           </td>

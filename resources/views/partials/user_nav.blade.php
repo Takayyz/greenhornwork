@@ -15,7 +15,6 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <!--<link href="{{ asset('css/user.css') }}" rel="stylesheet">-->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/user.css') }}" rel="stylesheet">
 
 
     <!-- Scripts -->
