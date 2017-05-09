@@ -19,9 +19,9 @@
         {!! Form::selectRange('month', 1, 12, date('m')) !!}
         <span class="help-block">{{ $errors->first('month') }}</span>
       </div>
-      @if (Session::has('flash_message'))
+      @if (Session::has('error'))
         <div class="has-error">
-          <span class="help-block">{{ Session('flash_message') }}</span>
+          <span class="help-block">{{ Session('error') }}</span>
         </div>
       @endif
       <div class="form-group {{ $errors->has('schedule') ? 'has-error' :'' }}">
