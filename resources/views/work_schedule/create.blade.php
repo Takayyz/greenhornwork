@@ -9,12 +9,12 @@
   <p class="pull-right"><a href="{{ route('schedule.index') }}">一覧に戻る</a></p>
   <div class="panel-body">
     {!! Form::open(['url' => 'schedule', 'method' => 'post', 'files' => 'true']) !!}
-      <div class="form-group {{ Session::has('flash_message') ? 'has-error' :'' }}">
+      <div class="form-group {{ Session::has('error') ? 'has-error' :'' }}">
         {!! Form::label('year', '年'); !!}
         {!! Form::selectRange('year', date('Y'), date('Y')+20, old('year', date('Y'))) !!}
         <span class="help-block">{{ $errors->first('year') }}</span>
       </div>
-      <div class="form-group {{ Session::has('flash_message') ? 'has-error' :'' }}">
+      <div class="form-group {{ Session::has('error') ? 'has-error' :'' }}">
         {!! Form::label('month', '月'); !!}
         {!! Form::selectRange('month', 1, 12, date('m')) !!}
         <span class="help-block">{{ $errors->first('month') }}</span>
