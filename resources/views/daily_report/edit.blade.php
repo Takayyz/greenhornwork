@@ -6,10 +6,10 @@
 @extends('partials.user_nav')
 
 @section('content')
-    <h2 class="page-header header-gradient">日報詳細・編集</h2>
-  </div>
-<div class="container">
-  <div class="panel-body">
+
+  <h1 class="brand-header">日報詳細・編集</h1>
+ 
+  <div class="container">
     {!! Form::open(['route' => ['report.update', $report->id], 'method' => 'PUT']) !!}
       <div class="form-group @if(!empty($errors->first('date'))) has-error @endif">
         {{ Form::input('date', 'date', $reporting_time, ['class' => 'form-control']) }}
@@ -23,11 +23,12 @@
         {!! Form::textarea('contents', $report->contents, ['class' => 'form-control', 'placeholder' => '本文']) !!}
         <span class="help-block">{{$errors->first('contents')}}</span>
       </div>
-      <button type="submit" class="btn btn-success">更新</button>
+      <button type="submit" class="btn btn-success pull-right">更新</button>
     {!! Form::close() !!}
+  </div><!-- container closing tag -->
+
+  <div class="bottom-btn-wrapper">
+    <a href="{{ route('report.index') }}" class="btn">日報一覧画面へ</a>
   </div>
-</div>
-<div class="col-md-offset-5">
-    <a href="{{ route('report.index') }}" class="button">日報一覧画面へ</a>
-</div>
+
 @endsection

@@ -1,7 +1,11 @@
-@extends('layouts.app')
+@extends('partials.user_nav')
 
 @section('content')
-<div class="container">
-  <h2 class="page-header">{{ $error_message }}</h2>
-</div>
+
+  <h1 class="brand-header">
+    Error
+  </h1>
+
+  <h2 class="page-header text-align">{{ $error_message }}</h2>
+
 @endsection

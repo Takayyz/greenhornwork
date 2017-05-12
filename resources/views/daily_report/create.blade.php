@@ -1,7 +1,9 @@
 @extends('partials.user_nav')
 
 @section('content')
-    <h2 class="page-header header-gradient">日報</h2>
+
+  <h2 class="brand-header">日報</h2>
+
   <div class="container">
     {!! Form::open(['route' => 'report.store']) !!}
       <div class="form-group @if(!empty($errors->first('date'))) has-error @endif">
@@ -19,8 +21,9 @@
       <button type="submit" class="btn btn-success pull-right">追加</button>
     {!! Form::close() !!}
   </div>
-</div>
-<div class="col-xs-12 col-md-offset-5">
-    <a href="{{ route('report.index') }}" class="button">日報一覧画面へ</a>
-</div>
+
+  <div class="bottom-btn-wrapper">
+    <a href="{{ route('report.index') }}" class="btn">日報一覧画面へ</a>
+  </div>
+  
 @endsection
