@@ -22,7 +22,10 @@ class UserInfos extends Authenticatable implements Transformable
         'email',
         'tel',
         'hire_date',
-        'store_id'
+        'store_id',
+        'access_right',
+        'position_name',
+        'position_code'
     ];
 
     protected $dates = ['deleted_at'];
@@ -104,6 +107,13 @@ class UserInfos extends Authenticatable implements Transformable
         default:
           return $query;
       }
+    }
+
+    public function scopeFilterByPositionCode($query, $position_code) {
+      if(!$position_code) {
+        return $query;
+      }
+      return $query->where('position_code', '<', $position_code);
     }
 
     public function sendPasswordResetNotification($token)

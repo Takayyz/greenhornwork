@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <h2 class="page-header">管理者の作成</h2>
-  {{ Form::open(['route' => 'admin.adminuser.store']) }}
+  {!! Form::open(['route' => 'admin.adminuser.store']) !!}
     {!! Form::label('last_name', '性'); !!}
     <div class="form-group {{ $errors->has('last_name')? 'has-error' : '' }}">
       {!! Form::input('text', 'last_name', old("name"), array('class' => 'form-control','placeholder' => '小松')) !!}
