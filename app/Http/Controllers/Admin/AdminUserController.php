@@ -60,6 +60,10 @@ class AdminUserController extends Controller
     public function store(AdminUserRequest $request)
     {
         $input = $request->all();
+
+        $fields = ['user_right', 'access_right'];
+        $access_right = $this->combineAccessRights($fields, $input);
+
         $this->userinfo->create([
           'first_name' => $input['first_name'],
           'last_name' => $input['last_name'],
@@ -69,6 +73,8 @@ class AdminUserController extends Controller
           'tel' => $input['tel'],
           'hire_date' => $input['hire_date'],
           'store_id' => 0,
+          'access_right' => bindec($access_right),
+          'position_code' => $input['position_code']
         ]);
 
         Mail::to($input['email'])->send(new AdminAccountRegister($input));
@@ -155,5 +161,14 @@ class AdminUserController extends Controller
         $data->delete();
 
         return redirect()->route('admin.adminuser.index');
+    }
+
+    public function combineAccessRights($fields, $input) {
+      $access_right = '';
+      foreach ($fields as $field) {
+        $input[$field] = $input[$field] ?? '0';
+        $access_right .= $input[$field];
+      }
+      return $access_right;
     }
 }

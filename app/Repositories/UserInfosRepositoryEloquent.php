@@ -43,7 +43,9 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
             'email' => $input['email'],
             'tel' => $input['tel'],
             'hire_date' => $input['hire_date'],
-            'store_id' => $input['store_id']
+            'store_id' => $input['store_id'],
+            'access_right' => 0,
+            'position_code' => 100
         ]);
     }
 
@@ -57,7 +59,9 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
             'email'=>$input["email"],
             'tel'=>$input['tel'],
             'hire_date'=>$input['hire_date'],
-            'store_id'=>$input['store_id']
+            'store_id'=>$input['store_id'],
+            'access_right' => 0,
+            'position_code' => 100
          ]);
     }
 
