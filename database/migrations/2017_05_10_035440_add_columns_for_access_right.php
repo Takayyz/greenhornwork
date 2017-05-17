@@ -14,9 +14,8 @@ class AddColumnsForAccessRight extends Migration
     public function up()
     {
       Schema::table('user_infos', function($table) {
-        $table->integer('access_right')->nullable();
-        $table->string('position_name');
-        $table->integer('position_code');
+        $table->integer('access_right')->after('store_id')->nullable();
+        $table->integer('position_code')->after('access_right');
       });
     }
 
@@ -27,6 +26,9 @@ class AddColumnsForAccessRight extends Migration
      */
     public function down()
     {
-        //
+      Schema::table('user_infos', function($table) {
+        $table->dropColumn('access_right');
+        $table->dropColumn('position_code');
+      });
     }
 }
