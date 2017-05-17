@@ -11,6 +11,7 @@ use App\Repositories\UserInfosRepository;
 use App\Http\Requests\AccessRightRequest;
 use Illuminate\Support\Facades\Auth;
 use Mail;
+use App\Services\Classes\Cryptogram;
 
 class AccessRightController extends Controller
 {
@@ -81,7 +82,7 @@ class AccessRightController extends Controller
       $inputs = $this->normalizeInputs($inputs);
 
       // データを復号し、申請者の情報を取得
-      $applicant = (array)$this->easyDecryption($query);
+      $applicant = Cryptogram::easyDecryption($query);
 
       // アクセス権限を許可
       $this->userinfos->permitAccessRights($applicant['user_info_id'], $inputs);
@@ -112,25 +113,5 @@ class AccessRightController extends Controller
         ];
       }
       return $inputs;
-    }
-
-    /**
-     * 簡易的な複合
-     */
-    public function easyDecryption($hexed_encrypted_data)
-    {
-      // 16進数から10進数に変換
-      $encrypted_data = hex2bin($hexed_encrypted_data);
-
-      // データのMAIL_ADDRESSPASSを鍵として使用し、復号
-      $zipped_data = openssl_decrypt($encrypted_data, 'aes-256-ecb', env('MAIL_ADDRESSPASS'));
-
-      // ZIP形式を解凍
-      $json_data = gzuncompress($zipped_data);
-
-      // JSON形式から連想配列に変換
-      $data = json_decode($json_data);
-
-      return $data;
     }
 }

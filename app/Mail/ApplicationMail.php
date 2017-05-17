@@ -7,6 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Repositories\UserInfosRepository;
+use App\Services\Classes\Cryptogram;
 
 class ApplicationMail extends Mailable
 {
@@ -33,7 +34,7 @@ class ApplicationMail extends Mailable
       $message = $this->inputs['message'];
 
       // ネットワーク上で個人情報を第三者に盗み見られないように暗号化
-      $encoded_data = $this->easyEncryption($this->inputs);
+      $encoded_data = Cryptogram::easyEncryption($this->inputs);
 
       // 送信するデータを設定（message, user_id, user_name）
       $query_string = '?data=' . $encoded_data;
@@ -47,25 +48,5 @@ class ApplicationMail extends Mailable
           'user_message' => $message
       ];
       return $this->view('mail.access_permission_email')->with($data);
-    }
-
-    /**
-     * 簡易的な暗号化
-     */
-    public function easyEncryption($data)
-    {
-      // データをJSON形式に変換
-      $json_data = json_encode($data);
-
-      // データをZIP形式で圧縮
-      $zipped_data = gzcompress($json_data);
-
-      // データのMAIL_ADDRESSPASSを鍵として使用し、暗号化
-      $encrypted_data = openssl_encrypt($zipped_data, 'aes-256-ecb', env('MAIL_ADDRESSPASS'));
-
-      // データを10進数から16進数へ変換
-      $hexed_encrypted_data = bin2hex($encrypted_data);
-
-      return $hexed_encrypted_data;
     }
 }
