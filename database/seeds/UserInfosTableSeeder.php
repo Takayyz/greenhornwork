@@ -18,7 +18,6 @@ class UserInfosTableSeeder extends Seeder
       'sex' => '男',
       'store_id' => 1,
       'access_right' => 6,
-      'position_name' => '開発者',
       'position_code' => 75
     ]);
     UserInfos::create(
@@ -30,7 +29,6 @@ class UserInfosTableSeeder extends Seeder
       'sex' => '男',
       'store_id' => 2,
       'access_right' => 7,
-      'position_name' => '部長',
       'position_code' => 25
     ]);
     UserInfos::create(
@@ -42,7 +40,6 @@ class UserInfosTableSeeder extends Seeder
       'sex' => '男',
       'store_id' => 3,
       'access_right' => 0,
-      'position_name' => '一般社員',
       'position_code' => 100
     ]);
     }
