@@ -55,6 +55,28 @@
         <option value="2">Admin</option>
       </select>
     </div>
+
+    <div class="form-group">
+      {!! Form::label('privileges', 'アクセス権限'); !!}
+      <label>
+        ユーザー
+      </label>
+      {!! Form::checkbox('user_right') !!}
+      <label>
+        店舗
+      </label>
+      {!! Form::checkbox('store_right') !!}
+    </div>
+
+    <div class="form-group">
+      <label>
+        社員コード
+      </label>
+      {!! Form::text('position_code', '',
+                      ['class' => 'form-control',
+                      'placeholder' => '1から100の間の数字を記入してして下さい']) !!}
+    </div>
+
     <div class="col-xs-12 col-md-offset-5">
       <a href="{{ route('admin.adminuser.index') }}" class="btn btn-primary">戻る</a>
       <button type="submit" class="btn btn-success pull-right">作成</button>
