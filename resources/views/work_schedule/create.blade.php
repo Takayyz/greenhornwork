@@ -2,24 +2,23 @@
 
 @section('content')
 
-<div class="container">
-  <div class="panel-heading">
-    <h2>勤務表アップロード</h2>
-  </div>
-  <p class="pull-right"><a href="{{ route('schedule.index') }}">一覧に戻る</a></p>
-  <div class="panel-body">
+  <h1 class="brand-header">勤務表アップロード</h1>
+
     {!! Form::open(['url' => 'schedule', 'method' => 'post', 'files' => 'true']) !!}
-      <div class="form-group {{ Session::has('error') ? 'has-error' :'' }}">
-        {!! Form::label('year', '年'); !!}
-        {!! Form::selectRange('year', date('Y'), date('Y')+20, old('year', date('Y'))) !!}
-        <span class="help-block">{{ $errors->first('year') }}</span>
+      <div class="form-group {{ Session::has('flash_message') ? 'has-error' :'' }}">
+        <div class="col-xs-2">
+          {!! Form::selectRange('year', date('Y')-10, date('Y')+10, old('year'), ['class' => 'form-control', 'placeholder'=>'年']) !!}
+        </div>
       </div>
-      <div class="form-group {{ Session::has('error') ? 'has-error' :'' }}">
-        {!! Form::label('month', '月'); !!}
-        {!! Form::selectRange('month', 1, 12, date('m')) !!}
+      <span class="help-block">{{ $errors->first('year') }}</span>
+      <div class="form-group {{ Session::has('fålash_message') ? 'has-error' :'' }}">
+        <div class="col-xs-2">
+          {!! Form::selectRange('month', 1, 12, old('month'), ['class' => 'form-control', 'placeholder'=>'月']) !!}
+        </div>
         <span class="help-block">{{ $errors->first('month') }}</span>
       </div>
-      @if (Session::has('error'))
+      <span class="help-block">※ファイルを選択ボタンを押して勤務表をアップロードして下さい！</span>
+      @if (Session::has('flash_message'))
         <div class="has-error">
           <span class="help-block">{{ Session('error') }}</span>
         </div>
@@ -28,8 +27,13 @@
         {!! Form::file('schedule', ['required' => 'required']) !!}
         <span class="help-block">{{ $errors->first('schedule') }}</span>
       </div>
-      <button type="submit" class="btn btn-success pull-right">追加</button>
+      <div class="btn-wrapper">
+        <button type="submit" class="btn btn-success">アップロード</button>
+      </div>
     {!! Form::close() !!}
-  </div>
-</div>
+ 
+    <div class="btn-wrapper">
+      <a href="{{ route('schedule.index') }}" class="bottom-btn">勤務表一覧画面へ</a>
+    </div>
+
 @endsection

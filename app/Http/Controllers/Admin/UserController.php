@@ -118,10 +118,9 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {
-
         $user =  $this->users->find($id);
         $input =  $request->all();
-        $this->user->updateUserinfo($input, $user);
+        $this->userinfos->updateUserInfo($input, $user);
 
         User::where('id', $id)->update([
                 'name'=>$input['name']
@@ -146,5 +145,10 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('admin.user.index');
+    }
+
+     public function getUserList($id)
+    {
+      return UserInfos::where('store_id', $id)->get();
     }
 }
