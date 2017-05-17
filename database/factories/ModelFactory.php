@@ -24,7 +24,6 @@ $factory->define(App\Entities\UserInfos::class, function(Faker\Generator $faker)
     static $phoneNumber = 11111111;
     $storeIndex = mt_rand(1, 3);
     $accessRightValue = mt_rand(0, 7);
-    $position_names = ['部長', '課長', '開発者', '一般社員'];
     $position_codes = [25, 50, 75, 100];
     $position_index = mt_rand(0, 3);
     return [
@@ -37,7 +36,6 @@ $factory->define(App\Entities\UserInfos::class, function(Faker\Generator $faker)
       'sex' => (mt_rand(0, 1) === 0) ? '男' : '女',
       'store_id' => $storeIndex,
       'access_right' => $accessRightValue,
-      'position_name' => $position_names[$position_index],
       'position_code' => $position_codes[$position_index]
     ];
 });
