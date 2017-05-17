@@ -61,9 +61,15 @@ class AdminUserController extends Controller
     {
         $input = $request->all();
 
-        $fields = ['user_right', 'access_right'];
-        $access_right = $this->combineAccessRights($fields, $input);
+        // ユーザーと店舗へのアクセス権限を文字列のバイナリーとして受け取り、
+        // 組み合わせ一つにする。
+        $fields = ['user_right', 'store_right'];
+        $access_right = bindec($this->combineAccessRights($fields, $input));
 
+        // 社員コードの正常化
+        $position_code = (int) $input['position_code'] ?? 100; // デフォルト値は100
+
+        // user_infosテーブルに管理者の情報を登録する。
         $this->userinfo->create([
           'first_name' => $input['first_name'],
           'last_name' => $input['last_name'],
@@ -73,8 +79,8 @@ class AdminUserController extends Controller
           'tel' => $input['tel'],
           'hire_date' => $input['hire_date'],
           'store_id' => 0,
-          'access_right' => bindec($access_right),
-          'position_code' => $input['position_code']
+          'access_right' => $access_right,
+          'position_code' => $position_code
         ]);
 
         Mail::to($input['email'])->send(new AdminAccountRegister($input));
@@ -163,6 +169,13 @@ class AdminUserController extends Controller
         return redirect()->route('admin.adminuser.index');
     }
 
+    /**
+     * checkboxから来た二つ権限（user_right, store_right）を一つに組み合わ、
+     * バイナリー（文字列）から数字に変換する。
+     * 例） user_right('1')  --->
+     *                           binary '10' ---> number 2 ---> access_right(2)
+     *     store_right('0')  --->
+     */
     public function combineAccessRights($fields, $input) {
       $access_right = '';
       foreach ($fields as $field) {
