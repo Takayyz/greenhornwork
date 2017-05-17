@@ -6,10 +6,6 @@
   color: #fff;
 }
 
-.hello {
-  width: 100%;
-}
-
 .home-btn-wrapper {
   width: 600px;
   height: 600px;
@@ -26,6 +22,8 @@
 }
 
 /*buttons*/
+
+/*sass*/
 
 .admin__btn {
   height: 220px;
@@ -69,19 +67,79 @@
   left: 390px;
 }
 
-.btn-admin {
-  background-color: #73736f;
-  border-bottom: 3px solid #3e3e3e;
-  border-right: 3px solid #3e3e3e;
-}
-
-.btn-admin:hover {
-  border-bottom: 1px solid #3e3e3e;
-  border-right: 1px solid #3e3e3e;
-}
-
 .container__inner {
   padding: 10px 0;
+}
+
+.user__btn {
+  display: block;
+  padding: 20px 20px;
+  font-size: 24px;
+  text-align: center;
+  color: #fff;
+}
+
+.user__btn:hover {
+  color: #000;
+}
+
+.btn-work__schedules:hover {
+  border-bottom: 1px solid #0c6641;
+  border-right: 1px solid #0c6641;
+}
+
+.btn__daily__reports:hover {
+  border-bottom: 1px solid #7d7409;
+  border-right: 1px solid #7d7409;
+}
+
+.user-search-btn-box {
+  text-align: right;
+}
+
+.back-btn-box {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 30px;
+}
+
+.user__btn {
+  font-size: 45px;
+}
+
+.bottom-btn:hover,
+.btn:hover {
+  box-shadow: 0 5px 60px rgba(40, 250, 40, .4);
+  text-decoration: none !important
+}
+
+.bottom-btn, .btn {
+  padding: 10px 60px;
+  border-radius: 10px;
+  border: solid 1px #5ba654;
+  background-color: #fff; 
+  color: #5ba654;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-wrapper {
+  text-align: center;
+  margin-top: 70px;
+}
+
+.bottom-btn-wrapper {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.btn-danger {
+  padding: 5px 40px;
+  border-radius: 10px;
+  background-color: red; 
+  color: #fff;
+  margin: 20px 0px;
+  margin-left: 20px;
 }
 
 /* 管理ユーザーCRUDに使用するクラス */
@@ -124,55 +182,12 @@
   padding-top: 100px;
 }
 
-.user__btn {
-  display: block;
-  padding: 20px 20px;
-  font-size: 24px;
-  text-align: center;
-  color: #fff;
-}
-
-.user__btn:hover {
-  color: #000;
-}
-
-/*.btn-work__schedules {
-  background-color: #20895e;
-  border-bottom: 3px solid #0c6641;
-  border-right: 3px solid #0c6641;
-}*/
-
-.btn-work__schedules:hover {
-  border-bottom: 1px solid #0c6641;
-  border-right: 1px solid #0c6641;
-}
-
-/*.btn__daily__reports {
-  background-color: #b3a92a;
-  border-bottom: 3px solid #7d7409;
-  border-right: 3px solid #7d7409;
-}*/
-
-.btn__daily__reports:hover {
-  border-bottom: 1px solid #7d7409;
-  border-right: 1px solid #7d7409;
-}
-
-.user-search-btn-box {
-  text-align: right;
-}
-
 .background-color {
   background-color: #fff !important;
 }
 
 /********** Reset <li> ***********/
 
-.back-btn-box {
-  width: 100%;
-  text-align: right;
-  margin-bottom: 30px;
-}
 
 form.user-search {
   background: #eee;
@@ -264,10 +279,6 @@ tbody.search-body > tr > td {
   border-color: #5ba654;
 }
 
-.user__btn {
-  font-size: 45px;
-}
-
 .fa {
   line-height: 0;
   width: 100%;
@@ -286,27 +297,6 @@ a, a:focus, a:hover {
   text-decoration: none !important;
 }
 
-.bottom-btn:hover,
-.btn:hover {
-  box-shadow: 0 5px 60px rgba(40, 250, 40, .4);
-  text-decoration: none !important
-}
-
-.bottom-btn, .btn {
-  padding: 10px 60px;
-  border-radius: 10px;
-  border: solid 1px #5ba654;
-  background-color: #fff; 
-  color: #5ba654;
-  text-transform: uppercase;
-  transition: all 0.2s ease-in-out;
-}
-
-.btn-wrapper {
-  text-align: center;
-  margin-top: 70px;
-}
-
 .container__inner {
   padding-top: 150px;
   padding-left: 196px;
@@ -318,22 +308,8 @@ a, a:focus, a:hover {
   display: block;
 }
 
-.bottom-btn-wrapper {
-  padding-top: 10px;
-  text-align: center;
-}
-
 .delete-margin {
   margin-right: 0 !important;
-}
-
-.btn-danger {
-  padding: 5px 40px;
-  border-radius: 10px;
-  background-color: red; 
-  color: #fff;
-  margin: 20px 0px;
-  margin-left: 20px;
 }
 
 .user-info-list {

@@ -21,21 +21,21 @@
 
       <li>
         <a href="{{ route('admin.store.index') }}" class="admin__btn store__btn__position">
-        	<i class="fa fa-home mt70 fa-2x"></i>
+        	<i class="fa fa-home fa-2x mt70"></i>
           <p>店舗</p>
         </a>
       </li>
 
       <li>
         <a href="{{ route('admin.user.index') }}" class="admin__btn user__btn__position">
-        	<i class="fa fa-user mt70 fa-2x"></i>
+        	<i class="fa fa-user fa-2x mt70"></i>
           <p>ユーザー</p>
         </a>
       </li>
 
       <li>
         <a href="{{ route('admin.adminuser.index') }}" class="admin__btn adminuser__btn__position">
-          <i class="fa fa-cog mt70 fa-2x"></i>
+          <i class="fa fa-cog fa-2x mt70"></i>
           <p>管理者</p>
         </a>
       </li>
