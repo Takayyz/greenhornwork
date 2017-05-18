@@ -4,7 +4,9 @@
 
   <h1 class="brand-header">店舗一覧</h1>
   <div class="btn-wrapper">
-    <a class="btn delete-margin" href="{{ url('admin/store/create') }}">店舗の登録</a>
+    @if ($selfinfo->access_right & env('ACCESS_RIGHT_STORE'))
+      <a class="btn delete-margin" href="{{ url('admin/store/create') }}">店舗の登録</a>
+    @endif
   </div>
 
   <div class="content-wrapper">
