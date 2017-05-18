@@ -124,4 +124,12 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
                   ->where('id', $admin_user_info_id)
                   ->update(['access_right' => $access_right]);
     }
+
+    public function getUserInfoByUserId($user_id) {
+      return $this->model->whereHas('admin', function($query) use ($user_id) {
+        return $query->when($user_id, function($query) use ($user_id) {
+          return $query->where('id', $user_id);
+        });
+      })->first();
+    }
 }

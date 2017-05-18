@@ -69,6 +69,11 @@
   left: 390px;
 }
 
+.access_right__btn__position {
+  top: 410px;
+  left: 750px;
+}
+
 .btn-admin {
   background-color: #73736f;
   border-bottom: 3px solid #3e3e3e;
@@ -296,7 +301,7 @@ a, a:focus, a:hover {
   padding: 10px 60px;
   border-radius: 10px;
   border: solid 1px #5ba654;
-  background-color: #fff; 
+  background-color: #fff;
   color: #5ba654;
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
@@ -330,7 +335,7 @@ a, a:focus, a:hover {
 .btn-danger {
   padding: 5px 40px;
   border-radius: 10px;
-  background-color: red; 
+  background-color: red;
   color: #fff;
   margin: 20px 0px;
   margin-left: 20px;
@@ -508,7 +513,7 @@ form.user-search {
 
 .user-navbar {
   background-color: #fff;
-  
+
 }
 
 .user-navbar a {

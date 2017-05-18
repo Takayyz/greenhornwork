@@ -13,6 +13,7 @@ use App\Entities\User;
 use App\Mail\AccountRegister;
 use App\Repositories\StoresRepository;
 use Mail;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -43,13 +44,16 @@ class UserController extends Controller
         // 管理者からのインプットを正常化
         $inputs = $this->users->normalizeInputs($inputs);
 
+        // 自身のユーザー情報を取得
+        $self_user_id = Auth::id();
+        $selfinfo = $this->userinfos->getUserInfoByUserId($self_user_id);
 
         // デフォルト：　ユーザー情報全権取得
         //　管理者が指定した条件によりユーザー情報を取得
         $users = $this->users->getUsersFromSearchingResult($inputs);
 
         $stores = $this->stores->all();
-        return view('admin.user.index', compact('users', 'stores'));
+        return view('admin.user.index', compact('users', 'stores', 'selfinfo'));
     }
 
     /**
@@ -90,10 +94,14 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        // 自身のユーザー情報を取得
+        $self_user_id = Auth::id();
+        $selfinfo = $this->userinfos->getUserInfoByUserId($self_user_id);
 
+        // 選択した研修生の情報を取得
         $user =  $this->users->find($id);
-        return view('admin.user.show', compact('user'));
-    
+        return view('admin.user.show', compact('user', 'selfinfo'));
+
     }
 
     /**
@@ -127,7 +135,7 @@ class UserController extends Controller
          ]);
 
         return redirect()->route('admin.user.index');
-        
+
     }
 
     /**

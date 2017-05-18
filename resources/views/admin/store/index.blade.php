@@ -19,9 +19,11 @@
           <tr>
             <td>{{ $store->name }}</td>
             <td><a class="btn btn-success pull-right" href="{{ route('admin.store.show', $store->id)}}">研修生一覧</a></td>
-            <td><a href="{{ route('admin.store.edit', $store->id) }}" type="submit" class="btn btn-success pull-right">
-              店舗情報の更新</a>
-            </td>
+              @if ($selfinfo->access_right & env('ACCESS_RIGHT_STORE'))
+                <td><a href="{{ route('admin.store.edit', $store->id) }}" type="submit" class="btn btn-success pull-right">
+                  店舗情報の更新</a>
+                </td>
+              @endif
           </tr>
         @endforeach
       </tbody>

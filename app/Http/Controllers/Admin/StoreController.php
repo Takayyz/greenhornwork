@@ -28,6 +28,10 @@ class StoreController extends Controller
   {
     $input = $request->all();
 
+    // 自身のユーザー情報を取得
+    $self_user_id = Auth::id();
+    $selfinfo = $this->user_infos->getUserInfoByUserId($self_user_id);
+
     if(empty($input)) {
       //一覧表示
       $stores = $this->stores->orderBy('kana_name', 'asc')->all();
@@ -35,7 +39,7 @@ class StoreController extends Controller
       //検索結果表示
       $stores = $this->stores->getSearchedStoreName($input);
     }
-    return view('admin.store.index', compact('stores'));
+    return view('admin.store.index', compact('stores', 'selfinfo'));
   }
 
   public function create()
