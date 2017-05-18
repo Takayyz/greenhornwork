@@ -1,27 +1,46 @@
-@extends('partials.admin_nav')
+@extends('partials.outline')
 
-@section('content')
-<div class="container">
-  <div class="row container__inner">
-      <div class="col-md-3 col-md-offset-2 col-xs-8 col-xs-offset-2">
-        <a href="{{ route('admin.schedule.index') }}" class="btn btn-work__schedules admin__btn"><i class="fa fa-briefcase" aria-hidden="true"></i>&nbsp;&nbsp;勤退</a>
-      </div>
-      <div class=" col-md-3 col-md-offset-2 col-xs-8 col-xs-offset-2">
-        <a href="{{ route('admin.report.index') }}" class="btn btn__daily__reports admin__btn"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;&nbsp;日報</a>
-      </div>
-  </div>
-  <div class="row container__inner">
-      <div class="col-md-3 col-md-offset-2 col-xs-8 col-xs-offset-2">
-        <a href="{{ route('admin.store.index') }}" class="btn btn-store admin__btn"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;店舗</a>
-      </div>
-      <div class="col-md-3 col-md-offset-2 col-xs-8 col-xs-offset-2">
-        <a href="{{ route('admin.user.index') }}" class="btn btn-user admin__btn"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;ユーザー</a>
-      </div>
-  </div>
-  <div class="row container__inner">
-    <div class="col-md-3 col-md-offset-2 col-xs-8 col-xs-offset-2">
-      <a href="{{ route('admin.adminuser.index') }}" class="btn btn-admin admin__btn"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;管理者</a>
-    </div>
-  </div>
-</div>
+@section('outline')
+
+  <body>
+
+    <ul class="home-btn-wrapper">
+      <li>
+        <a href="{{ route('admin.schedule.index') }}" class="admin__btn schedule__btn__position">
+          <i class="fa fa-briefcase fa-2x mt70"></i>
+          <p>勤退</p>
+        </a>
+      </li>
+
+      <li>
+        <a href="{{ route('admin.report.index') }}" class="admin__btn dailyreport__btn__position">
+        	<i class="fa fa-file-text-o fa-2x mt70"></i>
+          <p>日報</p>
+        </a>       
+      </li>
+
+      <li>
+        <a href="{{ route('admin.store.index') }}" class="admin__btn store__btn__position">
+        	<i class="fa fa-home mt70 fa-2x"></i>
+          <p>店舗</p>
+        </a>
+      </li>
+
+      <li>
+        <a href="{{ route('admin.user.index') }}" class="admin__btn user__btn__position">
+        	<i class="fa fa-user mt70 fa-2x"></i>
+          <p>ユーザー</p>
+        </a>
+      </li>
+
+      <li>
+        <a href="{{ route('admin.adminuser.index') }}" class="admin__btn adminuser__btn__position">
+          <i class="fa fa-cog mt70 fa-2x"></i>
+          <p>管理者</p>
+        </a>
+      </li>
+    </ul>
+
+  </body>
+
 @endsection

@@ -25,7 +25,7 @@ class WorkScheduleRequest extends FormRequest
   public function rules()
   {
     return [
-      'schedule' => 'mimes:jpeg,png,jpg,pdf',
+      'schedule' => 'mimes:jpeg,png,jpg,pdf|max:2048',
     ];
   }
 
@@ -33,6 +33,7 @@ class WorkScheduleRequest extends FormRequest
   {
     return[
       'schedule.mimes' => 'ファイルの形式が正しくありません。pdf/jpeg/jpg/pngのいずれかの形式のみアップロードできます。',
+      'schedule.max' => 'ファイルサイズが大きすぎます。2MB以内で投稿してください。',
     ];
   }
 }

@@ -20,7 +20,7 @@ Route::group(['prefix' => '/'], function() {
   Route::get('/', 'UserController@index');
   Route::get('/home', 'UserController@index');
   Route::resource('report', 'DailyReportController');
-  Route::resource('/schedule', 'WorkScheduleController');
+  Route::resource('/schedule', 'WorkScheduleController', ['except' => 'show']);
   Route::post('/register', 'Auth\RegisterController@register');
   Route::get('/register/{query}', 'Auth\RegisterController@showRegistrationForm');
 });
@@ -28,10 +28,11 @@ Route::group(['prefix' => '/'], function() {
 Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], function() {
   Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
   Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
-  Route::post('logout', 'Auth\LoginController@logout');
+  Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
-  Route::get('/', 'HomeController@index');
-  Route::resource('report', DailyReportController::class);
+
+  Route::resource('report', DailyReportController::class, ['only' => ['index', 'show']]);
+  Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
   Route::resource('store', StoreController::class);
 
   Route::resource('adminuser', AdminUserController::class);
@@ -47,7 +48,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::get('/register/', 'Auth\AdminRegisterController@showAdminRegistrationForm');
 
   Route::resource('user', UserController::class);
-  Route::resource('schedule', WorkScheduleController::class);
+  Route::resource('schedule', WorkScheduleController::class, ['only' => 'index']);
 
   // access_right
   Route::get('/access_right', ['as' => 'access_right.index', 'uses' => 'AccessRightController@index']);

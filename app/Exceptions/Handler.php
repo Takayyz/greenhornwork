@@ -6,6 +6,8 @@ use Exception;
 use Symfony\Component\HttpKernel\Exception as Errors;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\PostTooLargeException;
+use Illuminate\Session\TokenMismatchException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,50 +47,24 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        $error_message = $exception->getMessage();
-
-        //　ステータスコードに対応するメッセージをここで設定。
-        $MESSAGES = [
-          400 => 'Bad Request',
-          401 => '認証に失敗しました',
-          403 => 'アクセス権がありません',
-          404 => 'ページが見つかりません',
-          408 => 'タイムアウトです',
-          414 => 'リクエストURIが長過ぎます',
-          500 => 'Internal Server Error',
-          503 => 'Service Unavailable'
-        ];
-
-        //　予期しないステータスコードが渡って来た場合のメッセージを設定。
-        $MESSAGE_UNEXPECTED = "予期しないエラーが起きました。管理者に連絡して下さい";
-
-        //  エラーかどうかを判断。
-        if(!$error_message) {
-          $statusCode = $exception->getStatusCode();
-
-          //　渡って来たステータスコードが対応しているかどうかを確認
-          $error_message = $MESSAGES[$statusCode] ?? $MESSAGE_UNEXPECTED;
-        } else {
-          //  問題が無ければ普通に処理。
-          return parent::render($request, $exception);
-        }
-
-        //　viewに渡すデータをここで入力
-        $data = [
-          'exception' => $exception,
-          'error_message' => $error_message
-        ];
-
-        //　errors直下にcommonファイルがあればそちらを使用。ここでエラーが全て処理される。
-        if (view()->exists('errors.common')) {
-          return response(view('errors.common', $data), $statusCode);
-        }
-
-        //  そのステータスコードに対応しているファイルが存在しているかどうか確認。例）404.blade.php
-        if (view()->exists('errors.' . $statusCode)) {
-          return response(view('errors.' . $statusCode, $data), $statusCode);
-        }
+      //ログインしていない状態でログインが必要なページにアクセスした場合の処理
+      if($exception instanceof AuthenticationException) {
         return parent::render($request, $exception);
+      }
+
+      //POSTでデータ送信をした際に、post_max_sizeを超えた場合の処理
+      if($exception instanceof PostTooLargeException) {
+        $errMsg = 'ファイルサイズ超過です。2MB以内で投稿してください。';
+        return back()->with('error', $errMsg);
+      }
+
+      //セッションのトークンとフォームのトークンが合わない場合の処理
+      if($exception instanceof TokenMismatchException) {
+        return redirect('/');
+      }
+
+      //その他の例外が発生した場合の処理
+      return $this->otherException($exception);
     }
 
     /**
@@ -105,7 +81,7 @@ class Handler extends ExceptionHandler
         }
 
         if(in_array('admin', $exception->guards())) {
-          return redirect()->guest('admin/login');
+            return redirect()->guest('admin/login');
         }
 
         return redirect()->guest('login');
@@ -146,9 +122,40 @@ class Handler extends ExceptionHandler
         );
     }
 
-    // protected function renderHttpException(HttpException $exception)
-    // {
-    //   $status = $e->getStatusCode();
-    //   return response()->view("errors.common", compact('exception', 'status'));
-    // }
+    protected function otherException($exception)
+    {
+      //各ステータスコードに沿ったメッセージ
+      $MESSAGES = [
+        400 => 'Bad Request',
+        401 => '認証に失敗しました',
+        403 => 'アクセス権がありません',
+        404 => 'ページが見つかりません',
+        405 => 'アクセス権がありません',
+        408 => 'タイムアウトです',
+        414 => 'リクエストURIが長過ぎます',
+        500 => 'Internal Server Error',
+        503 => 'Service Unavailable'
+      ];
+
+      //上記ステータスコード以外、ステータスコードが存在しない場合に使用するメッセージ
+      $MESSAGE_UNEXPECTED = "予期しないエラーが起きました。管理者に連絡して下さい";
+
+      $statusCode = "";
+
+      if(method_exists($exception, 'getStatusCode')) {
+        $statusCode = $exception->getStatusCode();
+      }
+
+      $error_message = $MESSAGES[$statusCode] ?? $MESSAGE_UNEXPECTED;
+
+      //　viewに渡すデータを入力
+      $data = [
+        'exception' => $exception,
+        'error_message' => $error_message
+      ];
+
+      return response(view('errors.common', $data));
+
+    }
+
 }

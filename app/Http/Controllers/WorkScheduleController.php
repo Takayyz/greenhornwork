@@ -63,7 +63,7 @@ class WorkScheduleController extends Controller
     //同年月の勤務表が存在する場合は元の画面にリダイレクト
     if(!empty($errMsg))
     {
-      $request->session()->flash('flash_message', $errMsg);
+      $request->session()->flash('error', $errMsg);
       return redirect()->route('schedule.create');
     }
     //ファイル保存
@@ -90,7 +90,7 @@ class WorkScheduleController extends Controller
     //同年月の勤務表が存在する場合は元の画面にリダイレクト
     if(!empty($errMsg))
     {
-      $request->session()->flash('flash_message', $errMsg);
+      $request->session()->flash('error', $errMsg);
       return redirect()->route('schedule.edit', $id);
     }
 

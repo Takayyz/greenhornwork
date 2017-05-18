@@ -1,18 +1,15 @@
-
 <?php
 //日報の日付をstringからdatetimeに変換
  $reporting_time = date("Y-m-d", strtotime($report->reporting_time));
  ?>
 
-@extends('layouts.app')
+@extends('partials.user_nav')
 
 @section('content')
-<div class="container">
-  <p class="pull-right"><a href="{{ url('user/report') }}">一覧に戻る</a></p>
-  <div class="panel-heading">
-    <h2>日報詳細・編集</h2>
-  </div>
-  <div class="panel-body">
+
+  <h1 class="brand-header">日報詳細・編集</h1>
+ 
+  <div class="container">
     {!! Form::open(['route' => ['report.update', $report->id], 'method' => 'PUT']) !!}
       <div class="form-group @if(!empty($errors->first('date'))) has-error @endif">
         {{ Form::input('date', 'date', $reporting_time, ['class' => 'form-control']) }}
@@ -28,6 +25,10 @@
       </div>
       <button type="submit" class="btn btn-success pull-right">更新</button>
     {!! Form::close() !!}
+  </div><!-- container closing tag -->
+
+  <div class="bottom-btn-wrapper">
+    <a href="{{ route('report.index') }}" class="btn">日報一覧画面へ</a>
   </div>
-</div>
+
 @endsection

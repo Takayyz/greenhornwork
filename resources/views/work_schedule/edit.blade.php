@@ -1,26 +1,27 @@
 @extends('partials.user_nav')
 
 @section('content')
-<div class="container">
-  <div class="panel-heading">
-    <h2>勤務表更新</h2>
-  </div>
-  <p class="pull-right"><a href="{{ route('schedule.index') }}">一覧に戻る</a></p>
-  <div class="panel-body">
+
+  <h1 class="brand-header">勤務表更新</h1>
+  <div class="container">
     {!! Form::open(['route' => ['schedule.update', $schedule->id], 'method' => 'put' , 'files' => 'true']) !!}
-      <div class="form-group {{ Session::has('flash_message') ? 'has-error' :''}}">
+      <div class="form-group {{ Session::has('error') ? 'has-error' :''}}">
         {!! Form::label('year', '年'); !!}
-        {!! Form::selectRange('year', date('Y'), date('Y')+20, $schedule->year ) !!}
+        <td class="search-td">
+          {!! Form::selectRange('year', date('Y')-10, date('Y')+10, old('year'), ['class' => 'form-control-custom', 'placeholder'=>'年']) !!}
+        </td>
         <span class="help-block">{{ $errors->first('year') }}</span>
       </div>
-      <div class="form-group {{ Session::has('flash_message') ? 'has-error' :''}} ">
+      <div class="form-group {{ Session::has('error') ? 'has-error' :''}} ">
         {!! Form::label('month', '月'); !!}
-        {!! Form::selectRange('month', 1, 12, $schedule->month ) !!}
+        <td class="search-td">
+          {!! Form::selectRange('month', 1, 12, old('month'), ['class' => 'form-control-custom', 'placeholder'=>'月']) !!}
+        </td>
         <span class="help-block">{{ $errors->first('month') }}</span>
       </div>
-      @if (Session::has('flash_message'))
+      @if (Session::has('error'))
         <div class="has-error">
-          <span class="help-block">{{ Session('flash_message') }}</span>
+          <span class="help-block">{{ Session('error') }}</span>
         </div>
       @endif
       <div class="form-group">
@@ -34,7 +35,11 @@
         <img src="{{ url($schedule->file_path . $schedule->file_name) }}" alt="" width="350" height="350">
       </div>
       <button type="submit" class="btn btn-success pull-right">更新</button>
-    {!! Form::close() !!}
-  </div>
-</div>
+      {!! Form::close() !!}
+    </div><!-- container closing tag -->
+
+    <div class="bottom-btn-wrapper">
+      <a href="{{ route('schedule.index') }}" class="bottom-btn">ホームへ</a>
+    </div>
+
 @endsection
