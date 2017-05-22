@@ -26,7 +26,7 @@
               <td>{{ $adminuser->info->tel }}</td>
               <td>
                 <a class="btn btn-success" href="{{ route('admin.adminuser.show', $adminuser->id) }}">詳細</a>
-              </td>     
+              </td>
             </tr>
           @endforeach
         </tbody>
@@ -35,7 +35,9 @@
 
   <div class="bottom-btn-wrapper">
     <a href="{{ route('admin.home') }}" class="btn">ホームへ</a>
-    <a class="btn" href="{{ route('admin.adminuser.create') }}">管理者ユーザーの作成</a></p>
+    @if ($selfinfo->position_code === 1)
+      <a class="btn" href="{{ route('admin.adminuser.create') }}">管理者ユーザーの作成</a></p>
+    @endif
   </div>
 
 @endsection

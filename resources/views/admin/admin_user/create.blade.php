@@ -1,7 +1,6 @@
 @extends('partials.admin_nav')
 
 @section('content')
-
   <h1 class="brand-header">管理者ユーザーの作成</h1>
 
   {{ Form::open(['route' => 'admin.adminuser.store']) }}
@@ -24,7 +23,7 @@
         </li>
 
         <li>
-          <h4>{!! Form::label('first_name', '性別'); !!}</h4>
+          <h4>{!! Form::label('sex', '性別'); !!}</h4>
           <div class="form-group {{ $errors->has('sex') ? 'has-error' :''}}">
             {!! Form::label('sex', '男性'); !!}
             {!! Form::radio('sex', '男', old("sex")) !!}
@@ -42,7 +41,7 @@
           </div>
         </li>
 
-        <li>   
+        <li>
           <div class="form-group {{ $errors->has('email') ? 'has-error' :''}}">
             <h4>{!! Form::label('email', 'メールアドレス'); !!}</h4>
             {!! Form::input('text', 'email', old("email"), array('class' => 'form-control-custom','placeholder' => 'greenhorn@gizumo.com')) !!}
@@ -76,11 +75,41 @@
           </div>
         </li>
 
-        <li></li>
-      </ul>
-   </div><!-- container closing tag -->
-  {!! Form::close() !!}
+        <li>
+          <div class="form-group {{ $errors->has('email') ? 'has-error' :''}}">
+            <h4>{!! Form::label('privileges', '管理者権限'); !!}</h4>
+            {!! Form::input('text', 'email', old("email"), array('class' => 'form-control-custom','placeholder' => 'greenhorn@gizumo.com')) !!}
+            <span class="help-block">{{$errors->first('email')}}</span>
+          </div>
+        </li>
 
+        <li>
+          <div class="form-group">
+            {!! Form::label('privileges', 'アクセス権限'); !!}
+            <label>
+              ユーザー
+            </label>
+            {!! Form::checkbox('user_right') !!}
+            <label>
+              店舗
+            </label>
+            {!! Form::checkbox('store_right') !!}
+          </div>
+        </li>
+
+        <li>
+          <div class="form-group">
+            <label>
+              社員コード
+            </label>
+            {!! Form::text('position_code', '',
+                            ['class' => 'form-control',
+                            'placeholder' => '1から100の間の数字を記入してして下さい']) !!}
+          </div>
+        </li>
+      </ul>
+   </div> <!-- container closing tag -->
+  {!! Form::close() !!}
 
   <div class="bottom-btn-wrapper">
     <button type="submit" class="btn">管理者ユーザー作成</button>

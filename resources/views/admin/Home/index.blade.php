@@ -16,7 +16,7 @@
         <a href="{{ route('admin.report.index') }}" class="admin__btn dailyreport__btn__position">
         	<i class="fa fa-file-text-o fa-2x mt70"></i>
           <p>日報</p>
-        </a>       
+        </a>
       </li>
 
       <li>
@@ -39,6 +39,14 @@
           <p>管理者</p>
         </a>
       </li>
+
+      <li>
+        <a href="{{ route('admin.access_right.index') }}" class="admin__btn access_right__btn__position">
+          <i class="fa fa-check mt70 fa-2x"></i>
+          <p>申請</p>
+        </a>
+      </li>
+
     </ul>
 
   </body>

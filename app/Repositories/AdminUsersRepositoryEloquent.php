@@ -48,4 +48,17 @@ class AdminUsersRepositoryEloquent extends BaseRepository implements AdminUsersR
       // store_name
       return $this->model->whereHas('stores');
     }
+
+    public function getAdminUser($adminuser_id) {
+      return $this->model->when($adminuser_id, function($query) use ($adminuser_id) {
+        return $query->where('id', $adminuser_id);
+      });
+    }
+
+    public function getAdminUsersByPositionCode($admin_user_info_id) {
+      $adminuserinfo = $this->model->when($admin_user_info_id, function($query) use ($admin_user_info_id) {
+        return $query->where('id', $admin_user_info_id);
+      });
+      return $this->model->filterByPositionCode($adminuserinfo['position_code'])->get();
+    }
 }

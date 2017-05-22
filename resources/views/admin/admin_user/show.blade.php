@@ -5,10 +5,12 @@
   <h1 class="brand-header">管理者ユーザー詳細情報</h1>
 
     <div class="btn-wrapper">
-      {!! Form::open(['route' => ['admin.adminuser.destroy', $adminuser->id], 'method' => 'DELETE']) !!}
-        <a class="btn" href="{{ route('admin.adminuser.edit', $adminuser->id) }}">編集</a>
-        <button class="btn-danger btn" type="submit">削除</button>
-      {!! Form::close() !!}
+      @if ($selfinfo->position_code === 1)
+        {!! Form::open(['route' => ['admin.adminuser.destroy', $adminuser->id], 'method' => 'DELETE']) !!}
+          <a class="btn" href="{{ route('admin.adminuser.edit', $adminuser->id) }}">編集</a>
+          <button class="btn-danger btn" type="submit">削除</button>
+        {!! Form::close() !!}
+      @endif
     </div>
 
     <div class="container">
@@ -42,7 +44,7 @@
           <h3>メールアドレス</h3>
           {{$adminuser->info->email}}
         </li>
-    
+
       <!--   <p class="pull-right"><a href="{{ route('admin.adminuser.mailedit', $adminuser->id) }}">メールアドレスの変更はこちら</a></p> -->
 
         <li>
