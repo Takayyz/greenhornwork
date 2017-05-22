@@ -1,4 +1,4 @@
-@extends('partials.outline')
+@extends('partials.admin_outline')
 
 @section('outline')
 
