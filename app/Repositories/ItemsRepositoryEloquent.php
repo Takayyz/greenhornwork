@@ -32,11 +32,20 @@ class ItemsRepositoryEloquent extends BaseRepository implements ItemsRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    public function saveRentalItem($inputs)
+    // public function saveRentalItem($inputs)
+    // {
+    //     $this->model->create([
+    //         'name' => $inputs['name'],
+
+    //     ]);
+    // }
+
+    public function createItems($data)
     {
         $this->model->create([
-            'name' => $inputs['name'],
-
-        ]);
+            "name" => $data['name'],
+            "item_category_id" => $data['item_category_id'],
+            "item_info" => $data['item_info'],
+            ]);
     }
 }
