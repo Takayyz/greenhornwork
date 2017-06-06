@@ -70,8 +70,13 @@
 }
 
 .access_right__btn__position {
-  top: 410px;
-  left: 750px;
+  top: 500px;
+  left: 60px;
+}
+
+.rental__btn__position {
+  top: 500px;
+  left: 390px;
 }
 
 .btn-admin {

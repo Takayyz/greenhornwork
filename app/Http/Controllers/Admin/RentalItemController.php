@@ -24,30 +24,40 @@ class RentalItemController extends Controller
       UserRepository $user,
       ItemCategoryRepository $category
     ) {
+
     $this->middleware('auth:admin');
     $this->item = $item;
     $this->user = $user;
     $this->rentInfo = $rentInfo;
     $this->category = $category;
+  
   }
 
   public function index(Request $request)
   {
+  
     $items = $this->item->all();
 
     return view('admin.rent.index', compact('items'));
+  
   }
 
   public function create()
   {
+  
     $categories = $this->category->orderBy('category', 'desc')->all();
-// dd($categories);
-// exit;
+
     return view('admin.rent.create', compact('categories'));
+  
   }
 
   public function store(Request $request)
   {
-    $inputs = $request->all();
+  
+    $inputs = $request->all();  
+    $res = $this->item->createItems($inputs);
+
+    return redirect()->route('admin.rent.index');
   }
+
 }

@@ -21,4 +21,14 @@ class RentInfos extends Model implements Transformable
       'approved_at',
     ];
 
+
+    public function admin()
+    {
+      return $this->belongsTo('App\Entities\AdminUsers', 'admin_user_id');
+    }
+
+    public function item()
+    {
+      return $this->belongsTo('App\Entities\Items');
+    }
 }
