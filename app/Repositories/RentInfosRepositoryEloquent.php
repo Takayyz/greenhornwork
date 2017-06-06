@@ -33,4 +33,11 @@ class RentInfosRepositoryEloquent extends BaseRepository implements RentInfosRep
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function getAllRentInfos()
+    {
+        $rentInfos = $this->model->orderBy('rental_at')->get();
+
+        return $rentInfos;
+    }
 }
