@@ -539,8 +539,9 @@ form.user-search {
 }
 
 .control-label-custom {
-  margin-left: 15px;border-left: 5px solid #5ba654;
-  color: #5ba654;
+  margin-left: 15px;
+  border-left: 5px solid #5ba654;
+  color: #666;
 }
 
 .panel-heading-custom {
@@ -557,4 +558,8 @@ form.user-search {
 
 .btn-forget:hover {
   color:#5e5e5e;
+}
+
+.login-form-custom {
+  border: 1px solid #999;
 }
