@@ -11,7 +11,7 @@
       <ul class="">
         <li>
           <div class="form-group">
-            <h4>{{ Form::label('name', '書籍名') }}</h4>
+            <h4>{{ Form::label('name', '名称') }}</h4>
             {{ Form::input('text', 'name', old("name"), array('class' => 'form-controll')) }}
           </div>
         </li>
@@ -34,11 +34,13 @@
           </div>
         </li>
       </ul>
+
+      <div class="bottom-btn-wrapper">
+        <button type="submit" class="btn">追加</button>
+        <a href="{{ route('admin.rent.index') }}" class="bottom-btn">一覧へ</a>
+      </div> 
+
     </div>
   {{ Form::close() }}
 
-
-  <div class="bottom-btn-wrapper">
-    <a href="{{ route('admin.home') }}" class="bottom-button">ホームへ</a>
-  </div>
 @endsection

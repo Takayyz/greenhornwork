@@ -18,4 +18,9 @@ class Items extends Model implements Transformable
     ];
 
     protected $dates = ['deleted_at'];
+
+    public function category()
+    {
+      return $this->belongsTo('App\Entities\ItemCategory', 'item_category_id');
+    }
 }
