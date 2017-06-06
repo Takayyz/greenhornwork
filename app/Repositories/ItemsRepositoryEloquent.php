@@ -24,13 +24,19 @@ class ItemsRepositoryEloquent extends BaseRepository implements ItemsRepository
         return Items::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function saveRentalItem($inputs)
+    {
+        $this->model->create([
+            'name' => $inputs['name'],
+
+        ]);
     }
 }

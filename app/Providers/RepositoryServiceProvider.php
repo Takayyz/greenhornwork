@@ -30,7 +30,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\AdminUsersRepository::class,
             \App\Repositories\WorkSchedulesRepository::class,
             \App\Repositories\StoresRepository::class,
-            \App\Repositories\UserRepository::class,            
+            \App\Repositories\UserRepository::class,
+            \App\Repositories\RentInfosRepository::class,
+            \App\Repositories\ItemsRepository::class,
+            \App\Repositories\ItemCategoryRepository::class,
         ];
 
         foreach ($repositories as $repository) {

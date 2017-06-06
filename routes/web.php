@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::GET('password/reset',['as' => 'password.request', 'uses' => 'Auth\ForgotPasswordController@showLinkRequestForm']);
   Route::POST('password/reset', ['as' => 'password.request', 'uses' => 'Auth\ResetPasswordController@reset']);
   Route::GET('password/reset/{token}', ['as' => 'password.reset', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
+  Route::resource('rent', RentalItemController::class);
 
   Route::post('/register', ['as' => 'register', 'uses' => 'Auth\AdminRegisterController@adminRegister']);
   Route::get('/register/', 'Auth\AdminRegisterController@showAdminRegistrationForm');

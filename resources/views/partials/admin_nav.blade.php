@@ -85,6 +85,18 @@
                       </li>
                       <li class="dropmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                          貸出&nbsp;<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a href="{{ route('admin.rent.index') }}">
+                              貸出一覧
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="dropmenu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                           研修生&nbsp;<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
