@@ -11,7 +11,7 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>貸出物名</th>
+          <th>名称</th>
           <th>種類</th>
         </tr>
       </thead>
@@ -20,7 +20,7 @@
         <tr>
           <td>{{ $item->name }}</td>
           <td>{{ $item->category->category }}</td>
-          <td><a class="btn btn-success" href="#">詳細</a></td>
+          <td><a class="btn btn-success" href="{{ route('admin.rent.show', $item->id) }}">詳細</a></td>
         </tr>
         @endforeach
       </tbody>

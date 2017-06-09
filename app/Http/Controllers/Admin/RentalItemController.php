@@ -33,9 +33,9 @@ class RentalItemController extends Controller
   
   }
 
-  public function index(Request $request)
+  public function index()
   {
-  
+
     $items = $this->item->all();
 
     return view('admin.rent.index', compact('items'));
@@ -56,8 +56,35 @@ class RentalItemController extends Controller
   
     $inputs = $request->all();  
     $res = $this->item->createItems($inputs);
+    dd($input);
+    exit;
 
     return redirect()->route('admin.rent.index');
   }
 
+  public function show($id)
+  {
+    $item = $this->item->find($id);
+
+    return view('admin.rent.show', compact('item'));
+  }
+
+  public function edit($id)
+  {
+    $item = $this->item->find($id);
+    $categories = $this->category->orderBy('category', 'desc')->all();
+
+    return view('admin.rent.edit' ,compact('item', 'categories'));
+  }
+
+  public function update(Request $request, $id)
+  {
+    $self_user_id = Auth::id();//自身の情報取得
+
+    $item = $this->item->find($id);
+    $inputs = $repuest->all();
+    $res = $this->item->updateItem($inputs, $item);
+
+    return redirect()->route('admin.rent.index');
+  }
 }
