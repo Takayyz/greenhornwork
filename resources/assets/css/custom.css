@@ -533,3 +533,33 @@ form.user-search {
   top: 0;
   z-index: -1;
 }
+
+.login-panel {
+  border: 1px solid #5ba654;
+}
+
+.control-label-custom {
+  margin-left: 15px;
+  border-left: 5px solid #5ba654;
+  color: #666;
+}
+
+.panel-heading-custom {
+  margin: 10px 15px;
+  border-bottom: 1px solid #5ba654;
+  font-size: 30px;
+  color:#5ba654;
+}
+
+.forget-password {
+  margin-top: 15px;
+  color:#5ba654;
+}
+
+.btn-forget:hover {
+  color:#5e5e5e;
+}
+
+.login-form-custom {
+  border: 1px solid #999;
+}
