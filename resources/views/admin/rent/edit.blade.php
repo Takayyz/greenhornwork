@@ -3,10 +3,6 @@
 @section('content')
 
   <h1 class='brand-header'>貸出物の更新</h1>
-  <div class="btn-wrapper">
-    <a href="{{ route('admin.rent.show', $item->id) }}" class="btn">詳細に戻る</a>
-    <a href="{{ route('admin.rent.index') }}" class="btn">一覧へ</a>
-  </div>
   {!! Form::open(['route' => ['admin.rent.update', $item->id], 'method' => 'PUT']) !!}
     <div class="content-wrapper">
       <ul>
@@ -40,8 +36,11 @@
     </div>
 
     <div class="bottom-btn-wrapper">
-      <button class="btn" type="submit">更新</button>
+      <button class="btn btn-success" type="submit">更新</button>
     </div>
   {!! Form::close() !!}
-
+    <div class="bottom-btn-wrapper pull-right">
+      <a href="{{ route('admin.rent.show', $item->id) }}" class="btn">詳細に戻る</a>
+      <a href="{{ route('admin.rent.index') }}" class="btn">一覧へ</a>
+    </div>
 @endsection
