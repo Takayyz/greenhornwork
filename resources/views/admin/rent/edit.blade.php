@@ -19,7 +19,7 @@
             <h4>{!! Form::label('item_category_id', '種類') !!}</h4>
             <select name="item_category_id">
               @foreach($categories as $category)
-                <option value="{{ $category->id }}" {{ $item->item_category_id === $category->id ? 'selected' : '' }}>{{ $category->category }}</option>
+                <option value="{{ $category->id }}" {{ $item->item_category_id === $category->id ? 'selected' : '' }}>{{ $category->category }}</option><!--admin.user.edit 写し-->
               @endforeach
             </select>
           </div>

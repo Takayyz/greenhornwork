@@ -29,7 +29,7 @@ class RentalItemController extends Controller
 
   public function index()
   {
-
+//$this->item->orderBy('item_category_id', 'asc or desc')->all();で種類別で表示順を昇降順選べる
     $items = $this->item->all();
 
     return view('admin.rent.index', compact('items'));
@@ -38,7 +38,7 @@ class RentalItemController extends Controller
 
   public function create()
   {
-// orderBy('a', 'asc or desc')はaカラムを昇順or降順にソート
+
     $categories = $this->category->all();
 
     return view('admin.rent.create', compact('categories'));
