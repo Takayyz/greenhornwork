@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Entities\Items;
-use App\Repositories\RentInfosRepository;
 use App\Repositories\ItemCategoryRepository;
 use App\Repositories\ItemsRepository;
 
@@ -18,14 +17,12 @@ class RentalItemController extends Controller
   protected $category;
 
   public function __construct(
-      RentInfosRepository $rentInfo,
       ItemsRepository $item,
       ItemCategoryRepository $category
     ) {
 
     $this->middleware('auth:admin');
     $this->item = $item;
-    $this->rentInfo = $rentInfo;
     $this->category = $category;
 
   }
