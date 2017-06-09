@@ -48,4 +48,13 @@ class ItemsRepositoryEloquent extends BaseRepository implements ItemsRepository
             "item_info" => $data['item_info'],
             ]);
     }
+
+    public function updateItem($data, $item)
+    {
+        $this->model->where('id', $item['id'])->update([
+            "name" => $data['name'],
+            "item_category_id" => $data['item_category_id'],
+            "item_info" => $data['item_info']
+        ]);
+    }
 }

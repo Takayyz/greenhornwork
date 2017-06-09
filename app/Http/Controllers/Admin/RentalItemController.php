@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Entities\Items;
 use App\Repositories\RentInfosRepository;
 use App\Repositories\ItemCategoryRepository;
-use App\Repositories\UserRepository;
 use App\Repositories\ItemsRepository;
 
 class RentalItemController extends Controller
@@ -21,16 +20,14 @@ class RentalItemController extends Controller
   public function __construct(
       RentInfosRepository $rentInfo,
       ItemsRepository $item,
-      UserRepository $user,
       ItemCategoryRepository $category
     ) {
 
     $this->middleware('auth:admin');
     $this->item = $item;
-    $this->user = $user;
     $this->rentInfo = $rentInfo;
     $this->category = $category;
-  
+
   }
 
   public function index()
@@ -39,52 +36,66 @@ class RentalItemController extends Controller
     $items = $this->item->all();
 
     return view('admin.rent.index', compact('items'));
-  
+
   }
 
   public function create()
   {
-  
-    $categories = $this->category->orderBy('category', 'desc')->all();
+// orderBy('a', 'asc or desc')はaカラムを昇順or降順にソート
+    $categories = $this->category->all();
 
     return view('admin.rent.create', compact('categories'));
-  
+
   }
 
   public function store(Request $request)
   {
-  
-    $inputs = $request->all();  
+
+    $inputs = $request->all();
     $res = $this->item->createItems($inputs);
-    dd($input);
-    exit;
 
     return redirect()->route('admin.rent.index');
+
   }
 
   public function show($id)
   {
+
     $item = $this->item->find($id);
 
     return view('admin.rent.show', compact('item'));
+
   }
 
   public function edit($id)
   {
+
     $item = $this->item->find($id);
-    $categories = $this->category->orderBy('category', 'desc')->all();
+    $categories = $this->category->all();
 
     return view('admin.rent.edit' ,compact('item', 'categories'));
+
   }
 
   public function update(Request $request, $id)
   {
-    $self_user_id = Auth::id();//自身の情報取得
 
     $item = $this->item->find($id);
-    $inputs = $repuest->all();
+    $inputs = $request->all();
+
     $res = $this->item->updateItem($inputs, $item);
 
     return redirect()->route('admin.rent.index');
+
+  }
+
+  public function destroy($id)
+  {
+
+    $item = $this->item->find($id);
+    $item->delete();
+
+    return redirect()->route('admin.rent.index');
+
   }
 }

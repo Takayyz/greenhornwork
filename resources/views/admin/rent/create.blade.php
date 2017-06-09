@@ -30,7 +30,7 @@
         <li>
           <div class="form-group">
             <h4>{{ Form::label('item_info', '概要・説明') }}</h4>
-            {{ Form::textarea('item_info', '', ['maxlength' => 255]) }}
+            {{ Form::textarea('item_info', '', ['maxlength' => '255']) }}
           </div>
         </li>
       </ul>
@@ -38,7 +38,7 @@
       <div class="bottom-btn-wrapper">
         <button type="submit" class="btn">追加</button>
         <a href="{{ route('admin.rent.index') }}" class="bottom-btn">一覧へ</a>
-      </div> 
+      </div>
 
     </div>
   {{ Form::close() }}

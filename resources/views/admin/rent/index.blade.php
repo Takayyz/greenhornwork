@@ -4,7 +4,6 @@
 
   <h1 class="brand-header">貸出物一覧</h1>
   <div class="btn-wrapper">
-    <a href="#" class="btn">貸出物の検索</a>
     <a class="btn btn-success" href="{{ route('admin.rent.create') }}">貸出物の登録</a>
   </div>
   <div class="content-wrapper">
@@ -21,6 +20,11 @@
           <td>{{ $item->name }}</td>
           <td>{{ $item->category->category }}</td>
           <td><a class="btn btn-success" href="{{ route('admin.rent.show', $item->id) }}">詳細</a></td>
+          <td>
+            {!! Form::open(["route" => ['admin.rent.destroy', $item->id], 'method' => 'DELETE']) !!}
+              <button class="btn-danger btn" type="submit">削除</button>
+            {!! Form::close() !!}
+          </td>
         </tr>
         @endforeach
       </tbody>

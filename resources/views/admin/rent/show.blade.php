@@ -4,7 +4,10 @@
 
   <h1 class="brand-header">貸出物の詳細</h1>
   <div class="btn-wrapper">
-    <a href="{{ route('admin.rent.edit', $item->id) }}" class="btn">編集</a>
+    {!! Form::open(["route" => ['admin.rent.destroy', $item->id], 'method' => 'DELETE']) !!}
+      <a href="{{ route('admin.rent.edit', $item->id) }}" class="btn">編集</a>
+      <button class="btn-danger btn" type="submit">削除</button>
+    {!! Form::close() !!}
   </div>
   <div class="content-wrapper">
     <ul>
