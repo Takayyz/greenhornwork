@@ -23,4 +23,20 @@ class Items extends Model implements Transformable
     {
       return $this->belongsTo('App\Entities\ItemCategory', 'item_category_id');
     }
+
+    public function scopeWhereName($query, $field, $name) {
+      if(!$field || !$name)
+      {
+        return $query;
+      }
+
+      switch ($field) {
+        case 'name':
+          return $query->where($field, 'like', '%' . $name . '%');
+          break;
+
+        default:
+          $query;
+      }
+    }
 }

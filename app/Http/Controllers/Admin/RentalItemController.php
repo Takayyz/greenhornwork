@@ -27,12 +27,15 @@ class RentalItemController extends Controller
 
   }
 
-  public function index()
+  public function index(Request $request)
   {
+    $inputs = $request->all();//検索内容全取得
+    $inputs = $this->item->normalizeInputs($inputs);
 //$this->item->orderBy('item_category_id', 'asc or desc')->all();で種類別で表示順を昇降順選べる
-    $items = $this->item->all();
-
-    return view('admin.rent.index', compact('items'));
+    // dd($inputs);
+    $categories = $this->category->all();
+    $items = $this->item->getItemsBySearching($inputs);
+    return view('admin.rent.index', compact('items', 'categories'));
 
   }
 
@@ -77,8 +80,8 @@ class RentalItemController extends Controller
   public function update(Request $request, $id)
   {
 
-    $item = $this->item->find($id);
     $inputs = $request->all();
+    $item = $this->item->find($id);
 
     $res = $this->item->updateItem($inputs, $item);
 
