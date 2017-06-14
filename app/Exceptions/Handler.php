@@ -8,6 +8,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\PostTooLargeException;
 use Illuminate\Session\TokenMismatchException;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -61,6 +62,10 @@ class Handler extends ExceptionHandler
       //セッションのトークンとフォームのトークンが合わない場合の処理
       if($exception instanceof TokenMismatchException) {
         return redirect('/');
+      }
+
+      if($exception instanceof ValidationException){
+        return parent::render($request, $exception);
       }
 
       //その他の例外が発生した場合の処理
