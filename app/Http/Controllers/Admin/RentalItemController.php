@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Entities\Items;
 use App\Repositories\ItemCategoryRepository;
 use App\Repositories\ItemsRepository;
+use App\Requests\ItemsRequest;
 
 class RentalItemController extends Controller
 {

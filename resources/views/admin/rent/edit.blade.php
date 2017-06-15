@@ -11,6 +11,7 @@
           <div class="form-group">
             <h4>{!! Form::label('name', '名称') !!}</h4>
             {!! Form::input('text', 'name', $item->name, ['class' => 'form-control-custom']) !!}
+            <span class="help-block">{{ $errors->first('name') }}</span>
           </div>
         </li>
 
@@ -29,6 +30,7 @@
           <div class="form-group">
             <h4>{!! Form::label('item_info', '概要・説明') !!}</h4>
             {!! Form::textarea('item_info', $item->item_info, ['maxlength' => '255']) !!}
+            <span class="help-block">{{ $errors->first('item_info') }}</span>
           </div>
         </li>
 
