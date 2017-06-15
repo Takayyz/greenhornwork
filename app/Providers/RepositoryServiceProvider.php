@@ -34,6 +34,9 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\RentInfosRepository::class,
             \App\Repositories\ItemsRepository::class,
             \App\Repositories\ItemCategoryRepository::class,
+            \App\Repositories\TagCategoryRepository::class,
+            \App\Repositories\QuestionsRepository::class,
+            \App\Repositories\AnswersRepository::class,
         ];
 
         foreach ($repositories as $repository) {
