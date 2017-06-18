@@ -563,3 +563,9 @@ form.user-search {
 .login-form-custom {
   border: 1px solid #999;
 }
+
+.rental-item-list {
+  max-width: 20em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

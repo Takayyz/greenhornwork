@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Entities\Items;
 use App\Repositories\ItemCategoryRepository;
 use App\Repositories\ItemsRepository;
-use App\Requests\ItemsRequest;
+use App\Http\Requests\ItemsRequest;
 
 class RentalItemController extends Controller
 {
@@ -49,7 +49,7 @@ class RentalItemController extends Controller
 
   }
 
-  public function store(Request $request)
+  public function store(ItemsRequest $request)
   {
 
     $inputs = $request->all();
@@ -78,7 +78,7 @@ class RentalItemController extends Controller
 
   }
 
-  public function update(Request $request, $id)
+  public function update(ItemsRequest $request, $id)
   {
 
     $inputs = $request->all();

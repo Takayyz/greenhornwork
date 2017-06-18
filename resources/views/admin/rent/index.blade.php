@@ -60,7 +60,7 @@
       <tbody>
       @foreach($items as $item)
         <tr>
-          <td>{{ $item->name }}</td>
+          <td class="rental-item-list">{{ $item->name }}</td>
           <td>{{ $item->category->category }}</td>
           <td><a class="btn btn-success" href="{{ route('admin.rent.show', $item->id) }}">詳細</a></td>
           <td>
