@@ -57,5 +57,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::post('/access_right/replyMail/{query}', ['as' => 'access_right.replyMail', 'uses' => 'AccessRightController@replyMail']);
 
   Route::resource('rent', RentalItemController::class);
+  Route::resource('item_category', ItemCategoryController::class);
 
 });

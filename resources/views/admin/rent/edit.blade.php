@@ -8,9 +8,9 @@
       <ul>
 
         <li>
-          <div class="form-group">
+          <div class="form-group @if(!empty($errors->first('name'))) has-error @endif">
             <h4>{!! Form::label('name', '名称') !!}</h4>
-            {!! Form::input('text', 'name', $item->name, ['class' => 'form-control-custom']) !!}
+            {!! Form::input('text', 'name', $item->name, ['class' => 'form-control']) !!}
             <span class="help-block">{{ $errors->first('name') }}</span>
           </div>
         </li>
@@ -27,9 +27,9 @@
         </li>
 
         <li>
-          <div class="form-group">
+          <div class="form-group @if(!empty($errors->first('item_info'))) has-error @endif">
             <h4>{!! Form::label('item_info', '概要・説明') !!}</h4>
-            {!! Form::textarea('item_info', $item->item_info, ['maxlength' => '255']) !!}
+            {!! Form::textarea('item_info', $item->item_info, ['maxlength' => '255', 'class' => 'form-control']) !!}
             <span class="help-block">{{ $errors->first('item_info') }}</span>
           </div>
         </li>

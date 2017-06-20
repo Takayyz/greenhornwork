@@ -33,4 +33,19 @@ class ItemCategoryRepositoryEloquent extends BaseRepository implements ItemCateg
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function createItemCategory($data)
+    {
+        // dd($data['category']);
+        $this->model->create([
+            'category' => $data['category']
+        ]);
+    }
+
+    public function updateItemCategory($data, $category)
+    {
+        $this->model->where('id', $category['id'])->update([
+            'category' => $data['category']
+        ]);
+    }
 }

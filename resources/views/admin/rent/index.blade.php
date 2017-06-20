@@ -7,6 +7,7 @@
   <div class="btn-wrapper">
     <a class="btn btn-success" href="{{ route('admin.rent.create') }}">貸出物の登録</a>
     <a class="btn" href="#openModal">貸出物の検索</a>
+    <a class="btn btn-success" href="{{ route('admin.item_category.index') }}">貸出物種類一覧へ</a>
   </div>
 <!-- admin.user.index写し -->
   <div id="openModal" class="modalDialog">

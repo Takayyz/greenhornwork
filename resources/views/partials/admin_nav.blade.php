@@ -93,6 +93,11 @@
                               貸出物一覧
                             </a>
                           </li>
+                          <li>
+                            <a href="{{ route('admin.item_category.index') }}">
+                              貸出物種類一覧
+                            </a>
+                          </li>
                         </ul>
                       </li>
                       <li class="dropmenu">
