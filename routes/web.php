@@ -22,7 +22,12 @@ Route::group(['prefix' => '/'], function() {
   Route::resource('report', 'DailyReportController');
   Route::resource('/schedule', 'WorkScheduleController', ['except' => 'show']);
   Route::post('/register', 'Auth\RegisterController@register');
-  Route::get('/register/{query}', 'Auth\RegisterController@showRegistrationForm');
+  Route::post('/register/{query}', 'Auth\RegisterController@showRegistrationForm');
+  Route::resource('question', 'QuestionController');
+  Route::get('/questionmypage',['as' => 'questionmypage', 'uses' => 'QuestionController@myPage']);
+  Route::post('/confirm',['as' => 'confirmcreate', 'uses' => 'QuestionController@Confirm']);
+  Route::post('question/{id}/confirm',['as' => 'confirmupdata', 'uses' => 'QuestionController@Confirm']);
+
 });
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], function() {
@@ -56,4 +61,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::post('/access_right/sendMail', ['as' => 'access_right.sendMail', 'uses' => 'AccessRightController@sendMail']);
   Route::get('/access_right/permission', ['as' => 'access_right.permission', 'uses' => 'AccessRightController@permission']);
   Route::post('/access_right/replyMail/{query}', ['as' => 'access_right.replyMail', 'uses' => 'AccessRightController@replyMail']);
+
 });

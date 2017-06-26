@@ -7,7 +7,7 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TagCategories extends Model implements Transformable
+class TagCategory extends Model implements Transformable
 {
     use TransformableTrait, SoftDeletes;
 
