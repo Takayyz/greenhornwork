@@ -26,7 +26,6 @@
     {!! Form::close() !!}
   @else
 
-
 {!! Form::open(['route' => ['question.update', $inputs['id']], 'method' => 'PUT']) !!}
       <ul class="dailyreport-info-list">
         <li>

@@ -29,23 +29,18 @@ class QuestionController extends Controller
    */
   public function index(Request $request)
   {
+
     $categories = $this->category->all();
     $inputs = $request->all();
-    $search = $request->input('s');
+    $search = $request->input('search');
 
-    $questions = $this->question->getAllQuestions($inputs);
-
-    // if(!empty($search)) {
-    //          $questions->where('content', 'like', '%'.$search.'%');
-    //     }
-    if (strpos($questions,$search) !== false) {
-      $data = $questions->all();
-      return view('question.index', compact('data', 'inputs',  'categories'));
-    }else {
-      echo 'test';
+    if(empty($search)) {
+      $questions = $this->question->getAllQuestions($inputs);
+    } else {
+      $questions = $this->question->getSearchedQuestions($inputs);
     }
 
-    //return view('question.index', compact('questions', 'categories'));
+    return view('question.index', compact('questions', 'inputs',  'categories'));
 
   }
 
@@ -55,6 +50,7 @@ class QuestionController extends Controller
     $categories = $this->category->all();
 
     return view('question.create', compact('categories'));
+
   }
 
   /**

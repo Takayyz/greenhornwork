@@ -9,7 +9,6 @@
   <a　class="btn" href="#openModal">質問を検索</a>
 </div>
 
-
 <div id="openModal" class="modalDialog">
   <div>
     {!! Form::open(['route' => 'question.index', 'method' => 'GET']) !!}
@@ -19,19 +18,16 @@
         </thead>
         <div class="modal-header">質問検索</div>
         <tbody class="search-tbody">
-
           <tr>
             <td class="search-td">
               <label>
                 キーワード
               </label>
             </td>
-
             <td class="search-td">
-              {!! Form::text('s',null) !!}
+              {!! Form::text('search', null, ['class' => 'form-control']) !!}
             </td>
           </tr>
-
           <tr>
           <td class="search-td">
             <label>
@@ -64,7 +60,6 @@
   </div>
 </div>
 
-
 <div class="content-wrapper">
   <table class="table table-hover todo-table">
     <thead>
@@ -74,7 +69,7 @@
       </tr>
     </thead>
     <tbody>
-      @foreach($data as $question)
+      @foreach($questions as $question)
         <tr>
           <td>{{ $question->title }}</td>
           <td><a class="btn btn-success" href="question/{{ $question->id }}">詳細</a></td>

@@ -20,9 +20,6 @@
   <lavel>解答</lavel>
     <div class="form-group @if(!empty($errors->first('contents'))) has-error @endif">
       {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
-
     </div>
     <button type="submit" class="btn btn-success pull-right">確認</button>
-
-
 @endsection
