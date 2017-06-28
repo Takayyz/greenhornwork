@@ -6,15 +6,15 @@
   <ul class="dailyreport-info-list">
     <li>
       <h3>タイトル</h3>
-      {{ $question->title }}
+      {{ $questions->title }}
     </li>
     <li>
       <h3>カテゴリ</h3>
-      {{ $question->category->name }}
+      {{ $questions->category->name }}
     </li>
     <li>
       <h3>本文</h3>
-      {{ $question->content }}
+      {{ $questions->content }}
     </li>
   </ul>
   <lavel>解答</lavel>

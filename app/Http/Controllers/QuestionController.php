@@ -32,12 +32,11 @@ class QuestionController extends Controller
 
     $categories = $this->category->all();
     $inputs = $request->all();
-    $search = $request->input('search');
 
-    if(empty($search)) {
+    if(empty($inputs['search'])) {
       $questions = $this->question->getAllQuestions($inputs);
     } else {
-      $questions = $this->question->getSearchedQuestions($inputs);
+      $questions = $this->question->getSearchedQuestionTitle($inputs);
     }
 
     return view('question.index', compact('questions', 'inputs',  'categories'));
@@ -64,8 +63,8 @@ class QuestionController extends Controller
 
      $userId = Auth::id();
 
-     $input = $request->all();
-     $this->question->createQuestion($input, $userId);
+     $inputs = $request->all();
+     $this->question->createQuestion($inputs, $userId);
 
      return redirect()->route('question.index');
 
@@ -74,16 +73,15 @@ class QuestionController extends Controller
    public function show($id)
    {
 
-     $question = $this->question->find($id);
+     $questions = $this->question->find($id);
 
-     return view('question.show', compact('question'));
+     return view('question.show', compact('questions'));
 
    }
 
    public function edit($id)
    {
 
-     $id;
      $categories = $this->category->all();
      $question = $this->question->find($id);
      $categoryname = $this->category->find($question['tag_category_id'])->name;
@@ -96,8 +94,8 @@ class QuestionController extends Controller
    {
 
      $userId = Auth::id();
-     $input = $request->all();
-     $this->question->updateQuestion($input, $id, $userId);
+     $inputs = $request->all();
+     $this->question->updateQuestion($inputs, $id, $userId);
 
      return redirect()->route('question.index');
 
@@ -117,12 +115,12 @@ class QuestionController extends Controller
    {
 
      $userId = Auth::id();
-     $questions = $this->question->getMyQuestions($userId);
+     $questions = $this->question->getMyPageQuestions($userId);
      return view('question.questionmypage', compact('questions'));
 
    }
 
-   public function Confirm(QuestionsRequest $request)
+   public function confirm(QuestionsRequest $request)
    {
 
      $question = $this->question->all();

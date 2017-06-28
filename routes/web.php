@@ -22,11 +22,11 @@ Route::group(['prefix' => '/'], function() {
   Route::resource('report', 'DailyReportController');
   Route::resource('/schedule', 'WorkScheduleController', ['except' => 'show']);
   Route::post('/register', 'Auth\RegisterController@register');
-  Route::post('/register/{query}', 'Auth\RegisterController@showRegistrationForm');
+  Route::get('/register/{query}', 'Auth\RegisterController@showRegistrationForm');
   Route::resource('question', 'QuestionController');
   Route::get('/questionmypage',['as' => 'questionmypage', 'uses' => 'QuestionController@myPage']);
-  Route::post('/confirm',['as' => 'confirmcreate', 'uses' => 'QuestionController@Confirm']);
-  Route::post('question/{id}/confirm',['as' => 'confirmupdata', 'uses' => 'QuestionController@Confirm']);
+  Route::post('/confirm',['as' => 'confirmcreate', 'uses' => 'QuestionController@confirm']);
+  Route::post('question/{id}/confirm',['as' => 'confirm.updata', 'uses' => 'QuestionController@confirm']);
 
 });
 

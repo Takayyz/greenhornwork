@@ -15,12 +15,12 @@
         <tr>
           <td class="content-inner">{{ $question->title }}</td>
           <td>
-              <a class="btn btn-success" href="{{ route('question.edit', $question->id) }}">編集</a>
+            <a class="btn btn-success" href="{{ route('question.edit', $question->id) }}">編集</a>
           </td>
           <td>
-              {!! Form::open(['route' => ['question.destroy', $question->id], 'method' => 'DELETE']) !!}
-                <button class="btn btn-danger" type="submit">削除</button>
-              {!! Form::close() !!}
+            {!! Form::open(['route' => ['question.destroy', $question->id], 'method' => 'DELETE']) !!}
+              <button class="btn btn-danger" type="submit">削除</button>
+            {!! Form::close() !!}
           </td>
         </tr>
       @endforeach

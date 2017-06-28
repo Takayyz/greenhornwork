@@ -4,7 +4,7 @@
 <h1 class="brand-header">編集</h1>
 
 <div class="container">
-  {!! Form::open(['route' => ['confirmupdata', $question->id], 'method' => 'post']) !!}
+  {!! Form::open(['route' => ['confirm.updata', $question->id], 'method' => 'post']) !!}
     <h3>タイトル</h3>
       <div class="form-group @if(!empty($errors->first('title'))) has-error @endif">
         {!! Form::text('title', $question->title, ['class' => 'form-control']) !!}
