@@ -10,3 +10,4 @@ Homestead.yaml
 /public/schedules/*
 /storage/*
 npm-debug.log
+.vagrant
