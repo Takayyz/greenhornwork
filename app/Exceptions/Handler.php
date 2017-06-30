@@ -151,7 +151,11 @@ class Handler extends ExceptionHandler
         $statusCode = $exception->getStatusCode();
       }
 
-      $error_message = $MESSAGES[$statusCode] ?? $MESSAGE_UNEXPECTED;
+    //   $error_message = $MESSAGES[$statusCode] ?? $MESSAGE_UNEXPECTED;
+      if(isset($MESSAGES[$statusCode]))
+        $error_message = $MESSAGES[$statusCode];
+      else
+        return parent::render($request, $exception);
 
       //　viewに渡すデータを入力
       $data = [
