@@ -49,7 +49,7 @@ class ItemsRepositoryEloquent extends BaseRepository implements ItemsRepository
             ]);
     }
 
-    public function updateItem($data, $item)
+    public function updateItemById($data, $item)
     {
         $this->model->where('id', $item['id'])->update([
             "name" => $data['name'],
@@ -63,13 +63,16 @@ class ItemsRepositoryEloquent extends BaseRepository implements ItemsRepository
         if(is_array($data))
         {
             $data = [
+                // 'id' => isset($data['id']) ? $data['id'] : '',
                 'name' => isset($data['name']) ? $data['name'] : '',
-                'item_category_id' => isset($data['item_category_id']) ? $data['item_category_id'] : ''
+                'item_category_id' => isset($data['item_category_id']) ? $data['item_category_id'] : '',
+                'item_info' => isset($data['item_info']) ? $data['item_info'] : ''
             ];
         } else {
             $data = [
                 'name' => '',
-                'item_category_id' => ''
+                'item_category_id' => '',
+                'item_info' => ''
             ];
         }
 

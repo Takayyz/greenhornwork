@@ -12,7 +12,6 @@ use App\Http\Requests\ItemCategoryRequest;
 class ItemCategoryController extends Controller
 {
     protected $category;
-    // public $err;
 
     public function __construct(ItemCategoryRepository $category)
     {
@@ -22,24 +21,26 @@ class ItemCategoryController extends Controller
 
     }
 
-    public function index($err = NULL)
+    public function index()
     {
-      // dd(empty($err));
-      // if(empty($err)) $err = '';
+
       $categories = $this->category->all();
 
       return view('admin.item_category.index', compact('categories'));
 
     }
 
-    public function create()
+    public function create(Request $request)
     {
 
-      return view('admin.item_category.create');
+      $inputs = $request->all();
+      $data = $this->category->normalizeInputs($inputs);
+
+      return view('admin.item_category.create', compact('data'));
 
     }
 
-    public function store(ItemCategoryRequest $request)
+    public function store(Request $request)
     {
 
       $inputs = $request->all();
@@ -49,19 +50,24 @@ class ItemCategoryController extends Controller
 
     }
 
-    public function edit($id)
-    {
-
-      $category = $this->category->find($id);
-
-      return view('admin.item_category.edit', compact('category'));
-
-    }
-
-    public function update(ItemCategoryRequest $request, $id)
+    public function edit(Request $request, $id)
     {
 
       $inputs = $request->all();
+
+      $this->category->normalizeInputs($inputs);
+      $category = $this->category->find($id);
+
+      return view('admin.item_category.edit', compact('category', 'inputs'));
+
+    }
+
+    public function updateCategory(Request $request)
+    {
+
+      $inputs = $request->all();
+
+      $id = $inputs['id'];
       $category = $this->category->find($id);
 
       $res = $this->category->updateItemCategory($inputs, $category);
@@ -73,17 +79,29 @@ class ItemCategoryController extends Controller
     public function destroy($id)
     {
 
-      if (!isset($this->category->find($id)->item)) {
-
         $category = $this->category->find($id);
         $category->delete();
 
         return redirect()->route('admin.item_category.index');
 
-      } else {
-        $err = '使用されているカテゴリーです。';
+    }
 
-        return back()->with('err');
-      }
+    public function confirm(ItemCategoryRequest $request)
+    {
+
+      $inputs = $request->all();
+      // $session_inputs = $request->session()->all();
+
+      return view('admin.item_category.confirm', compact('inputs'));
+
+    }
+
+    public function updateConfirm(ItemCategoryRequest $request)
+    {
+
+      $inputs = $request->all();
+
+      return view('admin.item_category.update_confirm', compact('inputs'));
+
     }
 }

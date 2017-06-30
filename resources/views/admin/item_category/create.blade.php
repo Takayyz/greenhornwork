@@ -6,13 +6,13 @@
   <div class="btn-wrapper">
     <a href="{{ route('admin.item_category.index') }}" class="btn btn-success">貸出物種類一覧に戻る</a>
   </div>
-  {{ Form::open(array('route' => 'admin.item_category.store')) }}
+  {{ Form::open(['route' => 'admin.item_category.confirm', 'method' => 'GET']) }}
     <div class="content">
       <ul>
         <li>
-          <div class="form-group @if(!empty($errors->first('category'))) has-error @endif">
+          <div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">
             <h4>{{ Form::label('category', '種類') }}</h4>
-            {{ Form::input('text', 'category', old("category"), array('class' => 'form-control')) }}
+            {{ Form::input('text', 'category', $data['category'], array('class' => 'form-control')) }}
              <span class="help-block">{{ $errors->first('category') }}</span>
           </div>
         </li>
@@ -20,7 +20,7 @@
       </ul>
 
       <div class="bottom-btn-wrapper">
-        <button type="submit" class="btn">追加</button>
+        <button type="submit" class="btn">確認</button>
         <a href="{{ route('admin.item_category.index') }}" class="bottom-btn">一覧へ</a>
       </div>
 

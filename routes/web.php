@@ -56,7 +56,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::get('/access_right/permission', ['as' => 'access_right.permission', 'uses' => 'AccessRightController@permission']);
   Route::post('/access_right/replyMail/{query}', ['as' => 'access_right.replyMail', 'uses' => 'AccessRightController@replyMail']);
 
+  Route::get('rent/confirm', ['as' => 'rent.confirm', 'uses' => 'RentalItemController@confirm']);
+  Route::get('rent/update_confirm', ['as' => 'rent.updateConfirm', 'uses' => 'RentalItemController@updateConfirm']);
+  Route::put('rent/update_confirm', ['as' => 'rent.updateItems', 'uses' => 'RentalItemController@updateItems']);
   Route::resource('rent', RentalItemController::class);
+  Route::get('item_category/confirm', ['as' => 'item_category.confirm', 'uses' => 'ItemCategoryController@confirm']);
+  Route::get('item_category/update_confirm', ['as' => 'item_category.updateConfirm', 'uses' => 'ItemCategoryController@updateConfirm']);
+  Route::put('item_category/update_confirm', ['as' => 'item_category.updateCategory', 'uses' => 'ItemCategoryController@updateCategory']);
   Route::resource('item_category', ItemCategoryController::class);
-
 });

@@ -564,8 +564,17 @@ form.user-search {
   border: 1px solid #999;
 }
 
-.rental-item-list {
+.rental-item-name-list {
   max-width: 20em;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.rental-item-list>tbody>tr>td {
+  height: 91px;
+  vertical-align: middle;
+}
+
+.rental-item-show-list>li {
+  text-align:center;
 }

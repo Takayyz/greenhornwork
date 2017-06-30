@@ -36,7 +36,7 @@ class ItemCategoryRepositoryEloquent extends BaseRepository implements ItemCateg
 
     public function createItemCategory($data)
     {
-        // dd($data['category']);
+
         $this->model->create([
             'category' => $data['category']
         ]);
@@ -47,5 +47,24 @@ class ItemCategoryRepositoryEloquent extends BaseRepository implements ItemCateg
         $this->model->where('id', $category['id'])->update([
             'category' => $data['category']
         ]);
+    }
+
+    public function normalizeInputs($data)
+    {
+
+        if(is_array($data))
+        {
+
+            $data = [
+                'category' => isset($data['category']) ? $data['category'] : '',
+            ];
+        } else {
+            $data = [
+                'category' => '',
+            ];
+        }
+
+        return $data;
+
     }
 }

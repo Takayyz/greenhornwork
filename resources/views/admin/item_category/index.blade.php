@@ -11,7 +11,7 @@
 
   <div class="content-wrapper">
     <!-- <div class="has-error"><span class="help-block"></span></div> -->
-    <table class="table table-hover">
+    <table class="table table-hover rental-item-list">
       <thead>
         <tr>
           <th>種類</th>
@@ -20,14 +20,31 @@
       <tbody>
       @foreach($categories as $category)
         <tr>
-          <td class="rental-item-list">{{ $category->category }}</td>
+          <td>{{ $category->category }}</td>
           <td>
             <a class="btn" href="{{ route('admin.item_category.edit', $category->id) }}">編集</a>
           </td>
           <td>
-            {!! Form::open(["route" => ['admin.item_category.destroy', $category->id], 'method' => 'DELETE']) !!}
-              <button class="btn-danger btn" type="submit">削除</button>
-            {!! Form::close() !!}
+            @if(empty($category->item))
+            <a class="btn-danger btn" href="#deleteModal{{ $category->id }}">削除</a>
+
+            <div id="deleteModal{{ $category->id }}" class="modalDialog">
+              <div><a href="#close" class="close" title="Close">X</a>
+                <div class="modal-header">削除の確認</div>
+                <ul class="rental-item-show-list">
+                  <li>
+                    <h4>種類</h4>
+                    {{ $category->category }}
+                  </li>
+                </ul>
+                {!! Form::open(["route" => ['admin.item_category.destroy', $category->id], 'method' => 'DELETE']) !!}
+                  <a href="#close" class="btn" title="Close">閉じる</a>
+                  <button class="btn-danger btn">削除</button>
+                {!! Form::close() !!}
+              </div>
+            </div>
+
+            @endif
           </td>
         </tr>
         @endforeach

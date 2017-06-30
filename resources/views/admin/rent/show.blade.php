@@ -4,7 +4,7 @@
 
   <h1 class="brand-header">貸出物の詳細</h1>
   <div class="content-wrapper">
-    <ul>
+    <ul class="rental-item-show-list">
       <li>
         <h3>名称</h3>
         {{ $item->name }}

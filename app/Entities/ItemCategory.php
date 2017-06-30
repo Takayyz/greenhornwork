@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Entities\Items;
 
 class ItemCategory extends Model implements Transformable
 {
@@ -19,6 +20,6 @@ class ItemCategory extends Model implements Transformable
 
     public function item()
     {
-      return $this->belongsTo('App\Entities\Items', 'id', 'item_category_id');
+      return $this->belongsTo(Items::class, 'id', 'item_category_id');
     }
 }

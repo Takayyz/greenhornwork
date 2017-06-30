@@ -51,7 +51,7 @@
   </div>
 
   <div class="content-wrapper">
-    <table class="table table-hover">
+    <table class="table table-hover rental-item-list">
       <thead>
         <tr>
           <th>名称</th>
@@ -61,13 +61,36 @@
       <tbody>
       @foreach($items as $item)
         <tr>
-          <td class="rental-item-list">{{ $item->name }}</td>
+          <td class="rental-item-name-list">{{ $item->name }}</td>
           <td>{{ $item->category->category }}</td>
           <td><a class="btn btn-success" href="{{ route('admin.rent.show', $item->id) }}">詳細</a></td>
           <td>
-            {!! Form::open(["route" => ['admin.rent.destroy', $item->id], 'method' => 'DELETE']) !!}
-              <button class="btn-danger btn" type="submit">削除</button>
-            {!! Form::close() !!}
+            <a class="btn-danger btn" href="#deleteModal{{ $item->id }}">削除</a>
+
+            <div id="deleteModal{{ $item->id }}" class="modalDialog">
+              <div><a href="#close" class="close" title="Close">X</a>
+                <div class="modal-header">削除の確認</div>
+                <ul class="rental-item-show-list">
+                  <li>
+                    <h4>名称</h4>
+                    {{ $item->name }}
+                  </li>
+                  <li>
+                    <h4>種類</h4>
+                    {{ $item->category->category }}
+                  </li>
+                  <li>
+                    <h4>概要・説明</h4>
+                    {{ $item->item_info }}
+                  </li>
+                </ul>
+                {!! Form::open(["route" => ['admin.rent.destroy', $item->id], 'method' => 'DELETE']) !!}
+                  <a href="#close" class="btn" title="Close">閉じる</a>
+                  <button class="btn-danger btn">削除</button>
+                {!! Form::close() !!}
+              </div>
+            </div>
+
           </td>
         </tr>
         @endforeach
