@@ -25,7 +25,7 @@
           {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
           <span class="help-block">{{$errors->first('content')}}</span>
         </div>
-        <button type="submit" class="btn btn-success pull-right">確認</button>
+        {!! Form::submit('確認', array('name' => 'create', 'class' => 'btn btn-success pull-right')) !!}
     {!! Form::close() !!}
   </div>
 

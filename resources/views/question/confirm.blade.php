@@ -3,7 +3,7 @@
 @section('content')
 <h1 class="brand-header">確認画面</h1>
 <div class="container">
-  @if($res['path'] === "/question/create")
+  @if(isset($inputs['create']))
     {!! Form::open(['route' => 'question.store', 'method' => 'post']) !!}
       <ul class="dailyreport-info-list">
         <li>
@@ -24,7 +24,7 @@
       </ul>
       <button type="submit" class="btn btn-success pull-right">作成</button>
     {!! Form::close() !!}
-  @else
+  @elseif(isset($inputs['edit']))
 
   {!! Form::open(['route' => ['question.update', $inputs['id']], 'method' => 'PUT']) !!}
     <ul class="dailyreport-info-list">

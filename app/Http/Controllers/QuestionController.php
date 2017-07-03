@@ -115,7 +115,7 @@ class QuestionController extends Controller
 
      $userId = Auth::id();
      $questions = $this->question->getMyPageQuestions($userId);
-     return view('question.questionmypage', compact('questions'));
+     return view('question.mypage', compact('questions'));
 
    }
 
@@ -123,11 +123,10 @@ class QuestionController extends Controller
    {
 
      $question = $this->question->all();
-     $res = parse_url($_SERVER['HTTP_REFERER']);
      $inputs = $request->all();
      $category = $this->category->find($inputs['tag_category_id'])->name;
 
-     return view('question.confirm', compact('inputs', 'category', 'res', 'question'));
+     return view('question.confirm', compact('inputs', 'category','question'));
 
    }
 

@@ -26,7 +26,7 @@
         <span class="help-block">{{$errors->first('content')}}</span>
       </div>
       {!! Form::hidden('id', $question->id, ['class' => 'form-control']) !!}
-      <button type="submit" class="btn btn-success pull-right">確認</button>
+      {!! Form::submit('確認', array('name' => 'edit', 'class' => 'btn btn-success pull-right')) !!}
   {!! Form::close() !!}
 </div>
 @endsection
