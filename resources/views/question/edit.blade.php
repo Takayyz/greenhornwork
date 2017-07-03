@@ -13,7 +13,7 @@
     <h3>カテゴリ</h3>
     <div class="form-group @if(!empty($errors->first('tag_category_id'))) has-error @endif">
       <select name='tag_category_id'　class = "form-control"　id =　"pref_id">
-        <option value= "{{$question->tag_category_id}}">{{$categoryname}}</option>
+        <option value= "{{$question->tag_category_id}}">{{$question->category->name}}</option>
         @foreach($categories as $category)
         <option value= "{{$category->id}}">{{$category->name}}</option>
         @endforeach
@@ -26,7 +26,7 @@
         <span class="help-block">{{$errors->first('content')}}</span>
       </div>
       {!! Form::hidden('id', $question->id, ['class' => 'form-control']) !!}
-      <button type="submit" class="btn btn-success pull-right">更新</button>
+      <button type="submit" class="btn btn-success pull-right">確認</button>
   {!! Form::close() !!}
 </div>
 @endsection

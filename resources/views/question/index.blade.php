@@ -72,7 +72,7 @@
       @foreach($questions as $question)
         <tr>
           <td>{{ $question->title }}</td>
-          <td><a class="btn btn-success" href="question/{{ $question->id }}">詳細</a></td>
+          <td><a class="btn btn-success" href="question/{{ $question->id }}">解答する</a></td>
         </tr>
       @endforeach
     </tbody>

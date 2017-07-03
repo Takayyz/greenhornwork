@@ -84,9 +84,8 @@ class QuestionController extends Controller
 
      $categories = $this->category->all();
      $question = $this->question->find($id);
-     $categoryname = $this->category->find($question['tag_category_id'])->name;
 
-     return view('question.edit', compact('question', 'categories', 'categoryname', 'id'));
+     return view('question.edit', compact('question', 'categories', 'id'));
 
    }
 

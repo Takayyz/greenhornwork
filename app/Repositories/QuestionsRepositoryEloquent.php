@@ -38,17 +38,15 @@ class QuestionsRepositoryEloquent extends BaseRepository implements QuestionsRep
     {
 
         $inputs['tag_category_id'] = $inputs['tag_category_id'] ?? "";
-        $dataOfTheUser = $this->model->get();
-
-        //whenメソッド - 最初のパラメータがである場合にのみ、実行される
-        $dataOfTheUser = $dataOfTheUser->when($inputs['tag_category_id'], function($query) use ($inputs) {
+        $dataOfTheQuestion = $this->model->get()->when($inputs['tag_category_id'], function($query) use ($inputs)
+        {
           return $query->where('tag_category_id', $inputs['tag_category_id']);
         });
-        return $dataOfTheUser;
+        return $dataOfTheQuestion;
 
     }
 
-    public function getMyQuestions($user_id)
+    public function getMyPageQuestions($user_id)
     {
 
       return $this->model->where('user_id', $user_id)->get();
@@ -79,13 +77,13 @@ class QuestionsRepositoryEloquent extends BaseRepository implements QuestionsRep
 
     }
 
-    public function getSearchedQuestions($inputs)
+    public function getSearchedQuestionTitle($inputs)
     {
 
-      $result = $this->model->where('title', 'LIKE',"%" . $inputs['search'] . "%")->get();
-      $result = $result->when($inputs['tag_category_id'], function($query) use ($inputs) {
-        return $query->where('tag_category_id', $inputs['tag_category_id']);
-      });
+      $result = $this->model->where('title', 'LIKE',"%" . $inputs['search'] . "%")->get()->when($inputs['tag_category_id'], function($query) use ($inputs)
+       {
+         return $query->where('tag_category_id', $inputs['tag_category_id']);
+        });
       return $result;
 
     }
