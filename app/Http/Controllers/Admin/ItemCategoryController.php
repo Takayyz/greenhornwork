@@ -30,13 +30,10 @@ class ItemCategoryController extends Controller
 
     }
 
-    public function create(Request $request)
+    public function create()
     {
 
-      $inputs = $request->all();
-      $data = $this->category->normalizeInputs($inputs);
-
-      return view('admin.item_category.create', compact('data'));
+      return view('admin.item_category.create');
 
     }
 
@@ -50,15 +47,12 @@ class ItemCategoryController extends Controller
 
     }
 
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
 
-      $inputs = $request->all();
-
-      $this->category->normalizeInputs($inputs);
       $category = $this->category->find($id);
 
-      return view('admin.item_category.edit', compact('category', 'inputs'));
+      return view('admin.item_category.edit', compact('category'));
 
     }
 
@@ -88,9 +82,8 @@ class ItemCategoryController extends Controller
 
     public function confirm(ItemCategoryRequest $request)
     {
-
-      $inputs = $request->all();
-      // $session_inputs = $request->session()->all();
+      $request->flash();
+      $inputs = $request->old();
 
       return view('admin.item_category.confirm', compact('inputs'));
 
@@ -99,7 +92,8 @@ class ItemCategoryController extends Controller
     public function updateConfirm(ItemCategoryRequest $request)
     {
 
-      $inputs = $request->all();
+      $request->flash();
+      $inputs = $request->old();
 
       return view('admin.item_category.update_confirm', compact('inputs'));
 

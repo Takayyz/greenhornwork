@@ -11,7 +11,7 @@
           <div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">
             <h4>{!! Form::label('category', '種類') !!}</h4>
             {!! Form::hidden('id', $category->id) !!}
-            {!! Form::input('text', 'category', empty($inputs) ? $category->category : $inputs['category'], ['class' => 'form-control']) !!}
+            {!! Form::input('text', 'category', $category->category, ['class' => 'form-control']) !!}
             <span class="help-block">{{ $errors->first('category') }}</span>
           </div>
         </li>
