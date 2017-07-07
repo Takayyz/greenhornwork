@@ -58,33 +58,10 @@ class ItemsRepositoryEloquent extends BaseRepository implements ItemsRepository
         ]);
     }
 
-    public function normalizeInputs($data)//UserRepositoryEloquent写し
-    {
-        if(is_array($data))
-        {
-            $data = [
-                // 'id' => isset($data['id']) ? $data['id'] : '',
-                'name' => isset($data['name']) ? $data['name'] : '',
-                'item_category_id' => isset($data['item_category_id']) ? $data['item_category_id'] : '',
-                'item_info' => isset($data['item_info']) ? $data['item_info'] : ''
-            ];
-        } else {
-            $data = [
-                'name' => '',
-                'item_category_id' => '',
-                'item_info' => ''
-            ];
-        }
-
-        return $data;
-    }
-
     public function getItemsBySearching($data)
     {
-        //DailyReportsRepositoryEloquent,UserRepositoryEloquent参照
-        //名称絞り
+
         return $this->model->whereName('name', $data['name'])
-        //種類絞り
         ->whereHas('category', function($query) use ($data)
         {
             if($data['item_category_id'])

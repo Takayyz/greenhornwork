@@ -3,9 +3,6 @@
 @section('content')
 
   <h1 class="brand-header">貸出物の登録</h1>
-  <div class="btn-wrapper">
-    <a href="{{ route('admin.rent.index') }}" class="btn btn-success">貸出一覧に戻る</a>
-  </div>
   {{ Form::open(['route' => 'admin.rent.confirm', 'method' => 'GET']) }}
     <div class="content">
       <ul class="">

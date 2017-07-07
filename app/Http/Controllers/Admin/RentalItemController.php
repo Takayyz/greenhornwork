@@ -16,9 +16,10 @@ class RentalItemController extends Controller
   protected $category;
 
   public function __construct(
-      ItemsRepository $item,
-      ItemCategoryRepository $category
-    ) {
+    ItemsRepository $item,
+    ItemCategoryRepository $category
+  )
+  {
 
     $this->middleware('auth:admin');
     $this->item = $item;
@@ -28,21 +29,37 @@ class RentalItemController extends Controller
 
   public function index(Request $request)
   {
-    $inputs = $request->all();//検索内容全取得
-    $inputs = $this->item->normalizeInputs($inputs);
-//$this->item->orderBy('item_category_id', 'asc or desc')->all();で種類別で表示順を昇降順選べる
+
+    $inputs = $request->all();
     $categories = $this->category->all();
-    $items = $this->item->getItemsBySearching($inputs);
+
+    if (!empty($inputs))
+    {
+      $items = $this->item->getItemsBySearching($inputs);
 
     return view('admin.rent.index', compact('items', 'categories'));
+    } else {
+
+      $items = $this->item->all();
+
+      return view('admin.rent.index', compact('items', 'categories'));
+    }
 
   }
 
   public function create(Request $request)
   {
+    $inputs = $request->session()->get('_old_input');
 
-    $inputs = $request->all();
-    $data = $this->item->normalizeInputs($inputs);
+    if (!empty($inputs))
+    {
+      $data = $inputs;
+    } else if (!empty($request->all()))
+    {
+      $data = $request->session()->get('data');
+    } else {
+      $data = null;
+    }
 
     $categories = $this->category->all();
 
@@ -53,7 +70,8 @@ class RentalItemController extends Controller
   public function store(Request $request)
   {
 
-    $inputs = $request->all();
+    $inputs = $request->session()->pull('data');
+
     $res = $this->item->createItems($inputs);
 
     return redirect()->route('admin.rent.index');
@@ -71,20 +89,10 @@ class RentalItemController extends Controller
 
   public function edit(Request $request, $id)
   {
+    $request->flash();
 
-    $inputs = $request->all();
-    // $item = $this->item->checkEmptyInputs($item, $inputs);
-    // 入力確認画面で戻る押下されると$inputsに入力したデータが入る。
-    // それを$itemに格納し直す。
-    // 詳細画面から編集押下されると$inputsは空なので、$itemには$this->item->find(id);
-        if (empty($inputs))
-        {
-            $item = $this->item->find($id);
-        } else
-        {
-            $inputs = $this->item->normalizeInputs($inputs);
-            $item = $inputs;
-        }
+    $request->old();
+    $item = $this->item->find($id);
     $categories = $this->category->all();
 
     return view('admin.rent.edit' ,compact('id', 'item', 'categories'));
@@ -119,10 +127,13 @@ class RentalItemController extends Controller
   {
 
     $inputs = $request->all();
-    $id = $inputs['item_category_id'];
-    $category = $this->category->find($id);
 
-    return view('admin.rent.confirm', compact('inputs', 'category'));
+    $request->session()->put('data', $inputs);
+    $data = $request->session()->get('data');
+
+    $category = $this->category->find($data['item_category_id'])->category;
+
+    return view('admin.rent.confirm', compact('data', 'category'));
 
   }
 

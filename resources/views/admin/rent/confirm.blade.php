@@ -9,32 +9,29 @@
       <ul class="rental-item-show-list">
         <li>
           <div class="form-group">
-            <h4>{{ Form::label('name', '名称') }}</h4>
-            {{ $inputs['name'] }}
-            {{ Form::hidden('name', $inputs['name']) }}
+            <h4>名称</h4>
+            {{ $data['name'] }}
           </div>
         </li>
 
         <li>
           <div class="form-group">
-            <h4>{{ Form::label('item_category_id', '種類') }}</h4>
-            {{ $category['category'] }}
-            {{ Form::hidden('item_category_id', $inputs['item_category_id']) }}
+            <h4>種類</h4>
+            {{ $category }}
           </div>
         </li>
 
         <li>
           <div class="form-group">
-            <h4>{{ Form::label('item_info', '概要・説明') }}</h4>
-            {{ $inputs['item_info'] }}
-            {{ Form::hidden('item_info', $inputs['item_info']) }}
+            <h4>概要・説明</h4>
+            {{ $data['item_info'] }}
           </div>
         </li>
       </ul>
 
       <div class="bottom-btn-wrapper">
         <button type="submit" class="btn" >追加</button>
-        <a href="{{ route('admin.rent.create', $inputs) }}" class="bottom-btn">戻る</a>
+        <a href="{{ route('admin.rent.create', $data) }}" class="bottom-btn">戻る</a>
       </div>
 
     </div>
