@@ -6,19 +6,18 @@
   {{ Form::open(['route' => 'admin.item_category.store', 'method' => 'POST']) }}
     <div class="content">
 
-      <ul>
+      <ul class="rental-item-show-list">
         <li>
           <div class="form-group">
-            <h4>{{ Form::label('category', '種類') }}</h4>
-            {{ $inputs['category'] }}
-            {{ Form::hidden('category', $inputs['category']) }}
+            <h4>種類</h4>
+            {{ $data['category'] }}
           </div>
         </li>
       </ul>
 
       <div class="bottom-btn-wrapper">
         <button type="submit" class="btn" >追加</button>
-        <a href="{{ route('admin.item_category.create', $inputs) }}" class="bottom-btn">戻る</a>
+        <a href="{{ route('admin.item_category.create', $data) }}" class="bottom-btn">戻る</a>
       </div>
 
     </div>

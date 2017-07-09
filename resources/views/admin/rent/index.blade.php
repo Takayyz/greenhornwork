@@ -9,7 +9,6 @@
     <a class="btn" href="#openModal">貸出物の検索</a>
     <a class="btn btn-success" href="{{ route('admin.item_category.index') }}">貸出物種類一覧へ</a>
   </div>
-<!-- admin.user.index写し -->
   <div id="openModal" class="modalDialog">
     <div><a href="#close" class="close" title="Close">X</a>
       <table class="search-table">

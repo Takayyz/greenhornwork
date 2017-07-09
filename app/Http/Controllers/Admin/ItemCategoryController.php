@@ -21,7 +21,7 @@ class ItemCategoryController extends Controller
 
     }
 
-    public function index()
+    public function index(Request $request)
     {
 
       $categories = $this->category->all();
@@ -30,27 +30,39 @@ class ItemCategoryController extends Controller
 
     }
 
-    public function create()
+    public function create(Request $request)
     {
 
-      return view('admin.item_category.create');
+      if (!empty($request->all()))
+      {
+        $data = $request->session()->get('data');
+      } else {
+        $data = null;
+      }
+
+      return view('admin.item_category.create', compact('data'));
 
     }
 
     public function store(Request $request)
     {
 
-      $inputs = $request->all();
-      $res = $this->category->createItemCategory($inputs);
+      $data = $request->session()->pull('data');
+      $res = $this->category->createItemCategory($data);
 
       return redirect()->route('admin.item_category.index');
 
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
 
-      $category = $this->category->find($id);
+      if (!empty($request->all()))
+      {
+        $category = $request->session()->get('data');
+      } else {
+        $category = $this->category->find($id);
+      }
 
       return view('admin.item_category.edit', compact('category'));
 
@@ -59,12 +71,9 @@ class ItemCategoryController extends Controller
     public function updateCategory(Request $request)
     {
 
-      $inputs = $request->all();
+      $data = $request->session()->pull('data');
 
-      $id = $inputs['id'];
-      $category = $this->category->find($id);
-
-      $res = $this->category->updateItemCategory($inputs, $category);
+      $res = $this->category->updateItemCategory($data);
 
       return redirect()->route('admin.item_category.index');
 
@@ -73,8 +82,8 @@ class ItemCategoryController extends Controller
     public function destroy($id)
     {
 
-        $category = $this->category->find($id);
-        $category->delete();
+      $category = $this->category->find($id);
+      $category->delete();
 
         return redirect()->route('admin.item_category.index');
 
@@ -82,20 +91,21 @@ class ItemCategoryController extends Controller
 
     public function confirm(ItemCategoryRequest $request)
     {
-      $request->flash();
-      $inputs = $request->old();
 
-      return view('admin.item_category.confirm', compact('inputs'));
+      $data = $request->all();
+      $request->session()->put('data', $data);
+
+      return view('admin.item_category.confirm', compact('data'));
 
     }
 
     public function updateConfirm(ItemCategoryRequest $request)
     {
 
-      $request->flash();
-      $inputs = $request->old();
+      $data = $request->all();
+      $request->session()->put('data', $data);
 
-      return view('admin.item_category.update_confirm', compact('inputs'));
+      return view('admin.item_category.update_confirm', compact('data'));
 
     }
 }

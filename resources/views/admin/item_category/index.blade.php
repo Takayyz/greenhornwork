@@ -10,7 +10,6 @@
 
 
   <div class="content-wrapper">
-    <!-- <div class="has-error"><span class="help-block"></span></div> -->
     <table class="table table-hover rental-item-list">
       <thead>
         <tr>

@@ -2,8 +2,8 @@
 
 @section('content')
 
-  <h1 class='brand-header'>貸出物の更新</h1>
-  {!! Form::open(['route' => 'admin.rent.updateConfirm', 'method' => 'GET']) !!}
+  <h1 class="brand-header">貸出物の更新</h1>
+  {{ Form::open(['route' => 'admin.rent.updateConfirm', 'method' => 'GET']) }}
     <div class="content-wrapper">
       <ul>
 
@@ -21,7 +21,7 @@
             <h4>{!! Form::label('item_category_id', '種類') !!}</h4>
             <select name="item_category_id">
               @foreach($categories as $category)
-                <option value="{{ $category->id }}" {{ $item['item_category_id'] == $category->id ? 'selected' : '' }}>{{ $category->category }}</option><!--admin.user.edit 写し-->
+                <option value="{{ $category->id }}" {{ $item['item_category_id'] == $category->id ? 'selected' : '' }}>{{ $category->category }}</option>
               @endforeach
             </select>
           </div>

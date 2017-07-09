@@ -24,9 +24,8 @@ class Items extends Model implements Transformable
     {
       return $this->belongsTo(ItemCategory::class, 'item_category_id');
     }
-// Entitites/User.php写し
     public function scopeWhereName($query, $field, $name) {
-      if(!$field || !$name)// $field $name 検索nameが入ってくる
+      if(!$field || !$name)
       {
         return $query;
       }
@@ -34,7 +33,6 @@ class Items extends Model implements Transformable
       switch ($field) {
         case 'name':
           return $query->where($field, 'like', '%' . $name . '%');
-          // like, '%' . $name . '%'で含まれるものも検索対象にする
           break;
 
         default:

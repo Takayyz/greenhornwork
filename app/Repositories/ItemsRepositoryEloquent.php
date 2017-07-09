@@ -32,14 +32,6 @@ class ItemsRepositoryEloquent extends BaseRepository implements ItemsRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-    // public function saveRentalItem($inputs)
-    // {
-    //     $this->model->create([
-    //         'name' => $inputs['name'],
-
-    //     ]);
-    // }
-
     public function createItems($data)
     {
         $this->model->create([
@@ -49,9 +41,9 @@ class ItemsRepositoryEloquent extends BaseRepository implements ItemsRepository
             ]);
     }
 
-    public function updateItemById($data, $item)
+    public function updateItemById($data)
     {
-        $this->model->where('id', $item['id'])->update([
+        $this->model->where('id', $data['id'])->update([
             "name" => $data['name'],
             "item_category_id" => $data['item_category_id'],
             "item_info" => $data['item_info']

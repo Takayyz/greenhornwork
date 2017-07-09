@@ -49,12 +49,8 @@ class RentalItemController extends Controller
 
   public function create(Request $request)
   {
-    $inputs = $request->session()->get('_old_input');
 
-    if (!empty($inputs))
-    {
-      $data = $inputs;
-    } else if (!empty($request->all()))
+    if (!empty($request->all()))
     {
       $data = $request->session()->get('data');
     } else {
@@ -70,9 +66,9 @@ class RentalItemController extends Controller
   public function store(Request $request)
   {
 
-    $inputs = $request->session()->pull('data');
+    $data = $request->session()->pull('data');
 
-    $res = $this->item->createItems($inputs);
+    $res = $this->item->createItems($data);
 
     return redirect()->route('admin.rent.index');
 
@@ -89,10 +85,14 @@ class RentalItemController extends Controller
 
   public function edit(Request $request, $id)
   {
-    $request->flash();
 
-    $request->old();
-    $item = $this->item->find($id);
+    if (!empty($request->all()))
+    {
+      $item = $request->session()->get('data');
+    } else {
+      $item = $this->item->find($id);
+    }
+
     $categories = $this->category->all();
 
     return view('admin.rent.edit' ,compact('id', 'item', 'categories'));
@@ -102,12 +102,9 @@ class RentalItemController extends Controller
   public function updateItems(Request $request)
   {
 
-    $inputs = $request->all();
+    $data = $request->session()->get('data');
 
-    $id = $inputs['id'];
-    $item = $this->item->find($id);
-
-    $res = $this->item->updateItemById($inputs, $item);
+    $res = $this->item->updateItemById($data);
 
     return redirect()->route('admin.rent.index');
 
@@ -126,10 +123,8 @@ class RentalItemController extends Controller
   public function confirm(ItemsRequest $request)
   {
 
-    $inputs = $request->all();
-
-    $request->session()->put('data', $inputs);
-    $data = $request->session()->get('data');
+    $data = $request->all();
+    $request->session()->put('data', $data);
 
     $category = $this->category->find($data['item_category_id'])->category;
 
@@ -140,12 +135,13 @@ class RentalItemController extends Controller
   public function updateConfirm(ItemsRequest $request)
   {
 
-    $inputs = $request->all();
+    $data = $request->all();
 
-    $id = $inputs['item_category_id'];
-    $category = $this->category->find($id);
+    $request->session()->put('data', $data);
 
-    return view('admin.rent.update_confirm', compact('inputs', 'category'));
+    $category = $this->category->find($data['item_category_id'])->category;
+
+    return view('admin.rent.update_confirm', compact('data', 'category'));
 
   }
 }

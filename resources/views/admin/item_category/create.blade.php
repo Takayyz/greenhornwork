@@ -3,16 +3,14 @@
 @section('content')
 
   <h1 class="brand-header">貸出物種類の登録</h1>
-  <div class="btn-wrapper">
-    <a href="{{ route('admin.item_category.index') }}" class="btn btn-success">貸出物種類一覧に戻る</a>
-  </div>
+
   {{ Form::open(['route' => 'admin.item_category.confirm', 'method' => 'GET']) }}
     <div class="content">
       <ul>
         <li>
           <div class="form-group {{ $errors->has('category') ? 'has-error' : '' }}">
             <h4>{{ Form::label('category', '種類') }}</h4>
-            {{ Form::input('text', 'category', '', array('class' => 'form-control')) }}
+            {{ Form::input('text', 'category', $data['category'], array('class' => 'form-control')) }}
              <span class="help-block">{{ $errors->first('category') }}</span>
           </div>
         </li>
