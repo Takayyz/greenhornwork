@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Socialite\Two;
+
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\ProviderInterface;
 use Laravel\Socialite\Two\User;
+
 class SlackProvider extends AbstractProvider implements ProviderInterface
 {
      public function getScopes()
@@ -14,15 +17,18 @@ class SlackProvider extends AbstractProvider implements ProviderInterface
         // See: https://github.com/SocialiteProviders/Providers/pull/53
         return ['identity.basic', 'identity.email', 'identity.team', 'identity.avatar'];
     }
+
     protected function getAuthUrl($state)
     {
         return $this->buildAuthUrlFromBase('https://slack.com/oauth/authorize', $state);
     }
+
     protected function getTokenUrl()
     {
         // return 'https://api.line.me/v1/oauth/accessToken';
         return 'https://slack.com/api/oauth.access';
     }
+
     protected function getUserByToken($token)
     {
         // $response = $this->getHttpClient()->get('https://api.line.me/v1/profile', [

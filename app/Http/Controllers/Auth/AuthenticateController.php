@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Socialite;
-use App\Entities\SlackUsers;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use App\Entities\UserInfos;
+use App\Entities\User;
+
 
 
 class AuthenticateController extends Controller
@@ -14,7 +16,7 @@ class AuthenticateController extends Controller
 
   public function slackAuth()
   {
-    return Socialite::with('slack')->scopes(['users:read'])->redirect();
+    return Socialite::with('slack')->scopes(['identity.basic,identity.email'])->redirect();
   }
 
   public function userinfo()
@@ -22,15 +24,24 @@ class AuthenticateController extends Controller
     // ユーザー情報取得
     $userData = Socialite::with('slack')->user();
     // ユーザー作成
-    $user = SlackUsers::firstOrCreate([
-            'username' => $userData->name,
+    $name = $userData->name;
+    $splitName = explode(" ", $name);
+    $firstName = $splitName[0];
+    $lastName = end($splitName);
+    $userInfo = UserInfos::firstOrCreate([
+            'first_name' => $firstName,
+            'last_name' => $lastName,
             'email' => $userData->email,
-            'access_token' => $userData->token,
             ]);
-//    $aaa = $user['attributes'];
-//    $bbb = array('username' => $aaa['username'], 'email' => $aaa['email'], 'access_token' => $aaa['access_token']);
-
-    dd($user);
+    $info = $userInfo['attributes'];
+    $userInfoId = $info['id'];
+    $email = $userData->email;
+    $password = hash('sha256', $email);
+    $user = User::firstOrCreate([
+      'name' => $name,
+      'password' => $password,
+      'user_info_id' => $userInfoId,
+    ]);
     Auth::login($user, true);
     return redirect('/');
   }

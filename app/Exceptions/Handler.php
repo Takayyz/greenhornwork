@@ -130,6 +130,7 @@ class Handler extends ExceptionHandler
     protected function otherException($exception)
     {
       //各ステータスコードに沿ったメッセージ
+      dd($exception);
       $MESSAGES = [
         400 => 'Bad Request',
         401 => '認証に失敗しました',

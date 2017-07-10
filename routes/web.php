@@ -11,35 +11,19 @@
 |
 */
 
-Route::get('/', function()
-{
-    if (!Auth::check()) {
-        // ログイン済でなければリダイレクト
-        return 'こんにちは ゲストさん ' . link_to('slack/login', 'slack でログイン');
-    }
-    return 'Welcome back!!' ;
-});
-
-Route::get('slack/login', 'Auth\AuthenticateController@slackAuth');
-//slackのAuthorize画面に遷移する処理へ
-
-Route::get('callback', 'Auth\AuthenticateController@userinfo');
-//ユーザ情報取得と作成の処理へ
-
-
-
-
-
-
 Auth::routes();
-/*
 Route::group(['prefix' => '/'], function() {
   Route::get('/', function () {
+    if (Auth::check()){
+      return view('index');
+    }else{
     return 'こんにちは ゲストさん ' . link_to('slack/login', 'slack でログイン');
+    };
 //      return view('auth.login');
   });
   Route::get('slack/login', 'Auth\AuthenticateController@slackAuth');
-  Route::get('/', 'UserController@index');
+  Route::get('callback', 'Auth\AuthenticateController@userinfo');
+//  Route::get('/', 'UserController@index');
   Route::get('/home', 'UserController@index');
   Route::resource('report', 'DailyReportController');
   Route::resource('/schedule', 'WorkScheduleController', ['except' => 'show']);
@@ -47,12 +31,10 @@ Route::group(['prefix' => '/'], function() {
   Route::get('/register/{query}', 'Auth\RegisterController@showRegistrationForm');
 });
 
-
-
 Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], function() {
-//  Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
-//  Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
-  //Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
+  Route::get('login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+  Route::post('login', ['as' => 'login', 'uses' => 'Auth\LoginController@login']);
+  Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
 
   Route::resource('report', DailyReportController::class, ['only' => ['index', 'show']]);

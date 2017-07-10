@@ -36,7 +36,6 @@ class RegisterRequest extends FormRequest
             'password.required'=>'必須の項目です！',
             'password.confirmed'=>'パスワードが一致しません！',
             'password.min'=>'パスワードは６ケタ以上でお願いします！'
-        
         ];
     }
 }

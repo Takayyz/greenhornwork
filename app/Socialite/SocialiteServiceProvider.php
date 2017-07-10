@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Socialite;
+
 class SocialiteServiceProvider extends \Laravel\Socialite\SocialiteServiceProvider
 {
     public function register()
