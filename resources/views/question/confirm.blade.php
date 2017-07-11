@@ -18,7 +18,7 @@
         </li>
         <li>
           <h3>質問内容</h3>
-            <div>{{ $inputs['content'] }}</div>
+            <div>{!! $question->mark_content !!}</div>
             {!! Form::hidden('content', $inputs['content'], ['class' => 'form-control']) !!}
         </li>
       </ul>
@@ -40,7 +40,7 @@
       </li>
       <li>
         <h3>質問内容</h3>
-          <div>{{ $inputs['content'] }}</div>
+          <div>{!! $question->mark_content !!}</div>
           {!! Form::hidden('content', $inputs['content'], ['class' => 'form-control']) !!}
       </li>
     </ul>

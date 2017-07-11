@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use cebe\markdown\Markdown as Markdown;
 
 class Questions extends Model implements Transformable
 {
@@ -24,4 +25,18 @@ class Questions extends Model implements Transformable
     {
       return $this->belongsTo('App\Entities\TagCategory', 'tag_category_id');
     }
+
+    public function parse()
+    {
+        $parser = new Markdown();
+
+        return $parser->parse($this->content);
+    }
+
+    public function getMarkContentAttribute()
+    {
+        return $this->parse();
+    }
+
+
 }

@@ -122,10 +122,10 @@ class QuestionController extends Controller
    public function confirm(QuestionsRequest $request)
    {
 
-     $question = $this->question->all();
      $inputs = $request->all();
+     $question = $this->question->first();
+     $question->content = $inputs["content"];
      $category = $this->category->find($inputs['tag_category_id'])->name;
-
      return view('question.confirm', compact('inputs', 'category','question'));
 
    }

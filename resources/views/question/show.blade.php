@@ -14,7 +14,7 @@
     </li>
     <li>
       <h3>本文</h3>
-      {{ $questions->content }}
+      {!! $questions->mark_content !!}
     </li>
   </ul>
   <lavel>解答</lavel>
