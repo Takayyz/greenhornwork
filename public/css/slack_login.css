@@ -1,0 +1,168 @@
+.just_for_fun_Dont_delete {
+  position: absolute;
+  top: 53px;
+  left: 23px;
+  width:  7px;
+  height: 7px;
+  cursor: pointer;
+}
+
+.maker {
+  position: absolute;
+  display: inline-block;
+  width:  100%;
+  height: 100%;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+.loginform {
+  display: grid;
+  width: 600px;
+  height: 500px;
+  background-color: #5ba654;
+}
+
+@media screen and (max-width: 766px) {
+  .loginform {
+    width: 300px;
+    height: 400px;
+  }
+}
+
+.title {
+  text-align: center;
+  color: #fff;
+  height: 50px;
+  font-size: 65px;
+  margin-bottom: 0px;
+  font-weight: bold;
+  text-shadow: 0px 3px 0px #b2a98f,
+               0px 14px 10px rgba(0,0,0,0.15),
+               0px 24px 2px rgba(0,0,0,0.1),
+               0px 34px 30px rgba(0,0,0,0.1);
+}
+
+@media screen and (max-width: 766px) {
+  .title {
+    font-size: 45px;
+  }
+}
+
+.subtitle {
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  height: 20px;
+  margin-top: 45px;
+  font-weight: bold;
+  text-shadow: 0px 2px 0px #b2a98f;
+}
+
+@media screen and (max-width: 766px) {
+  .subtitle {
+    margin-top: 80px;
+    font-size: 18px;
+  }
+}
+
+.main {
+  display: grid;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.centering {
+  display: grid;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  line-height: 30px;
+}
+
+.text_def {
+  text-align: center;
+  vertical-align: middle;
+  margin: auto;
+}
+
+.btn_def {
+  vertical-align: middle;
+  outline: 0;
+  cursor: pointer;
+  border-width: medium;
+  border-radius: 10px;
+  border:none;
+  margin: 0 auto;
+  padding: 0;
+  background-color: #5ba654;
+}
+
+.signin {
+  display: inline-block;
+  margin: 0 auto;
+  opacity: 0.9;
+  width: 300px;
+  height: 60px;
+}
+
+@media screen and (max-width: 766px) {
+  .signin {
+    width: 210px;
+    height: 40px;
+  }
+}
+
+.signin:hover {
+  opacity: 1;
+  box-shadow:0px 0px 20px #fff;
+  border-radius: 10px;
+}
+
+.none_account {
+  color: #fff;
+  margin-top: 15px;
+}
+
+.here {
+  color: #fff;
+}
+
+.here:hover {
+  color: #4e4e4e;
+}
+
+@media screen and (max-width: 766px) {
+  .none_account {
+    width: 210px;
+    font-size: 10px;
+    margin: 0 auto;
+    padding: 5px 0;
+  }
+}
+
+.conversion_color {
+  background-color: #5ba654;
+}
+
+.floatright {
+  text-align: right;
+}
+
+.parent {
+  position: relative;
+}
+
+.child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%); /* Safari用 */
+  transform: translate(-50%, -50%);
+}

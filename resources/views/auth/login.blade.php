@@ -4,16 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/slack_login.css') }}" rel="stylesheet">
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -22,73 +19,46 @@
     </script>
 </head>
 <body class="body-color">
-  <div class="container">
-      <div class="row">
-          <div class="col-md-8 col-md-offset-2">
-              <div class="panel login-panel panel-default">
-                  <div class="panel-heading-custom">ログイン</div>
-                  <div class="panel-body">
-                      <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
-                          {{ csrf_field() }}
-
-                          <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                              <label for="name" class="col-md-4 control-label-custom">ユーザー名</label>
-
-                              <div class="col-md-6">
-                                  <input id="name" type="text" class="form-control login-form-custom" name="name" value="{{ old('name') }}" required autofocus>
-
-                                  @if ($errors->has('name'))
-                                      <span class="help-block">
-                                          <strong>{{ $errors->first('name') }}</strong>
-                                      </span>
-                                  @endif
-                              </div>
-                          </div>
-
-                          <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                              <label for="password" class="col-md-4 control-label-custom">パスワード</label>
-
-                              <div class="col-md-6">
-                                  <input id="password" type="password" class="form-control login-form-custom" name="password" required>
-
-                                  @if ($errors->has('password'))
-                                      <span class="help-block">
-                                          <strong>{{ $errors->first('password') }}</strong>
-                                      </span>
-                                  @endif
-                              </div>
-                          </div>
-
-                          <div class="form-group">
-                              <div class="col-md-6 col-md-offset-4">
-                                  <div class="checkbox">
-                                      <label>
-                                          <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> パスワードを記憶する
-                                      </label>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <div class="form-group">
-                              <div class="col-md-8 col-md-offset-4">
-                                  <button type="submit" class="btn btn-success">
-                                      ログイン
-                                  </button>
-
-                                  <div class="forget-password">
-                                    <a class="btn-forget" href="{{ route('password.request') }}">
-                                        パスワードを忘れた方はこちら
-                                    </a>
-                                  </div>
-                              </div>
-                          </div>
-                      </form>
-                  </div>
-              </div>
-          </div>
+                <div class="just_for_fun_Dont_delete"><a class="maker" href="newFlileCreate"></a></div>
+  <main class="">
+    <div class="loginform">
+    <div class="titlebox">
+      <h1 class="title">Greenhorn Works</h1>
+      <h1 class='subtitle'>- User Login page -</h1>
+    </div>
+      <div class="main centering">
+        <button class="btn_def" type="button" onclick="location.href='slack/login'">
+          <img class="signin" src="/image/signin.jpg" alt="Sign in with Slack" />
+        </button>
+        <p class="none_account">Slackアカウントをお持ちでない方は&nbsp;&nbsp;<span><u><a class="here" href="https://join.slack.com/giztech/invite/MTkwOTk3OTc1MTA5LTE0OTYyODAxMzAtY2JlYTcwNjgyNw?t=x-86274042113-190902972674">こちら</a></u></span></p>
       </div>
-  </div>
+    </div>
+    </div>
+  </main>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script>
+if (location.href.match(/login/)) {
+  var html = document.getElementsByTagName('html');
+  var body = document.getElementsByTagName('body');
+  html[0].classList.add('is-login');
+  body[0].classList.add('is-login');
+}
+</script>
+<style>
+  html.is-login,
+  body.is-login {
+    height: 100%;
+  }
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .centering {
+    height: auto;
+  }
+</style>
 </body>
 </html>

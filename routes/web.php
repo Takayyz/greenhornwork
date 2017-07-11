@@ -17,13 +17,12 @@ Route::group(['prefix' => '/'], function() {
     if (Auth::check()){
       return view('index');
     }else{
-    return 'こんにちは ゲストさん ' . link_to('slack/login', 'slack でログイン');
+      return view('auth/login');
     };
-//      return view('auth.login');
   });
   Route::get('slack/login', 'Auth\AuthenticateController@slackAuth');
   Route::get('callback', 'Auth\AuthenticateController@userinfo');
-//  Route::get('/', 'UserController@index');
+  Route::get('/', 'UserController@index');
   Route::get('/home', 'UserController@index');
   Route::resource('report', 'DailyReportController');
   Route::resource('/schedule', 'WorkScheduleController', ['except' => 'show']);

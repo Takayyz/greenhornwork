@@ -20,6 +20,7 @@ class UserInfos extends Authenticatable implements Transformable
         'sex',
         'birthday',
         'email',
+        'userId',
         'tel',
         'hire_date',
         'store_id',
