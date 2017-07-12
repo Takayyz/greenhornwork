@@ -85,12 +85,17 @@
                       </li>
                       <li class="dropmenu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                          貸出&nbsp;<span class="caret"></span>
+                          貸出物&nbsp;<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                           <li>
                             <a href="{{ route('admin.rent.index') }}">
-                              貸出一覧
+                              貸出物一覧
+                            </a>
+                          </li>
+                          <li>
+                            <a href="{{ route('admin.item_category.index') }}">
+                              貸出物種類一覧
                             </a>
                           </li>
                         </ul>

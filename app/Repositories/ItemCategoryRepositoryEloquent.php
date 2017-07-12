@@ -24,13 +24,25 @@ class ItemCategoryRepositoryEloquent extends BaseRepository implements ItemCateg
         return ItemCategory::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function createItemCategory($data)
+    {
+        $this->model->create([
+            'category' => $data['category']
+        ]);
+    }
+
+    public function updateItemCategory($data)
+    {
+        $this->model->where('id', $data['id'])->update([
+            'category' => $data['category']
+        ]);
     }
 }

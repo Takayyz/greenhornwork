@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Entities\ItemCategory;
 
 class Items extends Model implements Transformable
 {
@@ -21,6 +22,21 @@ class Items extends Model implements Transformable
 
     public function category()
     {
-      return $this->belongsTo('App\Entities\ItemCategory', 'item_category_id');
+      return $this->belongsTo(ItemCategory::class, 'item_category_id');
+    }
+    public function scopeWhereName($query, $field, $name) {
+      if(!$field || !$name)
+      {
+        return $query;
+      }
+
+      switch ($field) {
+        case 'name':
+          return $query->where($field, 'like', '%' . $name . '%');
+          break;
+
+        default:
+          $query;
+      }
     }
 }
