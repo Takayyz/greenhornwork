@@ -28,8 +28,8 @@
         </div>
         {!! Form::submit('確認', array('name' => 'create', 'class' => 'btn btn-success pull-right')) !!}
     {!! Form::close() !!}
-    <div id="openModal" class="modalDialog modalScroll">
-      <div>
+    <div id="openModal" class="modalDialog">
+      <div class="modalScroll">
         <a href="#close" title="Close" class="close">X</a>
         <table class="search-table contents">
           <div class="modal-header">

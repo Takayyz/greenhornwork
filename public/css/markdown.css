@@ -3,6 +3,10 @@
 }
 
 .modalScroll {
+  position: absolute;
+  width: 100%;
+  max-height: 500px;
+  box-sizing: border-box;
   overflow-y: auto;
 }
 
