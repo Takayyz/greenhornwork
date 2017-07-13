@@ -48,7 +48,7 @@ php artisan serve
   - 日本語で書くようにしてください
   - チケット内容に付随する修正した内容、編集したファイル名を書くこと
   - 末尾に必ず日付を書くようにしてください
-  - feature_**  : comment >  User作成にあたり以下の***Controllerを編集しました。 2017-mm-dd
+  - feature_**  : comment >  User作成の編集をしました。 2017-mm-dd
 
 - commitからpush > pull requestの流れ
   - addする際、`必ず`file名を指定すること
