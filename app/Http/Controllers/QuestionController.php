@@ -8,6 +8,7 @@ use App\Repositories\TagCategoryRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\QuestionsRequest;
+use cebe\markdown\Markdown;
 
 class QuestionController extends Controller
 {
@@ -58,76 +59,76 @@ class QuestionController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-   public function store(Request $request)
-   {
+  public function store(Request $request)
+  {
 
-     $userId = Auth::id();
+   $userId = Auth::id();
 
-     $inputs = $request->all();
-     $this->question->createQuestion($inputs, $userId);
+    $inputs = $request->all();
+    $this->question->createQuestion($inputs, $userId);
 
-     return redirect()->route('question.index');
+    return redirect()->route('question.index');
 
-   }
+  }
 
-   public function show($id)
-   {
+  public function show($id)
+  {
 
-     $questions = $this->question->find($id);
+    $questions = $this->question->find($id);
 
-     return view('question.show', compact('questions'));
+    return view('question.show', compact('questions'));
 
-   }
+  }
 
-   public function edit($id)
-   {
+  public function edit($id)
+  {
 
-     $categories = $this->category->all();
-     $question = $this->question->find($id);
+    $categories = $this->category->all();
+    $question = $this->question->find($id);
 
-     return view('question.edit', compact('question', 'categories', 'id'));
+    return view('question.edit', compact('question', 'categories', 'id'));
 
-   }
+  }
 
-   public function update(QuestionsRequest $request, $id)
-   {
+  public function update(QuestionsRequest $request, $id)
+  {
 
-     $userId = Auth::id();
-     $inputs = $request->all();
-     $this->question->updateQuestion($inputs, $id, $userId);
+    $userId = Auth::id();
+    $inputs = $request->all();
+    $this->question->updateQuestion($inputs, $id, $userId);
 
-     return redirect()->route('question.index');
+    return redirect()->route('question.index');
 
-   }
+  }
 
-   public function destroy($id)
-   {
+  public function destroy($id)
+  {
 
-     $data = $this->question->find($id);
-     $data->delete();
+    $data = $this->question->find($id);
+    $data->delete();
 
-     return redirect()->route('question.index');
+    return redirect()->route('question.index');
 
-   }
+  }
 
-   public function myPage()
-   {
+  public function myPage()
+  {
 
-     $userId = Auth::id();
-     $questions = $this->question->getMyPageQuestions($userId);
-     return view('question.mypage', compact('questions'));
+    $userId = Auth::id();
+    $questions = $this->question->getMyPageQuestions($userId);
+    return view('question.mypage', compact('questions'));
+    
+  }
 
-   }
+  public function confirm(QuestionsRequest $request)
+  {
 
-   public function confirm(QuestionsRequest $request)
-   {
+    $inputs = $request->all();
+    $parser = new Markdown();
+    $question = $parser->parse($this->content = $inputs['content']);
+    $category = $this->category->find($inputs['tag_category_id'])->name;
+    return view('question.confirm', compact('inputs', 'category','question'));
 
-     $inputs = $request->all();
-     $question = $this->question->first();
-     $question->content = $inputs["content"];
-     $category = $this->category->find($inputs['tag_category_id'])->name;
-     return view('question.confirm', compact('inputs', 'category','question'));
-
-   }
+  }
 
 }

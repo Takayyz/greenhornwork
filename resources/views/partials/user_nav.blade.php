@@ -15,7 +15,8 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <!--<link href="{{ asset('css/user.css') }}" rel="stylesheet">-->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('css/markdown.css') }}">
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Scripts -->
     <script>
@@ -50,6 +51,7 @@
                         &nbsp;
                         <li><a href="{{ url('schedule') }}">勤退表一覧</a></li>
                         <li><a href="{{ url('report') }}">日報一覧</a></li>
+                        <li><a href="{{ url('question') }}">質問掲示板</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

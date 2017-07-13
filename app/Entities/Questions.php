@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use cebe\markdown\Markdown as Markdown;
+use cebe\markdown\Markdown;
 
 class Questions extends Model implements Transformable
 {
@@ -37,6 +37,5 @@ class Questions extends Model implements Transformable
     {
         return $this->parse();
     }
-
 
 }

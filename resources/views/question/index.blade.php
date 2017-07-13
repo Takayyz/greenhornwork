@@ -5,7 +5,7 @@
 
 <div class="btn-wrapper">
   <a class="btn" href="{{ route('question.create') }}">質問投稿</a>
-  <a class="btn" href="{{ route('mypage') }}">マイページ</a>
+  <a class="btn" href="{{ route('question.mypage') }}">マイページ</a>
   <a　class="btn" href="#openModal">質問を検索</a>
 </div>
 
