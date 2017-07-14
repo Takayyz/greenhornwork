@@ -6,163 +6,180 @@
   height: 7px;
   cursor: pointer;
 }
-
 .maker {
   position: absolute;
   display: inline-block;
   width:  100%;
   height: 100%;
 }
-
 html {
   height: 100%;
 }
-
 body {
   height: 100%;
 }
-
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+html.is-login,
+body.is-login {
+  height: 100%;
+}
 .loginform {
-  display: grid;
-  width: 600px;
-  height: 500px;
-  background-color: #5ba654;
-}
-
-@media screen and (max-width: 766px) {
-  .loginform {
-    width: 300px;
-    height: 400px;
-  }
-}
-
-.title {
-  text-align: center;
-  color: #fff;
-  height: 50px;
-  font-size: 65px;
-  margin-bottom: 0px;
-  font-weight: bold;
-  text-shadow: 0px 3px 0px #b2a98f,
-               0px 14px 10px rgba(0,0,0,0.15),
-               0px 24px 2px rgba(0,0,0,0.1),
-               0px 34px 30px rgba(0,0,0,0.1);
-}
-
-@media screen and (max-width: 766px) {
-  .title {
-    font-size: 45px;
-  }
-}
-
-.subtitle {
-  text-align: center;
-  color: #fff;
-  font-size: 20px;
-  height: 20px;
-  margin-top: 45px;
-  font-weight: bold;
-  text-shadow: 0px 2px 0px #b2a98f;
-}
-
-@media screen and (max-width: 766px) {
-  .subtitle {
-    margin-top: 80px;
-    font-size: 18px;
-  }
-}
-
-.main {
-  display: grid;
-  width: 100%;
-  vertical-align: middle;
-}
-
-.centering {
-  display: grid;
-  width: 100%;
-  text-align: center;
-  margin: auto;
-  line-height: 30px;
-}
-
-.text_def {
-  text-align: center;
-  vertical-align: middle;
+  display: flex;
+  background-color: #150A09;
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.47, 1.71, 0.71, -1.99);
+  cursor: default;
   margin: auto;
 }
-
+.hover:hover > .outline_loginform > .loginform {
+  width: 800px;
+  height: 800px;
+  cursor: default;
+}
+.loginform_sizer {
+  text-align: center;
+  margin: auto;
+  position: relative;
+  width: 100%;
+  height: 60%;
+  opacity: 0;
+  transition-delay: .1s;
+  transition-duration: .2s;
+  cursor: default;
+}
+.outline_loginform {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  height: 230px;
+  width: 230px;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.47, 1.71, 0.71, -1.99);
+  cursor: default;
+  box-shadow: 0 0 160px #fff ;
+}
+.hover:hover > .outline_loginform {
+  width: 800px;
+  height: 800px;
+  cursor: default;
+}
+.hover:hover > .outline_loginform > .loginform > .loginform_sizer {
+  opacity: 1;
+  transition-delay:  1s;
+  transition-duration: 2s;
+  cursor: default;
+}
+.formbottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  cursor: default;
+}
 .btn_def {
-  vertical-align: middle;
-  outline: 0;
-  cursor: pointer;
-  border-width: medium;
-  border-radius: 10px;
-  border:none;
-  margin: 0 auto;
+  border: none;
+  background-color: #000;
   padding: 0;
-  background-color: #5ba654;
+  border-radius: 12px;
 }
-
+.btn_def:hover {
+  box-shadow: 0 0 30px #fff;
+  animation: spark 1s linear 1;
+  animation-iteration-count: 1;
+}
+@-webkit-keyframes spark {
+  0% {
+           opacity: 0;
+     }
+   4% {
+           opacity: 1;
+      }
+  5% {
+           opacity: 0;
+      }
+   9% {
+           opacity: 1;
+      }
+  10% {
+           opacity: 0;
+      }
+  35% {
+           opacity: 1;
+      }
+  36% {
+          opacity: 0;
+      }
+  39% {
+           opacity: 1;
+      }
+  40% {
+          opacity: 0;
+      }
+  59% {
+          opacity: 1;
+      }
+  60% {
+          opacity: 0;
+      }
+  100% {
+          opacity: 1;
+       }
+}
+.title {
+  font-size: 1px;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 0px 3px #005f25, 8px 11px 20px #00733c;
+  color: #5ba654;
+  -webkit-text-stroke-width: 1px;
+}
+.hover:hover > .outline_loginform > .loginform > .loginform_sizer > .formtop > .title_sizer > .title {
+  font-size: 65px;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 0px 3px #005f25, 8px 11px 20px #00733c;
+  color: #5ba654;
+  -webkit-text-stroke-width: 1px;
+}
+.subtitle {
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 0;
+  color:  #fff;
+  text-shadow: 7px 3px 7px #fff;
+}
 .signin {
-  display: inline-block;
-  margin: 0 auto;
-  opacity: 0.9;
-  width: 300px;
-  height: 60px;
+  opacity: .2;
+  width: 2px;
+  height: 2px;
 }
-
-@media screen and (max-width: 766px) {
-  .signin {
-    width: 210px;
-    height: 40px;
-  }
+.hover:hover > .outline_loginform > .loginform > .loginform_sizer > .formbottom > .btn_def > .signin {
+  width: 344px;
+  height: 80px;
 }
-
 .signin:hover {
   opacity: 1;
-  box-shadow:0px 0px 20px #fff;
-  border-radius: 10px;
 }
-
 .none_account {
-  color: #fff;
   margin-top: 15px;
 }
-
-.here {
-  color: #fff;
-}
-
-.here:hover {
-  color: #4e4e4e;
-}
-
-@media screen and (max-width: 766px) {
-  .none_account {
-    width: 210px;
-    font-size: 10px;
-    margin: 0 auto;
-    padding: 5px 0;
-  }
-}
-
-.conversion_color {
-  background-color: #5ba654;
-}
-
-.floatright {
-  text-align: right;
-}
-
-.parent {
+.hover {
   position: relative;
 }
-
-.child {
+.icon_box {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%); /* Safari用 */
   transform: translate(-50%, -50%);
 }
+.giz_icon {
+  margin: 0 auto;
+}
+@media screen and (max-width: 766px) {

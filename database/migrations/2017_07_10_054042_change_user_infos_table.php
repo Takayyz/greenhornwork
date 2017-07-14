@@ -32,7 +32,7 @@ class ChangeUserInfosTable extends Migration
     {
         //
       Schema::table('user_infos', function ($table) {
-        $table->dropColumn('userId');
+        $table->dropColumn('slack_user_id');
         $table->string('tel')->change();
         $table->string('sex')->change();
         $table->integer('store_id')->change();

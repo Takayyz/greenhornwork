@@ -16,7 +16,7 @@ class SlackProvider extends AbstractProvider implements ProviderInterface
         }
         // Provide some default scopes if the user didn't define some.
         // See: https://github.com/SocialiteProviders/Providers/pull/53
-        return ['user:read'];
+        return ['identity.basic', 'identity.email', 'identity.team'];
     }
 
     protected function getAuthUrl($state)
