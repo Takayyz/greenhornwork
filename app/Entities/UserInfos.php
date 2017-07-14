@@ -20,7 +20,7 @@ class UserInfos extends Authenticatable implements Transformable
         'sex',
         'birthday',
         'email',
-        'userId',
+        'slack_user_id',
         'tel',
         'hire_date',
         'store_id',
