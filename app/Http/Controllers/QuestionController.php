@@ -34,13 +34,13 @@ class QuestionController extends Controller
     $categories = $this->category->all();
     $inputs = $request->all();
 
-    if(empty($inputs['search'])) {
-      $questions = $this->question->getAllQuestions($inputs);
+    if(empty($inputs['search']) && empty($inputs['tag_category_id'])) {
+      $questions = $this->question->all();
     } else {
       $questions = $this->question->getSearchedQuestionTitle($inputs);
     }
 
-    return view('question.index', compact('questions', 'inputs',  'categories'));
+    return view('question.index', compact('questions', 'inputs', 'categories'));
 
   }
 
@@ -62,7 +62,7 @@ class QuestionController extends Controller
   public function store(Request $request)
   {
 
-   $userId = Auth::id();
+    $userId = Auth::id();
 
     $inputs = $request->all();
     $this->question->createQuestion($inputs, $userId);
@@ -117,7 +117,7 @@ class QuestionController extends Controller
     $userId = Auth::id();
     $questions = $this->question->getMyPageQuestions($userId);
     return view('question.mypage', compact('questions'));
-    
+
   }
 
   public function confirm(QuestionsRequest $request)
@@ -125,7 +125,7 @@ class QuestionController extends Controller
 
     $inputs = $request->all();
     $parser = new Markdown();
-    $question = $parser->parse($this->content = $inputs['content']);
+    $question = $parser->parse($inputs['content']);
     $category = $this->category->find($inputs['tag_category_id'])->name;
     return view('question.confirm', compact('inputs', 'category','question'));
 

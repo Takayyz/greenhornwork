@@ -6,12 +6,12 @@
   <div class="container">
     {!! Form::open(['route' => 'question.confirm', 'method' => 'post']) !!}
       <h3 class="test">タイトル</h3>
-        <div class="form-group @if(!empty($errors->first('title'))) has-error @endif">
+        <div class="form-group {{ $errors->has('title')? 'has-error' : '' }}">
           {!! Form::text('title', null, ['class' => 'form-control']) !!}
           <span class="help-block">{{$errors->first('title')}}</span>
         </div>
       <h3>カテゴリ</h3>
-        <div class="form-group @if(!empty($errors->first('tag_category_id'))) has-error @endif">
+        <div class="form-group {{ $errors->has('tag_category_id')? 'has-error' : '' }}">
           <select name='tag_category_id'　class = "form-control"　id =　"pref_id">
             <option value="">カテゴリ</option>
             @foreach($categories as $category)
@@ -22,7 +22,7 @@
         </div>
       <h3 class="inline-block">質問内容</h3>
       <a class="markdown-paddingleft" href="#openModal">Markdownの書き方</a>
-        <div class="form-group @if(!empty($errors->first('content'))) has-error @endif">
+        <div class="form-group {{ $errors->has('content')? 'has-error' : '' }}">
           {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
           <span class="help-block">{{$errors->first('content')}}</span>
         </div>

@@ -25,24 +25,13 @@ class QuestionsRepositoryEloquent extends BaseRepository implements QuestionsRep
     }
 
 
-
     /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
-    }
 
-    public function getAllQuestions($inputs)
-    {
-
-        $inputs['tag_category_id'] = $inputs['tag_category_id'] ?? "";
-        $dataOfTheQuestion = $this->model->get()->when($inputs['tag_category_id'], function($query) use ($inputs)
-        {
-          return $query->where('tag_category_id', $inputs['tag_category_id']);
-        });
-        return $dataOfTheQuestion;
+      $this->pushCriteria(app(RequestCriteria::class));
 
     }
 
@@ -57,7 +46,7 @@ class QuestionsRepositoryEloquent extends BaseRepository implements QuestionsRep
     {
 
       $this->model->create([
-      'user_id' => $userId,
+        'user_id' => $userId,
         'tag_category_id' => $data['tag_category_id'],
         'title' => $data['title'],
         'content' => $data['content'],
@@ -87,5 +76,4 @@ class QuestionsRepositoryEloquent extends BaseRepository implements QuestionsRep
       return $result;
 
     }
-
 }
