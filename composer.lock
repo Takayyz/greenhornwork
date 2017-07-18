@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b395e1a1820b3836ad7624e85f4d0e69",
+    "content-hash": "5b213ad1a32534ec1bbbdd93eb262361",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1020,23 +1020,23 @@
         },
         {
             "name": "laravel/socialite",
-            "version": "v2.0.21",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/socialite.git",
-                "reference": "c4e4337e5b70149fdbefbb95b2c9e93d0749c413"
+                "reference": "bca777a8526983e0ebdf3350f1b6e031923a473b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/socialite/zipball/c4e4337e5b70149fdbefbb95b2c9e93d0749c413",
-                "reference": "c4e4337e5b70149fdbefbb95b2c9e93d0749c413",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/bca777a8526983e0ebdf3350f1b6e031923a473b",
+                "reference": "bca777a8526983e0ebdf3350f1b6e031923a473b",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/guzzle": "~5.0|~6.0",
-                "illuminate/contracts": "~5.0",
-                "illuminate/http": "~5.0",
-                "illuminate/support": "~5.0",
+                "guzzlehttp/guzzle": "~6.0",
+                "illuminate/contracts": "~5.4",
+                "illuminate/http": "~5.4",
+                "illuminate/support": "~5.4",
                 "league/oauth1-client": "~1.0",
                 "php": ">=5.4.0"
             },
@@ -1062,7 +1062,7 @@
             "authors": [
                 {
                     "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
+                    "email": "taylor@laravel.com"
                 }
             ],
             "description": "Laravel wrapper around OAuth 1 & OAuth 2 libraries.",
@@ -1070,7 +1070,7 @@
                 "laravel",
                 "oauth"
             ],
-            "time": "2017-03-27T21:32:28+00:00"
+            "time": "2017-05-05T14:17:11+00:00"
         },
         {
             "name": "laravel/tinker",
