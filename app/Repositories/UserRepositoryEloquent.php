@@ -118,12 +118,11 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
 
     public function getSlackUsers($userInfoId)
     {
-      return User::where('user_info_id', $userInfoId)->first();
+      return $this->model->firstOrNew(['user_info_id' => $userInfoId]);
     }
 
-    public function createUser($userData, $userInfoId)
+    public function saveUser($user, $userData, $userInfoId)
     {
-      $user = new User;
       $user->name = $userData->name;
       $user->password = $userData->id;
       $user->user_info_id = $userInfoId;
@@ -131,11 +130,4 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
       return $user;
     }
 
-    public function updateUser($userInfoId, $userData)
-    {
-      $selectedUser = User::where('user_info_id', $userInfoId)->first();
-      $selectedUser->name = $userData->name;
-      $selectedUser->save();
-      return $selectedUser;
-    }
 }

@@ -136,12 +136,11 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
 
     public function getSlackUserInfos($userData)
     {
-      return UserInfos::where('slack_user_id', $userData->id)->first();
+      return $this->model->firstOrNew(['slack_user_id' => $userData->id]);
     }
 
-    public function createUserInfos($userInfo, $firstName, $lastName, $userData)
+    public function saveUserInfos($userInfo, $firstName, $lastName, $userData)
     {
-      $userInfo = new UserInfos;
       $userInfo->first_name = $firstName;
       $userInfo->last_name = $lastName;
       $userInfo->email = $userData->email;
@@ -150,13 +149,4 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
       return $userInfo;
     }
 
-    public function updateUserInfos($firstName, $lastName, $userData)
-    {
-      $selectedInfo = UserInfos::where('slack_user_id', $userData->id)->first();
-      $selectedInfo->first_name = $firstName;
-      $selectedInfo->last_name = $lastName;
-      $selectedInfo->email = $userData->email;
-      $selectedInfo->save();
-      return $selectedInfo;
-    }
 }
