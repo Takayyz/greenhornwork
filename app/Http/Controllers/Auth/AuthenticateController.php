@@ -6,13 +6,21 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Socialite;
 use Illuminate\Support\Facades\Auth;
-use App\Entities\UserInfos;
-use App\Entities\User;
-
+use App\Repositories\UserInfosRepository;
+use App\Repositories\UserRepository;
 
 
 class AuthenticateController extends Controller
 {
+
+  protected $userInfos;
+  protected $users;
+
+  public function __construct(UserInfosRepository $userInfos, UserRepository $users)
+  {
+    $this->userInfos = $userInfos;
+    $this->users = $users;
+  }
 
   public function slackAuth()
   {
@@ -30,61 +38,23 @@ class AuthenticateController extends Controller
     $firstName = $splitName[0];
     $lastName = end($splitName);
 
-    $userInfo = UserInfos::firstOrNew(['slack_user_id' => $userData->id]);
-    if ($userInfo['original'] == []) {
-      $this->createUserInfo($userInfo, $firstName, $lastName, $userData);
+    $userInfo = $this->userInfos->getSlackUserInfos($userData);
+    if (empty($userInfo)) {
+      $savedUserInfo = $this->userInfos->createUserInfos($userInfo, $firstName, $lastName, $userData);
     }else{
-      $this->updateUserInfo($firstName, $lastName, $userData);
+      $savedUserInfo = $this->userInfos->updateUserInfos($firstName, $lastName, $userData);
     };
 
-    $info = UserInfos::where('slack_user_id', $userData->id)->first();
-    $userInfoId = $info['attributes']['id'];
-    $user = User::firstOrNew(['user_info_id' => $userInfoId]);
-    if ($user['original'] == []) {
-      $user = $this->createUser($user, $userData, $userInfoId);
+    $userInfoId = $savedUserInfo['attributes']['id'];
+    $user = $this->users->getSlackUsers($userInfoId);
+    if (empty($user)) {
+      $savedUser = $this->users->createUser($userData, $userInfoId);
     }else{
-      $this->updateUser($userInfoId, $userData);
+      $savedUser = $this->users->updateUser($userInfoId, $userData);
     };
 
-    Auth::login($user);
+    Auth::login($savedUser);
     return redirect('/');
-  }
-
-  public function createUserInfo($userInfo, $firstName, $lastName, $userData)
-  {
-    $userInfo = [
-      'first_name' => $firstName,
-      'last_name' => $lastName,
-      'email' => $userData->email,
-      'slack_user_id' => $userData->id,
-      ];
-    UserInfos::create($userInfo);
-  }
-
-  public function updateUserInfo($firstName, $lastName, $userData)
-  {
-    UserInfos::where('slack_user_id', $userData->id)
-      ->update([
-          'first_name' => $firstName,
-          'last_name' => $lastName,
-          'email' => $userData->email,
-        ]);
-  }
-
-  public function createUser($user, $userData, $userInfoId)
-  {
-    $user = [
-      'name' => $userData->name,
-      'password' => $userData->id,
-      'user_info_id' => $userInfoId,
-    ];
-    User::create($user);
-    return User::where('user_info_id', $userInfoId)->first();
-  }
-
-  public function updateUser($userInfoId, $userData)
-  {
-    User::where('user_info_id', $userInfoId)->update(['name' => $userData->name]);
   }
 
 }
