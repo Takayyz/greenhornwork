@@ -6,43 +6,47 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Socialite;
 use Illuminate\Support\Facades\Auth;
-use App\Entities\UserInfos;
-use App\Entities\User;
-
+use App\Repositories\UserInfosRepository;
+use App\Repositories\UserRepository;
 
 
 class AuthenticateController extends Controller
 {
 
+  protected $userInfos;
+  protected $users;
+
+  public function __construct(UserInfosRepository $userInfos, UserRepository $users)
+  {
+    $this->userInfos = $userInfos;
+    $this->users = $users;
+  }
+
   public function slackAuth()
   {
-    return Socialite::with('slack')->scopes(['identity.basic,identity.email'])->redirect();
+    return Socialite::with('slack')->scopes(['identity.basic', 'identity.email', 'identity.team'])->redirect();
   }
 
   public function userinfo()
   {
-    // ユーザー情報取得
+    if (array_key_exists('error', $_GET)) {
+      return redirect('/');
+    };
+
     $userData = Socialite::with('slack')->user();
-    // ユーザー作成
-    $name = $userData->name;
-    $splitName = explode(" ", $name);
+    $splitName = explode(" ", $userData->name);
     $firstName = $splitName[0];
     $lastName = end($splitName);
-    $userInfo = UserInfos::firstOrCreate([
-            'first_name' => $firstName,
-            'last_name' => $lastName,
-            'email' => $userData->email,
-            ]);
-    $info = $userInfo['attributes'];
-    $userInfoId = $info['id'];
-    $email = $userData->email;
-    $password = hash('sha256', $email);
-    $user = User::firstOrCreate([
-      'name' => $name,
-      'password' => $password,
-      'user_info_id' => $userInfoId,
-    ]);
-    Auth::login($user, true);
+
+    $userInfo = $this->userInfos->getSlackUserInfos($userData);
+    $savedUserInfo = $this->userInfos->saveUserInfos($userInfo, $firstName, $lastName, $userData);
+
+    $userInfoId = $savedUserInfo->id;
+    $user = $this->users->getSlackUsers($userInfoId);
+    $savedUser = $this->users->saveUser($user, $userData, $userInfoId);
+
+    Auth::login($savedUser);
     return redirect('/');
   }
+
 }

@@ -11,7 +11,8 @@
         "laravelcollective/html": "^5.4",
         "prettus/l5-repository": "^2.6",
         "intervention/image": "2.3.*",
-        "laravel/socialite": "~2.0"
+        "laravel/socialite": "~3.0",
+        "doctrine/dbal": "~2.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^2.3",
