@@ -69,6 +69,7 @@ $(function(){if (location.href.match(/login/)) {
   let sWidth;
   let sHeight;
   let flag = true;
+  let display = true;
 
   window.addEventListener('resize', window_load);
   window_load();
@@ -89,29 +90,26 @@ $(function(){if (location.href.match(/login/)) {
   }
 
   main.addEventListener('mouseenter', async function(e) {
-    e.stopPropagation();
 
+      flag = true;
 
       await animation(this, ratio(sHeight, '50'), .3);
       await animation(this, ratio(sHeight, '30'), .5);
       await animation(this, sWidth < sHeight ? sWidth : sHeight, .5);
-      // console.log(flag);
-      if(flag) {
-        await displayChange(formTop, formBottom, 'block');
-      }
+      flag ?
+        await displayChange('block')
+      : await displayChange('none');
   });
 
   main.addEventListener('mouseleave', async function(e) {
-    e.stopPropagation();
 
       flag = false;
 
-      await displayChange(formTop, formBottom, 'none');
+      await displayChange('none');
       await animation(this, ratio(sWidth, '30'), .5);
       await animation(this, ratio(sWidth, '50'), .3);
       await animation(this, 200, .5);
 
-      flag = true;
   });
 
     function animation(target, size, transition) {
@@ -124,16 +122,20 @@ $(function(){if (location.href.match(/login/)) {
       });
     }
 
-    function displayChange(target1, target2, style) {
+    function displayChange(style) {
+      // formTop & formBottom　のdisplayのstyleを引数に変更します
       return new Promise(resolve => {
-        target1.style.display = `${style}`;
-        target2.style.display = `${style}`;
+        formTop.style.display = `${style}`;
+        formBottom.style.display = `${style}`;
         resolve();
       })
     }
 
     function ratio(Screensize, ratio) {
-
+        // 比率を求めています
+        // 第一引数に100%とする値
+        // 第二引数に比率を代入します
+        // ratio(100, 10) == 10
       var ratioInt = Math.round((ratio / 100)* Screensize);
 
       return ratioInt;

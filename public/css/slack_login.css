@@ -11,6 +11,7 @@ body {
 }
 
 .main {
+  background: radial-gradient(ellipse closest-side, #150A08 99%, white);
   width: 200px;
   height: 200px;
   position: absolute;
@@ -19,11 +20,11 @@ body {
   left: 0;
   bottom: 0;
   margin: auto;
-  background-color: #150A08;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 0 160px #fff, 0 0 20px #fff;
 }
 
 .main_hover  {
@@ -61,7 +62,7 @@ body {
 
 
 .giz_icon {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
