@@ -59,8 +59,6 @@ body {
   text-shadow: 7px 3px 7px #fff;
 }
 
-
-
 .giz_icon {
   position: fixed;
   top: 0;
@@ -140,4 +138,3 @@ body {
        }
 }
 
-transition-timing-function: cubic-bezier(0.47, 1.71, 0.71, -1.99);

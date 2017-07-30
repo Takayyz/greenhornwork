@@ -73,6 +73,9 @@ $(function(){if (location.href.match(/login/)) {
 
   window.addEventListener('resize', window_load);
   window_load();
+  // ウィンドウのサイズが変更される度にこのイベントが発火
+  // 関数window_loadを走らせる
+  // heightとwidthを比較し短い方をbodyのheightとwidthに代入
 
   function window_load() {
     sWidth = window.innerWidth;
@@ -90,18 +93,24 @@ $(function(){if (location.href.match(/login/)) {
   }
 
   main.addEventListener('mouseenter', async function(e) {
+    // mainにマウスが入った際に発火
+    // falgにtureを代入ののち順番にanimationさせ最後に
+    // flagがtureであればdisplayをブロックに
+    // falseであればnoneに
 
-      flag = true;
 
-      await animation(this, ratio(sHeight, '50'), .3);
-      await animation(this, ratio(sHeight, '30'), .5);
-      await animation(this, sWidth < sHeight ? sWidth : sHeight, .5);
-      flag ?
-        await displayChange('block')
-      : await displayChange('none');
+    flag = true;
+
+    await animation(this, ratio(sHeight, '50'), .3);
+    await animation(this, ratio(sHeight, '30'), .5);
+    await animation(this, sWidth < sHeight ? sWidth : sHeight, .5);
+    flag ? await displayChange('block')　: await displayChange('none');
   });
 
   main.addEventListener('mouseleave', async function(e) {
+      // mainからマウスが出た際に発火
+      // falgにfalseを代入ののちdisplayをnoneにし
+      // 順番にanimationさせる
 
       flag = false;
 
@@ -113,6 +122,8 @@ $(function(){if (location.href.match(/login/)) {
   });
 
     function animation(target, size, transition) {
+      // 第一引数の高さと幅に第二引数を与える。
+      // 第三引数を変化時間としているのでsettmeoutにも流用。
       return new Promise(resolve => {
         target.style.width = `${size}px`;
         target.style.height = `${size}px`;
