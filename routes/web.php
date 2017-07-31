@@ -12,11 +12,16 @@
 */
 
 Auth::routes();
-
 Route::group(['prefix' => '/'], function() {
   Route::get('/', function () {
-      return view('auth.login');
+    if (Auth::check()){
+      return view('index');
+    }else{
+      return view('auth/login');
+    };
   });
+  Route::get('slack/login', 'Auth\AuthenticateController@slackAuth');
+  Route::get('callback', 'Auth\AuthenticateController@userinfo');
   Route::get('/', 'UserController@index');
   Route::get('/home', 'UserController@index');
   Route::resource('report', 'DailyReportController');
