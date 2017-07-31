@@ -17,6 +17,10 @@
   position: relative;
 }
 
+.margin__center {
+  margin: 0 auto;
+}
+
 .mt70 {
   margin-top: 70px;
 }
@@ -132,6 +136,15 @@
 
 .container__inner {
   padding-top: 100px;
+}
+
+.container__inner__right {
+  padding-top: 100px;
+}
+
+.container__inner__top {
+  padding-left: 196px;
+  padding-bottom: 30px;
 }
 
 .user__btn {
@@ -432,6 +445,10 @@ body {
 
 .content-wrapper {
   padding: 100px;
+}
+
+.content-inner {
+  padding-right: 20px;
 }
 
 .dropdown-toggle {

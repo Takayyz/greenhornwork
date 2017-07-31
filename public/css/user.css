@@ -70,3 +70,8 @@
     margin-bottom: 20px;
   }
 }
+
+.textarea {
+  resize: none;
+  height: 240px;
+}
