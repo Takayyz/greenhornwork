@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RentInfosTableSeeder::class);
         $this->call(ItemsTableSeeder::class);
         $this->call(ItemCategoriesTableSeeder::class);
-        $this->call(TagCaregoriesSeeder::class);
+        $this->call(TagCategoriesSeeder::class);
     }
 }
