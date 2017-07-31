@@ -31,7 +31,7 @@ class UserRequest extends FormRequest
             'email'=>'required|email',
             'hire_date'=>'required',
             'tel'=>'required|numeric',
-            'store_id'=>'required'           
+            'store_id'=>'required'
         ];
     }
 

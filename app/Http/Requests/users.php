@@ -26,11 +26,10 @@ class users extends FormRequest
         return [
             'last_name'=>'required|max:11',
             'first_name'=>'required',
-            'sex'=>'required',
-            'birthday'=>'required',
+//            'sex'=>'required',
+//            'birthday'=>'required',
             'email'=>'required',
-            'tel'=>'required|int|max:11'
-                  
+//            'tel'=>'required|int|max:11'
         ];
     }
 
@@ -39,11 +38,10 @@ class users extends FormRequest
         return [
         'last_name.required'=> '入力必須の項目です！！！！',
         'first_name.required'=>'入力必須の項目です！！！！',
-        'sex.required'=> '入力必須の項目です！！！！',
-        'birthday.required'=>'入力必須の項目です！！！！',
+//        'sex.required'=> '入力必須の項目です！！！！',
+//        'birthday.required'=>'入力必須の項目です！！！！',
         'email.required'=>'入力必須の項目です！！！！',
-        'tel.required'=>'入力必須の項目です！！！！'
-        
+//        'tel.required'=>'入力必須の項目です！！！！'
         ];
     }
 }

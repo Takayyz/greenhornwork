@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\UserInfosRepository;
 use App\Entities\UserInfos;
 use App\Validators\UserInfosValidator;
+use App\Entities\User;
 
 
 /**
@@ -132,4 +133,20 @@ class UserInfosRepositoryEloquent extends BaseRepository implements UserInfosRep
         });
       })->first();
     }
+
+    public function getSlackUserInfos($userData)
+    {
+      return $this->model->firstOrNew(['slack_user_id' => $userData->id]);
+    }
+
+    public function saveUserInfos($userInfo, $firstName, $lastName, $userData)
+    {
+      $userInfo->first_name = $firstName;
+      $userInfo->last_name = $lastName;
+      $userInfo->email = $userData->email;
+      $userInfo->slack_user_id = $userData->id;
+      $userInfo->save();
+      return $userInfo;
+    }
+
 }

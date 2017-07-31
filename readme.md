@@ -27,6 +27,9 @@ MAIL_USERNAME=atsushi0202test@gmail.com
 MAIL_PASSWORD=hwrtwvrqwnvybxlv
 MAIL_ENCRYPTION=ssl
 MAIL_PRETEND=false
+SLACK_KEY=42620444977.204696413047
+SLACK_SECRET=b90b7ef77a8b8d9a28b102d47a0a2705
+SLACK_REDIRECT_URI=http://127.0.0.1:8000/callback
 
 # mysqlの設定に関しても各自の環境等々に変更してください
 php artisan key:generate
