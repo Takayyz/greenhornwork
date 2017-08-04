@@ -1,18 +1,30 @@
 
 - Use
-  - PHP : Version 7.0.*
-  - Mysql : Version 5.7.* 
+  - PHP : Version  >= 7.0.*
+  - Mysql : Version >= 5.7.* 
 
-### installation guide
+installation guide
+----
 
-
-```sh
+```shell
 git clone http://gitbucket.gizumo-inc.work:8080/products/greenhorn_works.git
 cd greenhorn_works
-cp .env{.example,} # 自身の環境に合わせて変更してください
+
+# .env fileの作成
+cp .env{.example,}
 composer install
 
-# .env ファイルの編集を行い、以下を追記してください。
+```
+
+#### env fileの編集・追記
+
+```
+# 各自自身でDBを作成し自身の環境にあった物に変更してください
+DB_DATABASE=your_db_name
+DB_USERNAME=your_db_user_name
+DB_PASSWORD=your_db_user_password
+
+# 以下を追記してください。
 MAIL_ADDRESSPASS=some_word
 MAIL_PRIVILEGES=some_word
 ACCESS_RIGHT_ADMIN=100
@@ -31,7 +43,11 @@ SLACK_KEY=42620444977.204696413047
 SLACK_SECRET=b90b7ef77a8b8d9a28b102d47a0a2705
 SLACK_REDIRECT_URI=http://127.0.0.1:8000/callback
 
-# mysqlの設定に関しても各自の環境等々に変更してください
+```
+
+### アプリケーション起動までのコマンド
+
+```shell
 php artisan key:generate
 php artisan migrate --seed
 php artisan serve
@@ -59,4 +75,3 @@ php artisan serve
   - pushする際は、作業Branchをpushすること
   - pushしたらdevelop branchに対してpull requestすること
   - merge処理は、北原に依頼すること `絶対に自身でmerge処理をしないこと`
- 
