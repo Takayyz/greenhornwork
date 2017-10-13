@@ -11,15 +11,17 @@ class UsersTableSeeder extends Seeder
     User::create([
       'name' => 'test',
       'password' => bcrypt('1234'),
-      'user_info_id' => 1,
-    ], [
+      'user_info_id' => 1
+    ]);
+    User::create([
       'name' => 'test1',
       'password' => bcrypt('1234'),
-      'user_info_id' => 2,
-    ], [
+      'user_info_id' => 2
+    ]);
+    User::create([
       'name' => 'test2',
       'password' => bcrypt('1234'),
-      'user_info_id' => 3,
+      'user_info_id' => 3
     ]);
   }
 }
