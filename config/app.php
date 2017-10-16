@@ -139,19 +139,15 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-//        Illuminate\Html\HtmlServiceProvider::class,//slack認証用
         /*
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-//        Laravel\Socialite\SocialiteServiceProvider::class,//slack認証用
-//        Way\Generators\GeneratorsServiseProvider::class,
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
@@ -159,7 +155,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\LocalServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        // Laravel\Socialite\SocialiteServiceProvider::class,
         App\Socialite\SocialiteServiceProvider::class,
     ],
     /*
@@ -208,7 +203,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-        // 'Socialite' => Laravel\Socialite\Facades\Socialite::class,//slack認証
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Image' => Intervention\Image\Facades\Image::class
     ],
