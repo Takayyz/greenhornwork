@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use DB;
@@ -17,24 +16,24 @@ class LoginTest extends TestCase
       'password' => '1234'
     ];
 
-    protected $erroruser = [
+    protected $errorUser = [
       'name' => 'yuta',
       'password' => '0809'
     ];
+
+    use DatabaseTransactions;
     /**
      * A basic test example.
      *
      * @return void
      */
-    
+
     public function setUp(){
       parent::setUp();
 
       if ($this->resetDatabase) {
-      Artisan::call('migrate:refresh --seed');
-
-    }
-    \DB::beginTransaction();
+        Artisan::call('migrate:refresh --seed');
+      }
     }
 
     public function testLoginPageIn()
@@ -66,7 +65,7 @@ class LoginTest extends TestCase
     {
       $this->reresetDatabase = false;
 
-      $this->post('admin/login', $this->erroruser)
+      $this->post('admin/login', $this->errorUser)
       ->assertStatus(302);
     }
 }
