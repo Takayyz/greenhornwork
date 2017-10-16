@@ -3,6 +3,9 @@
 namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
+use Artisan;
+
+
 
 trait CreatesApplication
 {
@@ -18,5 +21,11 @@ trait CreatesApplication
         $app->make(Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    public function prepareForTests()
+    {
+      Artisan::call('migrate:refresh');
+      Artisan::call('db:seed');
     }
 }
