@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Entities\AdminUsers;
 use Illuminate\Contracts\Console\Kernel;
 use Artisan;
 
@@ -9,6 +10,14 @@ use Artisan;
 
 trait CreatesApplication
 {
+    /**
+     * The base URL to use while testing the application.
+     * 
+     * @var string
+     *
+     */
+    protected $baseUrl = 'http://localhost/admin/login';
+
     /**
      * Creates the application.
      *
@@ -25,7 +34,10 @@ trait CreatesApplication
 
     public function prepareForTests()
     {
-      Artisan::call('migrate:refresh');
-      Artisan::call('db:seed');
+      Artisan::call('migrate');
+
+      if(!AdminUsers::all()->count()){
+        Artisan::call('db:seed');
+      }
     }
 }
