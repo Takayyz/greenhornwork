@@ -67,4 +67,4 @@ $factory->define(App\Entities\AdminUser::class, function (Faker\Generator $faker
     'user_info_id' => 1,
     'privileges' => 1,
   ]
-})
+});

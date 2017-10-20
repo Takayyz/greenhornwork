@@ -6,17 +6,15 @@ use App\Entities\AdminUsers;
 use Illuminate\Contracts\Console\Kernel;
 use Artisan;
 
-
-
 trait CreatesApplication
 {
     /**
      * The base URL to use while testing the application.
-     * 
+     *
      * @var string
      *
      */
-    protected $baseUrl = 'http://localhost/admin/login';
+    protected $baseUrl = 'http://localhost/';
 
     /**
      * Creates the application.
@@ -34,10 +32,16 @@ trait CreatesApplication
 
     public function prepareForTests()
     {
-      Artisan::call('migrate');
+        Artisan::call('migrate');
 
-      if(!AdminUsers::all()->count()){
-        Artisan::call('db:seed');
-      }
+        if(!AdminUsers::all()->count()){
+            Artisan::call('db:seed');
+        }
     }
+
+    public function adminLogin()
+    {
+        $this->post('admin/login', ["name" => "admin", "password" => "1234"]);
+    }
+
 }
