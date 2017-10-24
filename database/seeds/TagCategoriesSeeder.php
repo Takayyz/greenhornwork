@@ -30,6 +30,6 @@ class TagCategoriesSeeder extends Seeder
           [
             'name' => 'その他',
           ]
-    );
-  }
+      );
+    }
 }

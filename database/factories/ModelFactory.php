@@ -62,9 +62,9 @@ $factory->define(App\Entities\DailyReports::class, function (Faker\Generator $fa
 
 $factory->define(App\Entities\AdminUser::class, function (Faker\Generator $faker) {
   return [
-    'name' => $faker->name,,
+    'name' => $faker->name,
     'password' => bcrypt('1234'),
     'user_info_id' => 1,
     'privileges' => 1,
-  ]
+  ];
 });
