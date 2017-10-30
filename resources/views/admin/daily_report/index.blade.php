@@ -31,7 +31,6 @@
                 {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => '名前', 'id' => 'first_name']) !!} 
               </td>
             </tr>
-            
             <td class="search-td">
               <label>
                 始め
@@ -39,7 +38,7 @@
             </td>
             <td class="search-td"></td>
             <td class="search-td">
-              {!! Form::input('date', 'start-date', null, ['class' => 'form-control']) !!}　
+              {!!Form::text('start-date', '', ['class' => 'datepicker start-date form-control'])!!}
             </td>　
             <td class="search-td">
               <label>
@@ -47,7 +46,7 @@
               </label>
             </td>
             <td class="search-td">
-              {!! Form::input('date', 'end-date', null, ['class' => 'form-control']) !!}　
+              {!!Form::text('end-date', '', ['class' => 'datepicker end-date form-control'])!!}
             </td>
           </tbody>
 
@@ -94,3 +93,22 @@
   </div>
 
 @endsection
+
+@section('script')
+@parent
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<script>
+  $(function() {
+    $('.datepicker').datepicker({
+      maxDate: new Date(),
+      dateFormat: 'yy-mm-dd',
+      onSelect: function() {
+        var minDate = $('.start-date').val();
+        $('.end-date').datepicker('option', 'minDate', minDate);
+      }
+    });
+  });
+</script>
+@stop
