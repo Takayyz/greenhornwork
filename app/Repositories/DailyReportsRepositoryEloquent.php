@@ -72,6 +72,7 @@ class DailyReportsRepositoryEloquent extends BaseRepository implements DailyRepo
     public function normalizeInputs($inputs)
     {
       if(is_array($inputs)) {
+          dd(empty($inputs));
         $inputs = [
           'id' => isset($inputs['id']) ? $inputs['id'] : '',
           'start-date' => isset($inputs['start-date']) ? $inputs['start-date'] : '',
@@ -106,6 +107,6 @@ class DailyReportsRepositoryEloquent extends BaseRepository implements DailyRepo
           });
         })
         //　日報を作成した順に表示
-        ->orderBy('reporting_time')->get();
+          ->orderBy('reporting_time', 'desc')->get();
     }
 }

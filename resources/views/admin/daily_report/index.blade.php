@@ -5,30 +5,27 @@
   <h1 class="brand-header">日報一覧</h1>
 
       {!! Form::open(['route' => 'admin.report.index', 'method' => 'GET']) !!}
-        <a href="#close" title="Close" class="close">X</a>
         <table class="search-table">
           <thead class="search-thead">
           </thead>
           <div class="modal-header">日報検索</div>
           <tbody class="search-tbody">
             <tr>
-              <td class="search-td"></td>
-              <td class="search-td">
+              <div class="search-td col-md-3">
                 {!! Form::input('text', 'last_name', null, ['class' => 'form-control', 'placeholder' => '苗字', 'id' => 'last_name']) !!}
-              </td>
-              <td class="search-td"></td>
-              <td class="search-td">
+              <!-- </td> -->
+                  </div>
+              <div class="search-td col-md-3">
                 {!! Form::input('text', 'first_name', null, ['class' => 'form-control', 'placeholder' => '名前', 'id' => 'first_name']) !!}
-              </td>
+              <!-- </td>  -->
+                  </div
             </tr>
-            <td class="search-td"></td>
-            <td class="form-group search-td {{ $errors->has('start-date')? 'has-error' : '' }}">
-              {!!Form::text('start-date', '', ['class' => 'datepicker start-date form-control', 'placeholder' => '始め'])!!}
+            <td class="col-md-4 form-group search-td {{ $errors->has('start-date')? 'has-error' : '' }}">
+              {!! Form::text('start-date', '', ['class' => 'datepicker start-date form-control', 'placeholder' => '始め']) !!}
               <span class="help-block">{{ $errors->first('start-date') }}</span>
             </td>
-            <td class="search-td"></td>
-            <td class="form-group search-td {{ $errors->has('end-date')? 'has-error' : '' }}">
-              {!!Form::text('end-date', '', ['class' => 'datepicker end-date form-control', 'placeholder' => '終わり'])!!}
+            <td class="col-md-4 form-group search-td {{ $errors->has('end-date')? 'has-error' : '' }}">
+              {!! Form::text('end-date', '', ['class' => 'datepicker end-date form-control', 'placeholder' => '終わり']) !!}
               <span class="help-block">{{ $errors->first('end-date') }}</span>
             </td>
           </tbody>
