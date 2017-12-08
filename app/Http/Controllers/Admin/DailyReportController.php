@@ -6,7 +6,7 @@ use App\Entities\DailyReports;
 use App\Repositories\DailyReportsRepository;
 use App\Repositories\UserInfosRepository;
 use Illuminate\Http\Request;
-use App\Http\Requests\DailyReportRequest;
+use App\Http\Requests\Admin\DailyReportsRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
@@ -31,17 +31,18 @@ class DailyReportController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-  public function index(Request $request)
-  {
+   public function index(DailyReportsRequest $request)
+   {
       //　ユーザーの入力した値を連想配列で取得
       //　inputs: (first_name, last_name, start-date, end-date)
       $inputs = $request->all();
-
-      //　ユーザーの入力した値を正常化
-      $inputs = $this->report->normalizeInputs($inputs);
-
       //　あるユーザーの日報を日付の範囲で指定し、取得。
-      $reports = $this->report->getReportsBySearching($inputs);
+      if(empty($inputs)){
+          $reports = $this->report->orderBy('reporting_time','desc')->all();
+      }else{
+          $reports = $this->report->getReportsBySearching($inputs);
+      }
+      //$reports = $this->report->getReportsBySearching($inputs);
       return view('admin.daily_report.index', compact('reports'));
   }
 

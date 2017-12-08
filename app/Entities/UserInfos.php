@@ -54,7 +54,7 @@ class UserInfos extends Authenticatable implements Transformable
       switch($field) {
         case 'first_name':
         case 'last_name':
-          return $query->where($field, 'like', $name);
+          return $query->where($field, 'like', '%'.$name.'%');
           break;
         default:
           return $query;
