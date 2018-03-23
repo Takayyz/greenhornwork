@@ -1,7 +1,8 @@
 
 - Use
-  - PHP : Version  >= 7.0.*
-  - Mysql : Version >= 5.7.* 
+  - PHP   : Version >= 7.0.*
+  - Mysql : Version >= 5.7.*
+  - Node  : Version >= v8.9.*
 
 installation guide
 ----
@@ -45,7 +46,7 @@ SLACK_REDIRECT_URI=http://127.0.0.1:8000/callback
 
 ```
 
-### アプリケーション起動までのコマンド
+### アプリケーション起動
 
 ```shell
 php artisan key:generate
@@ -55,6 +56,14 @@ php artisan serve
 
 ### Access URL
 > http://127.0.0.1:8000
+
+
+### UIを編集する際は、以下コマンドを実行しresource/assets/css以下を変更すること
+```shell
+npm install
+npm run dev
+```
+
 
 ### Git Rule 
 
