@@ -34,12 +34,12 @@
 .admin__btn {
   height: 220px;
   width: 220px;
-  border-radius: 50%;
-  border: solid 8px #fff;
+  border-radius: 5%;
+  border: solid 8px #228b22;
   position: absolute;
   display: block;
   font-size: 37px;
-  color: #fff;
+  color: #228b22;
   text-align: center;
 }
 
@@ -49,38 +49,40 @@
 }
 
 .schedule__btn__position {
-  left: 210px;
+  left: -40px;
   top: 10px;
+  width: 480px;
 }
 
 .dailyreport__btn__position {
-  top: 160px;
-  left: -38px;
+  top: 270px;
+  left: -40px;
 }
 
 .store__btn__position {
-  top: 160px;
-  right: -80px;
+  top: 270px;
+  left: 220px;
 }
 
 .user__btn__position {
-  top: 410px;
-  left: 60px;
+  top: 10px;
+  left: 480px;
 }
 
 .adminuser__btn__position {
-  top: 410px;
-  left: 390px;
+  top: 270px;
+  left: 480px;
 }
 
 .access_right__btn__position {
-  top: 500px;
-  left: 60px;
+  top: 530px;
+  left: 220px;
+  width: 480px;
 }
 
 .rental__btn__position {
-  top: 500px;
-  left: 390px;
+  top: 530px;
+  left: -40px;
 }
 
 .btn-admin {

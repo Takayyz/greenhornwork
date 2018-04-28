@@ -1,6 +1,6 @@
-﻿@extends('partials.admin_outline')
+﻿@extends('partials.admin_nav')
 
-@section('outline')
+@section('content')
 
   <body>
 
@@ -49,7 +49,7 @@
       
       <li>
         <a href="{{ route('admin.rent.index') }}" class="admin__btn rental__btn__position">
-          <i class="fa fa-check mt70 fa-2x"></i>
+          <i class="fa fa-book mt70 fa-2x"></i>
           <p>貸出物</p>
         </a>
       </li>
