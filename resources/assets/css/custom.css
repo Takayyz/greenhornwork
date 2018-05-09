@@ -76,13 +76,17 @@
 
 .access_right__btn__position {
   top: 530px;
-  left: 220px;
-  width: 480px;
+  left: 480px;
 }
 
 .rental__btn__position {
   top: 530px;
   left: -40px;
+}
+
+.answer__btn__position {
+  top: 530px;
+  left: 220px;
 }
 
 .btn-admin {

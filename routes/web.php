@@ -75,4 +75,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::get('item_category/update_confirm', ['as' => 'item_category.updateConfirm', 'uses' => 'ItemCategoryController@updateConfirm']);
   Route::put('item_category/update_confirm', ['as' => 'item_category.updateCategory', 'uses' => 'ItemCategoryController@updateCategory']);
   Route::resource('item_category', ItemCategoryController::class);
+  Route::resource('answer', AnswerController::class);
 });

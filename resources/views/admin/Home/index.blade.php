@@ -53,6 +53,13 @@
           <p>貸出物</p>
         </a>
       </li>
+
+      <li>
+        <a href="{{ route('admin.answer.index') }}" class="admin__btn answer__btn__position">
+          <i class="fa fa-reply mt70 fa-2x"></i>
+          <p>回答</p>
+        </a>
+      </li>
     </ul>
 
   </body>
