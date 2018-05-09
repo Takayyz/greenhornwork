@@ -40,10 +40,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
       $users = $this->model;
 
-      //　ユーザー名で条件を絞る
+      // ユーザー名で条件を絞る
       return $users->whereName('name', $inputs['user_name'])
 
-      //　姓名で条件を絞る
+      // 姓名で条件を絞る
       ->whereHas('info', function($query) use ($inputs) {
           $name_fields = ['first_name', 'last_name'];
           foreach($name_fields as $name_field) {
@@ -51,7 +51,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
           }
       })
 
-      //　性別、Email、電話番号で条件を絞る
+      // 性別、Email、電話番号で条件を絞る
       ->whereHas('info', function($query) use ($inputs) {
         $equal_fields = ['sex', 'email', 'tel'];
         foreach ($equal_fields as $equal_field) {
@@ -65,7 +65,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
                       ->dateRange('hire_date', $inputs['hire_date-start-date'], $inputs['hire_date-end-date']);
       })
 
-      //　店舗名で条件を絞る
+      // 店舗名で条件を絞る
       ->whereHas('info', function($query) use ($inputs) {
         return  $query->whereHas('store', function($query) use ($inputs) {
           if($inputs['store_id']) {
@@ -81,7 +81,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     }
 
     /**
-     *　管理者が入力したデータを正常化
+     * 管理者が入力したデータを正常化
      */
     public function normalizeInputs($inputs) {
       if(is_array($inputs)) {

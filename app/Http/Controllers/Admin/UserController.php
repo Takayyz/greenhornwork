@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
-//
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -43,15 +41,12 @@ class UserController extends Controller
 
         // 管理者からのインプットを正常化
         $inputs = $this->users->normalizeInputs($inputs);
-
         // 自身のユーザー情報を取得
         $self_user_id = Auth::id();
         $selfinfo = $this->userinfos->getUserInfoByUserId($self_user_id);
-
-        // デフォルト：　ユーザー情報全権取得
-        //　管理者が指定した条件によりユーザー情報を取得
+        // デフォルト：ユーザー情報全権取得
+        // 管理者が指定した条件によりユーザー情報を取得
         $users = $this->users->getUsersFromSearchingResult($inputs);
-
         $stores = $this->stores->all();
         return view('admin.user.index', compact('users', 'stores', 'selfinfo'));
     }

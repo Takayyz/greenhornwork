@@ -30,5 +30,4 @@ class WorkScheduleController extends Controller
 
     return view('admin.work_schedule.index', compact('schedules'));
   }
-  
 }
