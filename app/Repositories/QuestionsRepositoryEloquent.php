@@ -54,6 +54,11 @@ class QuestionsRepositoryEloquent extends BaseRepository implements QuestionsRep
 
     }
 
+    public function addAnswerFlag($id)
+    {
+      $this->model->where('id', $id)->update(['has_answer' => 1]);
+    }
+
     public function updateQuestion($data, $id, $userId)
     {
 
@@ -75,5 +80,31 @@ class QuestionsRepositoryEloquent extends BaseRepository implements QuestionsRep
         });
       return $result;
 
+    }
+
+    public function getSearchedIsNotAnsweredQuestionTitle($inputs)
+    {
+
+      $result = $this->model->withTrashed()->where('has_answer', NULL)->where('title', 'LIKE',"%" . $inputs['search'] . "%")->get()->when($inputs['tag_category_id'], function($query) use ($inputs)
+       {
+         return $query->where('tag_category_id', $inputs['tag_category_id']);
+        });
+      return $result;
+
+    }
+
+    public function getAnsweredQuestion()
+    {
+      return $this->model->withTrashed()->where('has_answer', 1)->get();
+    }
+
+    public function getIsNotAnsweredQuestion()
+    {
+      return $this->model->withTrashed()->where('has_answer', NULL)->get();
+    }
+
+    public function getSelectedQuestion($id)
+    {
+      return $this->model->withTrashed()->where('id', $id)->get();
     }
 }

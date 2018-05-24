@@ -17,6 +17,7 @@ class Questions extends Model implements Transformable
         'tag_category_id',
         'title',
         'content',
+        'has_answer',
     ];
 
     protected $dates = ['deleted_at'];

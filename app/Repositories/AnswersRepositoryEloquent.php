@@ -24,7 +24,6 @@ class AnswersRepositoryEloquent extends BaseRepository implements AnswersReposit
         return Answers::class;
     }
 
-    
 
     /**
      * Boot up the repository, pushing criteria
@@ -32,5 +31,20 @@ class AnswersRepositoryEloquent extends BaseRepository implements AnswersReposit
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    // question_idに紐づいたレコードを取得
+    public function getAnswer($question_id)
+    {
+        return $this->model->withTrashed()->where('question_id', $question_id)->get();
+    }
+
+    public function createAnswer($userId, $questionId, $content)
+    {
+        $this->model->create([
+            'user_id' => $userId,
+            'question_id' => $questionId,
+            'content' => $content,
+        ]);
     }
 }

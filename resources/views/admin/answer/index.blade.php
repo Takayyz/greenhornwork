@@ -1,17 +1,16 @@
-@extends('partials.user_nav')
+@extends('partials.admin_nav')
 
 @section('content')
 <h2 class="brand-header">質問一覧</h2>
-<!-- 
+
 <div class="btn-wrapper">
-  <a class="btn" href="{{ route('question.create') }}">質問投稿</a>
-  <a class="btn" href="{{ route('question.mypage') }}">マイページ</a>
   <a class="btn" href="#openModal">質問を検索</a>
+  <a class="btn" href=" {{ route('admin.answer.answered') }} ">回答済みの質問</a>
 </div>
 
 <div id="openModal" class="modalDialog">
   <div>
-    {!! Form::open(['route' => 'question.index', 'method' => 'GET']) !!}
+    {!! Form::open(['route' => 'admin.answer.index', 'method' => 'GET']) !!}
       <a href="#close" title="Close" class="close">X</a>
       <table class="search-table">
         <thead class="search-thead">
@@ -65,17 +64,31 @@
     <thead>
       <tr>
         <th>タイトル</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
       @foreach($questions as $question)
         <tr>
           <td>{{ $question->title }}</td>
-          <td><a class="btn btn-success" href="question/{{ $question->id }}">解答する</a></td>
+          <td>
+            @if($question->deleted_at === NULL)
+              <a class="btn btn-success" href="answer/{{ $question->id }}">回答する</a>
+            @else
+              <a class="btn btn-success" href="answer/detail/{{ $question->id }}">詳細</a>
+            @endif
+          </td>
+          <td>
+            @if($question->deleted_at === NULL)
+              {!! Form::open(['route' => ['admin.answer.destroy', $question->id], 'method' => 'DELETE']) !!}
+                <button class="btn btn-danger" type="submit">削除</button>
+              {!! Form::close() !!}
+            @else
+              <span>削除済み</span>
+            @endif
+          </td>
         </tr>
       @endforeach
     </tbody>
   </table>
-</div> -->
+</div>
 @endsection

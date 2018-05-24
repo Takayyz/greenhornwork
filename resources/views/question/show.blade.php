@@ -16,10 +16,18 @@
       <h3>本文</h3>
       {!! $questions->mark_content !!}
     </li>
+    @foreach($answers as $answer)
+      <li>
+        <h3>回答</h3>
+        {{ $answer->content }}
+      </li>
+    @endforeach    
   </ul>
-  <lavel>解答</lavel>
-    <div class="form-group @if(!empty($errors->first('contents'))) has-error @endif">
-      {!! Form::textarea('content', null, ['class' => 'form-control']) !!}
-    </div>
-    <button type="submit" class="btn btn-success pull-right">確認</button>
+
+  <a href="{{ route('question.index') }}" class="btn pull-left">戻る</a>
+  @if($questions->user_id === $userId)
+    {!! Form::open(['route' => ['question.destroy', $questions->id], 'method' => 'DELETE']) !!}
+      <button type="submit" class="btn btn-danger pull-right">削除</button>
+    {!! Form::close() !!}
+  @endif
 @endsection

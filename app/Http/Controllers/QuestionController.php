@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Entities\Questions;
 use App\Repositories\QuestionsRepository;
 use App\Repositories\TagCategoryRepository;
+use App\Entities\Answers;
+use App\Repositories\AnswersRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\QuestionsRequest;
@@ -14,13 +16,18 @@ class QuestionController extends Controller
 {
   protected $question;
   protected $category;
+  protected $answer;
 
-  public function __construct(QuestionsRepository $question, TagCategoryRepository $category)
+  public function __construct(
+    QuestionsRepository $question,
+    TagCategoryRepository $category,
+    AnswersRepository $answer)
   {
 
     $this->middleware('auth');
     $this->question = $question;
     $this->category = $category;
+    $this->answer = $answer;
 
   }
   /**
@@ -74,9 +81,12 @@ class QuestionController extends Controller
   public function show($id)
   {
 
+    $userId = Auth::id();
     $questions = $this->question->find($id);
+    $answers = $this->answer->getAnswer($id);
+    // dd($questions);
 
-    return view('question.show', compact('questions'));
+    return view('question.show', compact('userId', 'questions', 'answers'));
 
   }
 
@@ -116,6 +126,7 @@ class QuestionController extends Controller
 
     $userId = Auth::id();
     $questions = $this->question->getMyPageQuestions($userId);
+    dd($questions);
     return view('question.mypage', compact('questions'));
 
   }

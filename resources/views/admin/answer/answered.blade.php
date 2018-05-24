@@ -1,17 +1,15 @@
-@extends('partials.user_nav')
+@extends('partials.admin_nav')
 
 @section('content')
-<h2 class="brand-header">質問一覧</h2>
+<h2 class="brand-header">回答済み質問一覧</h2>
 
 <div class="btn-wrapper">
-  <a class="btn" href="{{ route('question.create') }}">質問投稿</a>
-  <a class="btn" href="{{ route('question.mypage') }}">マイページ</a>
-  <a　class="btn" href="#openModal">質問を検索</a>
+  <a class="btn" href="#openModal">質問を検索</a>
 </div>
 
 <div id="openModal" class="modalDialog">
   <div>
-    {!! Form::open(['route' => 'question.index', 'method' => 'GET']) !!}
+    {!! Form::open(['route' => 'admin.answer.index', 'method' => 'GET']) !!}
       <a href="#close" title="Close" class="close">X</a>
       <table class="search-table">
         <thead class="search-thead">
@@ -36,7 +34,7 @@
           </td>
           <td class="search-td">
             <div class="form-group @if(!empty($errors->first('tag_category_id'))) has-error @endif">
-              <select name='tag_category_id'　class = "form-control"　id =　"pref_id">
+              <select name='tag_category_id' class = "form-control" id = "pref_id">
                 <option value="">カテゴリ</option>
                 @foreach($categories as $category)
                 <option value= "{{$category->id}}">{{$category->name}}</option>
@@ -65,14 +63,22 @@
     <thead>
       <tr>
         <th>タイトル</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
       @foreach($questions as $question)
         <tr>
           <td>{{ $question->title }}</td>
-          <td><a class="btn btn-success" href="question/{{ $question->id }}">詳細</a></td>
+          <td><a class="btn btn-success" href="../answer/detail/{{ $question->id }}">詳細</a></td>
+          <td>
+            @if($question->deleted_at === NULL)
+                {!! Form::open(['route' => ['admin.answer.destroy', $question->id], 'method' => 'DELETE']) !!}
+                <button class="btn btn-danger" type="submit">削除</button>
+                {!! Form::close() !!}
+            @else
+                <span>削除済み</span>
+            @endif
+          </td>
         </tr>
       @endforeach
     </tbody>

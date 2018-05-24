@@ -75,5 +75,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' ,'namespace' => 'Admin'], fu
   Route::get('item_category/update_confirm', ['as' => 'item_category.updateConfirm', 'uses' => 'ItemCategoryController@updateConfirm']);
   Route::put('item_category/update_confirm', ['as' => 'item_category.updateCategory', 'uses' => 'ItemCategoryController@updateCategory']);
   Route::resource('item_category', ItemCategoryController::class);
-  Route::resource('answer', AnswerController::class);
+
+  Route::get('/answer/detail/{id}', ['as' => 'answer.detail', 'uses' => 'AnswerController@detail']);
+  Route::get('/answer/answered', ['as' => 'answer.answered', 'uses' => 'AnswerController@answered']);
+  Route::post('/answer/confirm', ['as' => 'answer.confirm', 'uses' => 'AnswerController@confirm']);
+  Route::resource('/answer', AnswerController::class, ['only' => ['index', 'store', 'show', 'destroy', 'confirm']]);
 });
